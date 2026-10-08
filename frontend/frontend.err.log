@@ -1,0 +1,8 @@
+⚠ Port 3000 is in use by process 21708, using available port 3001 instead.
+Error: An IO error occurred while attempting to create and acquire the lockfile
+    at ignore-listed frames {
+  [cause]: Error: Access is denied. (os error 5)
+      at ignore-listed frames {
+    code: 'GenericFailure'
+  }
+}
