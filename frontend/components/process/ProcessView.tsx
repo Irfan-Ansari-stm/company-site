@@ -51,173 +51,173 @@ interface ProcessPhase {
 const processPhases: ProcessPhase[] = [
   {
     step: '01',
-    name: 'Discovery & Threat Modeling',
+    name: 'Planning & Discovery',
     duration: 'Days 1–3',
-    tagline: 'Airtight requirements, security boundaries, and architectural blueprints.',
+    tagline: 'Clear business goals, project scope, and a fixed timeline.',
     description:
-      'We conduct exhaustive technical interviews with your engineering leadership to uncover non-functional requirements, data sovereignty boundaries, expected throughput, and third-party integration constraints.',
+      'We meet with you to understand your business goals, target audience, and key features. Together, we establish a crystal-clear project scope, technical roadmap, and fixed schedule before writing any code.',
     icon: Search,
     deliverables: [
-      'Technical Product Requirement Document (PRD)',
-      'Security Threat Surface Matrix & Data Flow Diagram',
-      'API Integration Inventory & Auth Flow Model',
-      'Fixed-Scope Implementation Roadmap & Milestone Schedule',
+      'Detailed Project Plan & Feature Roadmap',
+      'Security & Data Architecture Plan',
+      'Key Integrations & User Workflow Map',
+      'Fixed Timeline & Milestone Schedule',
     ],
     clientGates: [
-      'Sign-off on technical specifications and scope boundaries',
-      'Provisioning of sandbox API keys and staging environment access',
+      'Agreement on project scope, features, and timeline',
+      'Access to necessary accounts and existing services',
     ],
-    tooling: ['Figma', 'Notion', 'Miro', 'OpenAPI 3.1 Spec'],
+    tooling: ['Figma', 'Notion', 'Miro', 'API Specs'],
   },
   {
     step: '02',
-    name: 'Relational Architecture & Prototyping',
+    name: 'Design & Clickable Prototype',
     duration: 'Days 4–7',
-    tagline: 'High-concurrency PostgreSQL schema design and clickable prototypes.',
+    tagline: 'Test interactive screens before development begins.',
     description:
-      'Before writing production code, we model relational entities in PostgreSQL with strict foreign key constraints, design indexing topologies, and build interactive high-fidelity user workflows in Figma.',
+      'Before writing code, we design intuitive, elegant screens and connect them into a clickable prototype. You can click through every workflow on your phone or desktop and give feedback until it looks and feels just right.',
     icon: Layers,
     deliverables: [
-      'PostgreSQL Relational Schema (ERD) with Index Maps',
-      'Clickable High-Fidelity Design Prototype (Figma)',
-      'Database Migration Scripts & Seed Fixtures',
-      'Design Token System (Color, Typography, Component Variants)',
+      'Interactive Clickable Prototype (Figma)',
+      'Complete Visual Design System (Colors, Fonts, Buttons)',
+      'Clean Database Structure & Entity Relationships',
+      'User Experience Flow Review & Approvals',
     ],
     clientGates: [
-      'Interactive prototype walkthrough and UX feedback review',
-      'Approval of database entity relationships and pricing/data rules',
+      'Clickable prototype walkthrough and design feedback',
+      'Final approval of user workflows and screen layouts',
     ],
-    tooling: ['PostgreSQL 18', 'Figma Tokens', 'dbdocs.io', 'TailwindCSS'],
+    tooling: ['Figma', 'Design Tokens', 'TailwindCSS'],
   },
   {
     step: '03',
-    name: 'Agile Sprint Engineering & CI/CD',
+    name: 'Sprint Development & Demos',
     duration: 'Weeks 2–8',
-    tagline: 'Bi-weekly sprint demos with automated tests and live staging cutovers.',
+    tagline: 'Working software in 2-week cycles with live demo calls.',
     description:
-      'Our senior engineering squad develops features in focused 14-day agile sprints. Every commit triggers automated GitHub Actions pipelines that run unit tests, integration tests, and spawn live preview environments.',
+      'Our senior engineers build your product in focused two-week sprints. Every two weeks, we demo working features on private staging links so you can test real progress and provide continuous feedback.',
     icon: Code2,
     deliverables: [
-      'Working Production Codebase with Clean Git Commit History',
-      'Automated Test Suites (>85% code coverage threshold)',
-      'Automated CI/CD Deployment Workflows (Docker & Kubernetes)',
-      'Bi-Weekly Sprint Demos with Working Feature Deployments',
+      'Clean, Well-Documented Production Code',
+      'Automated Quality & Safety Test Suites',
+      'Private Live Staging Links for Testing',
+      'Bi-Weekly Progress & Demo Video Walkthroughs',
     ],
     clientGates: [
-      'Bi-weekly live staging demo acceptance review',
-      'Direct sprint review feedback in our joint Slack/Teams channel',
+      'Bi-weekly staging demo review and feedback',
+      'Direct communication and Q&A in our shared channel',
     ],
-    tooling: ['Next.js 16', 'Node.js', 'Go', 'Docker', 'GitHub Actions', 'Jest'],
+    tooling: ['Next.js', 'Node.js', 'PostgreSQL', 'Docker', 'GitHub Actions'],
   },
   {
     step: '04',
-    name: 'Penetration Sweeps & Stress Verification',
+    name: 'Testing, Speed & Security',
     duration: 'Week 9',
-    tagline: 'OWASP Top 10 security audits and high-throughput load verification.',
+    tagline: 'Speed optimization, device testing, and security checks.',
     description:
-      'We subject the application to synthetic traffic loads up to 100,000 requests per minute, profiling slow queries, tuning connection pools, and validating against OWASP Top 10 vulnerabilities.',
+      'We rigorously test your application across mobile devices, tablets, and desktop browsers. We run automated speed checks, verify bank-grade encryption, and fix every bug before launch day.',
     icon: ShieldCheck,
     deliverables: [
-      'Penetration Testing & Security Vulnerability Report',
-      'Load Testing & Database Profiling Benchmark Benchmark',
-      'WCAG 2.2 AA Accessibility & Screen-Reader Audit',
-      'Disaster Recovery Failover & Snapshot Runbook',
+      'Comprehensive Security & Vulnerability Audit',
+      'Speed, Performance & Loading Time Optimization',
+      'Mobile & Multi-Browser Accessibility Testing',
+      'Data Backup & Recovery Plan',
     ],
     clientGates: [
-      'Review and sign-off on security and load test benchmark results',
-      'Final User Acceptance Testing (UAT) milestone approval',
+      'Review and sign-off on speed and security checks',
+      'Final User Acceptance Testing (UAT) approval',
     ],
-    tooling: ['k6 Load Tester', 'OWASP ZAP', 'Sentry', 'Lighthouse', 'Playwright'],
+    tooling: ['Automated Tests', 'Security Scanners', 'Lighthouse', 'Playwright'],
   },
   {
     step: '05',
-    name: 'Zero-Downtime Blue/Green Cutover',
+    name: 'Smooth Production Launch',
     duration: 'Launch Week',
-    tagline: 'Zero-downtime production cutover with live DNS telemetry alarms.',
+    tagline: 'Zero-downtime launch to real users with active monitoring.',
     description:
-      'We orchestrate a seamless production release using containerized blue-green or canary deployments. Traffic is shifted smoothly while telemetry systems monitor error rates, P95 latency, and database connection counts.',
+      'We manage the entire launch process—connecting your domain, configuring fast cloud hosting, setting up SSL certificates, and monitoring traffic in real time so your customers have a seamless first experience.',
     icon: Rocket,
     deliverables: [
-      'Zero-Downtime Production Cutover Execution',
-      'SSL/TLS 1.3 Certificate & Cloudflare CDN Edge Caching',
-      'Real-Time Telemetry Dashboards & PagerDuty Alert Rules',
-      'Production Database Backup & Automated Daily Snapshots',
+      'Zero-Downtime Live Production Launch',
+      'Free SSL Certificate & Global Fast Content Delivery',
+      'Real-Time Health Monitoring & Uptime Alerts',
+      'Automated Daily Database Backups',
     ],
     clientGates: [
-      'Executive launch authorization sign-off',
-      'Production DNS cutover coordination with your infrastructure team',
+      'Final launch authorization sign-off',
+      'Domain and DNS connection coordination',
     ],
-    tooling: ['AWS EKS', 'Kubernetes', 'Cloudflare', 'Prometheus', 'Grafana'],
+    tooling: ['Cloud Hosting', 'Cloudflare CDN', 'Error Tracking', 'Automated Backups'],
   },
   {
     step: '06',
-    name: 'SLA Hypercare & Full IP Transfer',
+    name: 'Warranty & 100% Code Handover',
     duration: 'Days 60+',
-    tagline: '60-day post-launch warranty, documentation, and repository handoff.',
+    tagline: '60-day free warranty, team training, and full ownership.',
     description:
-      'We do not disappear after launch. Every engagement includes a 60-day dedicated SLA warranty: rapid bug resolution, performance monitoring, dependency patches, and comprehensive engineering knowledge transfer.',
+      'We stand behind everything we build. You receive 60 days of post-launch warranty with fast bug fixes, recorded video training for your team, and complete ownership of all source code and accounts.',
     icon: Wrench,
     deliverables: [
-      '100% Source Repository Ownership Transfer',
-      'Comprehensive Operations Runbook & System Architecture Docs',
-      '60-Day Dedicated SLA Bug Warranty & Patching Agreement',
-      'Recorded Video Engineering Walkthroughs for Internal Staff',
+      '100% Source Code & Intellectual Property Transfer',
+      'Complete Operating Guides & Staff Training Videos',
+      '60-Day Free Bug-Fix Warranty & Maintenance',
+      'Flexible Ongoing Support & Advisory Options',
     ],
     clientGates: [
-      'Final repository transfer verification and access audit',
-      'Transition to internal maintenance or ongoing enterprise retainer',
+      'Final code transfer and account access verification',
+      'Transition to internal maintenance or optional retainer',
     ],
-    tooling: ['GitHub', 'Swagger / Postman', 'Loom', 'Confluence'],
+    tooling: ['GitHub', 'Documentation', 'Training Videos'],
   },
 ];
 
 const collaborationPillars = [
   {
     icon: MessageSquare,
-    title: 'Direct Engineer Access',
-    desc: 'No account manager telephone games. You communicate directly with the Principal Architects and Senior Full-Stack Engineers who write your code.',
+    title: 'Direct Access to Engineers',
+    desc: 'No middle managers or telephone games. You communicate directly with the senior engineers and architects building your product.',
   },
   {
     icon: Laptop,
-    title: 'Ephemeral PR Previews',
-    desc: 'Every pull request automatically deploys to an isolated staging URL. You can test new features on live staging instances before merging.',
+    title: 'Interactive Test Links',
+    desc: 'Every new feature is published to a private staging URL so you and your team can test real functionality before it goes live.',
   },
   {
     icon: Activity,
     title: 'Bi-Weekly Working Demos',
-    desc: 'At the end of every 14-day sprint, we present working software, inspect velocity benchmarks, and align on upcoming sprint milestones.',
+    desc: 'Every two weeks, we demo working software, review user feedback together, and align on upcoming sprint milestones.',
   },
   {
     icon: Lock,
-    title: 'Airtight Change Control',
-    desc: 'If new business requirements emerge mid-flight, we provide immediate transparent scope and timeline impact estimates before starting work.',
+    title: 'Transparent Scope & Costs',
+    desc: 'If your business needs change mid-project, we provide clear timeline and cost options before any extra work begins.',
   },
 ];
 
 const processFaqs = [
   {
-    q: 'How are requirements finalized before development begins?',
-    a: 'During Phase 01 (Technical Discovery), we map all user stories, data schemas, compliance boundaries, and acceptance criteria into an agreed Product Requirements Document (PRD). Development only begins once both teams formally sign off on scope.',
+    q: 'How do we finalize project requirements before development starts?',
+    a: 'During Phase 01 (Planning & Discovery), we map all user stories, key features, and success criteria into a clear project roadmap. Development only begins once both teams agree on scope, timeline, and deliverables.',
   },
   {
-    q: 'What happens if we need to modify requirements mid-project?',
-    a: 'Because we operate on agile 14-day sprints, we can adapt rapidly. When a requirement shifts, we calculate the architectural and timeline delta, discuss priority trade-offs in our sprint planning session, and update the backlog transparently.',
+    q: 'What happens if we need to change or add features mid-project?',
+    a: 'Because we work in two-week agile cycles, we can adapt smoothly. When a requirement shifts, we explain the timeline and cost impact right away so you can make informed decisions during our sprint planning.',
   },
   {
     q: 'Who owns the intellectual property and code repositories?',
-    a: 'You own 100% of all intellectual property, source repositories, database migration scripts, Docker manifests, and design assets from day one. Upon milestone payment, complete administrative control is transferred to your organization.',
+    a: 'You own 100% of all code, designs, and digital assets from day one. Upon milestone payment, complete administrative control and ownership of all repositories and accounts are handed over to your team.',
   },
   {
-    q: 'What is included in the 60-Day SLA Hypercare warranty?',
-    a: 'Every Core and Enterprise build includes 60 days of post-launch engineering hypercare: sub-2-hour response times for critical bugs, performance profiling under production traffic, automated security patches, and direct developer communication.',
+    q: 'What is included in the 60-day post-launch warranty?',
+    a: 'Every build includes 60 days of dedicated support: rapid bug fixes, performance monitoring under real traffic, security patches, and direct communication with the engineers who built your platform.',
   },
   {
-    q: 'How much time is required from our internal engineering team?',
-    a: 'Typically, 2–3 hours per week is ideal: a 30-minute weekly progress standup, asynchronous feedback on PR preview URLs in Slack, and a 45-minute bi-weekly sprint demonstration. We handle the heavy engineering lifting end-to-end.',
+    q: 'How much time will my team need to invest each week?',
+    a: 'Typically, 2 to 3 hours per week is plenty: a 30-minute weekly progress catch-up, testing features on private staging links, and a 45-minute demo call every two weeks. We handle the heavy lifting end-to-end.',
   },
   {
-    q: 'How do you guarantee production zero-downtime during cutover?',
-    a: 'We use containerized blue/green deployments on Kubernetes or AWS ECS with automated health checks. The new production environment is verified in parallel before live DNS routing shifts, guaranteeing zero interrupted sessions.',
+    q: 'How do you guarantee a smooth launch without downtime?',
+    a: 'We configure and verify your production server in parallel while testing live traffic. Once everything is confirmed working, we smoothly switch domain traffic so your users experience zero interruption.',
   },
 ];
 
@@ -256,7 +256,7 @@ export default function ProcessView() {
       });
     },
     onSuccess: () => {
-      toast.success('Technical scoping request received! A Principal Architect will contact you within 24 hours.');
+      toast.success('Thank you! We received your inquiry and will contact you within 24 hours.');
       setForm({
         first_name: '',
         last_name: '',
@@ -289,20 +289,20 @@ export default function ProcessView() {
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-800 uppercase shadow-inner shadow-cyan-500/10 dark:bg-cyan-950/40 dark:text-cyan-300 dark:shadow-cyan-500/20">
               <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-              <span>Predictable Engineering Execution &amp; SLA Governance</span>
+              <span>Clear Milestones &amp; Reliable Delivery</span>
             </div>
 
             {/* Headline */}
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-tight dark:text-white">
-              From Architectural Scope to Production Cutover{' '}
+            <h1 className="apple-hero-headline mt-6 text-slate-900 dark:text-white">
+              How We Build Your Software:{' '}
               <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400">
-                With Zero Surprises
+                From Idea to Launch, With Zero Surprises
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-300">
-              We operate on transparent bi-weekly sprints, automated CI/CD deployments, and measurable acceptance criteria. Every milestone is demoed on working staging environments before production cutover.
+            <p className="apple-lead mx-auto mt-6 text-slate-600 dark:text-slate-300">
+              We work in clear two-week sprints with regular working demos. You always know what is being built, when it will be delivered, and how it works.
             </p>
 
             {/* CTAs */}
@@ -311,14 +311,14 @@ export default function ProcessView() {
                 href="#process-intake"
                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/25 transition duration-200 hover:-translate-y-0.5 hover:from-cyan-400 hover:to-teal-400"
               >
-                Initiate Scoping Sprint
+                Plan Your Project
                 <ArrowRight className="h-4 w-4" />
               </a>
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:backdrop-blur dark:hover:border-slate-500 dark:hover:bg-slate-800"
               >
-                Explore 6 Core Services
+                Explore Our Services
               </Link>
             </div>
           </div>
@@ -326,10 +326,10 @@ export default function ProcessView() {
           {/* Stats Bar */}
           <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-200 pt-10 dark:border-slate-800/80 sm:grid-cols-4 sm:gap-6">
             {[
-              { label: 'Discovery to POC', value: '14 Days', sub: 'Interactive functional core' },
-              { label: 'Sprint Review Cadence', value: 'Bi-Weekly', sub: 'Working staging demos' },
-              { label: 'Automated Test Coverage', value: '> 85%', sub: 'Unit, E2E & integration' },
-              { label: 'Post-Launch Warranty', value: '60 Days', sub: 'Dedicated SLA hypercare' },
+              { label: 'Discovery to Prototype', value: '14 Days', sub: 'Interactive clickable prototype' },
+              { label: 'Milestone Demos', value: 'Every 2 Weeks', sub: 'Test working software regularly' },
+              { label: 'Code Quality', value: 'High Standard', sub: 'Automated tests & clean architecture' },
+              { label: 'Post-Launch Warranty', value: '60 Days', sub: 'Free bug fixes & team support' },
             ].map((stat, idx) => (
               <div
                 key={idx}
@@ -351,13 +351,13 @@ export default function ProcessView() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
-              The 6-Phase Lifecycle
+              The 6 Steps
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-              Engineered for Speed, Precision &amp; Accountability
+              A Simple, Step-by-Step Delivery Process
             </h2>
             <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
-              Click any stage below to inspect deliverables, verification gates, and tooling.
+              Click any step below to see what we deliver and what we review together.
             </p>
           </div>
 
@@ -419,10 +419,10 @@ export default function ProcessView() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 text-xs font-mono text-cyan-700 dark:text-cyan-400">
-                    <span>STAGE {selectedPhase.step} OF 06</span>
+                    <span>STEP {selectedPhase.step} OF 06</span>
                     <span>•</span>
                     <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
-                      Timeline: {selectedPhase.duration}
+                      Estimated Duration: {selectedPhase.duration}
                     </span>
                   </div>
                   <h2 className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">
@@ -439,7 +439,7 @@ export default function ProcessView() {
                   onClick={() => setActiveStage((prev) => Math.max(0, prev - 1))}
                   className="rounded-xl border border-slate-300 bg-slate-100 px-4 py-2 text-xs font-semibold text-slate-800 transition hover:bg-slate-200 disabled:opacity-40 cursor-pointer dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
                 >
-                  &larr; Previous Stage
+                  &larr; Previous Step
                 </button>
                 <button
                   type="button"
@@ -447,7 +447,7 @@ export default function ProcessView() {
                   onClick={() => setActiveStage((prev) => Math.min(processPhases.length - 1, prev + 1))}
                   className="rounded-xl bg-cyan-500 px-4 py-2 text-xs font-bold text-slate-950 transition hover:bg-cyan-400 disabled:opacity-40 cursor-pointer"
                 >
-                  Next Stage &rarr;
+                  Next Step &rarr;
                 </button>
               </div>
             </div>
@@ -458,7 +458,7 @@ export default function ProcessView() {
               <div className="lg:col-span-7 space-y-6">
                 <div>
                   <h3 className="text-sm font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
-                    Phase Methodology &amp; Execution
+                    What Happens in This Step
                   </h3>
                   <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
                     {selectedPhase.description}
@@ -469,7 +469,7 @@ export default function ProcessView() {
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950/80">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
                     <FileCheck className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
-                    Concrete Deliverables Generated
+                    What You Receive
                   </h4>
                   <ul className="mt-4 space-y-3">
                     {selectedPhase.deliverables.map((item, idx) => (
@@ -488,10 +488,10 @@ export default function ProcessView() {
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950/80">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
                     <Lock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                    Client Review Gates &amp; Sign-Offs
+                    What We Review Together
                   </h4>
                   <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
-                    What decisions and approvals happen before advancing to the next phase:
+                    Key checkpoints and approvals before moving to the next milestone:
                   </p>
                   <ul className="mt-4 space-y-3">
                     {selectedPhase.clientGates.map((gate, idx) => (
@@ -509,7 +509,7 @@ export default function ProcessView() {
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950/80">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
                     <Terminal className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
-                    Production Tools Used in This Phase
+                    Tools &amp; Technologies Used
                   </h4>
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {selectedPhase.tooling.map((tool, idx) => (
@@ -535,13 +535,13 @@ export default function ProcessView() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="text-xs font-bold tracking-widest uppercase text-teal-600 dark:text-teal-400">
-              Communication Governance
+              How We Work With You
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-              Transparent Collaboration Model
+              Clear Communication, No Confusion
             </h2>
             <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
-              We operate with radical visibility. You always know what is being built, which milestone is next, and how velocity is tracking.
+              You get direct access to the team building your product, with regular updates and no hidden surprises.
             </p>
           </div>
 
@@ -572,13 +572,13 @@ export default function ProcessView() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
-              Production Toolchain
+              Our Tech Stack
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-              Battle-Tested Technologies
+              Modern, Reliable Technology That Lasts
             </h2>
             <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
-              We exclusively use proven, high-performance tools that guarantee maintainability, high concurrency, and long-term stability.
+              We select proven tools that keep your application fast, secure, and easy to maintain over the long haul.
             </p>
           </div>
 
@@ -586,27 +586,27 @@ export default function ProcessView() {
             {[
               {
                 category: 'Frontend & User Experience',
-                items: ['Next.js 16 (App Router)', 'React 19', 'TailwindCSS', 'Figma Tokens', 'Radix UI'],
+                items: ['Next.js', 'React', 'TailwindCSS', 'Figma', 'Accessible UI'],
               },
               {
                 category: 'Backend & Microservices',
-                items: ['Node.js (Fastify/Express)', 'Go (Golang)', 'Apache Kafka', 'Redis 7', 'REST & GraphQL'],
+                items: ['Node.js', 'Go', 'Redis Caching', 'REST APIs', 'WebSockets'],
               },
               {
-                category: 'Relational Database & AI',
-                items: ['PostgreSQL 18', 'TimescaleDB', 'pgvector Embeddings', 'Flyway Migrations', 'Prisma / Knex'],
+                category: 'Databases & Data Storage',
+                items: ['PostgreSQL', 'Automated Backups', 'Data Encryption', 'Safe Migrations'],
               },
               {
-                category: 'DevOps & Multi-Cloud',
-                items: ['Docker Compose', 'Kubernetes (AWS EKS)', 'GitHub Actions CI/CD', 'Cloudflare CDN', 'Terraform'],
+                category: 'Cloud Hosting & DevOps',
+                items: ['Docker Containers', 'AWS & Cloud Hosting', 'Automated Deployments', 'Cloudflare CDN'],
               },
               {
                 category: 'Testing & Verification',
-                items: ['Jest & React Testing Library', 'Playwright E2E', 'k6 Load Testing', 'OWASP ZAP', 'WCAG Audits'],
+                items: ['Automated Tests', 'Browser Testing', 'Speed Benchmarks', 'Security Scans'],
               },
               {
-                category: 'Telemetry & Observability',
-                items: ['Sentry Error Tracking', 'Prometheus Metrics', 'Grafana Dashboards', 'Winston Structured Logs'],
+                category: 'Monitoring & Error Alerts',
+                items: ['24/7 Error Tracking', 'Uptime Monitoring', 'Live Health Dashboards'],
               },
             ].map((stack, idx) => (
               <div
@@ -639,30 +639,30 @@ export default function ProcessView() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="text-xs font-bold tracking-widest uppercase text-teal-600 dark:text-teal-400">
-              Quality Assurances
+              Quality Standards
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-              Strict Engineering Quality Benchmarks
+              Built for Speed, Reliability, and Security
             </h2>
           </div>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: 'ACID Data Integrity',
-                desc: 'Every schema migration is transactional. Non-blocking index creation and relational foreign keys prevent orphaned data.',
+                title: 'Data Safety & Backups',
+                desc: 'Automatic daily backups, strict relational checks, and safe database updates protect your critical business information.',
               },
               {
-                title: 'SOC2 & HIPAA Ready',
-                desc: 'Token-based RBAC authentication, TLS 1.3 cryptographic transit, and structured audit logs out of the box.',
+                title: 'Enterprise Security',
+                desc: 'Modern encryption, secure role-based login permissions, and standard audit trails protect your customer data.',
               },
               {
-                title: 'WCAG 2.2 AA Verified',
-                desc: 'Every interactive element supports keyboard tab order, aria semantics, focus indicators, and strict 4.5:1 contrast.',
+                title: 'Works on Every Device',
+                desc: 'Clean, responsive design that works seamlessly on mobile phones, tablets, laptops, and large desktop screens.',
               },
               {
-                title: 'Sub-120ms P95 Edge',
-                desc: 'Server-rendered pages with distributed Redis caching and Edge CDN asset compression guarantee rapid time-to-first-byte.',
+                title: 'Fast Loading Speeds',
+                desc: 'Optimized server code, instant caching, and global CDN delivery ensure your pages load within milliseconds.',
               },
             ].map((benchmark, idx) => (
               <div
@@ -687,13 +687,13 @@ export default function ProcessView() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
-              Clarity &amp; Questions
+              Common Questions
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-              Process &amp; Execution FAQs
+              Frequently Asked Questions About Our Process
             </h2>
             <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
-              Detailed answers about sprint cadence, requirement updates, and post-launch guarantees.
+              Straightforward answers about sprint timelines, project updates, and code ownership.
             </p>
           </div>
 
@@ -736,13 +736,13 @@ export default function ProcessView() {
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-100/60 px-3 py-1 text-xs font-semibold text-cyan-800 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
                 <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
-                Technical Scoping Initiation
+                Start Your Project
               </span>
               <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-                Ready to Plan Your Engineering Sprint?
+                Ready to Bring Your Idea to Life?
               </h2>
               <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
-                Submit your project goals. A Principal Architect will review your technical constraints and schedule an architectural roadmap consultation within 24 hours.
+                Tell us what you want to build. Our team will review your goals and schedule a friendly 30-minute discovery call within 24 hours.
               </p>
             </div>
 
@@ -817,7 +817,7 @@ export default function ProcessView() {
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <label htmlFor="process-discipline" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                    Target Engineering Discipline
+                    What do you need built?
                   </label>
                   <select
                     id="process-discipline"
@@ -825,18 +825,18 @@ export default function ProcessView() {
                     onChange={(e) => setForm({ ...form, service_discipline: e.target.value })}
                     className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
-                    <option value="Enterprise Full-Stack Architecture">Custom Software Development (Next.js / Node.js)</option>
-                    <option value="Cloud Infrastructure & DevOps">Cloud Infrastructure &amp; DevOps (AWS / Kubernetes)</option>
-                    <option value="Enterprise UI/UX Design System">Enterprise UI/UX Design &amp; WCAG Systems</option>
-                    <option value="AI Solutions & RAG Pipelines">AI Solutions &amp; Private RAG Pipelines</option>
-                    <option value="Multi-Tenant SaaS Platform">Multi-Tenant SaaS Product Engineering</option>
-                    <option value="API Integration & Microservices">API Integration &amp; Event Mesh</option>
+                    <option value="Enterprise Full-Stack Architecture">Custom Software Development (Web &amp; Mobile)</option>
+                    <option value="Cloud Infrastructure & DevOps">Cloud Hosting &amp; Server Setup</option>
+                    <option value="Enterprise UI/UX Design System">UI/UX Product Design &amp; Prototypes</option>
+                    <option value="AI Solutions & RAG Pipelines">AI Features &amp; Smart Search</option>
+                    <option value="Multi-Tenant SaaS Platform">SaaS Product Engineering</option>
+                    <option value="API Integration & Microservices">API Integrations &amp; Workflows</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="process-timeline" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                    Target Timeline
+                    When do you want to start?
                   </label>
                   <select
                     id="process-timeline"
@@ -844,16 +844,16 @@ export default function ProcessView() {
                     onChange={(e) => setForm({ ...form, target_timeline: e.target.value })}
                     className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
-                    <option value="immediate">Immediate (Ready to scope this week)</option>
-                    <option value="1-2 months">1–2 Months (Planning phase)</option>
-                    <option value="quarterly">Next Quarter (Budget allocated)</option>
+                    <option value="immediate">Immediately (Ready this month)</option>
+                    <option value="1-2 months">In 1–2 Months (Planning stage)</option>
+                    <option value="quarterly">Next Quarter (Budgeting stage)</option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label htmlFor="process-requirements" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                  Project Scope &amp; Target Outcomes <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                  Tell us a bit about your project <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
                   id="process-requirements"
@@ -861,7 +861,7 @@ export default function ProcessView() {
                   required
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
-                  placeholder="Outline your application requirements, expected traffic load, current stack, and any compliance constraints..."
+                  placeholder="Describe what you want to build, who your users are, and any specific deadlines..."
                   className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
@@ -869,7 +869,7 @@ export default function ProcessView() {
               <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
                 <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                   <Lock className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
-                  <span>Strict NDA confidential review. Zero vendor lock-in.</span>
+                  <span>Confidential review. Strict NDA protection and 100% IP ownership.</span>
                 </div>
 
                 <button
@@ -878,7 +878,7 @@ export default function ProcessView() {
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-bold text-slate-950 shadow-xl shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 sm:w-auto cursor-pointer"
                 >
                   <Send className="h-4 w-4" />
-                  {leadMutation.isPending ? 'Submitting Scope...' : 'Submit Scoping Request'}
+                  {leadMutation.isPending ? 'Sending Inquiry...' : 'Send Project Inquiry'}
                 </button>
               </div>
             </form>

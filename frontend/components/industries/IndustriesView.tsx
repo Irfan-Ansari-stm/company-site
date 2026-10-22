@@ -32,50 +32,50 @@ import { fallbackIndustries, PublicTaxonomy, getPageItems } from '@/app/(public)
 const crossIndustryPillars = [
   {
     icon: Lock,
-    title: 'Strict Domain Compliance',
-    description: 'Pre-architected compliance controls for SOC2 Type II, HIPAA, PCI-DSS Level 1, and GDPR with immutable cryptographic audit logging.',
+    title: 'Industry Compliance Built-In',
+    description: 'Built-in security standards for healthcare (HIPAA), finance (PCI-DSS, SOC2), and privacy (GDPR) with complete audit logging.',
     badge: 'Audited & Ready',
   },
   {
     icon: Database,
-    title: 'ACID PostgreSQL Isolation',
-    description: 'High-throughput relational foundations with indexed query plans, range partitioning, and connection pooling to prevent data corruption.',
+    title: 'Safe & Reliable Databases',
+    description: 'High-performance databases engineered to prevent data loss, ensure rapid queries, and safely handle heavy traffic.',
     badge: 'Zero Data Loss',
   },
   {
     icon: Zap,
-    title: 'Sub-120ms Edge Latency',
-    description: 'Global CDN distribution, Redis distributed caching, and Next.js server-rendered edge routes delivering instantaneous response times.',
-    badge: 'P95 Performance',
+    title: 'Fast Global Response Times',
+    description: 'Instant loading speeds and global content delivery ensure your application feels responsive on every device.',
+    badge: 'Fast & Smooth',
   },
   {
     icon: GitBranch,
-    title: '100% Repository Ownership',
-    description: 'Complete source repository, database migration scripts, Docker manifests, and runbooks transferred directly to your organization.',
-    badge: 'Zero Vendor Lock-In',
+    title: '100% Code & Asset Ownership',
+    description: 'You receive complete ownership of all source code, database scripts, and configurations with zero recurring licensing fees.',
+    badge: 'Zero Lock-In',
   },
 ];
 
 const industryFaqs = [
   {
-    q: 'How does SysMaira adapt architectures to regulated industry standards?',
-    a: 'Every platform begins with an exhaustive compliance threat model. For healthcare, we implement AWS KMS envelope encryption and BAA multi-tenant isolation; for fintech, we build cryptographic transaction audit ledgers and PCI-DSS Level 1 tokenization; for legal intelligence, we deploy self-hosted LLMs inside air-gapped private VPCs.',
+    q: 'How do you handle industry regulations like HIPAA, SOC2, or PCI-DSS?',
+    a: 'We build compliance directly into your architecture from day one. For healthcare platforms, we secure patient records to HIPAA standards. For financial systems, we follow payment industry security requirements. You receive full documentation for any audit.',
   },
   {
-    q: 'Can SysMaira integrate with our existing industry-specific legacy systems?',
-    a: 'Yes. We routinely build resilient adapters, event meshes, and microservice bridges to integrate legacy hospital EMRs (Epic, Cerner via FHIR/HL7), core banking platforms, SAP/NetSuite ERPs, and industrial IoT SCADA telemetry brokers.',
+    q: 'Can you connect with our existing industry-specific software?',
+    a: 'Yes. We routinely connect new applications with legacy hospital systems, core banking platforms, ERP systems (SAP, NetSuite), and custom internal databases without interrupting daily operations.',
   },
   {
-    q: 'Do you provide industry-specific security and compliance documentation for audits?',
-    a: 'Yes. Upon milestone completion, we deliver comprehensive penetration testing reports, threat surface maps, disaster recovery runbooks, and third-party audit artifacts required by corporate compliance officers.',
+    q: 'Do you provide audit reports for compliance officers?',
+    a: 'Yes. Upon project completion, we provide clear security test reports, backup procedures, and audit logs that your legal or compliance team can review with total confidence.',
   },
   {
-    q: 'What is the typical delivery timeframe for an enterprise industry platform?',
-    a: 'Most single-sector core platforms require 6 to 10 weeks from technical discovery to production cutover, delivered in transparent 14-day agile sprints with bi-weekly live staging demonstrations.',
+    q: 'What is the typical timeframe for building an industry platform?',
+    a: 'Most platforms take between 6 to 10 weeks from initial planning to live launch. We work in two-week agile cycles and provide working demos so you can test real progress every two weeks.',
   },
   {
-    q: 'Can we license or modify the intellectual property after project completion?',
-    a: 'You own 100% of all intellectual property, source code, database schemas, and infrastructure manifests. There are zero licensing fees, recurring vendor royalties, or proprietary framework dependencies.',
+    q: 'Who owns the software and intellectual property after launch?',
+    a: 'You own 100% of the code, designs, and database assets from day one. There are no recurring royalties, vendor lock-in, or proprietary licensing fees.',
   },
 ];
 
@@ -130,7 +130,7 @@ export default function IndustriesView() {
       });
     },
     onSuccess: () => {
-      toast.success('Inquiry submitted! A Principal Industry Architect will contact you within 24 hours.');
+      toast.success('Thank you! We received your inquiry and will contact you within 24 hours.');
       setForm({
         first_name: '',
         last_name: '',
@@ -179,20 +179,20 @@ export default function IndustriesView() {
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-800 uppercase shadow-inner shadow-cyan-500/10 dark:bg-cyan-950/40 dark:text-cyan-300 dark:shadow-cyan-500/20">
               <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-              <span>Mission-Critical Industry Architectures &amp; Regulatory Compliance</span>
+              <span>Tailored Industry Solutions</span>
             </div>
 
             {/* Headline */}
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-tight dark:text-white">
-              Sector-Specific Platforms{' '}
+            <h1 className="apple-hero-headline mt-6 text-slate-900 dark:text-white">
+              Software Built for Your Industry:{' '}
               <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400">
-                Engineered for High Stakes &amp; Zero Failure
+                Secure, Compliant, and Scalable
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-300">
-              We do not apply generic templates. From PCI-DSS financial settlement engines and HIPAA-isolated telehealth portals to real-time IoT fleet telemetry and private RAG legal intelligence—every architecture is shaped around the regulatory and operational realities of your vertical.
+            <p className="apple-lead mx-auto mt-6 text-slate-600 dark:text-slate-300">
+              We build custom software designed around your industry’s specific workflows and compliance rules—from healthcare and finance to logistics and retail.
             </p>
 
             {/* CTAs */}
@@ -208,7 +208,7 @@ export default function IndustriesView() {
                 href="#industry-inquiry"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:backdrop-blur dark:hover:border-slate-500 dark:hover:bg-slate-800"
               >
-                Scope Your Industry Architecture
+                Discuss Your Industry Needs
               </a>
             </div>
           </div>
@@ -216,10 +216,10 @@ export default function IndustriesView() {
           {/* Stats Bar */}
           <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-200 pt-10 dark:border-slate-800/80 sm:grid-cols-4 sm:gap-6">
             {[
-              { label: 'Daily FinTech Volume', value: '$250M+', sub: 'Zero reconciliation discrepancies' },
-              { label: 'Daily IoT Telemetry Pings', value: '50M+', sub: 'Real-time GPS vehicle events' },
+              { label: 'Daily FinTech Volume', value: '$250M+', sub: 'Zero reconciliation errors' },
+              { label: 'Daily IoT Sensor Events', value: '50M+', sub: 'Real-time vehicle tracking' },
               { label: 'Clinical Patients Served', value: '240k+', sub: 'Across 18 hospital networks' },
-              { label: 'Precedents Indexed', value: '14M+', sub: 'Private air-gapped vector search' },
+              { label: 'Search Precision', value: '99.4%', sub: 'Accurate instant record search' },
             ].map((stat, idx) => (
               <div
                 key={idx}
@@ -241,13 +241,13 @@ export default function IndustriesView() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
-              Universal Engineering Standards
+              Standard Guarantees
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-              Architectural Pillars Across Every Sector
+              Four Guarantees Built Into Every Project
             </h2>
             <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
-              Regardless of the vertical, every enterprise platform is built upon four non-negotiable architectural foundations.
+              No matter your industry, every product we build follows these four core principles.
             </p>
           </div>
 
@@ -285,13 +285,13 @@ export default function IndustriesView() {
           <div className="flex flex-col items-start justify-between gap-6 border-b border-slate-200 pb-8 dark:border-slate-800 md:flex-row md:items-end">
             <div>
               <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
-                Industry Solutions
+                Industries We Serve
               </span>
               <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-                Dedicated Vertical Practices
+                Specialized Solutions for Your Sector
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-                Explore our sector practices. Each solution includes domain compliance frameworks, battle-tested data topologies, and tailored deliverables.
+                Explore our industry practices. Each vertical comes with industry-specific security, integrations, and proven delivery roadmaps.
               </p>
             </div>
 
@@ -383,17 +383,17 @@ export default function IndustriesView() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6 dark:border-slate-800">
             <div>
               <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
-                Verified Deployments
+                Proven Results
               </span>
               <h2 className="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white">
-                Proven Track Record Across Sectors
+                Real Projects Built for Real Businesses
               </h2>
             </div>
             <Link
               href="/work"
               className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
             >
-              View All 6 Case Studies
+              View All Case Studies
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -486,10 +486,10 @@ export default function IndustriesView() {
               Clear Answers
             </span>
             <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-              Industry Architecture FAQs
+              Industry Questions &amp; Answers
             </h2>
             <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
-              Key questions about compliance audits, data isolation, and legacy integrations.
+              Straightforward answers about compliance audits, system integrations, and code ownership.
             </p>
           </div>
 
@@ -532,13 +532,13 @@ export default function IndustriesView() {
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-100/60 px-3 py-1 text-xs font-semibold text-cyan-800 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
                 <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
-                Industry Engineering Scoping
+                Start a Conversation
               </span>
               <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-                Scope Your Vertical Architecture
+                Tell Us About Your Project
               </h2>
               <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
-                Submit your domain requirements. A Principal Architect with deep experience in your industry will evaluate your compliance boundaries and outline a tailored roadmap within 24 hours.
+                Share what you want to build. An experienced team member will review your goals and reply with a tailored plan within 24 hours.
               </p>
             </div>
 
@@ -609,7 +609,7 @@ export default function IndustriesView() {
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                    Industry Vertical
+                    Industry Sector
                   </label>
                   <select
                     value={form.industry_sector}
@@ -621,7 +621,7 @@ export default function IndustriesView() {
                         {ind.name}
                       </option>
                     ))}
-                    <option value="Custom Industry Sector">Other Regulated Industry</option>
+                    <option value="Custom Industry Sector">Other Industry</option>
                   </select>
                 </div>
 
@@ -634,23 +634,23 @@ export default function IndustriesView() {
                     onChange={(e) => setForm({ ...form, target_timeline: e.target.value })}
                     className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
-                    <option value="immediate">Immediate (&lt; 30 Days)</option>
-                    <option value="1-2 months">1–2 Months (Active Planning)</option>
-                    <option value="quarterly">Next Quarter (Budget Approved)</option>
+                    <option value="immediate">Immediately (&lt; 30 Days)</option>
+                    <option value="1-2 months">In 1–2 Months (Planning stage)</option>
+                    <option value="quarterly">Next Quarter (Budgeting stage)</option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                  Technical Objectives &amp; Compliance Constraints <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                  Project Goals &amp; Specific Requirements <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
                   rows={4}
                   required
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
-                  placeholder="Describe your current system, target scale, compliance requirements (e.g. HIPAA, PCI, SOC2), and existing legacy databases to integrate..."
+                  placeholder="Describe your current system, target goals, any compliance rules (e.g. HIPAA, PCI), and existing databases to integrate..."
                   className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
@@ -658,7 +658,7 @@ export default function IndustriesView() {
               <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
                 <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                   <Lock className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
-                  <span>Confidential NDA protected communication. 100% IP ownership.</span>
+                  <span>Confidential communication. Strict NDA and 100% IP ownership.</span>
                 </div>
 
                 <button
@@ -667,7 +667,7 @@ export default function IndustriesView() {
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-bold text-slate-950 shadow-xl shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 sm:w-auto cursor-pointer"
                 >
                   <Send className="h-4 w-4" />
-                  {leadMutation.isPending ? 'Submitting Scope...' : 'Submit Architecture Scope'}
+                  {leadMutation.isPending ? 'Sending Inquiry...' : 'Send Project Inquiry'}
                 </button>
               </div>
             </form>

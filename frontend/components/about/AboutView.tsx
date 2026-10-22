@@ -207,19 +207,19 @@ export default function AboutView() {
           {/* Eyebrow Pill */}
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/70 px-3.5 py-1 text-xs font-semibold text-cyan-800 backdrop-blur-md dark:border-cyan-500/30 dark:bg-cyan-950/40 dark:text-cyan-300">
             <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-            <span className="tracking-wide uppercase font-mono">About {brandName} / Enterprise Architecture</span>
+            <span className="apple-eyebrow">About {brandName}</span>
           </div>
 
           {/* Main Headline */}
           <div className="mt-6 max-w-5xl">
-            <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
-              Technology with purpose. <br className="hidden sm:inline" />
+            <h1 className="apple-hero-headline text-slate-900 dark:text-white">
+              We build custom software <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-indigo-600 dark:from-cyan-300 dark:via-teal-300 dark:to-indigo-300 bg-clip-text text-transparent">
-                Systems engineered for what comes next.
+                that helps businesses grow.
               </span>
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">
-              We are an enterprise digital engineering firm headquartered in San Francisco. We design, build, and scale mission-critical distributed architectures, high-throughput PostgreSQL databases, and modern cloud platforms for high-growth scaleups and regulated global enterprises.
+            <p className="apple-lead mt-6 text-slate-600 dark:text-slate-300">
+              SysMaira is a dedicated software engineering and design team. We help startup founders, executives, and growing businesses design, build, and launch reliable web applications, client portals, and cloud systems that customers love to use.
             </p>
           </div>
 
@@ -229,7 +229,7 @@ export default function AboutView() {
               href="/services"
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-3.5 text-sm font-bold text-slate-950 transition hover:brightness-110 shadow-lg shadow-cyan-500/20 cursor-pointer"
             >
-              <span>Explore Core Disciplines</span>
+              <span>Explore Our Services</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
 
@@ -237,34 +237,34 @@ export default function AboutView() {
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-white dark:hover:bg-slate-800 cursor-pointer shadow-sm"
             >
-              <span>Schedule Architecture Scoping</span>
+              <span>Talk to Our Team</span>
             </Link>
           </div>
 
-          {/* Verified Engineering Standards Ribbon */}
+          {/* Clear Key Guarantees Ribbon */}
           <div className="mt-16 grid grid-cols-2 gap-4 rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-lg backdrop-blur-md transition-colors sm:grid-cols-4 sm:p-8 dark:border-slate-800 dark:bg-slate-900/50">
             <div>
-              <p className="text-3xl font-black text-cyan-600 dark:text-cyan-400 sm:text-4xl">99.99%</p>
-              <p className="mt-1 text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                Production SLA Standard
+              <p className="text-3xl font-bold text-cyan-600 dark:text-cyan-400 sm:text-4xl">99.9%</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                Uptime Standard
               </p>
             </div>
             <div>
-              <p className="text-3xl font-black text-teal-600 dark:text-teal-400 sm:text-4xl">Sub-120ms</p>
-              <p className="mt-1 text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                P95 Global Edge Latency
+              <p className="text-3xl font-bold text-teal-600 dark:text-teal-400 sm:text-4xl">&lt; 150ms</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                Fast Page Load Speed
               </p>
             </div>
             <div>
-              <p className="text-3xl font-black text-slate-900 dark:text-white sm:text-4xl">100%</p>
-              <p className="mt-1 text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                Client Code &amp; IP Ownership
+              <p className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">100%</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                You Own All Code &amp; IP
               </p>
             </div>
             <div>
-              <p className="text-3xl font-black text-indigo-600 dark:text-indigo-400 sm:text-4xl">Zero</p>
-              <p className="mt-1 text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                Vendor Lock-In Protocol
+              <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400 sm:text-4xl">Zero</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                Hidden Fees or Lock-in
               </p>
             </div>
           </div>
@@ -277,22 +277,22 @@ export default function AboutView() {
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             {/* Story Text */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">
+              <div className="inline-flex items-center gap-1.5 apple-eyebrow text-cyan-600 dark:text-cyan-400">
                 <Compass className="h-4 w-4" />
-                <span>Our Founding Thesis</span>
+                <span>Why We Started</span>
               </div>
-              <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl leading-tight">
-                Built as an engineering asset, <br className="hidden sm:inline" />
-                not a disposable brochure.
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl leading-tight">
+                Software built to run your business, <br className="hidden sm:inline" />
+                not just look nice in a demo.
               </h2>
               <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                The enterprise technology landscape is full of extremes: agencies that build flashy prototypes that crumble under real database concurrency, and legacy consulting giants that bill millions for multi-year slide decks without shipping working production code.
+                Many agencies build prototypes that look great on a slide but crash when real customers start using them. Others bill for months of endless discovery meetings without shipping working software.
               </p>
               <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                {brandName} was founded to provide a decisive alternative: small, elite pods of Principal Systems Architects, database engineers, and modern full-stack practitioners who ship production-grade, audited code directly into your repositories.
+                We founded SysMaira to offer a better way: small, senior teams of developers and designers who build dependable products and ship working features directly to your team every two weeks.
               </p>
               <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                From high-frequency financial settlement gateways processing hundreds of millions in volume, to HIPAA-compliant clinical telemetry portals, our platforms are built to run the actual business.
+                From high-speed transaction platforms to secure customer portals, we focus on what really moves the needle: clean code, fast performance, and software that helps you acquire and retain customers.
               </p>
 
               <div className="pt-2 flex flex-wrap gap-4">
@@ -300,7 +300,7 @@ export default function AboutView() {
                   href="/process"
                   className="inline-flex items-center gap-1.5 font-semibold text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300 transition text-sm cursor-pointer"
                 >
-                  <span>Learn how our 6-phase engineering process works</span>
+                  <span>See how our 4-phase development process works</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

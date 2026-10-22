@@ -180,14 +180,14 @@ export default function HighContrastCTA() {
         {/* Verified Client Testimonials Subsection */}
         <div>
           <div className="max-w-2xl">
-            <p className="text-xs font-bold tracking-widest uppercase text-violet-600 dark:text-cyan-400">
-              Verified Social Proof
+            <p className="apple-eyebrow text-violet-600 dark:text-cyan-400">
+              Client Stories
             </p>
-            <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-              Proven results across production enterprise systems.
+            <h2 className="apple-section-title mt-3 text-slate-900 dark:text-white">
+              Trusted by founders and business leaders.
             </h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-              Direct feedback from technical leaders managing platforms built by SysMaira.
+            <p className="apple-lead mt-2 text-slate-600 dark:text-slate-300">
+              Here is what executives and product teams say about building with SysMaira.
             </p>
           </div>
 
@@ -242,29 +242,29 @@ export default function HighContrastCTA() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/15 px-4 py-1.5 text-xs font-semibold text-violet-300">
                 <Sparkles className="h-4 w-4 text-cyan-400" />
-                <span>Enterprise Lead Intake &amp; Architecture Review</span>
+                <span>Let&apos;s Talk About Your Project</span>
               </div>
 
-              <h2 className="mt-6 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight">
-                Ready to build something extraordinary?
+              <h2 className="mt-6 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight">
+                Ready to bring your software project to life?
               </h2>
 
               <p className="mt-4 text-base leading-relaxed text-slate-300">
-                Schedule a confidential technical consultation with our engineering directors. We evaluate your current architecture, recommend a targeted roadmap, and prepare milestone deliverables.
+                Tell us what you are building. We will review your goals, suggest the best path forward, and give you a clear timeline and cost estimate.
               </p>
 
               <div className="mt-8 space-y-4 text-sm text-slate-300">
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0" />
-                  <span>Direct ingestion into PostgreSQL CRM schema &bull; Real-time pipeline routing</span>
+                  <Clock className="h-5 w-5 text-cyan-400 shrink-0" />
+                  <span>We reply within 24 hours with an initial plan &amp; estimate</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Clock className="h-5 w-5 text-cyan-400 shrink-0" />
-                  <span>Guaranteed response within 24 business hours</span>
+                  <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0" />
+                  <span>Fixed-price milestone billing — you only pay for approved deliverables</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Lock className="h-5 w-5 text-violet-400 shrink-0" />
-                  <span>Mutual Non-Disclosure Agreement (NDA) protected by default</span>
+                  <span>100% code ownership — you own all repositories and assets</span>
                 </div>
               </div>
             </div>
@@ -276,10 +276,10 @@ export default function HighContrastCTA() {
               className="rounded-2xl border border-white/10 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8"
             >
               <h3 className="text-xl font-bold text-white">
-                Book an Architecture Consultation
+                Tell Us About Your Project
               </h3>
               <p className="mt-1 text-xs text-slate-400">
-                Direct integration with PostgreSQL CRM database
+                Fill out the short form below and we will get back to you within 24 hours.
               </p>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -428,7 +428,7 @@ export default function HighContrastCTA() {
                         ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500'
                         : 'border-slate-700 focus:border-violet-500 focus:ring-violet-500'
                     }`}
-                    placeholder="Outline your application goals, expected concurrency, compliance needs, or target timeline..."
+                    placeholder="Tell us what you want to build, key features you need, or your target launch date..."
                   />
                   {formErrors.requirements && (
                     <p className="mt-1 text-[11px] text-rose-400">{formErrors.requirements}</p>
@@ -443,7 +443,7 @@ export default function HighContrastCTA() {
                     type="submit"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 py-3.5 text-sm font-bold text-white shadow-xl shadow-violet-600/30 transition hover:brightness-110 disabled:opacity-50 cursor-pointer"
                   >
-                    {leadMutation.isPending ? 'Ingesting inquiry into CRM...' : 'Submit Architecture Request'}
+                    {leadMutation.isPending ? 'Sending your message...' : 'Send Message'}
                     <ArrowRight className="h-4 w-4" />
                   </button>
                 </MagneticButton>

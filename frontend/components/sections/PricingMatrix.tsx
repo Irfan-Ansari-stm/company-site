@@ -44,59 +44,59 @@ const fallbackCoupons = [
 const pricingTiers = [
   {
     name: 'Starter Sprint',
-    subtitle: 'Discovery & Architectural Audit',
+    subtitle: 'Technical Audit & Roadmap Planning',
     price: 15000,
     priceLabel: '$15,000',
     cadence: 'Fixed-Price Engagement',
     duration: '2 Weeks Delivery',
     popular: false,
-    description: 'Rapid deep-dive assessment of your existing software, data schemas, security compliance, and performance bottlenecks.',
+    description: 'A focused, two-week technical assessment to review your existing software, identify bottlenecks, and plan your development roadmap.',
     features: [
-      'Comprehensive database & schema audit (PostgreSQL)',
-      'WCAG 2.2 AA accessibility & UX heuristic evaluation',
-      'OWASP Top 10 security review & vulnerability scan',
-      'API bottleneck & concurrency benchmark report',
-      'Executive technical roadmap & implementation blueprint',
+      'Complete code, database, and performance review',
+      'User experience and mobile accessibility evaluation',
+      'Security audit and vulnerability checks',
+      'Speed and page-load benchmark report',
+      'Actionable product roadmap and cost estimate',
     ],
-    sla: '5 Business Days Turnaround',
+    sla: 'Delivery within 10 business days',
   },
   {
-    name: 'Core Platform Build',
-    subtitle: 'End-to-End System Engineering',
+    name: 'Full Product Build',
+    subtitle: 'Complete Custom Web Application',
     price: 35000,
     priceLabel: '$35,000',
-    cadence: 'Production Delivery',
+    cadence: 'Milestone Delivery',
     duration: '6 – 8 Weeks Delivery',
     popular: true,
-    description: 'Complete architecture and turnkey implementation of your public website, CMS, CRM pipeline, and internal dashboard.',
+    description: 'Turnkey design and development of your custom web application, customer portal, content management, and backend ready for launch.',
     features: [
-      'Production Next.js 16 App Router frontend with Tailwind v4',
-      'Robust Express.js backend with 18 PostgreSQL domain schemas',
-      'CRM lead intake with automated routing & sales alerts',
-      'Client portal with role-based access control (RBAC)',
-      'Docker containerization & automated CI/CD pipeline',
-      '30-day post-launch warranty & 99.99% uptime guarantee',
+      'Modern, mobile-responsive web application',
+      'Secure database with automatic daily backups',
+      'Lead capture forms with automated email notifications',
+      'Client portal with role-based user logins',
+      'Automated cloud hosting deployment',
+      '30-day post-launch support & bug-free guarantee',
     ],
-    sla: '24/7 Priority Emergency Support',
+    sla: 'Dedicated Slack communication & weekly demos',
   },
   {
-    name: 'Enterprise Transformation',
-    subtitle: 'Multi-Tenant Scale & Cloud Modernization',
+    name: 'Enterprise Scale',
+    subtitle: 'Custom Large-Scale Engineering',
     price: 75000,
     priceLabel: '$75,000+',
-    cadence: 'Bespoke Custom Scope',
-    duration: 'Custom Milestone Sprints',
+    cadence: 'Bespoke Engagement',
+    duration: 'Iterative 2-Week Sprints',
     popular: false,
-    description: 'Designed for enterprise organizations modernizing complex multi-region infrastructure, microservices, or custom AI agents.',
+    description: 'Built for established companies needing multi-region scaling, complex third-party integrations, or dedicated development pods.',
     features: [
-      'Multi-cloud Kubernetes / Terraform infrastructure-as-code',
-      'High-frequency event streaming with Redis & WebSockets',
-      'Custom AI LLM agents, RAG pipelines, and automated tools',
-      'Dedicated engineering pods with daily sprint ceremonies',
-      '100% intellectual property transfer & staff training workshops',
-      'Contractual SLA with sub-hour incident response',
+      'Scalable cloud infrastructure configured for heavy traffic',
+      'High-speed data pipelines and custom REST/GraphQL APIs',
+      'AI-powered workflows, vector search, and automation',
+      'Dedicated senior development team working on your product',
+      '100% intellectual property and code ownership transfer',
+      'Priority emergency support with rapid response time',
     ],
-    sla: 'Sub-Hour SLA Guarantee',
+    sla: 'Guaranteed 99.9% uptime & priority support',
   },
 ];
 
@@ -172,14 +172,14 @@ export default function PricingMatrix() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl">
-          <p className="text-xs font-bold tracking-widest uppercase text-violet-600 dark:text-cyan-400">
-            Engagement &amp; Pricing Models
+          <p className="apple-eyebrow text-violet-600 dark:text-cyan-400">
+            Pricing &amp; Packages
           </p>
-          <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
-            Transparent enterprise rates with guaranteed milestones.
+          <h2 className="apple-section-title mt-3 text-slate-900 dark:text-white">
+            Simple, transparent pricing with clear milestones.
           </h2>
-          <p className="mt-4 text-base text-slate-600 dark:text-slate-300 sm:text-lg">
-            Engineering services backed by PostgreSQL contract schemas, milestone billing, and SLA deliverables.
+          <p className="apple-lead mt-4 text-slate-600 dark:text-slate-300">
+            Know exactly what you pay and what you get at every stage. No hidden fees, no long contracts, and you only pay for approved work.
           </p>
         </div>
 
@@ -216,7 +216,7 @@ export default function PricingMatrix() {
                     )}
                   </div>
 
-                  <h3 className="mt-4 text-2xl font-black text-slate-900 dark:text-white">
+                  <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                     {tier.name}
                   </h3>
                   <p className="mt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -388,7 +388,7 @@ export default function PricingMatrix() {
                     href="#contact"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 py-3 text-sm font-bold text-white shadow-md shadow-violet-600/20 hover:brightness-110"
                   >
-                    Lock In This Scope
+                    Get Started with This Plan
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </MagneticButton>
@@ -397,13 +397,13 @@ export default function PricingMatrix() {
           </div>
         </div>
 
-        {/* Standard Project Investment Tiers */}
+        {/* Typical Project Budgets */}
         <div className="mt-14 rounded-2xl border border-slate-200/90 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-950/70">
           <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-            Custom Scope Availability Mapping
+            Flexible Project Sizes &amp; Budgets
           </h3>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Current engineering capacity mapped across CRM intake budgets:
+            We work with startups and growing companies across all budget stages:
           </p>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

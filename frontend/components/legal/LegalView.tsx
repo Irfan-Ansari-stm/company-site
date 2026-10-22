@@ -107,11 +107,11 @@ export default function LegalView({ type }: LegalViewProps) {
                 </span>
               </div>
 
-              <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
+              <h1 className="apple-hero-headline mt-4 text-slate-900 dark:text-white">
                 {isPrivacy ? 'Privacy Policy' : 'Terms of Service'}
               </h1>
 
-              <p className="mt-4 text-base text-slate-600 leading-relaxed dark:text-slate-300 sm:text-lg">
+              <p className="apple-lead mt-4 text-slate-600 dark:text-slate-300">
                 {isPrivacy
                   ? 'Our binding commitment to client confidentiality, zero AI model training on private codebases, and strict compliance with global privacy regulations (GDPR, CCPA/CPRA, and SOC2 Type II).'
                   : 'The legal framework and terms governing enterprise advisory engagements, Statements of Work (SOW), 100% intellectual property transfer, and delivery milestone warranties with SysMaira Enterprise.'}

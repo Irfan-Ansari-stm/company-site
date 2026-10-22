@@ -25,33 +25,33 @@ import { servicesApi } from '@/lib/api';
 // Fallback constant based on database seed
 const fallbackServices = [
   {
-    title: 'Enterprise Full-Stack Web Application Development',
+    title: 'Custom Web Application Development',
     slug: 'enterprise-full-stack-web-apps',
     summary:
-      'Scalable Next.js and Node.js solutions engineered for high concurrency, enterprise security, and seamless developer experience.',
+      'Fast, secure web apps, dashboards, and customer portals designed to make your business run better and grow smoothly.',
     starting_price: '25000.00',
     currency: 'USD',
-    tech_stack: ['Next.js 16', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    tech_stack: ['Next.js', 'React', 'Node.js', 'PostgreSQL'],
     is_featured: true,
   },
   {
-    title: 'Multi-Cloud Architecture & Kubernetes Modernization',
+    title: 'Cloud Infrastructure & DevOps',
     slug: 'multi-cloud-architecture-kubernetes',
     summary:
-      'End-to-end containerization, Terraform infrastructure-as-code, GitOps pipelines, and multi-region disaster recovery setups.',
+      'Reliable cloud hosting setup, automated release pipelines, and 24/7 uptime monitoring so your site never goes down.',
     starting_price: '35000.00',
     currency: 'USD',
-    tech_stack: ['Kubernetes', 'Docker', 'Terraform', 'AWS/GCP'],
+    tech_stack: ['AWS', 'Google Cloud', 'Docker', 'Kubernetes'],
     is_featured: true,
   },
   {
-    title: 'Enterprise Design Systems & Digital UX Audit',
+    title: 'UI/UX Design & Design Systems',
     slug: 'enterprise-design-systems-ux-audit',
     summary:
-      'Comprehensive heuristic evaluation, WCAG 2.2 AA accessibility compliance, and production Figma-to-React component libraries.',
+      'Clean, intuitive interfaces designed for high conversions, effortless user navigation, and complete mobile responsiveness.',
     starting_price: '15000.00',
     currency: 'USD',
-    tech_stack: ['Tailwind CSS', 'Framer Motion', 'WCAG 2.2 AA', 'Storybook'],
+    tech_stack: ['Figma', 'Tailwind CSS', 'Accessible UX', 'Mobile First'],
     is_featured: false,
   },
 ];
@@ -117,14 +117,14 @@ export default function FeatureBento() {
         {/* Header */}
         <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold tracking-widest uppercase text-violet-600 dark:text-cyan-400">
-              Enterprise Solutions
+            <p className="apple-eyebrow text-violet-600 dark:text-cyan-400">
+              Our Core Services
             </p>
-            <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
-              High-performance engineering tailored to your operational scale.
+            <h2 className="apple-section-title mt-3 text-slate-900 dark:text-white">
+              Everything you need to launch and scale your digital product.
             </h2>
-            <p className="mt-4 text-base text-slate-600 dark:text-slate-300 sm:text-lg">
-              Every service is backed by documented PostgreSQL schemas, containerized deployment pipelines, and guaranteed SLA contracts.
+            <p className="apple-lead mt-4 text-slate-600 dark:text-slate-300">
+              From web applications and customer portals to cloud hosting and UI/UX design, our team handles the technical heavy lifting so you can focus on growing your business.
             </p>
           </div>
           <div>
@@ -132,7 +132,7 @@ export default function FeatureBento() {
               href="/services"
               className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-3 text-xs font-bold text-white shadow-md shadow-violet-600/20 transition hover:bg-violet-500 whitespace-nowrap dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400"
             >
-              All Services Catalog
+              Explore All Services
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

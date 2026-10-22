@@ -6,39 +6,39 @@ import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
 const faqs = [
   {
     id: 1,
-    question: 'What technology stack and architecture does SysMaira specialize in?',
+    question: 'What kind of software and websites does SysMaira build?',
     answer:
-      'We build high-concurrency systems using Next.js 16 (App Router), TypeScript, and Tailwind CSS on the frontend, powered by modular Express.js and Go microservices on the backend. Data persistence is engineered using PostgreSQL 18 with relational domain schemas, connection pooling, and Redis distributed caching for ultra-low-latency throughput.',
+      'We build custom web applications, SaaS platforms, client portals, and modern company websites. We use reliable, industry-standard technologies like React, Next.js, and Node.js with secure databases so your product runs fast, looks polished, and can handle thousands of users smoothly.',
   },
   {
     id: 2,
-    question: 'How do you handle enterprise data security, HIPAA, and SOC2 compliance?',
+    question: 'How do you protect our data and ensure security?',
     answer:
-      'Security is integrated at every architectural tier. We implement end-to-end TLS 1.3 encryption, database envelope encryption for sensitive fields, strict Role-Based Access Control (RBAC) with granular permission guards, parameterized SQL to eliminate injection vectors, and comprehensive immutable audit logging for all administrative actions.',
+      'Security is built into everything we develop. We use bank-level data encryption, secure logins with role-based permissions, and automated security checks to keep your customer information safe and private.',
   },
   {
     id: 3,
-    question: 'Who owns the intellectual property, code repositories, and database schemas?',
+    question: 'Who owns the code, design, and intellectual property?',
     answer:
-      'You retain 100% full intellectual property ownership. Upon milestone sign-off, all Git repositories, infrastructure-as-code scripts (Terraform/Docker), PostgreSQL migration files, design assets, and documentation are transferred entirely to your organization without proprietary lock-in or recurring licensing fees.',
+      'You do. You own 100% of all source code, designs, and database assets from day one. When each project milestone is completed, everything is transferred directly to your organization with zero recurring licensing fees or vendor lock-in.',
   },
   {
     id: 4,
-    question: 'How does the public website integrate with internal CRM and dashboard systems?',
+    question: 'How long does a typical project take?',
     answer:
-      'The public landing page is directly connected to your operational backend. Leads submitted through the inquiry form are validated and instantly routed to the PostgreSQL CRM schema (/api/v1/crm/leads/public). Internal teams can track pipeline stages, view real-time conversion telemetry, publish blog insights, and manage catalog services through the authenticated dashboard.',
+      'Planning and technical discovery sprints take 2 weeks. Complete custom product builds typically take 6 to 8 weeks, delivered in clear 2-week milestones with live demo previews so you can see real progress at every step.',
   },
   {
     id: 5,
-    question: 'What are typical project timelines, milestone billings, and SLA guarantees?',
+    question: 'How does payment work?',
     answer:
-      'Architectural discovery sprints deliver within 2 weeks. Full-scale platform builds typically span 6 to 10 weeks delivered in two-week iterative sprints. Contracts follow milestone payments (typically 40% kickoff, 40% working staging demo, 20% production release). All production builds include our guaranteed 99.99% uptime SLA and 30 days of post-launch hypercare.',
+      'We use milestone-based pricing with clear deliverables. Typically, payments are divided into three parts: kickoff, working demo review, and final launch approval. You only pay for deliverables you review and approve.',
   },
   {
     id: 6,
-    question: 'Can your engineering pods integrate with our existing in-house team?',
+    question: 'Can you work alongside our existing team?',
     answer:
-      'Yes. We regularly augment existing enterprise engineering teams. We participate in daily standups, integrate into your existing GitHub/GitLab CI/CD pipelines, conduct peer code reviews, and provide comprehensive architecture walkthroughs to ensure smooth long-term maintainability for your team.',
+      'Yes. We regularly work with in-house developers, product managers, and designers. We join your existing communication channels and follow your workflow to help you ship features faster and with higher quality.',
   },
 ];
 
@@ -52,15 +52,15 @@ export default function FAQAccordion() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-4 py-1.5 text-xs font-semibold text-violet-700 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-cyan-300">
             <HelpCircle className="h-4 w-4 text-violet-600 dark:text-cyan-400" />
-            <span>Enterprise Architecture FAQ</span>
+            <span className="apple-eyebrow">Frequently Asked Questions</span>
           </div>
 
-          <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
-            Frequently Asked Questions
+          <h2 className="apple-section-title mt-4 text-slate-900 dark:text-white">
+            Common questions from founders and business leaders.
           </h2>
 
-          <p className="mt-4 text-base text-slate-600 dark:text-slate-300 sm:text-lg">
-            Answers to common questions regarding our engineering standards, compliance protocols, and engagement structures.
+          <p className="apple-lead mx-auto mt-4 text-slate-600 dark:text-slate-300">
+            Everything you need to know about our development process, timelines, code ownership, and pricing.
           </p>
         </div>
 

@@ -112,14 +112,14 @@ export default function ShowcaseGallery() {
         {/* Header */}
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold tracking-widest uppercase text-violet-600 dark:text-cyan-400">
-              Selected Case Studies
+            <p className="apple-eyebrow text-violet-600 dark:text-cyan-400">
+              Featured Work
             </p>
-            <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
-              Production architectures operating at global scale.
+            <h2 className="apple-section-title mt-3 text-slate-900 dark:text-white">
+              Real projects built for real businesses.
             </h2>
-            <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
-              Real systems engineered to withstand intense concurrency, strict regulatory compliance, and mission-critical workloads.
+            <p className="apple-lead mt-4 text-slate-600 dark:text-slate-300">
+              Take a look at how we have helped companies build custom software, speed up platforms, and scale their digital products.
             </p>
           </div>
 
@@ -127,7 +127,7 @@ export default function ShowcaseGallery() {
             href="/work"
             className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-700 transition hover:bg-violet-50 hover:text-violet-600 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-cyan-300"
           >
-            View Full Portfolio Directory
+            View All Projects
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

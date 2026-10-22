@@ -22,7 +22,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({
   brandName = 'SysMaira Enterprise',
-  subheadline = 'We architect and build resilient digital platforms, high-concurrency cloud systems, and connected web ecosystems powered by PostgreSQL and Next.js.',
+  subheadline = 'We build custom software, web applications, and digital platforms that help your business run smoothly and scale.',
 }: HeroSectionProps) {
   return (
     <section
@@ -40,20 +40,20 @@ export default function HeroSection({
         {/* Left Column: Headlines & Call to Actions */}
         <div className="max-w-3xl">
           {/* Eyebrow Badge */}
-          <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-violet-200 bg-violet-50/90 px-4 py-1.5 text-xs font-semibold text-violet-700 shadow-sm backdrop-blur-md dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-300 sm:text-sm">
+          <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-violet-200 bg-violet-50/90 px-4 py-1.5 text-xs font-semibold text-violet-700 shadow-xs backdrop-blur-md dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-300 sm:text-sm">
             <Sparkles className="h-4 w-4 text-violet-600 dark:text-cyan-400" />
-            <span className="truncate">
-              Awwwards-Caliber Architecture &bull; Next.js 16 &bull; PostgreSQL 18
+            <span className="truncate apple-eyebrow">
+              Custom Software &bull; Web Apps &bull; Cloud Systems
             </span>
           </div>
 
           {/* Primary Brand Headline */}
-          <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
+          <h1 className="apple-hero-headline text-slate-900 dark:text-white">
             <TextReveal text={brandName} />
           </h1>
 
           {/* Supporting Copy */}
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl font-normal">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl font-normal tracking-[-0.011em]">
             {subheadline}
           </p>
 
@@ -64,7 +64,7 @@ export default function HeroSection({
                 href="#contact"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-violet-600/25 transition hover:shadow-violet-600/40 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
               >
-                Book a consultation
+                Talk to Our Team
                 <ChevronRight className="h-4 w-4" />
               </a>
             </MagneticButton>
@@ -79,32 +79,32 @@ export default function HeroSection({
             </MagneticButton>
           </div>
 
-          {/* Verified Technical Benchmarks */}
+          {/* Plain English Key Proof Metrics */}
           <div className="mt-12 grid max-w-2xl grid-cols-3 gap-6 border-t border-slate-200/90 pt-6 dark:border-slate-800/80">
             <div>
-              <div className="flex items-center gap-1.5 text-2xl font-black tracking-tight text-slate-900 dark:text-white sm:text-3xl">
-                <span>99.99%</span>
+              <div className="flex items-center gap-1.5 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+                <span>99.9%</span>
               </div>
               <div className="mt-1 text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
-                Production SLA uptime
+                Uptime guarantee
               </div>
             </div>
 
             <div>
-              <div className="flex items-center gap-1.5 text-2xl font-black tracking-tight text-slate-900 dark:text-white sm:text-3xl">
-                <span>120ms</span>
+              <div className="flex items-center gap-1.5 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+                <span>&lt; 150ms</span>
               </div>
               <div className="mt-1 text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
-                Median API latency
+                Fast page loads
               </div>
             </div>
 
             <div>
-              <div className="flex items-center gap-1.5 text-2xl font-black tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+              <div className="flex items-center gap-1.5 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
                 <span>100%</span>
               </div>
               <div className="mt-1 text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
-                Client IP ownership
+                You own all code &amp; IP
               </div>
             </div>
           </div>
@@ -124,51 +124,47 @@ export default function HeroSection({
                 </span>
                 <div>
                   <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
-                    Live System Telemetry
+                    Live System Status
                   </p>
                   <h3 className="mt-0.5 text-base font-bold text-slate-900 dark:text-white">
-                    Public API &amp; Engine Status
+                    Platform &amp; Service Health
                   </h3>
                 </div>
               </div>
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                Online &bull; 1ms DB
+                All Systems Operational
               </div>
             </div>
 
-            {/* 4 Interactive Data Flow Rows */}
+            {/* 4 Clear Business Feature Rows */}
             <div className="mt-5 space-y-3">
               {[
                 {
-                  endpoint: '/api/v1/services',
-                  title: 'Services Catalog API',
-                  desc: 'Public active offers & category counts',
-                  status: '200 OK',
+                  title: 'Custom Web Apps',
+                  desc: 'High-speed portals and web applications',
+                  status: 'Active',
                   icon: Zap,
                   badge: 'bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-500/15 dark:text-cyan-300 dark:border-cyan-500/30',
                 },
                 {
-                  endpoint: '/api/v1/crm/leads/public',
-                  title: 'Enterprise Lead Intake',
-                  desc: 'Direct PostgreSQL CRM schema insertion',
-                  status: '201 Created',
+                  title: 'Secure Databases',
+                  desc: 'Protected data storage with daily backups',
+                  status: 'Protected',
                   icon: CheckCircle2,
                   badge: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/30',
                 },
                 {
-                  endpoint: '/api/v1/portfolio',
-                  title: 'Portfolio & Case Studies',
-                  desc: 'High-concurrency benchmark metrics',
-                  status: '200 OK',
+                  title: 'Cloud Infrastructure',
+                  desc: 'Reliable hosting configured to scale',
+                  status: 'Online',
                   icon: Shield,
                   badge: 'bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-500/15 dark:text-violet-300 dark:border-violet-500/30',
                 },
                 {
-                  endpoint: '/api/v1/marketing/subscribers',
-                  title: 'Newsletter Subscription API',
-                  desc: 'Automated subscriber list router',
-                  status: '201 Created',
+                  title: 'Dedicated Support',
+                  desc: 'Direct communication with senior engineers',
+                  status: 'Available',
                   icon: Sparkles,
                   badge: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-500/30',
                 },
@@ -202,15 +198,15 @@ export default function HeroSection({
               })}
             </div>
 
-            {/* Micro Architecture Metadata */}
+            {/* Clear Business Delivery Facts */}
             <div className="mt-5 rounded-lg border border-slate-200 bg-slate-100/70 p-3 text-xs text-slate-600 dark:border-slate-800/80 dark:bg-slate-950/40 dark:text-slate-400">
-              <div className="flex justify-between font-mono text-[11px]">
-                <span className="text-slate-500">API Prefix:</span>
-                <span className="text-violet-600 dark:text-cyan-400">/api/v1 (Express.js 4)</span>
+              <div className="flex justify-between text-[11px]">
+                <span className="text-slate-500 font-medium">Delivery Sprints:</span>
+                <span className="font-semibold text-violet-600 dark:text-cyan-400">2-week milestones with live demos</span>
               </div>
-              <div className="mt-1 flex justify-between font-mono text-[11px]">
-                <span className="text-slate-500">PostgreSQL Schema:</span>
-                <span className="text-indigo-600 dark:text-violet-400">sysmaira (18 public domains)</span>
+              <div className="mt-1 flex justify-between text-[11px]">
+                <span className="text-slate-500 font-medium">Code Ownership:</span>
+                <span className="font-semibold text-indigo-600 dark:text-violet-400">100% transferred to your team</span>
               </div>
             </div>
           </div>

@@ -78,14 +78,14 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-100/70 px-3 py-1 text-xs font-semibold text-cyan-800 dark:border-cyan-500/30 dark:bg-cyan-950/60 dark:text-cyan-300">
                 <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-                <span>Next-Gen Enterprise Engineering</span>
+                <span className="apple-eyebrow">Start Your Project</span>
               </div>
-              <h2 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl dark:text-white">
-                Have an ambitious platform to build? <br className="hidden sm:inline" />
-                Let&apos;s engineer something meaningful.
+              <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl dark:text-white">
+                Have an ambitious project to build? <br className="hidden sm:inline" />
+                Let&apos;s talk about what you need.
               </h2>
               <p className="mt-3 text-sm text-slate-600 leading-relaxed dark:text-slate-300">
-                Connect directly with our Principal Systems Architects in San Francisco for distributed system scoping, high-throughput database tuning, and cloud infrastructure migration.
+                Connect directly with our team to discuss your project requirements, target launch date, and budget. We will help you turn your idea into a working product.
               </p>
             </div>
 
@@ -94,14 +94,14 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-4 text-sm font-bold text-slate-950 transition hover:brightness-110 shadow-lg shadow-cyan-500/20 cursor-pointer"
               >
-                <span>Schedule Architecture Scoping</span>
+                <span>Talk to Our Team</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/work"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-4 text-sm font-bold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800 cursor-pointer shadow-sm"
               >
-                <span>Explore Verified Work</span>
+                <span>Explore Our Work</span>
               </Link>
             </div>
           </div>
@@ -115,13 +115,13 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-3 py-1 text-xs font-semibold text-cyan-800 dark:border-cyan-500/30 dark:bg-cyan-950/40 dark:text-cyan-300">
               <ShieldCheck className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-              <span>Architectural Quarterly</span>
+              <span className="apple-eyebrow">Practical Insights</span>
             </div>
-            <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
-              Subscribe to Engineering Insights
+            <h3 className="mt-3 text-2xl font-bold text-slate-900 dark:text-white">
+              Get Practical Product &amp; Tech Guides
             </h3>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              In-depth technical papers on distributed PostgreSQL indexing, micro-frontends, and cloud DevOps directly to your inbox. Zero spam.
+              Clear, useful guides on building software, scaling products, and improving UX design directly to your inbox. Zero spam.
             </p>
           </div>
 

@@ -38,21 +38,21 @@ import { fallbackServices, PublicService, getPageItems } from '@/app/(public)/_l
 const engagementTiers = [
   {
     id: 'starter',
-    name: 'Starter Architecture Sprint',
+    name: 'Discovery & Prototype Sprint',
     price: 15000,
     period: 'one-time',
     duration: '2–3 weeks',
-    tagline: 'Ideal for technical validation, MVP scoping, and architecture blueprints.',
+    tagline: 'Ideal for testing new ideas, defining requirements, and building clickable prototypes.',
     features: [
-      'Comprehensive Technical Scope & Threat Model',
-      'Database Schema Design & ERD (PostgreSQL)',
-      'High-Fidelity Interactive Figma Prototype',
-      'Proof-of-Concept (POC) Core Engine Deployment',
-      'Infrastructure Cost Estimation & Roadmap',
-      '14-Day Post-Delivery Architectural Review',
+      'Clear Project Scope & Feature Roadmap',
+      'Database Structure & Architecture Plan',
+      'Interactive Clickable Figma Prototype',
+      'Working Proof-of-Concept Engine',
+      'Cloud Hosting Estimates & Timeline',
+      '14-Day Post-Delivery Architecture Review',
     ],
     popular: false,
-    recommendedFor: 'Early-stage tech founders & pilot initiatives',
+    recommendedFor: 'Early-stage founders & new initiatives',
   },
   {
     id: 'core',
@@ -60,96 +60,96 @@ const engagementTiers = [
     price: 35000,
     period: 'one-time',
     duration: '6–8 weeks',
-    tagline: 'Production-ready full-stack application engineered for enterprise scale.',
+    tagline: 'A production-ready web application built to launch and scale smoothly.',
     features: [
-      'Production Next.js 16 + Node.js Microservices',
-      'High-Concurrency PostgreSQL Schema with Migrations',
-      'RBAC Authentication & Audit Logging (SOC2 Ready)',
-      'Automated CI/CD Pipeline (Docker & Kubernetes)',
-      'Comprehensive Automated Test Suite (>85% coverage)',
-      '60-Day Dedicated SLA Warranty & Hypercare Support',
+      'Full-Stack Web App (Next.js & Node.js)',
+      'High-Performance Secure PostgreSQL Database',
+      'User Authentication & Role Permissions',
+      'Automated Deployments & Cloud Setup',
+      'Automated Quality & Safety Test Suite',
+      '60-Day Dedicated Warranty & Support',
     ],
     popular: true,
-    recommendedFor: 'Growing platforms & enterprise modernization',
+    recommendedFor: 'Growing businesses & SaaS platforms',
   },
   {
     id: 'enterprise',
-    name: 'Enterprise Transformation',
+    name: 'Enterprise Custom Platform',
     price: 75000,
     period: 'custom retainer',
     duration: 'Quarterly / Ongoing',
-    tagline: 'Dedicated senior engineering squad for mission-critical ecosystems.',
+    tagline: 'Dedicated senior engineering squad for high-scale, mission-critical systems.',
     features: [
-      'Dedicated Full-Stack Engineering & DevOps Squad',
-      'Multi-Cloud High Availability & Auto-scaling',
-      'Private LLM Fine-Tuning & RAG Knowledge Pipeline',
-      'SOC2 Type II, HIPAA & ISO 27001 Compliance Hardening',
-      '24/7/365 Sub-15 Minute Incident Response SLA',
-      'Weekly Executive Briefing & Direct Slack/Teams Channel',
+      'Dedicated Senior Engineering & Cloud Squad',
+      'High-Availability Multi-Cloud Infrastructure',
+      'Custom AI Features & Smart Search Pipelines',
+      'Enterprise Compliance & Security Hardening',
+      '24/7 Priority Emergency Support SLA',
+      'Weekly Progress Briefings & Direct Channel',
     ],
     popular: false,
-    recommendedFor: 'Fintech, Healthtech, & High-load SaaS',
+    recommendedFor: 'High-volume platforms & regulated industries',
   },
 ];
 
 const lifecycleSteps = [
   {
     step: '01',
-    title: 'Discovery & Threat Modeling',
+    title: 'Discovery & Planning',
     timeline: 'Days 1–3',
-    description: 'We audit business requirements, compliance constraints, API integrations, and security surfaces to define an airtight technical blueprint.',
-    deliverables: ['PRD Document', 'Threat Vector Map', 'Cloud Cost Model'],
+    description: 'We meet to understand your goals, users, and feature requirements, delivering a clear plan and fixed schedule.',
+    deliverables: ['Project Roadmap', 'Security Plan', 'Timeline & Budget'],
   },
   {
     step: '02',
-    title: 'Architecture & System Design',
+    title: 'Design & Prototype',
     timeline: 'Days 4–7',
-    description: 'Engineering relational schema models, API specifications (OpenAPI/GraphQL), component trees, and interactive high-fidelity user workflows.',
-    deliverables: ['PostgreSQL Schema ERD', 'Interactive Wireframes', 'API Contracts'],
+    description: 'We design intuitive screens and build an interactive prototype so you can click through every workflow before coding begins.',
+    deliverables: ['Clickable Prototype', 'Design System', 'User Workflows'],
   },
   {
     step: '03',
-    title: 'Agile Sprint Implementation',
+    title: 'Sprint Development & Demos',
     timeline: 'Weeks 2–8',
-    description: 'Bi-weekly sprint demos with automated CI/CD deployments. You review working code in live staging environments with zero surprises.',
-    deliverables: ['Live Staging Environments', 'Automated Test Suites', 'Sprint Changelogs'],
+    description: 'Two-week sprint cycles with live demo calls. You test working software on private staging links with zero surprises.',
+    deliverables: ['Clean Codebase', 'Automated Tests', 'Bi-Weekly Demos'],
   },
   {
     step: '04',
-    title: 'Security Audits & Load Testing',
+    title: 'Testing & Security Sweeps',
     timeline: 'Week 9',
-    description: 'Stress testing up to 100,000 req/sec, OWASP Top 10 penetration sweeps, database query profiling, and multi-browser accessibility verification.',
-    deliverables: ['Penetration Audit Report', 'Load Profile Benchmark', 'WCAG 2.2 AA Audit'],
+    description: 'Rigorous speed checks, security testing, and mobile device audits to ensure your application is fast and bug-free.',
+    deliverables: ['Security Audit', 'Speed Optimization', 'Cross-Device QA'],
   },
   {
     step: '05',
-    title: 'Zero-Downtime Launch & Hypercare',
+    title: 'Smooth Launch & 60-Day Support',
     timeline: 'Day 60+',
-    description: 'Production cutover with blue-green deployments, telemetry alarms, real-time logging, and a 60-day engineering hypercare SLA.',
-    deliverables: ['Full IP & Repo Transfer', 'SLA Warranty', 'Runbook & Operations Docs'],
+    description: 'Zero-downtime launch with 24/7 monitoring, full code handover, and 60 days of free bug fixes and team support.',
+    deliverables: ['100% Code Ownership', '60-Day Warranty', 'Operations Guides'],
   },
 ];
 
 const serviceFaqs = [
   {
-    q: 'Do we own 100% of the intellectual property and source code?',
-    a: 'Yes, absolutely. Upon milestone completion, 100% of all intellectual property, source repositories, documentation, design files, and deployment scripts are transferred directly to your organization. There are zero licensing lock-ins or proprietary framework fees.',
+    q: 'Do we own 100% of the code and digital assets?',
+    a: 'Yes, absolutely. You own 100% of all intellectual property, source repositories, designs, and database assets from day one. There are no ongoing licensing fees or proprietary vendor lock-in.',
   },
   {
-    q: 'How does SysMaira guarantee performance and SLA reliability?',
-    a: 'We architect every platform with production-proven foundations: Next.js 16 for high-speed edge rendering, PostgreSQL for ACID reliability with indexed query plans, Redis for distributed caching, and containerized Docker/Kubernetes workloads with automated health checks and blue-green deployments.',
+    q: 'How does SysMaira guarantee performance and reliability?',
+    a: 'We use modern, battle-tested foundations: Next.js for lightning-fast page loads, PostgreSQL for rock-solid data protection, and cloud hosting with automated daily backups and real-time monitoring.',
   },
   {
-    q: 'Can SysMaira integrate with our existing backend or internal microservices?',
-    a: 'Yes. Our team routinely integrates with existing legacy databases, enterprise CRMs (Salesforce, HubSpot), ERP systems (SAP, NetSuite), payment processors (Stripe), and internal REST or gRPC microservices with robust error handling, circuit breakers, and idempotency guarantees.',
+    q: 'Can SysMaira integrate with our existing tools and software?',
+    a: 'Yes. We frequently integrate with existing business tools, payment gateways (Stripe), CRMs (HubSpot, Salesforce), legacy databases, and custom third-party APIs with reliable error handling.',
   },
   {
-    q: 'What is included in the 60-Day SLA Hypercare period?',
-    a: 'Every Core and Enterprise build includes dedicated SLA hypercare: immediate bug resolution, performance monitoring, database tuning, dependency patches, and direct communication with the lead engineers who built your platform.',
+    q: 'What is included in the 60-Day Free Warranty?',
+    a: 'Every Core and Enterprise build includes 60 days of dedicated support: rapid bug fixes, performance monitoring under real traffic, security updates, and direct access to the engineers who built your platform.',
   },
   {
-    q: 'Can we apply promotional discounts or enterprise credits to our contract?',
-    a: 'Yes. You can test your promo codes directly in our live pricing calculator below. We also offer multi-service engagement bundles and special early-quarter enterprise incentives.',
+    q: 'Can we test discounts or promo codes before signing?',
+    a: 'Yes. You can test verified promotional codes directly in our live pricing calculator below. We also offer bundled discounts for multi-service engagements.',
   },
 ];
 
@@ -218,7 +218,7 @@ export default function ServicesView() {
       });
     },
     onSuccess: () => {
-      toast.success('Inquiry submitted! An enterprise engineering director will contact you within 24 hours.');
+      toast.success('Thank you! We received your inquiry and will contact you within 24 hours.');
       setForm({
         first_name: '',
         last_name: '',
@@ -325,20 +325,20 @@ export default function ServicesView() {
             {/* Pill badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-800 uppercase shadow-inner shadow-cyan-500/10 dark:bg-cyan-950/40 dark:text-cyan-300 dark:shadow-cyan-500/20">
               <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-              <span>Full-Stack Engineering & Architecture Services</span>
+              <span>Custom Software &amp; Cloud Engineering</span>
             </div>
 
             {/* Headline */}
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-tight dark:text-white">
-              Engineering Mission-Critical{' '}
+            <h1 className="apple-hero-headline mt-6 text-slate-900 dark:text-white">
+              Software Built for Your Business:{' '}
               <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400">
-                Digital Platforms & Cloud Systems
+                Fast, Reliable, and Made to Scale
               </span>
             </h1>
 
             {/* Subheading */}
-            <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-300">
-              From high-concurrency Next.js applications and private RAG AI pipelines to automated Kubernetes clouds and SOC2-compliant APIs. We build, scale, and maintain software that never fails.
+            <p className="apple-lead mx-auto mt-6 text-slate-600 dark:text-slate-300">
+              We design, build, and support custom web applications, SaaS platforms, and cloud systems that run your business smoothly and delight your customers.
             </p>
 
             {/* CTAs */}
@@ -347,14 +347,14 @@ export default function ServicesView() {
                 href="#inquiry-section"
                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/25 transition duration-200 hover:-translate-y-0.5 hover:from-cyan-400 hover:to-teal-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               >
-                Discuss Your Architecture
+                Discuss Your Project
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="#services-catalog"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:backdrop-blur dark:hover:border-slate-500 dark:hover:bg-slate-800"
               >
-                Explore 6 Core Capabilities
+                Explore Our Services
               </a>
             </div>
           </div>
@@ -362,10 +362,10 @@ export default function ServicesView() {
           {/* Stats Bar */}
           <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-200 pt-10 dark:border-slate-800/80 sm:grid-cols-4 sm:gap-6">
             {[
-              { label: 'SLA Uptime Commitment', value: '99.99%', sub: 'High availability clusters' },
-              { label: 'P95 Edge Latency', value: '< 120ms', sub: 'Global CDN distribution' },
-              { label: 'Code & IP Ownership', value: '100%', sub: 'Zero vendor lock-in' },
-              { label: 'Discovery to POC', value: '14 Days', sub: 'Rapid tangible execution' },
+              { label: 'Uptime Reliability', value: '99.9%', sub: 'High availability cloud hosting' },
+              { label: 'Fast Loading Speeds', value: '< 120ms', sub: 'Instant global page loads' },
+              { label: 'Full Code Ownership', value: '100%', sub: 'Zero vendor lock-in' },
+              { label: 'Discovery to Prototype', value: '14 Days', sub: 'Interactive clickable prototype' },
             ].map((stat, idx) => (
               <div
                 key={idx}
@@ -388,10 +388,10 @@ export default function ServicesView() {
           {/* Header */}
           <div className="flex flex-col items-start justify-between gap-6 border-b border-slate-200 pb-8 dark:border-slate-800 md:flex-row md:items-end">
             <div>
-              <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Production Offerings</span>
-              <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Comprehensive Engineering Disciplines</h2>
+              <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">What We Build</span>
+              <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Our Core Engineering Services</h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-                Explore our fully-staffed engineering practices. Each service delivers complete architectural documentation, tested source code, and dedicated launch hypercare.
+                Explore our specialized services. Every project includes clean code, full documentation, and dedicated post-launch support.
               </p>
             </div>
 
@@ -493,9 +493,9 @@ export default function ServicesView() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <span className="text-xs font-bold tracking-widest text-teal-600 uppercase dark:text-teal-400">Why Choose SysMaira</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Engineered for Technical Excellence</h2>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Built for Real Business Needs</h2>
             <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
-              We do not build flimsy templates. We deliver resilient architectures backed by battle-tested engineering standards.
+              We do not build flimsy templates. We deliver secure, high-performance software built to scale with your business.
             </p>
           </div>
 
@@ -503,27 +503,27 @@ export default function ServicesView() {
             {[
               {
                 icon: Database,
-                title: 'ACID-Compliant PostgreSQL',
-                description: 'Rock-solid relational foundations with indexed query paths, connection pooling, and automated schema migrations for high throughput.',
-                badge: 'Zero Corruption',
+                title: 'Safe & Structured Databases',
+                description: 'Reliable database design that prevents data loss, speeds up searches, and handles high traffic smoothly.',
+                badge: 'Zero Data Loss',
               },
               {
                 icon: ShieldCheck,
-                title: 'SOC2 & HIPAA Ready',
-                description: 'Role-based access control (RBAC), end-to-end audit logging, TLS 1.3 encryption, and OWASP Top 10 penetration resistance out of the box.',
-                badge: 'Bank-Grade Security',
+                title: 'Bank-Grade Security',
+                description: 'Modern encryption, secure user logins, and standard compliance built into every project from day one.',
+                badge: 'Protected',
               },
               {
                 icon: GitBranch,
                 title: '100% Code & IP Ownership',
-                description: 'Full source repository transfer, automated CI/CD pipelines, and clean documentation. No proprietary lock-ins or surprise licensing fees.',
-                badge: 'Pure Handoff',
+                description: 'Full source code transfer, automated deployment scripts, and clear documentation. No proprietary lock-ins.',
+                badge: 'Full Ownership',
               },
               {
                 icon: Clock,
-                title: '60-Day SLA Hypercare',
-                description: 'Post-launch technical warranty with rapid-response bug fixes, automated error logging with Sentry, and continuous performance tuning.',
-                badge: 'Direct Engineers',
+                title: '60-Day Free Warranty',
+                description: 'Dedicated post-launch warranty with fast bug fixes, uptime monitoring, and ongoing developer support.',
+                badge: 'Free Support',
               },
             ].map((benefit, i) => {
               const Icon = benefit.icon;
@@ -555,10 +555,10 @@ export default function ServicesView() {
       <section className="relative py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Transparent Execution</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Our 5-Step Engineering Lifecycle</h2>
+            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">How We Work</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">A Clear, Predictable 5-Step Process</h2>
             <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
-              Clear roadmaps, predictable deliverables, and weekly production demos. Here is exactly how we deliver on time.
+              Clear roadmaps, predictable deliverables, and regular working demos. Here is exactly how we deliver on time.
             </p>
           </div>
 
@@ -688,10 +688,10 @@ export default function ServicesView() {
       <section className="relative border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Transparent Investment</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Engagement Models & Pricing</h2>
+            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Clear Pricing</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Flexible Packages &amp; Transparent Pricing</h2>
             <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
-              Clear, fixed-scope pricing with milestone deliverables. Select an engagement model below to inspect features and calculate verified promotional discounts.
+              Clear, fixed-scope pricing with milestone deliverables. Select a package below to inspect features and calculate verified discounts.
             </p>
           </div>
 
@@ -868,10 +868,10 @@ export default function ServicesView() {
       <section className="relative border-t border-slate-200 bg-slate-100/40 py-24 dark:border-slate-800/80 dark:bg-slate-900/30">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Clarity & Confidence</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Service Delivery FAQs</h2>
+            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Common Questions</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Frequently Asked Questions</h2>
             <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
-              Clear answers regarding intellectual property, engineering methodologies, and ongoing support.
+              Straightforward answers about code ownership, development timelines, and ongoing support.
             </p>
           </div>
 
@@ -914,13 +914,13 @@ export default function ServicesView() {
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
                 <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
-                Direct Engineering Scoping
+                Get in Touch
               </span>
               <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
-                Start Your Project Engagement
+                Ready to Bring Your Idea to Life?
               </h2>
               <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
-                Submit your technical requirements. A Principal Architect will review your scope and schedule a 30-minute technical roadmap consultation within 24 hours.
+                Tell us about your project goals. Our team will review your requirements and schedule a friendly 30-minute consultation within 24 hours.
               </p>
             </div>
 
@@ -976,7 +976,7 @@ export default function ServicesView() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                    Phone / Signal (Optional)
+                    Phone (Optional)
                   </label>
                   <input
                     type="tel"
@@ -1012,7 +1012,7 @@ export default function ServicesView() {
                         {s.title || s.name}
                       </option>
                     ))}
-                    <option value="Custom Engineering Architecture">Custom Engineering Architecture</option>
+                    <option value="Custom Engineering Architecture">Custom Software Development</option>
                   </select>
                 </div>
 
@@ -1024,7 +1024,7 @@ export default function ServicesView() {
                     className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
                     <option value="under-$10k">&lt; $15,000 (Advisory / POC)</option>
-                    <option value="$10k-$25k">$15,000 – $25,000 (Starter)</option>
+                    <option value="$10k-$25k">$15,000 – $25,000 (Discovery / Prototype)</option>
                     <option value="$25k-$50k">$25,000 – $50,000 (Core Platform)</option>
                     <option value="$50k+">$50,000 – $100,000+ (Enterprise)</option>
                   </select>
@@ -1033,14 +1033,14 @@ export default function ServicesView() {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                  Project Scope & Technical Objectives <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                  Project Goals &amp; Scope <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
                   rows={4}
                   required
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
-                  placeholder="Outline your application goals, target users, expected scale, integration points, and any compliance constraints..."
+                  placeholder="Tell us what you want to build, who your users are, and any specific deadlines..."
                   className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
@@ -1057,7 +1057,7 @@ export default function ServicesView() {
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-bold text-slate-950 shadow-xl shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 cursor-pointer sm:w-auto"
                 >
                   <Send className="h-4 w-4" />
-                  {leadMutation.isPending ? 'Submitting to CRM...' : 'Submit Engineering Scope'}
+                  {leadMutation.isPending ? 'Sending Inquiry...' : 'Send Project Inquiry'}
                 </button>
               </div>
             </form>

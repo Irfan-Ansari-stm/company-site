@@ -39,14 +39,14 @@ export function ServicesPage() {
 
   return (
     <PublicShell>
-      <PageHero eyebrow="Services" title="Enterprise website and platform services" description="Every service is powered by the same backend modules in your collection: services, CMS, CRM, analytics, portfolio, marketing, and deployment-ready system settings." />
+      <PageHero eyebrow="Services" title="Custom Software, Web &amp; Cloud Services" description="We design, build, and support custom web applications, SaaS platforms, and cloud infrastructure to help your business scale." />
       <section className="public-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 grid gap-5 lg:grid-cols-3">
             {[
-              ['Website experience', 'Landing pages, service pages, blog, resources, SEO routes, and conversion forms.'],
-              ['Business systems', 'CRM, CMS, portfolio, marketing, analytics, media, and dashboard workflows.'],
-              ['Launch support', 'Responsive QA, production build checks, environment setup, and deployment packaging.'],
+              ['Custom Web Apps', 'Fast, responsive web apps, customer portals, and modern company websites.'],
+              ['Business Systems', 'Custom dashboards, CRM workflows, database setups, and internal tools.'],
+              ['Launch & Growth Support', 'Quick cloud deployment, security audits, uptime monitoring, and ongoing updates.'],
             ].map(([title, body]) => (
               <div key={title} className="glass-card p-5">
                 <CheckCircle2 className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
@@ -130,14 +130,14 @@ export function PortfolioPage() {
 
   return (
     <PublicShell>
-      <PageHero eyebrow="Work" title="Selected enterprise platform work" description="Case studies and published projects come from the portfolio API, with graceful fallbacks for deployment previews." />
+      <PageHero eyebrow="Work" title="Selected Client Work &amp; Case Studies" description="Explore live platforms, web apps, and custom digital systems we have built for startups and growing businesses." />
       <section className="public-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 grid gap-5 md:grid-cols-3">
             {[
-              ['Public website', 'Brand pages, service pages, resource libraries, and lead journeys.'],
-              ['Internal dashboard', 'CRM, projects, finance, support, and analytics connected to the website.'],
-              ['Measurable outcomes', 'Cleaner intake, faster follow-up, better content publishing, and clearer reporting.'],
+              ['Custom Websites & Apps', 'Customer-facing portals, landing pages, and responsive web products.'],
+              ['Internal Tools & Dashboards', 'Admin consoles, CRM integrations, and real-time operational workflows.'],
+              ['Measurable Business Impact', 'Faster load times, higher conversion rates, and reliable 99.9% uptime.'],
             ].map(([title, body]) => (
               <div key={title} className="glass-card p-5">
                 <BriefcaseBusiness className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
@@ -200,7 +200,7 @@ export function ProcessPage() {
 
   return (
     <PublicShell>
-      <PageHero eyebrow="Process" title="A clear path from website plan to working platform" description="The process page explains how public pages, backend APIs, dashboard modules, content, leads, analytics, and deployment readiness come together." />
+      <PageHero eyebrow="Process" title="How We Work: From Concept to Launch" description="A simple, 4-phase development process designed for speed, clarity, and zero surprises." />
       <section className="public-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -270,7 +270,7 @@ export function BlogPage() {
 
   return (
     <PublicShell>
-      <PageHero eyebrow="Blog" title="Insights for websites that run the business" description="Published posts are loaded from the blog API and remain manageable from the dashboard." />
+      <PageHero eyebrow="Blog" title="Guides on Product, Tech &amp; Growth" description="Practical advice on building web apps, scaling databases, and designing intuitive digital products." />
       <section className="public-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CardGrid>
@@ -315,7 +315,7 @@ export function ResourcesPage() {
 
   return (
     <PublicShell>
-      <PageHero eyebrow="Resources" title="Guides, downloads, and launch assets" description="Resources are powered by the blog resources API and can be gated or ungated from the backend." />
+      <PageHero eyebrow="Resources" title="Guides, Checklists &amp; Blueprints" description="Free technical guides, architecture checklists, and checklists to help founders and engineering teams build better digital products." />
       <section className="public-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CardGrid>
@@ -368,7 +368,7 @@ export function TaxonomyPage({ type }: { type: 'industries' | 'solutions' }) {
 
   return (
     <PublicShell>
-      <PageHero eyebrow={type} title={type === 'industries' ? 'Industries we support' : 'Solutions for growth teams'} description={type === 'industries' ? 'Industry pages come from the services module and explain how the platform adapts to each market.' : 'Solutions are API-backed pages for common business outcomes and platform packages.'} />
+      <PageHero eyebrow={type} title={type === 'industries' ? 'Industries We Serve' : 'Solutions Built for Growth'} description={type === 'industries' ? 'Learn how our custom software solutions meet the specific regulatory and operational needs of your industry.' : 'Practical packages and software solutions built to help your business launch and grow.'} />
       <section className="public-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CardGrid>

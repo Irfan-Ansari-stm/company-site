@@ -2215,3 +2215,24 @@
 2026-10-22 21:38:15 [error]: Error: Project not found
     at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\portfolio.js:70:27
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-23 00:53:52 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-23 00:53:53 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-23 00:53:53 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-23 00:53:53 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-23 00:53:53 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-23 00:53:53 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-23 00:53:53 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)

@@ -36,9 +36,9 @@ export function PageHero({
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl rounded-3xl border border-slate-200/90 bg-white/85 p-6 shadow-xl shadow-slate-900/5 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-950/80 dark:shadow-2xl dark:shadow-black/60 sm:p-8">
-          <p className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-300 sm:text-sm font-mono">{eyebrow}</p>
-          <h1 className="mt-3 text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl">{title}</h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">{description}</p>
+          <p className="apple-eyebrow text-cyan-600 dark:text-cyan-300">{eyebrow}</p>
+          <h1 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl tracking-[-0.03em]">{title}</h1>
+          <p className="apple-lead mt-4 text-slate-600 dark:text-slate-300">{description}</p>
         </div>
       </div>
     </section>

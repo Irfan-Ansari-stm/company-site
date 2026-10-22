@@ -182,18 +182,18 @@ export default function ContactView() {
         <div className="mx-auto max-w-7xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/70 px-3.5 py-1 text-xs font-semibold text-cyan-800 backdrop-blur-md dark:border-cyan-500/30 dark:bg-cyan-950/40 dark:text-cyan-300">
             <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-            <span className="tracking-wide uppercase font-mono">Let&apos;s Connect / Architectural Inquiry</span>
+            <span className="apple-eyebrow">Contact Us</span>
           </div>
 
-          <h1 className="mt-5 text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
-            Let&apos;s engineer something <br className="hidden sm:inline" />
+          <h1 className="apple-hero-headline mt-5 text-slate-900 dark:text-white">
+            Let&apos;s talk about <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-indigo-600 dark:from-cyan-300 dark:via-teal-300 dark:to-indigo-300 bg-clip-text text-transparent">
-              extraordinary together.
+              your next software project.
             </span>
           </h1>
 
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
-            Direct access to our senior engineering partners and staff architects. Whether you need to decouple a monolithic backend, audit database indexing, or scale an enterprise SaaS core, we are ready to assist.
+          <p className="apple-lead mt-6 text-slate-600 dark:text-slate-300">
+            Get in touch with our team. Tell us about your goals, key features, and target launch date. We will reply within 24 hours with clear next steps and an honest estimate.
           </p>
         </div>
       </section>
@@ -206,9 +206,9 @@ export default function ContactView() {
             <div className="space-y-8 lg:col-span-5">
               {/* Contact Information Card */}
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl backdrop-blur-md transition-colors sm:p-8 dark:border-slate-800 dark:bg-gradient-to-br dark:from-slate-900/90 dark:to-slate-950/80">
-                <h2 className="text-xl font-black text-slate-900 dark:text-white">Direct Advisory Channels</h2>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white">Ways to Reach Us</h2>
                 <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                  Connect directly with our San Francisco architecture office.
+                  We are available Monday through Friday.
                 </p>
 
                 <div className="mt-6 space-y-5 text-sm">
@@ -366,12 +366,12 @@ export default function ContactView() {
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
 
-                  <h3 className="mt-6 text-2xl font-black text-slate-900 dark:text-white sm:text-3xl">
-                    Architectural Brief Received
+                  <h3 className="mt-6 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
+                    Message Received!
                   </h3>
 
                   <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300 max-w-lg mx-auto">
-                    Thank you, <span className="font-bold text-slate-900 dark:text-white">{formData.name}</span>. Your scoping brief has been assigned reference ID:
+                    Thank you, <span className="font-bold text-slate-900 dark:text-white">{formData.name}</span>. Your inquiry reference number is:
                   </p>
 
                   <div className="mt-4 inline-block rounded-xl border border-teal-200 bg-teal-50 px-5 py-2 font-mono text-sm font-bold text-teal-800 dark:border-teal-500/40 dark:bg-teal-950/60 dark:text-teal-300">
@@ -420,11 +420,11 @@ export default function ContactView() {
                   className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl backdrop-blur-md transition-colors space-y-6 sm:p-10 dark:border-slate-800 dark:bg-slate-900/60"
                 >
                   <div>
-                    <h2 className="text-2xl font-black text-slate-900 dark:text-white sm:text-3xl">
-                      Request Architecture Scoping
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
+                      Tell Us About Your Project
                     </h2>
                     <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                      Complete the briefing form below. All inquiries are strictly confidential.
+                      Fill out the form below. We will get back to you within 24 hours with an estimate and next steps.
                     </p>
                   </div>
 
@@ -578,7 +578,7 @@ export default function ContactView() {
                   {/* Row 6: Project Brief / Message */}
                   <div>
                     <label htmlFor="contact-message" className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                      Project Brief &amp; Technical Objectives <span className="text-cyan-600 dark:text-cyan-400">*</span>
+                      Project Details &amp; Goals <span className="text-cyan-600 dark:text-cyan-400">*</span>
                     </label>
                     <textarea
                       id="contact-message"
@@ -586,7 +586,7 @@ export default function ContactView() {
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Outline your existing stack, bottleneck, scalability target, or key requirements..."
+                      placeholder="Tell us what you want to build, key features, and your target launch date..."
                       className="mt-2 w-full resize-none rounded-xl border border-slate-300 bg-slate-50 p-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
                     />
                   </div>
@@ -601,7 +601,7 @@ export default function ContactView() {
                       className="mt-1 h-4 w-4 rounded border-slate-300 bg-white text-cyan-600 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 cursor-pointer"
                     />
                     <label htmlFor="consent-check" className="text-xs text-slate-600 dark:text-slate-400 cursor-pointer">
-                      I agree to confidential enterprise architectural consultation and understand that all project discussions are protected under standard mutual NDA policies.
+                      I agree to receive a project estimate and consultation. All information is strictly confidential.
                     </label>
                   </div>
 
@@ -614,11 +614,11 @@ export default function ContactView() {
                     {leadMutation.isPending ? (
                       <>
                         <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
-                        <span>Transmitting Brief to Principal Architect...</span>
+                        <span>Sending your message...</span>
                       </>
                     ) : (
                       <>
-                        <span>Submit Architectural Inquiry</span>
+                        <span>Send Message</span>
                         <Send className="h-4 w-4" />
                       </>
                     )}

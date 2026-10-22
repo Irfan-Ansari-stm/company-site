@@ -92,7 +92,7 @@ export default function PortfolioView() {
             </div>
 
             {/* Headline */}
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-tight dark:text-white">
+            <h1 className="apple-hero-headline mt-6 text-slate-900 dark:text-white">
               Mission-Critical Systems{' '}
               <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400">
                 Engineered for Global Scale
@@ -100,7 +100,7 @@ export default function PortfolioView() {
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-300">
+            <p className="apple-lead mx-auto mt-6 text-slate-600 dark:text-slate-300">
               Explore real-world case studies in distributed cloud infrastructure, low-latency financial systems, AI vector pipelines, and enterprise design systems. Every project backed by verifiable metrics and production code.
             </p>
 
