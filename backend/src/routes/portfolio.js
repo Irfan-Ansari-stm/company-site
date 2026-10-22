@@ -7,11 +7,21 @@ const { generateSlug, success, created, noContent, isUUID } = require('../utils/
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
 
 // GET /portfolio
-router.get('/', paginate, asyncHandler(async (req, res) => {
-  const { category_id, industry_id, is_featured, search, tech } = req.query;
-  const conditions = ['p.deleted_at IS NULL', 'p.is_published=TRUE'];
+router.get('/', optionalAuth, paginate, asyncHandler(async (req, res) => {
+  const { category_id, industry_id, is_featured, is_published, search, tech } = req.query;
+  const isAdmin = req.user?.role && !['client','candidate'].includes(req.user.role);
+
+  const conditions = ['p.deleted_at IS NULL'];
   const params     = [];
   let   idx        = 1;
+
+  if (!isAdmin) {
+    conditions.push('p.is_published=TRUE');
+  } else if (is_published !== undefined) {
+    conditions.push(`p.is_published=$${idx}`);
+    params.push(is_published === 'true');
+    idx++;
+  }
 
   if (category_id) { conditions.push(`p.category_id=$${idx}`); params.push(category_id); idx++; }
   if (industry_id) { conditions.push(`p.industry_id=$${idx}`); params.push(industry_id); idx++; }

@@ -11,9 +11,14 @@ import toast from 'react-hot-toast';
 import { Mail, Phone, Globe, Building2, Calendar, MessageSquare, Activity, FileText, Video, ArrowRight } from 'lucide-react';
 
 const STAGES = [
-  { value: 'new', label: 'New' }, { value: 'contacted', label: 'Contacted' },
-  { value: 'qualified', label: 'Qualified' }, { value: 'proposal', label: 'Proposal' },
-  { value: 'negotiation', label: 'Negotiation' }, { value: 'won', label: 'Won' }, { value: 'lost', label: 'Lost' },
+  { value: 'new', label: 'New' },
+  { value: 'contacted', label: 'Contacted' },
+  { value: 'qualified', label: 'Qualified' },
+  { value: 'meeting_scheduled', label: 'Meeting Scheduled' },
+  { value: 'proposal_sent', label: 'Proposal Sent' },
+  { value: 'negotiation', label: 'Negotiation' },
+  { value: 'won', label: 'Won' },
+  { value: 'lost', label: 'Lost' },
 ];
 
 const ACTIVITY_TYPES = [

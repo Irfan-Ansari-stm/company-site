@@ -7,9 +7,101 @@ const { generatePublicId, success, created, noContent, isUUID } = require('../ut
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
 
 // ════════════════════════════════════════════════════════════
+//  GLOBAL RBAC RESTRICTION FOR CLIENT ROLE
+// ════════════════════════════════════════════════════════════
+router.use((req, res, next) => {
+  // Public lead submission (contact/inquiry forms) does not require user authentication
+  if (req.path === '/leads/public') {
+    return next();
+  }
+  authenticate(req, res, () => {
+    if (req.user && req.user.role === 'client') {
+      return next(new AppError('Access to CRM module is restricted to administrators and staff members', 403));
+    }
+    next();
+  });
+});
+
+// ════════════════════════════════════════════════════════════
+//  CRM OVERVIEW & STATS
+// ════════════════════════════════════════════════════════════
+router.get('/overview', requirePermission('lead.read'), asyncHandler(async (req, res) => {
+  const [statsRes, clientsRes, funnelRes] = await Promise.all([
+    query(`
+      SELECT
+        COUNT(*)::int AS total_leads,
+        COUNT(*) FILTER (WHERE stage NOT IN ('won', 'lost'))::int AS active_leads,
+        COUNT(*) FILTER (WHERE stage = 'won')::int AS won_deals,
+        COUNT(*) FILTER (WHERE stage = 'lost')::int AS lost_deals,
+        COALESCE(SUM(expected_value) FILTER (WHERE stage NOT IN ('won', 'lost')), 0)::numeric AS pipeline_value,
+        COALESCE(SUM(COALESCE(deal_value, expected_value)) FILTER (WHERE stage = 'won'), 0)::numeric AS won_revenue,
+        COUNT(*) FILTER (WHERE next_follow_up <= NOW() AND stage NOT IN ('won', 'lost'))::int AS follow_ups_due,
+        COUNT(*) FILTER (WHERE next_follow_up > NOW() AND stage NOT IN ('won', 'lost'))::int AS upcoming_follow_ups,
+        COUNT(*) FILTER (WHERE created_at >= date_trunc('month', NOW()))::int AS new_this_month
+      FROM crm_schema.leads
+      WHERE deleted_at IS NULL AND is_archived = FALSE
+    `),
+    query(`
+      SELECT
+        COUNT(*)::int AS total_clients,
+        COUNT(*) FILTER (WHERE status = 'active' AND (is_active IS TRUE OR is_active IS NULL))::int AS active_clients
+      FROM client_schema.clients
+      WHERE deleted_at IS NULL
+    `),
+    query(`SELECT * FROM crm_schema.pipeline_summary()`),
+  ]);
+
+  const stats = statsRes.rows[0] || {};
+  const clientStats = clientsRes.rows[0] || {};
+  const totalDecided = (stats.won_deals || 0) + (stats.lost_deals || 0);
+  const winRate = totalDecided > 0 ? Math.round(((stats.won_deals || 0) / totalDecided) * 100) : 0;
+
+  return success(res, {
+    total_leads: stats.total_leads || 0,
+    active_leads: stats.active_leads || 0,
+    won_deals: stats.won_deals || 0,
+    lost_deals: stats.lost_deals || 0,
+    pipeline_value: parseFloat(stats.pipeline_value || 0),
+    won_revenue: parseFloat(stats.won_revenue || 0),
+    win_rate: winRate,
+    follow_ups_due: stats.follow_ups_due || 0,
+    upcoming_follow_ups: stats.upcoming_follow_ups || 0,
+    new_this_month: stats.new_this_month || 0,
+    total_clients: clientStats.total_clients || 0,
+    active_clients: clientStats.active_clients || 0,
+    pipeline: funnelRes.rows.map(r => ({
+      stage: r.stage,
+      count: parseInt(r.count || r.lead_count || 0, 10),
+      total_value: parseFloat(r.total_value || 0),
+      avg_score: parseFloat(r.avg_score || 0),
+      overdue_followups: parseInt(r.overdue_followups || 0, 10)
+    })),
+  });
+}));
+
+// Follow-ups list
+router.get('/follow-ups', requirePermission('lead.read'), asyncHandler(async (req, res) => {
+  const { rows } = await query(`
+    SELECT l.id, l.public_id, l.full_name, l.email, l.company, l.phone,
+           l.stage, l.lead_score, l.lead_temperature, l.next_follow_up,
+           l.expected_value, l.currency,
+           u.display_name AS assigned_to_name
+      FROM crm_schema.leads l
+      LEFT JOIN auth_schema.users u ON l.assigned_to = u.id
+     WHERE l.next_follow_up IS NOT NULL
+       AND l.deleted_at IS NULL
+       AND l.is_archived = FALSE
+       AND l.stage NOT IN ('won', 'lost')
+     ORDER BY l.next_follow_up ASC
+     LIMIT 50
+  `);
+  return success(res, rows);
+}));
+
+// ════════════════════════════════════════════════════════════
 //  LEADS
 // ════════════════════════════════════════════════════════════
-router.get('/leads', authenticate, requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
+router.get('/leads', requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
   const { stage, assigned_to, temperature, source, search, is_archived, from_date, to_date } = req.query;
   const { col, dir } = safeSort(req.query.sort_by, req.query.sort_dir, 'created_at');
 
@@ -26,7 +118,7 @@ router.get('/leads', authenticate, requirePermission('lead.read'), paginate, asy
   if (from_date) { conditions.push(`l.created_at >= $${idx}`); params.push(from_date); idx++; }
   if (to_date)   { conditions.push(`l.created_at <= $${idx}`); params.push(to_date);   idx++; }
   if (search) {
-    conditions.push(`(l.full_name ILIKE $${idx} OR l.email ILIKE $${idx} OR l.company ILIKE $${idx})`);
+    conditions.push(`(l.full_name ILIKE $${idx} OR l.email ILIKE $${idx} OR l.company ILIKE $${idx} OR l.phone ILIKE $${idx})`);
     params.push(`%${search}%`); idx++;
   }
 
@@ -46,41 +138,49 @@ router.get('/leads', authenticate, requirePermission('lead.read'), paginate, asy
         LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM crm_schema.leads l WHERE ${where}`, params),
+    query(`SELECT COUNT(*)::int AS count FROM crm_schema.leads l WHERE ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
 
 // Overview view
-router.get('/leads/overview', authenticate, requirePermission('lead.read'), asyncHandler(async (req, res) => {
+router.get('/leads/overview', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const { rows } = await query(`SELECT * FROM crm_schema.v_leads_overview ORDER BY created_at DESC LIMIT 100`);
   return success(res, rows);
 }));
 
 // Pipeline summary
-router.get('/leads/pipeline', authenticate, requirePermission('lead.read'), asyncHandler(async (req, res) => {
+router.get('/leads/pipeline', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const { assigned_to } = req.query;
   const { rows } = await query(
     `SELECT * FROM crm_schema.pipeline_summary($1)`,
     [assigned_to || null]
   );
-  return success(res, rows);
+  const formatted = rows.map(r => ({
+    stage: r.stage,
+    count: parseInt(r.count || r.lead_count || 0, 10),
+    lead_count: parseInt(r.lead_count || r.count || 0, 10),
+    total_value: parseFloat(r.total_value || 0),
+    avg_score: parseFloat(r.avg_score || 0),
+    overdue_followups: parseInt(r.overdue_followups || 0, 10)
+  }));
+  return success(res, formatted);
 }));
 
 // Lead funnel analytics
-router.get('/leads/funnel', authenticate, requirePermission('lead.read'), asyncHandler(async (req, res) => {
+router.get('/leads/funnel', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const { rows } = await query(`SELECT * FROM crm_schema.v_lead_funnel ORDER BY week DESC LIMIT 12`);
   return success(res, rows);
 }));
 
 // Source stats
-router.get('/leads/source-stats', authenticate, requirePermission('lead.read'), asyncHandler(async (req, res) => {
+router.get('/leads/source-stats', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const { rows } = await query(`SELECT * FROM crm_schema.mv_lead_source_stats ORDER BY total_leads DESC`);
   return success(res, rows);
 }));
 
 // GET /crm/leads/:id
-router.get('/leads/:id', authenticate, requirePermission('lead.read'), asyncHandler(async (req, res) => {
+router.get('/leads/:id', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const byPublic = req.params.id.length === 16;
   const col = byPublic ? 'public_id' : 'id';
   const { rows } = await query(
@@ -112,13 +212,13 @@ router.get('/leads/:id', authenticate, requirePermission('lead.read'), asyncHand
 }));
 
 // POST /crm/leads
-router.post('/leads', authenticate, requirePermission('lead.create'), asyncHandler(async (req, res) => {
+router.post('/leads', requirePermission('lead.create'), asyncHandler(async (req, res) => {
   const {
     source, source_campaign, source_medium, landing_page, referrer,
     first_name, last_name, email, phone, company, company_size, designation,
     website, linkedin_url, country, city, timezone,
     project_type, services_needed, budget_range, timeline, requirements, urgency,
-    assigned_to, expected_value, currency, tags, metadata
+    assigned_to, expected_value, currency, tags, metadata, next_follow_up
   } = req.body;
 
   if (!first_name || !last_name || !email) throw new AppError('first_name, last_name, email required');
@@ -130,28 +230,50 @@ router.post('/leads', authenticate, requirePermission('lead.create'), asyncHandl
         first_name, last_name, email, phone, company, company_size, designation,
         website, linkedin_url, country, city, timezone,
         project_type, services_needed, budget_range, timeline, requirements, urgency,
-        assigned_to, expected_value, currency, tags, metadata)
+        assigned_to, expected_value, currency, tags, metadata, next_follow_up)
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,
-             $19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29::jsonb)
+             $19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29::jsonb,$30)
      RETURNING *`,
     [publicId, source || 'website', source_campaign, source_medium, landing_page, referrer,
      first_name, last_name, email, phone, company, company_size, designation,
      website, linkedin_url, country, city, timezone,
      project_type, services_needed || [], budget_range, timeline, requirements, urgency || 'medium',
-     assigned_to || null, expected_value, currency || 'USD', tags || [],
-     JSON.stringify(metadata || {})]
+     assigned_to || null, expected_value || 0, currency || 'USD', tags || [],
+     JSON.stringify(metadata || {}), next_follow_up || null]
   );
   return created(res, rows[0]);
 }));
 
 // Public lead submission (contact/inquiry form)
 router.post('/leads/public', asyncHandler(async (req, res) => {
-  const {
-    first_name, last_name, email, phone, company, services_needed,
-    budget_range, requirements, urgency, source = 'website',
-    source_campaign, landing_page, referrer, metadata
+  let {
+    first_name, last_name, name, email, phone, company, services_needed,
+    budget_range, budget, requirements, message, urgency, source = 'website',
+    source_campaign, landing_page, referrer, metadata = {}
   } = req.body;
-  if (!first_name || !last_name || !email) throw new AppError('first_name, last_name, email required');
+
+  // Gracefully handle combined 'name' field if separate first/last name not supplied
+  if ((!first_name || !last_name) && name) {
+    const parts = name.trim().split(/\s+/);
+    first_name = first_name || parts[0] || 'Inquirer';
+    last_name = last_name || (parts.length > 1 ? parts.slice(1).join(' ') : 'Contact');
+  }
+
+  if (!first_name) first_name = 'Inquirer';
+  if (!last_name) last_name = 'Contact';
+
+  if (!email) throw new AppError('email required', 400);
+
+  // Validate against PostgreSQL lead_source enum
+  const allowedSources = ['website', 'referral', 'linkedin', 'google_ads', 'meta_ads', 'cold_outreach', 'partner', 'event', 'other'];
+  const sanitizedSource = allowedSources.includes(source) ? source : 'website';
+  const finalRequirements = requirements || message || '';
+  const finalBudgetRange = budget_range || budget || null;
+  const mergedMetadata = {
+    ...(typeof metadata === 'object' && metadata !== null ? metadata : {}),
+    original_source: source,
+    submitted_at: new Date().toISOString(),
+  };
 
   const publicId = generatePublicId();
   const { rows } = await query(
@@ -160,17 +282,17 @@ router.post('/leads/public', asyncHandler(async (req, res) => {
         first_name, last_name, email, phone, company,
         services_needed, budget_range, requirements, urgency, metadata)
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15::jsonb)
-     RETURNING id, public_id, email`,
-    [publicId, source, source_campaign, landing_page, referrer,
+     RETURNING id, public_id, email, first_name, last_name, company, budget_range`,
+    [publicId, sanitizedSource, source_campaign, landing_page, referrer,
      first_name, last_name, email, phone, company,
-     services_needed || [], budget_range, requirements, urgency || 'medium',
-     JSON.stringify(metadata || {})]
+     services_needed || [], finalBudgetRange, finalRequirements, urgency || 'medium',
+     JSON.stringify(mergedMetadata)]
   );
   return created(res, rows[0], 'Inquiry submitted successfully. We will be in touch shortly.');
 }));
 
 // PATCH /crm/leads/:id
-router.patch('/leads/:id', authenticate, requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+router.patch('/leads/:id', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
   const { stage, assigned_to, lead_score, expected_value, next_follow_up, lost_reason,
           deal_value, tags, urgency, budget_range, requirements, company,
           services_needed, phone, designation, website } = req.body;
@@ -192,35 +314,47 @@ router.patch('/leads/:id', authenticate, requirePermission('lead.edit'), asyncHa
             phone          = COALESCE($14, phone),
             designation    = COALESCE($15, designation),
             website        = COALESCE($16, website),
+            lead_score     = COALESCE($17, lead_score),
             won_at         = CASE WHEN $2='won' AND stage != 'won' THEN NOW() ELSE won_at END,
-            lost_at        = CASE WHEN $2='lost' AND stage != 'lost' THEN NOW() ELSE lost_at END
+            lost_at        = CASE WHEN $2='lost' AND stage != 'lost' THEN NOW() ELSE lost_at END,
+            updated_at     = NOW()
       WHERE id=$1 AND deleted_at IS NULL
       RETURNING *`,
     [req.params.id, stage, assigned_to, expected_value, next_follow_up, lost_reason,
      deal_value, tags, urgency, budget_range, requirements, company, services_needed,
-     phone, designation, website]
+     phone, designation, website, lead_score]
   );
   if (!rows.length) throw new AppError('Lead not found', 404);
+
+  // If stage changed, log activity
+  if (stage) {
+    await query(
+      `INSERT INTO crm_schema.lead_activities (lead_id, actor_id, activity_type, subject, description)
+       VALUES ($1, $2, 'stage_change', 'Stage updated', 'Stage changed to ' || $3)`,
+      [req.params.id, req.userId, stage]
+    );
+  }
+
   return success(res, rows[0]);
 }));
 
 // DELETE /crm/leads/:id (soft)
-router.delete('/leads/:id', authenticate, requirePermission('lead.delete'), asyncHandler(async (req, res) => {
-  await query(`CALL crm_schema.delete_lead($1, $2)`, [req.params.id, req.userId]);
+router.delete('/leads/:id', requirePermission('lead.delete'), asyncHandler(async (req, res) => {
+  await query(`UPDATE crm_schema.leads SET deleted_at = NOW() WHERE id = $1`, [req.params.id]);
   return noContent(res);
 }));
 
 // Convert lead to client
-router.post('/leads/:id/convert', authenticate, requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+router.post('/leads/:id/convert', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
   const { rows } = await query(
-    `SELECT * FROM crm_schema.convert_lead_to_client($1, $2) AS client_id`,
+    `SELECT crm_schema.fn_convert_lead_to_client($1, $2) AS client_id`,
     [req.params.id, req.userId]
   );
   return success(res, { client_id: rows[0]?.client_id }, 'Lead converted to client');
 }));
 
 // Assign lead
-router.post('/leads/:id/assign', authenticate, requirePermission('lead.assign'), asyncHandler(async (req, res) => {
+router.post('/leads/:id/assign', requirePermission('lead.assign'), asyncHandler(async (req, res) => {
   const { user_id } = req.body;
   if (!user_id) throw new AppError('user_id required');
   const { rows } = await query(
@@ -238,7 +372,7 @@ router.post('/leads/:id/assign', authenticate, requirePermission('lead.assign'),
 }));
 
 // ── Lead Notes ───────────────────────────────────────────────
-router.get('/leads/:id/notes', authenticate, requirePermission('lead.read'), asyncHandler(async (req, res) => {
+router.get('/leads/:id/notes', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const { rows } = await query(
     `SELECT n.*, u.display_name AS author_name FROM crm_schema.lead_notes n
       LEFT JOIN auth_schema.users u ON n.author_id=u.id
@@ -248,7 +382,7 @@ router.get('/leads/:id/notes', authenticate, requirePermission('lead.read'), asy
   return success(res, rows);
 }));
 
-router.post('/leads/:id/notes', authenticate, requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+router.post('/leads/:id/notes', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
   const { content, is_pinned } = req.body;
   if (!content) throw new AppError('content required');
   const { rows } = await query(
@@ -258,7 +392,7 @@ router.post('/leads/:id/notes', authenticate, requirePermission('lead.edit'), as
   return created(res, rows[0]);
 }));
 
-router.patch('/leads/:leadId/notes/:noteId', authenticate, requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+router.patch('/leads/:leadId/notes/:noteId', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
   const { content, is_pinned } = req.body;
   const { rows } = await query(
     `UPDATE crm_schema.lead_notes
@@ -271,13 +405,13 @@ router.patch('/leads/:leadId/notes/:noteId', authenticate, requirePermission('le
   return success(res, rows[0]);
 }));
 
-router.delete('/leads/:leadId/notes/:noteId', authenticate, requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+router.delete('/leads/:leadId/notes/:noteId', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
   await query(`DELETE FROM crm_schema.lead_notes WHERE id=$1 AND lead_id=$2`, [req.params.noteId, req.params.leadId]);
   return noContent(res);
 }));
 
 // ── Lead Activities ───────────────────────────────────────────
-router.get('/leads/:id/activities', authenticate, requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
+router.get('/leads/:id/activities', requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
   const [dataRes, countRes] = await Promise.all([
     query(
       `SELECT a.*, u.display_name AS actor_name FROM crm_schema.lead_activities a
@@ -285,12 +419,12 @@ router.get('/leads/:id/activities', authenticate, requirePermission('lead.read')
        WHERE a.lead_id=$1 ORDER BY a.occurred_at DESC LIMIT $2 OFFSET $3`,
       [req.params.id, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM crm_schema.lead_activities WHERE lead_id=$1`, [req.params.id]),
+    query(`SELECT COUNT(*)::int AS count FROM crm_schema.lead_activities WHERE lead_id=$1`, [req.params.id]),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
 
-router.post('/leads/:id/activities', authenticate, requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+router.post('/leads/:id/activities', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
   const { activity_type, subject, description, outcome, duration_min, occurred_at, metadata } = req.body;
   if (!activity_type) throw new AppError('activity_type required');
   const { rows } = await query(
@@ -309,7 +443,7 @@ router.post('/leads/:id/activities', authenticate, requirePermission('lead.edit'
 // ════════════════════════════════════════════════════════════
 //  MEETINGS
 // ════════════════════════════════════════════════════════════
-router.get('/meetings', authenticate, requirePermission('meeting.manage'), paginate, asyncHandler(async (req, res) => {
+router.get('/meetings', requirePermission('meeting.manage'), paginate, asyncHandler(async (req, res) => {
   const { status, host_id, from_date, to_date } = req.query;
   const conditions = [];
   const params     = [];
@@ -332,12 +466,12 @@ router.get('/meetings', authenticate, requirePermission('meeting.manage'), pagin
         ORDER BY m.scheduled_at DESC LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM crm_schema.meetings m ${where}`, params),
+    query(`SELECT COUNT(*)::int AS count FROM crm_schema.meetings m ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
 
-router.get('/meetings/:id', authenticate, requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
+router.get('/meetings/:id', requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
   const { rows } = await query(
     `SELECT m.*, l.full_name AS lead_name, u.display_name AS host_name
        FROM crm_schema.meetings m
@@ -351,7 +485,7 @@ router.get('/meetings/:id', authenticate, requirePermission('meeting.manage'), a
   return success(res, { ...rows[0], attendees: attendees.rows });
 }));
 
-router.post('/meetings', authenticate, requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
+router.post('/meetings', requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
   const { lead_id, client_id, title, agenda, meeting_type, scheduled_at, duration_min,
           timezone, meeting_url, location, attendees } = req.body;
   if (!title || !scheduled_at) throw new AppError('title and scheduled_at required');
@@ -389,7 +523,7 @@ router.post('/meetings', authenticate, requirePermission('meeting.manage'), asyn
   return created(res, rows[0]);
 }));
 
-router.patch('/meetings/:id', authenticate, requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
+router.patch('/meetings/:id', requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
   const { status, notes, outcome, recording_url, completed_at, cancelled_at, cancel_reason } = req.body;
   const { rows } = await query(
     `UPDATE crm_schema.meetings
@@ -407,7 +541,7 @@ router.patch('/meetings/:id', authenticate, requirePermission('meeting.manage'),
   return success(res, rows[0]);
 }));
 
-router.delete('/meetings/:id', authenticate, requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
+router.delete('/meetings/:id', requirePermission('meeting.manage'), asyncHandler(async (req, res) => {
   await query(`UPDATE crm_schema.meetings SET status='cancelled', cancelled_at=NOW() WHERE id=$1`, [req.params.id]);
   return noContent(res);
 }));
@@ -415,7 +549,7 @@ router.delete('/meetings/:id', authenticate, requirePermission('meeting.manage')
 // ════════════════════════════════════════════════════════════
 //  PROPOSALS
 // ════════════════════════════════════════════════════════════
-router.get('/proposals', authenticate, requirePermission('proposal.manage'), paginate, asyncHandler(async (req, res) => {
+router.get('/proposals', requirePermission('proposal.manage'), paginate, asyncHandler(async (req, res) => {
   const { status, lead_id, client_id } = req.query;
   const conditions = [];
   const params     = [];
@@ -436,12 +570,12 @@ router.get('/proposals', authenticate, requirePermission('proposal.manage'), pag
         ORDER BY p.created_at DESC LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM crm_schema.proposals p ${where}`, params),
+    query(`SELECT COUNT(*)::int AS count FROM crm_schema.proposals p ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
 
-router.get('/proposals/:id', authenticate, requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
+router.get('/proposals/:id', requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
   const { rows } = await query(
     `SELECT p.*, l.full_name AS lead_name, l.email AS lead_email,
             u.display_name AS created_by_name
@@ -455,7 +589,7 @@ router.get('/proposals/:id', authenticate, requirePermission('proposal.manage'),
   return success(res, rows[0]);
 }));
 
-router.post('/proposals', authenticate, requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
+router.post('/proposals', requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
   const { lead_id, client_id, title, summary, scope, deliverables, timeline, milestones,
           total_amount, currency, tax_percent, discount_percent, line_items, terms,
           validity_days, notes } = req.body;
@@ -475,7 +609,7 @@ router.post('/proposals', authenticate, requirePermission('proposal.manage'), as
   return created(res, rows[0]);
 }));
 
-router.patch('/proposals/:id', authenticate, requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
+router.patch('/proposals/:id', requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
   const { status, total_amount, line_items, sent_at, viewed_at, accepted_at, rejected_at, reject_reason, pdf_url } = req.body;
   const { rows } = await query(
     `UPDATE crm_schema.proposals
@@ -496,7 +630,7 @@ router.patch('/proposals/:id', authenticate, requirePermission('proposal.manage'
   return success(res, rows[0]);
 }));
 
-router.post('/proposals/:id/send', authenticate, requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
+router.post('/proposals/:id/send', requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
   const { rows } = await query(
     `UPDATE crm_schema.proposals SET status='sent', sent_at=NOW() WHERE id=$1 AND status='draft' RETURNING *`,
     [req.params.id]
@@ -505,7 +639,7 @@ router.post('/proposals/:id/send', authenticate, requirePermission('proposal.man
   return success(res, rows[0], 'Proposal sent');
 }));
 
-router.delete('/proposals/:id', authenticate, requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
+router.delete('/proposals/:id', requirePermission('proposal.manage'), asyncHandler(async (req, res) => {
   await query(`DELETE FROM crm_schema.proposals WHERE id=$1`, [req.params.id]);
   return noContent(res);
 }));
@@ -513,7 +647,7 @@ router.delete('/proposals/:id', authenticate, requirePermission('proposal.manage
 // ════════════════════════════════════════════════════════════
 //  CRM ACCOUNTS
 // ════════════════════════════════════════════════════════════
-router.get('/accounts', authenticate, requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
+router.get('/accounts', requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
   const { search, is_client } = req.query;
   const conditions = [];
   const params     = [];
@@ -525,19 +659,19 @@ router.get('/accounts', authenticate, requirePermission('lead.read'), paginate, 
   const [dataRes, countRes] = await Promise.all([
     query(`SELECT * FROM crm_schema.accounts ${where} ORDER BY name LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]),
-    query(`SELECT COUNT(*) FROM crm_schema.accounts ${where}`, params),
+    query(`SELECT COUNT(*)::int AS count FROM crm_schema.accounts ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
 
-router.get('/accounts/:id', authenticate, requirePermission('lead.read'), asyncHandler(async (req, res) => {
+router.get('/accounts/:id', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const { rows } = await query(`SELECT * FROM crm_schema.accounts WHERE id=$1`, [req.params.id]);
   if (!rows.length) throw new AppError('Account not found', 404);
   const contacts = await query(`SELECT * FROM crm_schema.contacts WHERE account_id=$1 ORDER BY is_primary DESC`, [req.params.id]);
   return success(res, { ...rows[0], contacts: contacts.rows });
 }));
 
-router.post('/accounts', authenticate, requirePermission('lead.create'), asyncHandler(async (req, res) => {
+router.post('/accounts', requirePermission('lead.create'), asyncHandler(async (req, res) => {
   const { name, website, industry, company_size, country, city, phone, email,
           linkedin_url, description, tags } = req.body;
   if (!name) throw new AppError('name required');
@@ -551,7 +685,7 @@ router.post('/accounts', authenticate, requirePermission('lead.create'), asyncHa
   return created(res, rows[0]);
 }));
 
-router.patch('/accounts/:id', authenticate, requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+router.patch('/accounts/:id', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
   const { name, website, industry, description, tags, is_client } = req.body;
   const { rows } = await query(
     `UPDATE crm_schema.accounts
@@ -571,7 +705,7 @@ router.patch('/accounts/:id', authenticate, requirePermission('lead.edit'), asyn
 // ════════════════════════════════════════════════════════════
 //  CRM CONTACTS
 // ════════════════════════════════════════════════════════════
-router.get('/contacts', authenticate, requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
+router.get('/contacts', requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
   const { account_id, search } = req.query;
   const conditions = [];
   const params     = [];
@@ -579,15 +713,16 @@ router.get('/contacts', authenticate, requirePermission('lead.read'), paginate, 
   if (account_id) { conditions.push(`account_id=$${idx}`); params.push(account_id); idx++; }
   if (search) { conditions.push(`(first_name ILIKE $${idx} OR last_name ILIKE $${idx} OR email ILIKE $${idx})`); params.push(`%${search}%`); idx++; }
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+
   const [dataRes, countRes] = await Promise.all([
     query(`SELECT * FROM crm_schema.contacts ${where} ORDER BY is_primary DESC, created_at DESC LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]),
-    query(`SELECT COUNT(*) FROM crm_schema.contacts ${where}`, params),
+    query(`SELECT COUNT(*)::int AS count FROM crm_schema.contacts ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
 
-router.post('/contacts', authenticate, requirePermission('lead.create'), asyncHandler(async (req, res) => {
+router.post('/contacts', requirePermission('lead.create'), asyncHandler(async (req, res) => {
   const { account_id, first_name, last_name, email, phone, designation, linkedin_url, is_primary } = req.body;
   if (!first_name || !last_name) throw new AppError('first_name and last_name required');
   const { rows } = await query(
@@ -601,7 +736,7 @@ router.post('/contacts', authenticate, requirePermission('lead.create'), asyncHa
 // ════════════════════════════════════════════════════════════
 //  PIPELINES
 // ════════════════════════════════════════════════════════════
-router.get('/pipelines', authenticate, asyncHandler(async (req, res) => {
+router.get('/pipelines', asyncHandler(async (req, res) => {
   const { rows } = await query(`SELECT * FROM crm_schema.pipelines ORDER BY is_default DESC, name`);
   for (const pipeline of rows) {
     const stages = await query(`SELECT * FROM crm_schema.pipeline_stages WHERE pipeline_id=$1 ORDER BY sort_order`, [pipeline.id]);
@@ -610,7 +745,7 @@ router.get('/pipelines', authenticate, asyncHandler(async (req, res) => {
   return success(res, rows);
 }));
 
-router.post('/pipelines', authenticate, requirePermission('pipeline.read'), asyncHandler(async (req, res) => {
+router.post('/pipelines', requirePermission('pipeline.read'), asyncHandler(async (req, res) => {
   const { name, description, stages = [] } = req.body;
   if (!name) throw new AppError('name required');
   const { rows } = await withTransaction(async (client) => {

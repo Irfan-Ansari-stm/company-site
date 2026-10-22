@@ -13,18 +13,26 @@ const paginate = (req, res, next) => {
   next();
 };
 
-const paginateResponse = (data, total, pagination) => ({
-  success: true,
-  data,
-  pagination: {
-    page:       pagination.page,
-    limit:      pagination.limit,
-    total:      parseInt(total),
-    totalPages: Math.ceil(parseInt(total) / pagination.limit),
-    hasNext:    pagination.page * pagination.limit < parseInt(total),
-    hasPrev:    pagination.page > 1,
-  },
-});
+const paginateResponse = (data, total, pagination) => {
+  const totalNum = parseInt(total, 10) || 0;
+  const totalPages = Math.ceil(totalNum / pagination.limit) || 1;
+  return {
+    success: true,
+    data,
+    total: totalNum,
+    page: pagination.page,
+    limit: pagination.limit,
+    totalPages,
+    pagination: {
+      page:       pagination.page,
+      limit:      pagination.limit,
+      total:      totalNum,
+      totalPages,
+      hasNext:    pagination.page * pagination.limit < totalNum,
+      hasPrev:    pagination.page > 1,
+    },
+  };
+};
 
 // ── File upload ──────────────────────────────────────────────
 const ALLOWED_MIME = new Set([

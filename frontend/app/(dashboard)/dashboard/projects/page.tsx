@@ -39,6 +39,11 @@ export default function ProjectsPage() {
     queryFn: () => projectsApi.list({ page, limit: 20, search: search || undefined, status: statusFilter || undefined }).then(r => r.data),
   });
 
+  const { data: summaryData } = useQuery({
+    queryKey: ['projects-summary'],
+    queryFn: () => projectsApi.summary().then(r => r.data.data),
+  });
+
   const { data: overdueData } = useQuery({
     queryKey: ['projects-overdue'],
     queryFn: () => projectsApi.overdue().then(r => r.data.data),
@@ -46,7 +51,13 @@ export default function ProjectsPage() {
 
   const createMutation = useMutation({
     mutationFn: () => projectsApi.create(form),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['projects'] }); setShowCreate(false); toast.success('Project created'); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['projects'] });
+      qc.invalidateQueries({ queryKey: ['projects-summary'] });
+      qc.invalidateQueries({ queryKey: ['projects-overdue'] });
+      setShowCreate(false);
+      toast.success('Project created');
+    },
     onError: (e: any) => toast.error(extractApiError(e)),
   });
 
@@ -54,20 +65,15 @@ export default function ProjectsPage() {
   const projects = data?.data || [];
   const totalPages = Math.ceil((data?.total || 0) / 20);
 
-  const statusCounts = STATUSES.reduce((acc, s) => {
-    acc[s.value] = projects.filter((p: any) => p.status === s.value).length;
-    return acc;
-  }, {} as Record<string, number>);
-
   return (
     <DashboardLayout title="Projects" breadcrumbs={[{ label: 'Projects' }]}>
       <div className="space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard title="Total Projects" value={data?.total || 0} icon={<FolderKanban className="w-5 h-5" />} color="blue" />
-          <StatCard title="In Progress" value={projects.filter((p: any) => p.status === 'in_progress').length} icon={<Clock className="w-5 h-5" />} color="orange" />
-          <StatCard title="Completed" value={projects.filter((p: any) => p.status === 'completed').length} icon={<CheckCircle2 className="w-5 h-5" />} color="green" />
-          <StatCard title="Overdue" value={overdueData?.length || 0} icon={<AlertTriangle className="w-5 h-5" />} color="red" />
+          <StatCard title="Total Projects" value={summaryData?.total ?? data?.total ?? 0} icon={<FolderKanban className="w-5 h-5" />} color="blue" />
+          <StatCard title="In Progress" value={summaryData?.in_progress ?? 0} icon={<Clock className="w-5 h-5" />} color="orange" />
+          <StatCard title="Completed" value={summaryData?.completed ?? 0} icon={<CheckCircle2 className="w-5 h-5" />} color="green" />
+          <StatCard title="Overdue" value={summaryData?.overdue ?? overdueData?.length ?? 0} icon={<AlertTriangle className="w-5 h-5" />} color="red" />
         </div>
 
         {/* Table */}

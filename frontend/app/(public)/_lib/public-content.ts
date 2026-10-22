@@ -42,7 +42,12 @@ export type PublicProject = {
   cover_image?: string;
   industry_name?: string;
   category_name?: string;
+  category_slug?: string;
+  duration_weeks?: number;
+  budget_range?: string;
+  is_featured?: boolean;
   tech_stack?: string[];
+  tags?: string[];
   metrics?: Array<{ id?: string; metric_name: string; value: string; prefix?: string; suffix?: string; description?: string }>;
 };
 

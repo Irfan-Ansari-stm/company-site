@@ -89,10 +89,21 @@ export default function SystemPage() {
   });
 
   // Flatten settings into groups
+  const settingsList: any[] = Array.isArray(settingsData)
+    ? settingsData
+    : settingsData && typeof settingsData === 'object'
+    ? Object.entries(settingsData).map(([k, v]: [string, any]) => ({
+        key: k,
+        ...(typeof v === 'object' ? v : { value: v }),
+        group: v?.group || 'general',
+      }))
+    : [];
+
   const settingsGroups: Record<string, any[]> = {};
-  settingsData?.forEach((s: any) => {
-    if (!settingsGroups[s.group]) settingsGroups[s.group] = [];
-    settingsGroups[s.group].push(s);
+  settingsList.forEach((s: any) => {
+    const grp = s.group || 'general';
+    if (!settingsGroups[grp]) settingsGroups[grp] = [];
+    settingsGroups[grp].push(s);
   });
 
   return (

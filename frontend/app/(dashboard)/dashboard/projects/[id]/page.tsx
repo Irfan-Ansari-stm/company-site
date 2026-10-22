@@ -5,7 +5,7 @@ import { use } from 'react';
 import { DashboardLayout } from '@/app/(dashboard)/_components/layout/DashboardLayout';
 import { Card, Button, StatusBadge, Modal, Input, Select, Textarea, TabBar, PageLoader, Badge, Avatar, Table, Tr, Td } from '@/components/ui';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { projectsApi, tasksApi } from '@/lib/api';
+import { projectsApi, tasksApi, usersApi } from '@/lib/api';
 import { formatDate, formatCurrency, timeAgo, extractApiError } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import { Plus, CheckSquare, Clock, Users, Paperclip, Flag, Calendar } from 'lucide-react';
@@ -40,15 +40,40 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
     enabled: tab === 'tasks' || tab === 'overview',
   });
 
+  const { data: usersData } = useQuery({
+    queryKey: ['users-list-mini'],
+    queryFn: () => usersApi.list({ limit: 100 }).then(r => r.data.data),
+    enabled: showAddMember,
+  });
+
   const addTaskMutation = useMutation({
     mutationFn: () => tasksApi.create({ ...taskForm, project_id: id }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['project-tasks', id] }); setShowAddTask(false); toast.success('Task created'); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['project-tasks', id] });
+      qc.invalidateQueries({ queryKey: ['project', id] });
+      setShowAddTask(false);
+      toast.success('Task created');
+    },
+    onError: (e: any) => toast.error(extractApiError(e)),
+  });
+
+  const addMemberMutation = useMutation({
+    mutationFn: () => projectsApi.addMember(id, memberForm),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['project', id] });
+      setShowAddMember(false);
+      toast.success('Member added');
+    },
     onError: (e: any) => toast.error(extractApiError(e)),
   });
 
   const updateStatusMutation = useMutation({
     mutationFn: ({ status }: { status: string }) => projectsApi.update(id, { status }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['project', id] }); toast.success('Status updated'); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['project', id] });
+      qc.invalidateQueries({ queryKey: ['projects'] });
+      toast.success('Status updated');
+    },
   });
 
   if (isLoading) return <DashboardLayout title="Project"><PageLoader /></DashboardLayout>;
@@ -282,6 +307,38 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
           <div className="col-span-2">
             <Textarea label="Description" value={taskForm.description} onChange={e => setTaskForm(f => ({ ...f, description: e.target.value }))} rows={3} />
           </div>
+        </div>
+      </Modal>
+
+      {/* Add Member Modal */}
+      <Modal open={showAddMember} onClose={() => setShowAddMember(false)} title="Add Team Member"
+        footer={
+          <>
+            <Button variant="outline" onClick={() => setShowAddMember(false)}>Cancel</Button>
+            <Button loading={addMemberMutation.isPending} onClick={() => addMemberMutation.mutate()}>Add Member</Button>
+          </>
+        }
+      >
+        <div className="space-y-4">
+          <Select
+            label="Select User *"
+            options={usersData?.map((u: any) => ({ value: u.id, label: `${u.display_name} (${u.email})` })) || []}
+            value={memberForm.user_id}
+            onChange={e => setMemberForm(f => ({ ...f, user_id: e.target.value }))}
+            placeholder="Choose team member"
+          />
+          <Select
+            label="Project Role"
+            options={[
+              { value: 'manager', label: 'Manager' },
+              { value: 'lead', label: 'Tech Lead' },
+              { value: 'member', label: 'Developer / Member' },
+              { value: 'designer', label: 'Designer' },
+              { value: 'qa', label: 'QA / Tester' },
+            ]}
+            value={memberForm.role}
+            onChange={e => setMemberForm(f => ({ ...f, role: e.target.value }))}
+          />
         </div>
       </Modal>
     </DashboardLayout>

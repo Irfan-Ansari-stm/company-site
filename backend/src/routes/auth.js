@@ -6,6 +6,7 @@ const qrcode  = require('qrcode');
 const { query, withTransaction } = require('../config/database');
 const { authenticate, requirePermission } = require('../middleware/auth');
 const { authLimiter, paginate } = require('../middleware/common');
+const { recordAuditLog } = require('../utils/audit');
 const {
   generateAccessToken, generateRefreshToken, hashToken,
   hashPassword, comparePassword, generateSecureToken,
@@ -14,23 +15,43 @@ const {
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
 
 // ── POST /auth/register ───────────────────────────────────────
+// Enforces Server-Side Client Assignment:
+// Ignores any client-supplied role, roleId, isSuperAdmin, permissions or isAdmin
 router.post('/register', authLimiter, asyncHandler(async (req, res) => {
-  const { email, password, first_name, last_name, phone, role = 'client' } = req.body;
+  const { email, password, first_name, last_name, phone } = req.body;
   if (!email || !password || !first_name || !last_name)
     throw new AppError('email, password, first_name, last_name are required');
 
   const passwordHash = await hashPassword(password);
   const publicId     = generatePublicId();
 
+  // All public registrations strictly receive the 'client' role
   const { rows } = await query(
     `INSERT INTO auth_schema.users
        (email, password_hash, first_name, last_name, phone, role, public_id)
-     VALUES ($1,$2,$3,$4,$5,$6,$7)
-     RETURNING id, email, display_name, role, created_at`,
-    [email, passwordHash, first_name, last_name, phone, role, publicId]
+     VALUES ($1,$2,$3,$4,$5,'client',$6)
+     RETURNING id, email, display_name, first_name, last_name, role, created_at`,
+    [email, passwordHash, first_name, last_name, phone, publicId]
   );
 
   const user = rows[0];
+
+  // Fetch client permissions (synced automatically to user_roles by DB trigger)
+  const permsRes = await query(
+    `SELECT auth_schema.get_user_permissions($1) AS permissions`,
+    [user.id]
+  );
+  const permissions = permsRes.rows[0]?.permissions || [];
+
+  // Audit log public registration
+  await recordAuditLog({
+    actorId: user.id,
+    action: 'REGISTER',
+    resourceType: 'users',
+    resourceId: user.id,
+    newData: { email: user.email, role: 'client' },
+    req
+  });
 
   // Send verification email
   const verifyToken = generateSecureToken();
@@ -54,7 +75,16 @@ router.post('/register', authLimiter, asyncHandler(async (req, res) => {
      req.headers['x-browser'], req.headers['x-os']]
   );
 
-  return created(res, { user, accessToken, refreshToken }, 'Registration successful');
+  return created(res, {
+    user: {
+      ...user,
+      isSuperAdmin: false,
+      permissions,
+      roles: ['Client'],
+    },
+    accessToken,
+    refreshToken
+  }, 'Registration successful');
 }));
 
 // ── POST /auth/login ──────────────────────────────────────────
@@ -64,6 +94,7 @@ router.post('/login', authLimiter, asyncHandler(async (req, res) => {
 
   const { rows } = await query(
     `SELECT id, email, password_hash, role, is_active, is_verified, display_name,
+            first_name, last_name, avatar_url,
             two_factor_enabled, failed_login_attempts, locked_until
        FROM auth_schema.users
       WHERE email = $1 AND deleted_at IS NULL`,
@@ -109,7 +140,45 @@ router.post('/login', authLimiter, asyncHandler(async (req, res) => {
     [user.id, hashToken(refreshToken), req.ip, req.headers['user-agent']?.substring(0, 200)]
   );
 
-  return success(res, { user: { id: user.id, email: user.email, display_name: user.display_name, role: user.role }, accessToken, refreshToken });
+  // Load permissions and roles for immediate frontend hydration
+  const [permsRes, rolesRes] = await Promise.all([
+    query(`SELECT auth_schema.get_user_permissions($1) AS permissions`, [user.id]),
+    query(
+      `SELECT ARRAY_AGG(DISTINCT r.name) FILTER (WHERE r.name IS NOT NULL) AS roles
+         FROM auth_schema.user_roles ur
+         JOIN auth_schema.roles r ON ur.role_id = r.id
+        WHERE ur.user_id = $1`,
+      [user.id]
+    ),
+  ]);
+
+  const permissions = permsRes.rows[0]?.permissions || [];
+  const roles = rolesRes.rows[0]?.roles || [user.role];
+
+  await recordAuditLog({
+    actorId: user.id,
+    action: 'LOGIN',
+    resourceType: 'auth',
+    resourceId: user.id,
+    req
+  });
+
+  return success(res, {
+    user: {
+      id: user.id,
+      email: user.email,
+      display_name: user.display_name,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      avatar_url: user.avatar_url,
+      role: user.role,
+      isSuperAdmin: user.role === 'super_admin',
+      permissions,
+      roles,
+    },
+    accessToken,
+    refreshToken
+  });
 }));
 
 // ── POST /auth/2fa/verify ─────────────────────────────────────
@@ -326,6 +395,7 @@ router.get('/me', authenticate, asyncHandler(async (req, res) => {
   const { rows } = await query(
     `SELECT u.id, u.email, u.username, u.display_name, u.first_name, u.last_name,
             u.phone, u.avatar_url, u.bio, u.timezone, u.locale, u.role,
+            (u.role = 'super_admin') AS "isSuperAdmin",
             u.is_active, u.is_verified, u.two_factor_enabled, u.last_login_at,
             u.preferences, u.created_at,
             auth_schema.get_user_permissions(u.id) AS permissions,
@@ -337,7 +407,20 @@ router.get('/me', authenticate, asyncHandler(async (req, res) => {
       GROUP BY u.id`,
     [req.userId]
   );
+  if (!rows.length) throw new AppError('User not found', 404);
   return success(res, rows[0]);
+}));
+
+// ── GET /auth/client-config ───────────────────────────────────
+// Returns permitted modules and widgets for client dashboard view
+router.get('/client-config', asyncHandler(async (req, res) => {
+  const { rows } = await query(
+    `SELECT key, name, description, icon, is_client_enabled, widgets, actions, sort_order
+       FROM auth_schema.dashboard_modules
+      WHERE is_client_enabled = TRUE
+      ORDER BY sort_order ASC`
+  );
+  return success(res, rows);
 }));
 
 // ── PATCH /auth/me ────────────────────────────────────────────

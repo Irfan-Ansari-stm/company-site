@@ -157,9 +157,9 @@ export default function HRPage() {
             {teamData?.map((m: any) => (
               <Card key={m.id} className="text-center !p-4">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white text-xl font-bold mx-auto mb-3">
-                  {(m.first_name || m.designation)?.[0] || '?'}
+                  {(m.name || m.first_name || m.designation)?.[0] || '?'}
                 </div>
-                <p className="font-semibold text-slate-900">{m.first_name} {m.last_name}</p>
+                <p className="font-semibold text-slate-900">{m.name || `${m.first_name || ''} ${m.last_name || ''}`.trim() || 'Team Member'}</p>
                 <p className="text-sm text-slate-500">{m.designation}</p>
                 <p className="text-xs text-slate-400 mt-1">{m.department_name}</p>
                 {m.is_featured && <Badge variant="info" className="mt-2">Featured</Badge>}

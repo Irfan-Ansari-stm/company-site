@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DashboardLayout } from '@/app/(dashboard)/_components/layout/DashboardLayout';
 import { Card, Button, Table, Tr, Td, Pagination, Modal, Input, Select, Textarea, StatCard } from '@/components/ui';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -15,8 +15,10 @@ export default function TimeTrackingPage() {
   const { user } = useAuthStore();
   const [page, setPage] = useState(1);
   const [showLog, setShowLog] = useState(false);
+  const [showStartModal, setShowStartModal] = useState(false);
   const [editEntry, setEditEntry] = useState<any>(null);
   const [form, setForm] = useState({ project_id: '', task_id: '', description: '', hours: '', date: new Date().toISOString().split('T')[0], billable: true });
+  const [timerForm, setTimerForm] = useState({ project_id: '', task_id: '', description: '', billable: true });
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerSeconds, setTimerSeconds] = useState(0);
 
@@ -30,6 +32,14 @@ export default function TimeTrackingPage() {
     queryFn: () => timeApi.summary().then(r => r.data.data),
   });
 
+  const { data: activeTimerData } = useQuery({
+    queryKey: ['active-timer'],
+    queryFn: () => timeApi.active().then(r => r.data.data),
+    refetchInterval: 30000,
+  });
+
+  const activeTimer = activeTimerData?.active_timer;
+
   const { data: projectsData } = useQuery({
     queryKey: ['projects-list-mini'],
     queryFn: () => projectsApi.list({ limit: 100 }).then(r => r.data.data),
@@ -41,45 +51,80 @@ export default function TimeTrackingPage() {
     enabled: !!form.project_id,
   });
 
+  const { data: timerTasksData } = useQuery({
+    queryKey: ['timer-tasks-mini', timerForm.project_id],
+    queryFn: () => tasksApi.list({ project_id: timerForm.project_id, limit: 100 }).then(r => r.data.data),
+    enabled: !!timerForm.project_id,
+  });
+
+  // Sync timer state with server authoritative timer
+  useEffect(() => {
+    if (activeTimer) {
+      setTimerRunning(true);
+      const serverStarted = new Date(activeTimer.started_at).getTime();
+      const currentServer = activeTimerData?.server_time ? new Date(activeTimerData.server_time).getTime() : Date.now();
+      const initialSeconds = Math.max(0, Math.floor((currentServer - serverStarted) / 1000));
+      setTimerSeconds(initialSeconds);
+
+      const interval = setInterval(() => {
+        setTimerSeconds(s => s + 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setTimerRunning(false);
+      setTimerSeconds(0);
+    }
+  }, [activeTimer, activeTimerData?.server_time]);
+
+  const startTimerMutation = useMutation({
+    mutationFn: (data: any) => timeApi.start(data),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['active-timer'] });
+      setShowStartModal(false);
+      toast.success('Timer started');
+    },
+    onError: (e: any) => toast.error(extractApiError(e)),
+  });
+
+  const stopTimerMutation = useMutation({
+    mutationFn: () => timeApi.stop(),
+    onSuccess: (res: any) => {
+      qc.invalidateQueries({ queryKey: ['active-timer'] });
+      qc.invalidateQueries({ queryKey: ['my-time-entries'] });
+      qc.invalidateQueries({ queryKey: ['time-summary'] });
+      qc.invalidateQueries({ queryKey: ['projects'] });
+      setTimerRunning(false);
+      setTimerSeconds(0);
+      toast.success(`Logged ${res.data?.data?.hours || ''} hours successfully`);
+    },
+    onError: (e: any) => toast.error(extractApiError(e)),
+  });
+
   const createMutation = useMutation({
     mutationFn: () => timeApi.create({ ...form, hours: parseFloat(form.hours) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['my-time-entries'] }); qc.invalidateQueries({ queryKey: ['time-summary'] }); setShowLog(false); toast.success('Time logged'); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['my-time-entries'] });
+      qc.invalidateQueries({ queryKey: ['time-summary'] });
+      setShowLog(false);
+      toast.success('Time logged');
+    },
     onError: (e: any) => toast.error(extractApiError(e)),
   });
 
   const updateMutation = useMutation({
     mutationFn: () => timeApi.update(editEntry.id, { description: editEntry.description, hours: parseFloat(editEntry.hours), billable: editEntry.billable }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['my-time-entries'] }); setEditEntry(null); toast.success('Entry updated'); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['my-time-entries'] }); qc.invalidateQueries({ queryKey: ['time-summary'] }); setEditEntry(null); toast.success('Entry updated'); },
     onError: (e: any) => toast.error(extractApiError(e)),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => timeApi.delete(id),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['my-time-entries'] }); toast.success('Entry deleted'); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['my-time-entries'] }); qc.invalidateQueries({ queryKey: ['time-summary'] }); toast.success('Entry deleted'); },
   });
 
   const set = (k: string, v: any) => setForm(f => ({ ...f, [k]: v }));
   const entries = myEntries?.data || [];
   const totalPages = Math.ceil((myEntries?.total || 0) / 20);
-
-  // Timer logic (simple front-end timer)
-  const startTimer = () => {
-    setTimerRunning(true);
-    const start = Date.now() - timerSeconds * 1000;
-    const interval = setInterval(() => {
-      setTimerSeconds(Math.floor((Date.now() - start) / 1000));
-    }, 1000);
-    (window as any).__timerInterval = interval;
-  };
-
-  const stopTimer = () => {
-    setTimerRunning(false);
-    clearInterval((window as any).__timerInterval);
-    const hours = (timerSeconds / 3600).toFixed(2);
-    set('hours', hours);
-    setShowLog(true);
-    setTimerSeconds(0);
-  };
 
   const formatTimer = (s: number) => {
     const h = Math.floor(s / 3600).toString().padStart(2, '0');
@@ -103,17 +148,21 @@ export default function TimeTrackingPage() {
         <Card>
           <div className="flex items-center gap-6">
             <div className="flex-1">
-              <h3 className="font-semibold text-slate-800 mb-1">Live Timer</h3>
-              <p className="text-xs text-slate-500">Start a timer and log it as a time entry when done</p>
+              <h3 className="font-semibold text-slate-800 mb-1">
+                Live Timer {activeTimer?.project_name ? `— ${activeTimer.project_name}` : ''}
+              </h3>
+              <p className="text-xs text-slate-500">
+                {activeTimer ? `Tracking: ${activeTimer.description || activeTimer.task_title || 'Active Session'}` : 'Start a timer and log it as a time entry when done'}
+              </p>
             </div>
-            <div className={`text-4xl font-mono font-bold ${timerRunning ? 'text-blue-600' : 'text-slate-300'}`}>
+            <div className={`text-4xl font-mono font-bold ${timerRunning ? 'text-blue-600 animate-pulse' : 'text-slate-300'}`}>
               {formatTimer(timerSeconds)}
             </div>
             <div className="flex gap-2">
               {!timerRunning ? (
-                <Button icon={<Timer className="w-4 h-4" />} onClick={startTimer}>Start Timer</Button>
+                <Button icon={<Timer className="w-4 h-4" />} onClick={() => setShowStartModal(true)}>Start Timer</Button>
               ) : (
-                <Button variant="danger" onClick={stopTimer}>Stop & Log</Button>
+                <Button variant="danger" loading={stopTimerMutation.isPending} onClick={() => stopTimerMutation.mutate()}>Stop & Log</Button>
               )}
             </div>
           </div>
@@ -133,7 +182,7 @@ export default function TimeTrackingPage() {
           >
             {entries.map((e: any) => (
               <Tr key={e.id}>
-                <Td>{formatDate(e.date)}</Td>
+                <Td>{formatDate(e.date || e.started_at)}</Td>
                 <Td className="font-medium">{e.project_name}</Td>
                 <Td>{e.task_title || '—'}</Td>
                 <Td className="max-w-xs truncate">{e.description || '—'}</Td>
@@ -159,6 +208,64 @@ export default function TimeTrackingPage() {
           <Pagination page={page} totalPages={totalPages} onPageChange={setPage} total={myEntries?.total} limit={20} />
         </Card>
       </div>
+
+      {/* Start Timer Modal */}
+      <Modal
+        open={showStartModal}
+        onClose={() => setShowStartModal(false)}
+        title="Start Live Timer"
+        footer={
+          <>
+            <Button variant="outline" onClick={() => setShowStartModal(false)}>Cancel</Button>
+            <Button
+              loading={startTimerMutation.isPending}
+              onClick={() => {
+                if (!timerForm.project_id) {
+                  toast.error('Please select a project');
+                  return;
+                }
+                startTimerMutation.mutate(timerForm);
+              }}
+            >
+              Start Timer
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-4">
+          <Select
+            label="Project *"
+            options={projectsData?.map((p: any) => ({ value: p.id, label: p.name })) || []}
+            value={timerForm.project_id}
+            onChange={e => setTimerForm(f => ({ ...f, project_id: e.target.value }))}
+            placeholder="Select project"
+          />
+          {timerForm.project_id && (
+            <Select
+              label="Task (Optional)"
+              options={timerTasksData?.map((t: any) => ({ value: t.id, label: t.title })) || []}
+              value={timerForm.task_id}
+              onChange={e => setTimerForm(f => ({ ...f, task_id: e.target.value }))}
+              placeholder="Select task"
+            />
+          )}
+          <Input
+            label="Description (Optional)"
+            value={timerForm.description}
+            onChange={e => setTimerForm(f => ({ ...f, description: e.target.value }))}
+            placeholder="What will you work on?"
+          />
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={timerForm.billable}
+              onChange={e => setTimerForm(f => ({ ...f, billable: e.target.checked }))}
+              className="rounded"
+            />
+            <span className="text-sm text-slate-700">Billable hours</span>
+          </label>
+        </div>
+      </Modal>
 
       {/* Log Time Modal */}
       <Modal

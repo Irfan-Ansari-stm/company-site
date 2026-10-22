@@ -56,11 +56,21 @@ router.delete('/categories/:id', authenticate, requirePermission('service.manage
 // ════════════════════════════════════════════════════════════
 //  SERVICES
 // ════════════════════════════════════════════════════════════
-router.get('/', paginate, asyncHandler(async (req, res) => {
-  const { category_id, is_featured, search, pricing_type } = req.query;
-  const conditions = ['s.is_active=TRUE', 's.deleted_at IS NULL'];
+router.get('/', optionalAuth, paginate, asyncHandler(async (req, res) => {
+  const { category_id, is_featured, is_active, search, pricing_type } = req.query;
+  const isAdmin = req.user?.role && !['client','candidate'].includes(req.user.role);
+
+  const conditions = ['s.deleted_at IS NULL'];
   const params     = [];
   let idx = 1;
+
+  if (!isAdmin) {
+    conditions.push('s.is_active=TRUE');
+  } else if (is_active !== undefined) {
+    conditions.push(`s.is_active=$${idx}`);
+    params.push(is_active === 'true');
+    idx++;
+  }
 
   if (category_id) { conditions.push(`s.category_id=$${idx}`); params.push(category_id); idx++; }
   if (is_featured !== undefined) { conditions.push(`s.is_featured=$${idx}`); params.push(is_featured === 'true'); idx++; }

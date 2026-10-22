@@ -1,5 +1,16 @@
-import { ServiceDetailPage } from '../../_components/PublicListingPages';
+'use client';
+
+import { useParams } from 'next/navigation';
+import { PublicShell } from '../../_components/PublicShell';
+import ServiceDetailView from '@/components/services/ServiceDetailView';
 
 export default function Page() {
-  return <ServiceDetailPage />;
+  const params = useParams<{ slug: string }>();
+  const slug = params?.slug || '';
+
+  return (
+    <PublicShell>
+      <ServiceDetailView slug={slug} />
+    </PublicShell>
+  );
 }

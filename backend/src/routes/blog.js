@@ -80,7 +80,7 @@ router.post('/tags', authenticate, asyncHandler(async (req, res) => {
 }));
 
 // ── Posts ────────────────────────────────────────────────────
-router.get('/posts', paginate, asyncHandler(async (req, res) => {
+router.get('/posts', optionalAuth, paginate, asyncHandler(async (req, res) => {
   const { status, category_id, author_id, is_featured, search, tag } = req.query;
   const isAdmin = req.user?.role && !['client','candidate'].includes(req.user?.role);
 

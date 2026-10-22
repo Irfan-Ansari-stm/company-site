@@ -32,7 +32,9 @@ const clientsRoutes      = require('./routes/clients');
 const supportRoutes      = require('./routes/support');
 const hrRoutes           = require('./routes/hr');
 const mediaRoutes        = require('./routes/media');
-const { router: notificationsRouter, analyticsRouter } = require('./routes/notifications');
+const { router: notificationsRouter } = require('./routes/notifications');
+const dashboardRoutes    = require('./routes/dashboard');
+const analyticsRoutes    = require('./routes/analytics');
 const systemRoutes       = require('./routes/system');
 const marketingRoutes    = require('./routes/marketing');
 const aiRoutes           = require('./routes/ai');
@@ -125,6 +127,7 @@ app.use(`${PREFIX}/projects`,    projectsRouter);
 app.use(`${PREFIX}/tasks`,       tasksRouter);
 app.use(`${PREFIX}/sprints`,     sprintsRouter);
 app.use(`${PREFIX}/time-entries`, timeRouter);
+app.use(`${PREFIX}/time-tracking`, timeRouter);
 
 // Finance
 app.use(`${PREFIX}/finance`,     financeRoutes);
@@ -141,8 +144,13 @@ app.use(`${PREFIX}/hr`,          hrRoutes);
 // Notifications
 app.use(`${PREFIX}/notifications`, notificationsRouter);
 
+// Dashboard
+app.use(`${PREFIX}/dashboard`,   dashboardRoutes);
+app.use('/api/dashboard',        dashboardRoutes);
+
 // Analytics
-app.use(`${PREFIX}/analytics`,   analyticsRouter);
+app.use(`${PREFIX}/analytics`,   analyticsRoutes);
+app.use('/api/analytics',        analyticsRoutes);
 
 // Marketing
 app.use(`${PREFIX}/marketing`,   marketingRoutes);

@@ -80,7 +80,7 @@ const noContent = (res) => res.status(204).send();
 
 // ── UUID validation ───────────────────────────────────────────
 const isUUID = (str) =>
-  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(str);
+  typeof str === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
 // ── Build dynamic SET clause for UPDATE queries ───────────────
 const buildUpdateSet = (fields, startIndex = 1) => {

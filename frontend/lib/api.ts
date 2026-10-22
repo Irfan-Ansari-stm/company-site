@@ -68,6 +68,7 @@ export const authApi = {
   disable2FA: (code: string) => api.post('/auth/2fa/disable', { code }),
   verify2FA: (partialToken: string, code: string) =>
     api.post('/auth/2fa/verify', { partialToken, code }),
+  getClientConfig: () => api.get('/auth/client-config'),
 };
 
 // ─── USERS ───────────────────────────────────────────────────
@@ -101,6 +102,10 @@ export const usersApi = {
 
 // ─── CRM ─────────────────────────────────────────────────────
 export const crmApi = {
+  // Overview
+  getOverview: () => api.get('/crm/overview'),
+  getFollowUps: () => api.get('/crm/follow-ups'),
+
   // Leads
   getLeads: (params?: any) => api.get('/crm/leads', { params }),
   getLead: (id: string) => api.get(`/crm/leads/${id}`),
@@ -164,6 +169,7 @@ export const crmApi = {
 // ─── PROJECTS ────────────────────────────────────────────────
 export const projectsApi = {
   list: (params?: any) => api.get('/projects', { params }),
+  summary: () => api.get('/projects/summary'),
   get: (id: string) => api.get(`/projects/${id}`),
   create: (data: any) => api.post('/projects', data),
   update: (id: string, data: any) => api.patch(`/projects/${id}`, data),
@@ -196,6 +202,7 @@ export const projectsApi = {
 // ─── TASKS ───────────────────────────────────────────────────
 export const tasksApi = {
   list: (params?: any) => api.get('/tasks', { params }),
+  summary: (params?: any) => api.get('/tasks/summary', { params }),
   myTasks: () => api.get('/tasks/my'),
   get: (id: string) => api.get(`/tasks/${id}`),
   create: (data: any) => api.post('/tasks', data),
@@ -224,6 +231,9 @@ export const sprintsApi = {
 export const timeApi = {
   list: (params?: any) => api.get('/time-entries', { params }),
   myEntries: (params?: any) => api.get('/time-entries/my', { params }),
+  active: () => api.get('/time-entries/active'),
+  start: (data: any) => api.post('/time-entries/start', data),
+  stop: (data?: any) => api.post('/time-entries/stop', data || {}),
   create: (data: any) => api.post('/time-entries', data),
   update: (id: string, data: any) => api.patch(`/time-entries/${id}`, data),
   delete: (id: string) => api.delete(`/time-entries/${id}`),
@@ -232,6 +242,9 @@ export const timeApi = {
 
 // ─── FINANCE ─────────────────────────────────────────────────
 export const financeApi = {
+  // Overview & Dashboard
+  getOverview: () => api.get('/finance/overview'),
+
   // Invoices
   getInvoices: (params?: any) => api.get('/finance/invoices', { params }),
   getInvoice: (id: string) => api.get(`/finance/invoices/${id}`),
@@ -279,6 +292,7 @@ export const financeApi = {
 
 // ─── CLIENTS ─────────────────────────────────────────────────
 export const clientsApi = {
+  getOverview: () => api.get('/clients/overview'),
   list: (params?: any) => api.get('/clients', { params }),
   get: (id: string) => api.get(`/clients/${id}`),
   create: (data: any) => api.post('/clients', data),
@@ -510,6 +524,7 @@ export const marketingApi = {
   deleteCampaign: (id: string) => api.delete(`/marketing/campaigns/${id}`),
 
   getCoupons: (params?: any) => api.get('/marketing/coupons', { params }),
+  getPublicCoupons: () => api.get('/marketing/coupons/public'),
   validateCoupon: (code: string, amount?: number) =>
     api.post('/marketing/coupons/validate', { code, amount }),
   createCoupon: (data: any) => api.post('/marketing/coupons', data),
@@ -558,19 +573,34 @@ export const notificationsApi = {
   subscribePush: (data: any) => api.post('/notifications/push-subscribe', data),
 };
 
+// ─── DASHBOARD ───────────────────────────────────────────────
+export const dashboardApi = {
+  summary: () => api.get('/dashboard/summary'),
+  revenue: () => api.get('/dashboard/revenue'),
+  projects: () => api.get('/dashboard/projects'),
+  tickets: () => api.get('/dashboard/tickets'),
+  traffic: () => api.get('/dashboard/traffic'),
+};
+
 // ─── ANALYTICS ───────────────────────────────────────────────
 export const analyticsApi = {
   dashboard: (params?: any) => api.get('/analytics/dashboard', { params }),
+  overview: () => api.get('/analytics/overview'),
   trafficSources: (params?: any) =>
     api.get('/analytics/traffic-sources', { params }),
   conversion: () => api.get('/analytics/conversion'),
   realtime: () => api.get('/analytics/realtime'),
+  revenue: (params?: any) => api.get('/analytics/revenue', { params }),
+  projects: () => api.get('/analytics/projects'),
+  tickets: () => api.get('/analytics/tickets'),
+  traffic: (params?: any) => api.get('/analytics/traffic', { params }),
   trackPageview: (data: any) => api.post('/analytics/pageview', data),
   trackEvent: (data: any) => api.post('/analytics/event', data),
 };
 
 // ─── AI ──────────────────────────────────────────────────────
 export const aiApi = {
+  getStatus: () => api.get('/ai/status'),
   getConversations: () => api.get('/ai/conversations'),
   getConversation: (id: string) => api.get(`/ai/conversations/${id}`),
   createConversation: (data: any) => api.post('/ai/conversations', data),
@@ -594,6 +624,19 @@ export const systemApi = {
     api.put(`/system/settings/${key}`, { value }),
 
   getAuditLogs: (params?: any) => api.get('/system/audit-logs', { params }),
+
+  // Company Profile & Diagnostics
+  getCompanyProfile: () => api.get('/system/company-profile'),
+  updateCompanyProfile: (data: any) => api.patch('/system/company-profile', data),
+  testEmail: (recipient?: string) => api.post('/system/test-email', { recipient }),
+
+  // Client Dashboard Access Control (Super Admin)
+  getClientModules: () => api.get('/system/client-modules'),
+  updateClientModule: (key: string, data: any) =>
+    api.put(`/system/client-modules/${key}`, data),
+  saveBulkClientModules: (modules: any[]) =>
+    api.put('/system/client-modules', { modules }),
+  getClientPreview: () => api.get('/system/client-preview'),
 
   getApiKeys: () => api.get('/system/api-keys'),
   createApiKey: (data: any) => api.post('/system/api-keys', data),

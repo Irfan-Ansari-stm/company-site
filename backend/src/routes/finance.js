@@ -7,6 +7,93 @@ const { generatePublicId, success, created, noContent, isUUID } = require('../ut
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
 
 // ════════════════════════════════════════════════════════════
+//  FINANCE OVERVIEW / DASHBOARD
+// ════════════════════════════════════════════════════════════
+router.get('/overview', authenticate, requirePermission('invoice.read'), asyncHandler(async (req, res) => {
+  const isClient = req.user?.role === 'client';
+  const clientFilter = isClient
+    ? `AND (i.client_id IN (SELECT client_id FROM client_schema.client_portal_access WHERE user_id=$1) OR i.client_id IN (SELECT id FROM client_schema.clients WHERE primary_contact_id=$1 OR user_id=$1))`
+    : '';
+  const params = isClient ? [req.userId] : [];
+
+  const [summaryRes, trendsRes, recentInvRes, recentPayRes] = await Promise.all([
+    query(
+      `SELECT
+         COUNT(*)::int AS total_invoices,
+         COUNT(*) FILTER (WHERE status = 'paid')::int AS paid_count,
+         COUNT(*) FILTER (WHERE status = 'sent')::int AS pending_count,
+         COUNT(*) FILTER (WHERE status = 'overdue' OR (due_date < NOW() AND status NOT IN ('paid', 'cancelled')))::int AS overdue_count,
+         COALESCE(SUM(total_amount), 0)::numeric AS total_value,
+         COALESCE(SUM(amount_paid), 0)::numeric AS total_collected,
+         COALESCE(SUM(total_amount) FILTER (WHERE status = 'overdue' OR (due_date < NOW() AND status NOT IN ('paid', 'cancelled'))), 0)::numeric AS overdue_amount
+       FROM billing_schema.invoices i
+       WHERE i.deleted_at IS NULL ${clientFilter}`,
+      params
+    ),
+    query(
+      `SELECT
+         TO_CHAR(issue_date, 'YYYY-MM') AS month,
+         COALESCE(SUM(total_amount), 0)::numeric AS invoiced,
+         COALESCE(SUM(amount_paid), 0)::numeric AS collected,
+         COUNT(*)::int AS invoice_count
+       FROM billing_schema.invoices i
+       WHERE i.deleted_at IS NULL ${clientFilter}
+         AND issue_date >= CURRENT_DATE - INTERVAL '12 months'
+       GROUP BY TO_CHAR(issue_date, 'YYYY-MM')
+       ORDER BY month ASC`,
+      params
+    ),
+    query(
+      `SELECT i.id, i.invoice_number, i.status, i.issue_date, i.due_date,
+              i.total_amount, i.amount_paid, i.currency, cl.company_name AS client_name
+         FROM billing_schema.invoices i
+         LEFT JOIN client_schema.clients cl ON i.client_id=cl.id
+        WHERE i.deleted_at IS NULL ${clientFilter}
+        ORDER BY i.created_at DESC LIMIT 6`,
+      params
+    ),
+    query(
+      `SELECT p.id, p.amount, p.currency, p.method, p.status, p.paid_at,
+              i.invoice_number, cl.company_name AS client_name
+         FROM billing_schema.payments p
+         LEFT JOIN billing_schema.invoices i ON p.invoice_id=i.id
+         LEFT JOIN client_schema.clients cl ON p.client_id=cl.id
+        WHERE 1=1 ${isClient ? `AND (p.client_id IN (SELECT client_id FROM client_schema.client_portal_access WHERE user_id=$1) OR p.client_id IN (SELECT id FROM client_schema.clients WHERE primary_contact_id=$1 OR user_id=$1))` : ''}
+        ORDER BY p.paid_at DESC NULLS LAST, p.created_at DESC LIMIT 6`,
+      params
+    ),
+  ]);
+
+  const s = summaryRes.rows[0] || {};
+  const totalInvoiced = parseFloat(s.total_value || 0);
+  const totalCollected = parseFloat(s.total_collected || 0);
+
+  return success(res, {
+    total_invoiced: totalInvoiced,
+    total_collected: totalCollected,
+    outstanding_amount: Math.max(0, totalInvoiced - totalCollected),
+    overdue_amount: parseFloat(s.overdue_amount || 0),
+    total_invoices: parseInt(s.total_invoices || 0),
+    paid_count: parseInt(s.paid_count || 0),
+    pending_count: parseInt(s.pending_count || 0),
+    overdue_count: parseInt(s.overdue_count || 0),
+    monthly_trend: trendsRes.rows.map(r => ({
+      month: r.month,
+      invoiced: parseFloat(r.invoiced),
+      collected: parseFloat(r.collected),
+      invoice_count: parseInt(r.invoice_count),
+    })),
+    recent_invoices: recentInvRes.rows,
+    recent_payments: recentPayRes.rows,
+  });
+}));
+
+router.get('/dashboard', authenticate, requirePermission('invoice.read'), (req, res, next) => {
+  req.url = '/overview';
+  router.handle(req, res, next);
+});
+
+// ════════════════════════════════════════════════════════════
 //  INVOICES
 // ════════════════════════════════════════════════════════════
 router.get('/invoices', authenticate, requirePermission('invoice.read'), paginate, asyncHandler(async (req, res) => {
@@ -16,6 +103,12 @@ router.get('/invoices', authenticate, requirePermission('invoice.read'), paginat
   const conditions = ['i.deleted_at IS NULL'];
   const params     = [];
   let   idx        = 1;
+
+  if (req.user?.role === 'client') {
+    conditions.push(`(i.client_id IN (SELECT client_id FROM client_schema.client_portal_access WHERE user_id=$${idx}) OR i.client_id IN (SELECT id FROM client_schema.clients WHERE primary_contact_id=$${idx} OR user_id=$${idx}))`);
+    params.push(req.userId);
+    idx++;
+  }
 
   if (status)     { conditions.push(`i.status=$${idx}::invoice_status`); params.push(status); idx++; }
   if (client_id)  { conditions.push(`i.client_id=$${idx}`);  params.push(client_id);  idx++; }
@@ -29,10 +122,10 @@ router.get('/invoices', authenticate, requirePermission('invoice.read'), paginat
     query(
       `SELECT i.id, i.invoice_number, i.status, i.issue_date, i.due_date,
               i.subtotal, i.tax_amount, i.discount_amount, i.total_amount,
-              i.amount_paid, i.currency, i.sent_at, i.paid_at, i.created_at,
+              i.amount_paid, i.amount_due, i.currency, i.sent_at, i.paid_at, i.created_at,
               cl.company_name AS client_name, cl.email AS client_email,
               p.name AS project_name
-         FROM finance_schema.invoices i
+         FROM billing_schema.invoices i
          LEFT JOIN client_schema.clients   cl ON i.client_id=cl.id
          LEFT JOIN project_schema.projects p  ON i.project_id=p.id
         WHERE ${where}
@@ -42,7 +135,7 @@ router.get('/invoices', authenticate, requirePermission('invoice.read'), paginat
     ),
     query(
       `SELECT COUNT(*), SUM(i.total_amount) AS total_value, SUM(i.amount_paid) AS total_collected
-         FROM finance_schema.invoices i WHERE ${where}`, params
+         FROM billing_schema.invoices i WHERE ${where}`, params
     ),
   ]);
 
@@ -56,115 +149,136 @@ router.get('/invoices', authenticate, requirePermission('invoice.read'), paginat
 }));
 
 router.get('/invoices/summary', authenticate, requirePermission('invoice.read'), asyncHandler(async (req, res) => {
-  const { rows } = await query(`SELECT * FROM finance_schema.v_invoice_summary`);
-  return success(res, rows[0]);
+  const isClient = req.user?.role === 'client';
+  const clientFilter = isClient
+    ? `AND (client_id IN (SELECT client_id FROM client_schema.client_portal_access WHERE user_id=$1) OR client_id IN (SELECT id FROM client_schema.clients WHERE primary_contact_id=$1 OR user_id=$1))`
+    : '';
+  const params = isClient ? [req.userId] : [];
+
+  const { rows } = await query(
+    `SELECT
+       COUNT(*)::int AS total_invoices,
+       COUNT(*) FILTER (WHERE status = 'paid')::int AS paid_count,
+       COUNT(*) FILTER (WHERE status = 'sent')::int AS pending_count,
+       COUNT(*) FILTER (WHERE status = 'overdue' OR (due_date < NOW() AND status NOT IN ('paid', 'cancelled')))::int AS overdue_count,
+       COALESCE(SUM(total_amount), 0)::numeric AS total_value,
+       COALESCE(SUM(amount_paid), 0)::numeric AS total_collected,
+       COALESCE(SUM(total_amount) FILTER (WHERE status = 'overdue' OR (due_date < NOW() AND status NOT IN ('paid', 'cancelled'))), 0)::numeric AS overdue_amount
+     FROM billing_schema.invoices
+     WHERE deleted_at IS NULL ${clientFilter}`,
+    params
+  );
+  const row = rows[0] || {};
+  const totalInvoiced = parseFloat(row.total_value || 0);
+  const totalCollected = parseFloat(row.total_collected || 0);
+  const overdueAmount = parseFloat(row.overdue_amount || 0);
+
+  return success(res, {
+    total_invoices: parseInt(row.total_invoices || 0),
+    total_invoiced: totalInvoiced,
+    total_value: totalInvoiced,
+    total_collected: totalCollected,
+    outstanding_amount: Math.max(0, totalInvoiced - totalCollected),
+    overdue_amount: overdueAmount,
+    overdue_count: parseInt(row.overdue_count || 0),
+    paid_count: parseInt(row.paid_count || 0),
+    pending_count: parseInt(row.pending_count || 0),
+  });
 }));
 
 router.get('/invoices/overdue', authenticate, requirePermission('invoice.read'), asyncHandler(async (req, res) => {
+  const isClient = req.user?.role === 'client';
   const { rows } = await query(
     `SELECT i.*, cl.company_name AS client_name
-       FROM finance_schema.invoices i
+       FROM billing_schema.invoices i
        LEFT JOIN client_schema.clients cl ON i.client_id=cl.id
-      WHERE i.due_date < NOW() AND i.status IN ('sent','partially_paid') AND i.deleted_at IS NULL
-      ORDER BY i.due_date ASC`
+      WHERE i.deleted_at IS NULL AND i.due_date < NOW() AND i.status NOT IN ('paid','cancelled')
+        ${isClient ? 'AND (i.client_id IN (SELECT client_id FROM client_schema.client_portal_access WHERE user_id=$1) OR i.client_id IN (SELECT id FROM client_schema.clients WHERE primary_contact_id=$1 OR user_id=$1))' : ''}
+      ORDER BY i.due_date ASC`,
+    isClient ? [req.userId] : []
   );
   return success(res, rows);
 }));
 
 router.get('/invoices/:id', authenticate, requirePermission('invoice.read'), asyncHandler(async (req, res) => {
+  const isClient = req.user?.role === 'client';
   const { rows } = await query(
     `SELECT i.*,
             cl.company_name AS client_name, cl.email AS client_email,
-            cl.phone AS client_phone, cl.address AS client_address,
+            cl.phone AS client_phone,
             p.name AS project_name, p.code AS project_code
-       FROM finance_schema.invoices i
+       FROM billing_schema.invoices i
        LEFT JOIN client_schema.clients   cl ON i.client_id=cl.id
        LEFT JOIN project_schema.projects p  ON i.project_id=p.id
-      WHERE i.id=$1 AND i.deleted_at IS NULL`,
-    [req.params.id]
+      WHERE i.id=$1 AND i.deleted_at IS NULL
+        ${isClient ? 'AND (i.client_id IN (SELECT client_id FROM client_schema.client_portal_access WHERE user_id=$2) OR i.client_id IN (SELECT id FROM client_schema.clients WHERE user_id=$2))' : ''}`,
+    isClient ? [req.params.id, req.userId] : [req.params.id]
   );
   if (!rows.length) throw new AppError('Invoice not found', 404);
 
   const invoice = rows[0];
-  const [lineItems, payments, reminders] = await Promise.all([
-    query(`SELECT * FROM finance_schema.invoice_line_items WHERE invoice_id=$1 ORDER BY sort_order`, [invoice.id]),
-    query(`SELECT * FROM finance_schema.payments WHERE invoice_id=$1 ORDER BY payment_date DESC`, [invoice.id]),
-    query(`SELECT * FROM finance_schema.invoice_reminders WHERE invoice_id=$1 ORDER BY sent_at DESC`, [invoice.id]),
-  ]);
+  const { rows: payments } = await query(
+    `SELECT * FROM billing_schema.payments WHERE invoice_id=$1 ORDER BY paid_at DESC`,
+    [invoice.id]
+  );
 
-  return success(res, { ...invoice, line_items: lineItems.rows, payments: payments.rows, reminders: reminders.rows });
+  return success(res, {
+    ...invoice,
+    line_items: Array.isArray(invoice.line_items) ? invoice.line_items : [],
+    payments,
+    reminders: [],
+  });
 }));
 
 router.post('/invoices', authenticate, requirePermission('invoice.create'), asyncHandler(async (req, res) => {
   const {
-    client_id, project_id, milestone_id, currency, issue_date, due_date,
-    payment_terms, notes, footer_notes, tax_percent, discount_percent,
+    client_id, project_id, milestone_id, currency = 'USD', issue_date, due_date,
+    notes, terms, footer, tax_percent = 0, discount_percent = 0,
     line_items = []
   } = req.body;
 
   if (!client_id || !issue_date || !due_date) throw new AppError('client_id, issue_date, due_date required');
   if (!line_items.length) throw new AppError('At least one line item required');
 
-  const { rows } = await withTransaction(async (client) => {
-    // Generate invoice number
-    const { rows: numRows } = await client.query(
-      `SELECT finance_schema.next_invoice_number() AS num`
-    );
-    const invoiceNumber = numRows[0]?.num || `INV-${Date.now()}`;
+  const invoiceNumber = `INV-${Date.now().toString(36).toUpperCase()}`;
 
-    // Calculate totals
-    const subtotal        = line_items.reduce((s, item) => s + (item.quantity * item.unit_price), 0);
-    const discountAmount  = subtotal * ((discount_percent || 0) / 100);
-    const taxableAmount   = subtotal - discountAmount;
-    const taxAmount       = taxableAmount * ((tax_percent || 0) / 100);
-    const totalAmount     = taxableAmount + taxAmount;
+  const subtotal       = line_items.reduce((s, item) => s + (Number(item.quantity || 1) * Number(item.unit_price || 0)), 0);
+  const discountAmount = subtotal * (Number(discount_percent || 0) / 100);
+  const taxableAmount  = subtotal - discountAmount;
+  const taxAmount      = taxableAmount * (Number(tax_percent || 0) / 100);
+  const totalAmount    = taxableAmount + taxAmount;
 
-    const invRes = await client.query(
-      `INSERT INTO finance_schema.invoices
-         (invoice_number, client_id, project_id, milestone_id, created_by, currency,
-          issue_date, due_date, payment_terms, notes, footer_notes,
-          tax_percent, discount_percent, subtotal, tax_amount, discount_amount, total_amount)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
-       RETURNING *`,
-      [invoiceNumber, client_id, project_id || null, milestone_id || null, req.userId,
-       currency || 'USD', issue_date, due_date, payment_terms || 'net30',
-       notes, footer_notes, tax_percent || 0, discount_percent || 0,
-       subtotal, taxAmount, discountAmount, totalAmount]
-    );
-    const invoice = invRes.rows[0];
-
-    // Insert line items
-    for (let i = 0; i < line_items.length; i++) {
-      const item = line_items[i];
-      const lineTotal = item.quantity * item.unit_price * (1 - (item.discount_percent || 0) / 100);
-      await client.query(
-        `INSERT INTO finance_schema.invoice_line_items
-           (invoice_id, description, quantity, unit_price, unit, discount_percent, total_price, sort_order, service_id, task_id)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
-        [invoice.id, item.description, item.quantity, item.unit_price, item.unit || 'unit',
-         item.discount_percent || 0, lineTotal, i, item.service_id || null, item.task_id || null]
-      );
-    }
-    return invRes.rows;
-  });
+  const { rows } = await query(
+    `INSERT INTO billing_schema.invoices
+       (invoice_number, client_id, project_id, milestone_id, status,
+        issue_date, due_date, line_items, subtotal, discount_amount,
+        tax_amount, total_amount, amount_paid, currency,
+        notes, terms, footer, created_by)
+     VALUES ($1,$2,$3,$4,'draft',$5,$6,$7::jsonb,$8,$9,$10,$11,0,$12,$13,$14,$15,$16)
+     RETURNING *`,
+    [invoiceNumber, client_id, project_id || null, milestone_id || null,
+     issue_date, due_date, JSON.stringify(line_items), subtotal, discountAmount,
+     taxAmount, totalAmount, currency, notes || null, terms || null, footer || null, req.userId]
+  );
 
   return created(res, rows[0]);
 }));
 
 router.patch('/invoices/:id', authenticate, requirePermission('invoice.edit'), asyncHandler(async (req, res) => {
-  const { status, due_date, notes, footer_notes, sent_at, viewed_at, paid_at, void_reason } = req.body;
+  const { status, due_date, notes, terms, footer, sent_at, viewed_at, paid_at } = req.body;
   const { rows } = await query(
-    `UPDATE finance_schema.invoices
+    `UPDATE billing_schema.invoices
         SET status      = COALESCE($2::invoice_status, status),
             due_date    = COALESCE($3, due_date),
             notes       = COALESCE($4, notes),
-            footer_notes= COALESCE($5, footer_notes),
-            sent_at     = COALESCE($6, sent_at),
-            viewed_at   = COALESCE($7, viewed_at),
-            paid_at     = COALESCE($8, paid_at),
-            void_reason = COALESCE($9, void_reason)
+            terms       = COALESCE($5, terms),
+            footer      = COALESCE($6, footer),
+            sent_at     = COALESCE($7, sent_at),
+            viewed_at   = COALESCE($8, viewed_at),
+            paid_at     = COALESCE($9, paid_at),
+            updated_at  = NOW()
       WHERE id=$1 AND deleted_at IS NULL RETURNING *`,
-    [req.params.id, status, due_date, notes, footer_notes, sent_at, viewed_at, paid_at, void_reason]
+    [req.params.id, status, due_date, notes, terms, footer, sent_at, viewed_at, paid_at]
   );
   if (!rows.length) throw new AppError('Invoice not found', 404);
   return success(res, rows[0]);
@@ -172,15 +286,21 @@ router.patch('/invoices/:id', authenticate, requirePermission('invoice.edit'), a
 
 router.post('/invoices/:id/send', authenticate, requirePermission('invoice.edit'), asyncHandler(async (req, res) => {
   const { rows } = await query(
-    `UPDATE finance_schema.invoices SET status='sent', sent_at=NOW() WHERE id=$1 AND status='draft' RETURNING *`,
+    `UPDATE billing_schema.invoices
+        SET status='sent', sent_at=NOW(), updated_at=NOW()
+      WHERE id=$1 AND deleted_at IS NULL
+      RETURNING *`,
     [req.params.id]
   );
-  if (!rows.length) throw new AppError('Invoice not found or not in draft status', 404);
+  if (!rows.length) throw new AppError('Invoice not found', 404);
   return success(res, rows[0], 'Invoice sent');
 }));
 
 router.delete('/invoices/:id', authenticate, requirePermission('invoice.delete'), asyncHandler(async (req, res) => {
-  await query(`UPDATE finance_schema.invoices SET deleted_at=NOW(), status='cancelled' WHERE id=$1`, [req.params.id]);
+  await query(
+    `UPDATE billing_schema.invoices SET deleted_at=NOW(), status='cancelled', updated_at=NOW() WHERE id=$1`,
+    [req.params.id]
+  );
   return noContent(res);
 }));
 
@@ -189,29 +309,39 @@ router.delete('/invoices/:id', authenticate, requirePermission('invoice.delete')
 // ════════════════════════════════════════════════════════════
 router.get('/payments', authenticate, requirePermission('payment.read'), paginate, asyncHandler(async (req, res) => {
   const { invoice_id, client_id, method, status, from_date, to_date } = req.query;
+  const isClient = req.user?.role === 'client';
   const conditions = [];
   const params     = [];
   let   idx        = 1;
+
+  if (isClient) {
+    conditions.push(`(p.client_id IN (SELECT client_id FROM client_schema.client_portal_access WHERE user_id=$${idx}) OR p.client_id IN (SELECT id FROM client_schema.clients WHERE primary_contact_id=$${idx} OR user_id=$${idx}))`);
+    params.push(req.userId);
+    idx++;
+  }
 
   if (invoice_id) { conditions.push(`p.invoice_id=$${idx}`); params.push(invoice_id); idx++; }
   if (client_id)  { conditions.push(`p.client_id=$${idx}`);  params.push(client_id);  idx++; }
   if (method)     { conditions.push(`p.method=$${idx}::payment_method`); params.push(method); idx++; }
   if (status)     { conditions.push(`p.status=$${idx}::payment_status_type`); params.push(status); idx++; }
-  if (from_date)  { conditions.push(`p.payment_date >= $${idx}`); params.push(from_date); idx++; }
-  if (to_date)    { conditions.push(`p.payment_date <= $${idx}`); params.push(to_date);   idx++; }
+  if (from_date)  { conditions.push(`p.paid_at >= $${idx}`); params.push(from_date); idx++; }
+  if (to_date)    { conditions.push(`p.paid_at <= $${idx}`); params.push(to_date);   idx++; }
 
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const [dataRes, countRes] = await Promise.all([
     query(
-      `SELECT p.*, i.invoice_number, cl.company_name AS client_name
-         FROM finance_schema.payments p
-         LEFT JOIN finance_schema.invoices  i  ON p.invoice_id=i.id
-         LEFT JOIN client_schema.clients   cl ON p.client_id=cl.id
+      `SELECT p.id, p.invoice_id, p.client_id, p.amount, p.currency, p.method,
+              p.status, p.gateway_provider, p.gateway_txn_id, p.gateway_ref,
+              p.paid_at AS payment_date, p.paid_at, p.notes, p.created_at,
+              i.invoice_number, cl.company_name AS client_name
+         FROM billing_schema.payments p
+         LEFT JOIN billing_schema.invoices i  ON p.invoice_id=i.id
+         LEFT JOIN client_schema.clients  cl ON p.client_id=cl.id
          ${where}
-        ORDER BY p.payment_date DESC LIMIT $${idx} OFFSET $${idx+1}`,
+        ORDER BY p.paid_at DESC NULLS LAST, p.created_at DESC LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*), SUM(p.amount) AS total FROM finance_schema.payments p ${where}`, params),
+    query(`SELECT COUNT(*), SUM(p.amount) AS total FROM billing_schema.payments p ${where}`, params),
   ]);
 
   return res.json({
@@ -221,35 +351,49 @@ router.get('/payments', authenticate, requirePermission('payment.read'), paginat
 }));
 
 router.post('/payments', authenticate, requirePermission('payment.create'), asyncHandler(async (req, res) => {
-  const { invoice_id, client_id, amount, currency, method, payment_date,
-          transaction_id, gateway_ref, notes } = req.body;
-  if (!invoice_id || !amount || !method) throw new AppError('invoice_id, amount, method required');
+  const { invoice_id, client_id, amount, currency = 'USD', method = 'bank_transfer',
+          payment_date, transaction_id, gateway_ref, notes } = req.body;
+  if (!invoice_id || !amount) throw new AppError('invoice_id and amount required');
 
   const { rows } = await withTransaction(async (client) => {
+    const invRes = await client.query(`SELECT * FROM billing_schema.invoices WHERE id=$1 AND deleted_at IS NULL`, [invoice_id]);
+    if (!invRes.rows.length) throw new AppError('Invoice not found', 404);
+    const invoice = invRes.rows[0];
+    const clientId = client_id || invoice.client_id;
+
     const payRes = await client.query(
-      `INSERT INTO finance_schema.payments
-         (invoice_id, client_id, recorded_by, amount, currency, method, payment_date,
-          transaction_id, gateway_ref, notes)
-       VALUES ($1,$2,$3,$4,$5,$6::payment_method,$7,$8,$9,$10) RETURNING *`,
-      [invoice_id, client_id || null, req.userId, amount, currency || 'USD',
-       method, payment_date || new Date(), transaction_id, gateway_ref, notes]
+      `INSERT INTO billing_schema.payments
+         (invoice_id, client_id, amount, currency, method, status,
+          gateway_txn_id, gateway_ref, paid_at, notes)
+       VALUES ($1,$2,$3,$4,$5::payment_method,'completed',$6,$7,$8,$9) RETURNING *`,
+      [invoice_id, clientId, amount, currency, method,
+       transaction_id || null, gateway_ref || null, payment_date || new Date(), notes || null]
     );
-    const payment = payRes.rows[0];
 
-    // Update invoice amount_paid & status
-    await client.query(`SELECT finance_schema.update_invoice_after_payment($1)`, [invoice_id]);
+    const newPaid = parseFloat(invoice.amount_paid || 0) + parseFloat(amount);
+    const total = parseFloat(invoice.total_amount || 0);
+    const newStatus = newPaid >= total ? 'paid' : (newPaid > 0 ? 'partial' : invoice.status);
+    const paidAt = newPaid >= total ? new Date() : invoice.paid_at;
 
-    return payRes.rows;
+    await client.query(
+      `UPDATE billing_schema.invoices
+          SET amount_paid=$2, status=$3::invoice_status,
+              paid_at=$4, updated_at=NOW()
+        WHERE id=$1`,
+      [invoice_id, newPaid, newStatus, paidAt]
+    );
+
+    return payRes.rows[0];
   });
 
-  return created(res, rows[0]);
+  return created(res, rows);
 }));
 
 router.get('/payments/:id', authenticate, requirePermission('payment.read'), asyncHandler(async (req, res) => {
   const { rows } = await query(
     `SELECT p.*, i.invoice_number, cl.company_name AS client_name
-       FROM finance_schema.payments p
-       LEFT JOIN finance_schema.invoices i ON p.invoice_id=i.id
+       FROM billing_schema.payments p
+       LEFT JOIN billing_schema.invoices i ON p.invoice_id=i.id
        LEFT JOIN client_schema.clients cl ON p.client_id=cl.id
       WHERE p.id=$1`,
     [req.params.id]
@@ -259,15 +403,15 @@ router.get('/payments/:id', authenticate, requirePermission('payment.read'), asy
 }));
 
 router.patch('/payments/:id', authenticate, requirePermission('payment.create'), asyncHandler(async (req, res) => {
-  const { status, notes, refunded_at, refund_reason } = req.body;
+  const { status, notes, refunded_at, refund_amount } = req.body;
   const { rows } = await query(
-    `UPDATE finance_schema.payments
-        SET status       = COALESCE($2::payment_status_type, status),
-            notes        = COALESCE($3, notes),
-            refunded_at  = COALESCE($4, refunded_at),
-            refund_reason= COALESCE($5, refund_reason)
+    `UPDATE billing_schema.payments
+        SET status        = COALESCE($2::payment_status_type, status),
+            notes         = COALESCE($3, notes),
+            refunded_at   = COALESCE($4, refunded_at),
+            refund_amount = COALESCE($5, refund_amount)
       WHERE id=$1 RETURNING *`,
-    [req.params.id, status, notes, refunded_at, refund_reason]
+    [req.params.id, status, notes, refunded_at, refund_amount]
   );
   if (!rows.length) throw new AppError('Payment not found', 404);
   return success(res, rows[0]);
@@ -284,7 +428,7 @@ router.get('/expenses', authenticate, requirePermission('finance.read'), paginat
 
   if (project_id) { conditions.push(`e.project_id=$${idx}`); params.push(project_id); idx++; }
   if (category)   { conditions.push(`e.category=$${idx}`);   params.push(category);   idx++; }
-  if (status)     { conditions.push(`e.status=$${idx}::expense_status`); params.push(status); idx++; }
+  if (status)     { conditions.push(`e.status=$${idx}`);     params.push(status);     idx++; }
   if (user_id)    { conditions.push(`e.submitted_by=$${idx}`); params.push(user_id);  idx++; }
   if (from_date)  { conditions.push(`e.expense_date >= $${idx}`); params.push(from_date); idx++; }
   if (to_date)    { conditions.push(`e.expense_date <= $${idx}`); params.push(to_date);   idx++; }
@@ -328,7 +472,7 @@ router.patch('/expenses/:id', authenticate, requirePermission('finance.read'), a
   const { status, notes, approved_by, approved_at, rejected_at, rejection_reason } = req.body;
   const { rows } = await query(
     `UPDATE finance_schema.expenses
-        SET status          = COALESCE($2::expense_status, status),
+        SET status          = COALESCE($2, status),
             notes           = COALESCE($3, notes),
             approved_by     = COALESCE($4, approved_by),
             approved_at     = COALESCE($5, approved_at),
@@ -343,10 +487,10 @@ router.patch('/expenses/:id', authenticate, requirePermission('finance.read'), a
 
 router.delete('/expenses/:id', authenticate, asyncHandler(async (req, res) => {
   const { rowCount } = await query(
-    `DELETE FROM finance_schema.expenses WHERE id=$1 AND submitted_by=$2 AND status='pending'`,
-    [req.params.id, req.userId]
+    `DELETE FROM finance_schema.expenses WHERE id=$1 AND (submitted_by=$2 OR $3 = 'super_admin')`,
+    [req.params.id, req.userId, req.user?.role]
   );
-  if (!rowCount) throw new AppError('Expense not found, not yours, or not deletable', 403);
+  if (!rowCount) throw new AppError('Expense not found or access denied', 403);
   return noContent(res);
 }));
 
@@ -358,9 +502,9 @@ router.get('/subscriptions', authenticate, requirePermission('finance.read'), pa
   const conditions = [];
   const params = [];
   let idx = 1;
-  if (status)    { conditions.push(`s.status=$${idx}::subscription_status`); params.push(status); idx++; }
-  if (plan_id)   { conditions.push(`s.plan_id=$${idx}`);   params.push(plan_id);   idx++; }
-  if (client_id) { conditions.push(`s.client_id=$${idx}`); params.push(client_id); idx++; }
+  if (status)    { conditions.push(`s.status=$${idx}`);   params.push(status);    idx++; }
+  if (plan_id)   { conditions.push(`s.plan_id=$${idx}`);  params.push(plan_id);   idx++; }
+  if (client_id) { conditions.push(`s.client_id=$${idx}`);params.push(client_id); idx++; }
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const [dataRes, countRes] = await Promise.all([
     query(
@@ -389,7 +533,7 @@ router.post('/subscriptions', authenticate, requirePermission('finance.read'), a
     `INSERT INTO finance_schema.subscriptions
        (client_id, plan_id, user_id, amount, currency, interval, current_period_start, current_period_end, trial_end_date, metadata)
      VALUES ($1,$2,$3,$4,$5,$6,$7,
-       $7 + CASE $6 WHEN 'monthly' THEN INTERVAL '1 month' WHEN 'yearly' THEN INTERVAL '1 year' ELSE INTERVAL '7 days' END,
+       $7::date + INTERVAL '1 month',
        $8,$9::jsonb)
      RETURNING *`,
     [client_id, plan_id, user_id || null, plan.price, plan.currency, plan.interval,
@@ -402,7 +546,7 @@ router.patch('/subscriptions/:id', authenticate, requirePermission('finance.read
   const { status, cancel_at_period_end, cancelled_at, pause_reason } = req.body;
   const { rows } = await query(
     `UPDATE finance_schema.subscriptions
-        SET status               = COALESCE($2::subscription_status, status),
+        SET status               = COALESCE($2, status),
             cancel_at_period_end = COALESCE($3, cancel_at_period_end),
             cancelled_at         = COALESCE($4, cancelled_at),
             pause_reason         = COALESCE($5, pause_reason)
@@ -415,17 +559,18 @@ router.patch('/subscriptions/:id', authenticate, requirePermission('finance.read
 
 // Subscription Plans
 router.get('/subscription-plans', asyncHandler(async (req, res) => {
-  return success(res, []);
+  const { rows } = await query(`SELECT * FROM finance_schema.subscription_plans WHERE is_active=TRUE ORDER BY sort_order ASC, price ASC`);
+  return success(res, rows);
 }));
 
 router.post('/subscription-plans', authenticate, requirePermission('finance.read'), asyncHandler(async (req, res) => {
   const { name, slug, description, price, currency, interval, features, is_popular, sort_order, trial_days } = req.body;
-  if (!name || !price || !interval) throw new AppError('name, price, interval required');
+  if (!name || price === undefined) throw new AppError('name, price required');
   const { rows } = await query(
     `INSERT INTO finance_schema.subscription_plans
        (name, slug, description, price, currency, interval, features, is_popular, sort_order, trial_days)
-     VALUES ($1,$2,$3,$4,$5,$6::billing_interval,$7::jsonb,$8,$9,$10) RETURNING *`,
-    [name, slug || generatePublicId(), description, price, currency || 'USD', interval,
+     VALUES ($1,$2,$3,$4,$5,$6,$7::jsonb,$8,$9,$10) RETURNING *`,
+    [name, slug || generatePublicId(), description, price, currency || 'USD', interval || 'monthly',
      JSON.stringify(features || []), is_popular || false, sort_order || 0, trial_days || 0]
   );
   return created(res, rows[0]);
@@ -439,8 +584,8 @@ router.get('/quotes', authenticate, requirePermission('invoice.read'), paginate,
   const conditions = [];
   const params = [];
   let idx = 1;
-  if (status)    { conditions.push(`status=$${idx}::quote_status`); params.push(status); idx++; }
-  if (client_id) { conditions.push(`client_id=$${idx}`);           params.push(client_id); idx++; }
+  if (status)    { conditions.push(`status=$${idx}`);     params.push(status);    idx++; }
+  if (client_id) { conditions.push(`client_id=$${idx}`);  params.push(client_id); idx++; }
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const [dataRes, countRes] = await Promise.all([
     query(`SELECT q.*, cl.company_name AS client_name FROM finance_schema.quotes q
@@ -456,7 +601,7 @@ router.post('/quotes', authenticate, requirePermission('invoice.create'), asyncH
   const { client_id, title, notes, line_items, tax_percent, discount_percent, currency, valid_until } = req.body;
   if (!client_id || !line_items?.length) throw new AppError('client_id and line_items required');
 
-  const subtotal       = line_items.reduce((s, i) => s + (i.quantity * i.unit_price), 0);
+  const subtotal       = line_items.reduce((s, i) => s + (Number(i.quantity || 1) * Number(i.unit_price || 0)), 0);
   const discountAmount = subtotal * ((discount_percent || 0) / 100);
   const taxAmount      = (subtotal - discountAmount) * ((tax_percent || 0) / 100);
   const totalAmount    = subtotal - discountAmount + taxAmount;
@@ -476,7 +621,7 @@ router.patch('/quotes/:id', authenticate, requirePermission('invoice.edit'), asy
   const { status } = req.body;
   const { rows } = await query(
     `UPDATE finance_schema.quotes
-        SET status      = COALESCE($2::quote_status, status),
+        SET status      = COALESCE($2, status),
             accepted_at = CASE WHEN $2='accepted' THEN NOW() ELSE accepted_at END,
             rejected_at = CASE WHEN $2='rejected' THEN NOW() ELSE rejected_at END
       WHERE id=$1 RETURNING *`,
@@ -489,41 +634,73 @@ router.patch('/quotes/:id', authenticate, requirePermission('invoice.edit'), asy
 // ════════════════════════════════════════════════════════════
 //  FINANCIAL REPORTS
 // ════════════════════════════════════════════════════════════
-router.get('/reports/revenue', authenticate, requirePermission('finance.read'), asyncHandler(async (req, res) => {
-  const { year, month } = req.query;
+router.get('/reports/revenue', authenticate, requirePermission('billing.read', 'report.read', 'invoice.read'), asyncHandler(async (req, res) => {
+  const { year } = req.query;
   const { rows } = await query(
-    `SELECT * FROM finance_schema.v_monthly_revenue
-      WHERE ($1::int IS NULL OR EXTRACT(YEAR FROM month) = $1)
-        AND ($2::int IS NULL OR EXTRACT(MONTH FROM month) = $2)
-      ORDER BY month DESC LIMIT 24`,
-    [year || null, month || null]
+    `SELECT
+       TO_CHAR(issue_date, 'YYYY-MM-01') AS month,
+       COALESCE(SUM(total_amount), 0)::numeric AS invoiced,
+       COALESCE(SUM(amount_paid), 0)::numeric AS collected,
+       COUNT(*)::int AS invoice_count
+     FROM billing_schema.invoices
+     WHERE deleted_at IS NULL
+       AND ($1::int IS NULL OR EXTRACT(YEAR FROM issue_date) = $1)
+     GROUP BY TO_CHAR(issue_date, 'YYYY-MM-01')
+     ORDER BY month DESC LIMIT 24`,
+    [year ? parseInt(year, 10) : null]
   );
-  return success(res, rows);
+  return success(res, rows.map(r => ({
+    month: r.month,
+    invoiced: parseFloat(r.invoiced),
+    collected: parseFloat(r.collected),
+    invoice_count: parseInt(r.invoice_count),
+  })));
 }));
 
 router.get('/reports/profitability', authenticate, requirePermission('finance.read'), asyncHandler(async (req, res) => {
-  const { project_id, from_date, to_date } = req.query;
   const { rows } = await query(
-    `SELECT * FROM finance_schema.v_project_profitability
-      WHERE ($1::uuid IS NULL OR project_id=$1)`,
-    [project_id || null]
+    `SELECT
+       cp.id AS project_id, cp.title AS project_name, cl.company_name AS client_name,
+       COALESCE(cp.budget, 0)::numeric AS budget,
+       COALESCE(cp.spent, 0)::numeric AS spent,
+       COALESCE(SUM(i.total_amount), 0)::numeric AS total_invoiced,
+       COALESCE(SUM(i.amount_paid), 0)::numeric AS total_collected,
+       COALESCE(SUM(i.amount_paid), 0)::numeric - COALESCE(cp.spent, 0)::numeric AS profit
+     FROM client_schema.client_projects cp
+     LEFT JOIN client_schema.clients cl ON cp.client_id = cl.id
+     LEFT JOIN billing_schema.invoices i ON i.project_id = cp.id AND i.deleted_at IS NULL
+     GROUP BY cp.id, cp.title, cl.company_name, cp.budget, cp.spent
+     LIMIT 50`
   );
   return success(res, rows);
 }));
 
 router.get('/reports/aging', authenticate, requirePermission('invoice.read'), asyncHandler(async (req, res) => {
-  const { rows } = await query(`SELECT * FROM finance_schema.v_receivables_aging`);
-  return success(res, rows);
+  const { rows } = await query(
+    `SELECT
+       COALESCE(SUM(amount_due) FILTER (WHERE due_date >= CURRENT_DATE), 0)::numeric AS current,
+       COALESCE(SUM(amount_due) FILTER (WHERE due_date < CURRENT_DATE AND due_date >= CURRENT_DATE - 30), 0)::numeric AS days_1_30,
+       COALESCE(SUM(amount_due) FILTER (WHERE due_date < CURRENT_DATE - 30 AND due_date >= CURRENT_DATE - 60), 0)::numeric AS days_31_60,
+       COALESCE(SUM(amount_due) FILTER (WHERE due_date < CURRENT_DATE - 60 AND due_date >= CURRENT_DATE - 90), 0)::numeric AS days_61_90,
+       COALESCE(SUM(amount_due) FILTER (WHERE due_date < CURRENT_DATE - 90), 0)::numeric AS days_90_plus,
+       COALESCE(SUM(amount_due), 0)::numeric AS total_outstanding
+     FROM billing_schema.invoices
+     WHERE deleted_at IS NULL AND status NOT IN ('paid', 'cancelled')`
+  );
+  return success(res, rows[0] || {});
 }));
 
 router.get('/reports/cash-flow', authenticate, requirePermission('finance.read'), asyncHandler(async (req, res) => {
-  const { from_date, to_date } = req.query;
   const { rows } = await query(
-    `SELECT * FROM finance_schema.v_cash_flow_statement
-      WHERE ($1::date IS NULL OR period >= $1)
-        AND ($2::date IS NULL OR period <= $2)
-      ORDER BY period DESC`,
-    [from_date || null, to_date || null]
+    `SELECT
+       TO_CHAR(paid_at, 'YYYY-MM') AS month,
+       COALESCE(SUM(amount), 0)::numeric AS inflow,
+       0::numeric AS outflow,
+       COALESCE(SUM(amount), 0)::numeric AS net_cash_flow
+     FROM billing_schema.payments
+     WHERE status = 'completed' AND paid_at >= CURRENT_DATE - INTERVAL '12 months'
+     GROUP BY TO_CHAR(paid_at, 'YYYY-MM')
+     ORDER BY month ASC`
   );
   return success(res, rows);
 }));

@@ -50,13 +50,23 @@ export default function TasksPage() {
 
   const createMutation = useMutation({
     mutationFn: () => tasksApi.create(form),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['all-tasks'] }); setShowCreate(false); toast.success('Task created'); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['all-tasks'] });
+      qc.invalidateQueries({ queryKey: ['projects'] });
+      qc.invalidateQueries({ queryKey: ['projects-summary'] });
+      setShowCreate(false);
+      toast.success('Task created');
+    },
     onError: (e: any) => toast.error(extractApiError(e)),
   });
 
   const updateStatusMutation = useMutation({
     mutationFn: ({ id, status }: any) => tasksApi.update(id, { status }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['all-tasks'] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['all-tasks'] });
+      qc.invalidateQueries({ queryKey: ['projects'] });
+      qc.invalidateQueries({ queryKey: ['projects-summary'] });
+    },
   });
 
   const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));

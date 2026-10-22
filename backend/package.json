@@ -6,7 +6,17 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "db:migrate": "node src/utils/migrate.js"
+    "db:migrate": "node src/utils/migrate.js",
+    "db:seed": "node src/scripts/seed-dashboard-data.js",
+    "db:seed:reset": "node src/scripts/seed-dashboard-data.js --reset",
+    "test:rbac": "node src/tests/rbac-suite.test.js",
+    "test:dashboard": "node src/tests/dashboard-analytics.test.js",
+    "test:crm": "node src/tests/crm-clients.test.js",
+    "test:work": "node src/tests/work-management.test.js",
+    "test:enterprise": "node src/tests/enterprise-modules.test.js",
+    "test:admin": "node src/tests/admin-tools.test.js",
+    "test:all": "npm run test:rbac && npm run test:dashboard && npm run test:crm && npm run test:work && npm run test:enterprise && npm run test:admin",
+    "bootstrap:superadmin": "node src/scripts/bootstrap-superadmin.js"
   },
   "dependencies": {
     "express": "^4.18.2",

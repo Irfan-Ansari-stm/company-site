@@ -87,11 +87,13 @@ export default function TicketDetailPage({ params }: { params: Promise<{ id: str
               placeholder="Type your reply..."
             />
             <div className="flex items-center justify-between mt-3">
-              <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
-                <input type="checkbox" checked={isInternal} onChange={e => setIsInternal(e.target.checked)} className="rounded" />
-                <Lock className="w-3.5 h-3.5" />
-                Internal note (not visible to client)
-              </label>
+              {user?.role !== 'client' ? (
+                <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                  <input type="checkbox" checked={isInternal} onChange={e => setIsInternal(e.target.checked)} className="rounded" />
+                  <Lock className="w-3.5 h-3.5" />
+                  Internal note (not visible to client)
+                </label>
+              ) : <div />}
               <Button
                 size="sm"
                 loading={replyMutation.isPending}
