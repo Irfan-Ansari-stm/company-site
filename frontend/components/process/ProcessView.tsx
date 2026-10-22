@@ -276,32 +276,32 @@ export default function ProcessView() {
   const selectedPhase = processPhases[activeStage];
 
   return (
-    <div className="relative isolate w-full bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="relative isolate w-full bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* =========================================================================
           SECTION A: PROCESS HERO
           ========================================================================= */}
-      <section className="relative isolate overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-20 pb-20 sm:pt-28 sm:pb-28">
+      <section className="relative isolate overflow-hidden border-b border-slate-200 bg-gradient-to-b from-slate-100 via-white to-slate-50 pt-20 pb-20 dark:border-slate-800/80 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 sm:pt-28 sm:pb-28">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(14,165,233,0.18),transparent)]" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1e293b0d_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0d_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-300 uppercase shadow-inner shadow-cyan-500/20">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-800 uppercase shadow-inner shadow-cyan-500/10 dark:bg-cyan-950/40 dark:text-cyan-300 dark:shadow-cyan-500/20">
+              <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
               <span>Predictable Engineering Execution &amp; SLA Governance</span>
             </div>
 
             {/* Headline */}
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl sm:leading-tight">
+            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-tight dark:text-white">
               From Architectural Scope to Production Cutover{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400">
                 With Zero Surprises
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-6 text-lg leading-8 text-slate-300 sm:text-xl">
+            <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-300">
               We operate on transparent bi-weekly sprints, automated CI/CD deployments, and measurable acceptance criteria. Every milestone is demoed on working staging environments before production cutover.
             </p>
 
@@ -316,7 +316,7 @@ export default function ProcessView() {
               </a>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur transition hover:border-slate-500 hover:bg-slate-800"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:backdrop-blur dark:hover:border-slate-500 dark:hover:bg-slate-800"
               >
                 Explore 6 Core Services
               </Link>
@@ -324,7 +324,7 @@ export default function ProcessView() {
           </div>
 
           {/* Stats Bar */}
-          <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-800/80 pt-10 sm:grid-cols-4 sm:gap-6">
+          <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-200 pt-10 dark:border-slate-800/80 sm:grid-cols-4 sm:gap-6">
             {[
               { label: 'Discovery to POC', value: '14 Days', sub: 'Interactive functional core' },
               { label: 'Sprint Review Cadence', value: 'Bi-Weekly', sub: 'Working staging demos' },
@@ -333,11 +333,11 @@ export default function ProcessView() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="group rounded-2xl border border-slate-800/60 bg-slate-900/40 p-4 text-center backdrop-blur transition hover:border-cyan-500/40 hover:bg-slate-900/80"
+                className="group rounded-2xl border border-slate-200 bg-white/80 p-4 text-center shadow-sm backdrop-blur transition hover:border-cyan-500/40 hover:bg-white dark:border-slate-800/60 dark:bg-slate-900/40 dark:shadow-none dark:hover:bg-slate-900/80"
               >
-                <div className="text-2xl font-black text-cyan-400 sm:text-3xl">{stat.value}</div>
-                <div className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-200">{stat.label}</div>
-                <div className="mt-0.5 text-xs text-slate-500">{stat.sub}</div>
+                <div className="text-2xl font-black text-cyan-600 sm:text-3xl dark:text-cyan-400">{stat.value}</div>
+                <div className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">{stat.label}</div>
+                <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{stat.sub}</div>
               </div>
             ))}
           </div>
@@ -347,16 +347,16 @@ export default function ProcessView() {
       {/* =========================================================================
           SECTION B: STAGE OVERVIEW STEPPER
           ========================================================================= */}
-      <section className="relative border-b border-slate-800/80 bg-slate-900/30 py-20">
+      <section className="relative border-b border-slate-200 bg-slate-100/50 py-20 dark:border-slate-800/80 dark:bg-slate-900/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+            <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
               The 6-Phase Lifecycle
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
               Engineered for Speed, Precision &amp; Accountability
             </h2>
-            <p className="mt-3 text-sm text-slate-400">
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
               Click any stage below to inspect deliverables, verification gates, and tooling.
             </p>
           </div>
@@ -373,30 +373,30 @@ export default function ProcessView() {
                   onClick={() => setActiveStage(idx)}
                   className={`group relative flex flex-col justify-between rounded-2xl border p-5 text-left transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? 'border-cyan-500 bg-slate-900 shadow-xl shadow-cyan-500/10 scale-102 ring-1 ring-cyan-500'
-                      : 'border-slate-800 bg-slate-950/60 hover:border-slate-700 hover:bg-slate-900/50'
+                      ? 'border-cyan-500 bg-white shadow-xl shadow-cyan-500/10 scale-102 ring-1 ring-cyan-500 dark:bg-slate-900'
+                      : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950/60 dark:hover:border-slate-700 dark:hover:bg-slate-900/50'
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-sm font-black text-cyan-400">
+                      <span className="font-mono text-sm font-black text-cyan-600 dark:text-cyan-400">
                         {phase.step}
                       </span>
-                      <span className="rounded bg-slate-800/80 px-2 py-0.5 font-mono text-[10px] text-slate-300">
+                      <span className="rounded bg-slate-100 px-2 py-0.5 font-mono text-[10px] text-slate-700 dark:bg-slate-800/80 dark:text-slate-300">
                         {phase.duration}
                       </span>
                     </div>
 
-                    <div className="mt-4 flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-cyan-400 border border-slate-800">
+                    <div className="mt-4 flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-cyan-700 border border-slate-200 dark:bg-slate-900 dark:text-cyan-400 dark:border-slate-800">
                       <Icon className="h-4 w-4" />
                     </div>
 
-                    <h3 className="mt-3 text-sm font-bold text-white group-hover:text-cyan-300 transition">
+                    <h3 className="mt-3 text-sm font-bold text-slate-900 group-hover:text-cyan-600 transition dark:text-white dark:group-hover:text-cyan-300">
                       {phase.name}
                     </h3>
                   </div>
 
-                  <div className="mt-4 border-t border-slate-800/80 pt-3 text-[11px] text-slate-400 line-clamp-2">
+                  <div className="mt-4 border-t border-slate-100 pt-3 text-[11px] text-slate-500 line-clamp-2 dark:border-slate-800/80 dark:text-slate-400">
                     {phase.tagline}
                   </div>
                 </button>
@@ -411,21 +411,21 @@ export default function ProcessView() {
           ========================================================================= */}
       <section className="relative py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 p-8 shadow-2xl lg:p-12">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between border-b border-slate-800 pb-8">
+          <div className="overflow-hidden rounded-3xl border border-cyan-500/30 bg-white p-8 shadow-2xl dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 lg:p-12">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 pb-8 dark:border-slate-800">
               <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-cyan-950/80 font-mono text-2xl font-black text-cyan-400 border border-cyan-500/30">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-cyan-100 font-mono text-2xl font-black text-cyan-700 border border-cyan-300 dark:bg-cyan-950/80 dark:text-cyan-400 dark:border-cyan-500/30">
                   {selectedPhase.step}
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-cyan-400">
+                  <div className="flex items-center gap-2 text-xs font-mono text-cyan-700 dark:text-cyan-400">
                     <span>STAGE {selectedPhase.step} OF 06</span>
                     <span>•</span>
-                    <span className="rounded bg-slate-800 px-2 py-0.5 text-slate-300">
+                    <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                       Timeline: {selectedPhase.duration}
                     </span>
                   </div>
-                  <h2 className="mt-1 text-2xl font-extrabold text-white sm:text-3xl">
+                  <h2 className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">
                     {selectedPhase.name}
                   </h2>
                 </div>
@@ -437,7 +437,7 @@ export default function ProcessView() {
                   type="button"
                   disabled={activeStage === 0}
                   onClick={() => setActiveStage((prev) => Math.max(0, prev - 1))}
-                  className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700 disabled:opacity-40 cursor-pointer"
+                  className="rounded-xl border border-slate-300 bg-slate-100 px-4 py-2 text-xs font-semibold text-slate-800 transition hover:bg-slate-200 disabled:opacity-40 cursor-pointer dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
                 >
                   &larr; Previous Stage
                 </button>
@@ -457,24 +457,24 @@ export default function ProcessView() {
               {/* Left Detail Column */}
               <div className="lg:col-span-7 space-y-6">
                 <div>
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-cyan-400">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
                     Phase Methodology &amp; Execution
                   </h3>
-                  <p className="mt-3 text-base leading-relaxed text-slate-300">
+                  <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
                     {selectedPhase.description}
                   </p>
                 </div>
 
                 {/* Deliverables Checklist */}
-                <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-6">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-                    <FileCheck className="h-4 w-4 text-emerald-400" />
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950/80">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                    <FileCheck className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                     Concrete Deliverables Generated
                   </h4>
                   <ul className="mt-4 space-y-3">
                     {selectedPhase.deliverables.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500 dark:text-emerald-400 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -485,18 +485,18 @@ export default function ProcessView() {
               {/* Right Gate & Tooling Column */}
               <div className="lg:col-span-5 space-y-6">
                 {/* Client Gates */}
-                <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-6">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-                    <Lock className="h-4 w-4 text-amber-400" />
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950/80">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                    <Lock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                     Client Review Gates &amp; Sign-Offs
                   </h4>
-                  <p className="mt-1 text-[11px] text-slate-400">
+                  <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
                     What decisions and approvals happen before advancing to the next phase:
                   </p>
                   <ul className="mt-4 space-y-3">
                     {selectedPhase.clientGates.map((gate, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-950 text-amber-400 font-mono text-[9px] font-bold border border-amber-500/30">
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 font-mono text-[9px] font-bold border border-amber-300 dark:bg-amber-950 dark:text-amber-400 dark:border-amber-500/30">
                           {idx + 1}
                         </div>
                         <span>{gate}</span>
@@ -506,16 +506,16 @@ export default function ProcessView() {
                 </div>
 
                 {/* Tooling Tags */}
-                <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-6">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-                    <Terminal className="h-4 w-4 text-cyan-400" />
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950/80">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                    <Terminal className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                     Production Tools Used in This Phase
                   </h4>
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {selectedPhase.tooling.map((tool, idx) => (
                       <span
                         key={idx}
-                        className="rounded-md border border-slate-800 bg-slate-900 px-2.5 py-1 font-mono text-[11px] text-cyan-300"
+                        className="rounded-md border border-slate-200 bg-white px-2.5 py-1 font-mono text-[11px] text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-cyan-300"
                       >
                         {tool}
                       </span>
@@ -531,16 +531,16 @@ export default function ProcessView() {
       {/* =========================================================================
           SECTION E: COLLABORATION & GOVERNANCE
           ========================================================================= */}
-      <section className="relative border-y border-slate-800/80 bg-slate-900/40 py-24">
+      <section className="relative border-y border-slate-200 bg-slate-100/60 py-24 dark:border-slate-800/80 dark:bg-slate-900/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest uppercase text-teal-400">
+            <span className="text-xs font-bold tracking-widest uppercase text-teal-600 dark:text-teal-400">
               Communication Governance
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
               Transparent Collaboration Model
             </h2>
-            <p className="mt-3 text-base text-slate-400">
+            <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
               We operate with radical visibility. You always know what is being built, which milestone is next, and how velocity is tracking.
             </p>
           </div>
@@ -551,13 +551,13 @@ export default function ProcessView() {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 backdrop-blur transition hover:border-slate-700 hover:bg-slate-900/60"
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-950/70 dark:shadow-none dark:hover:border-slate-700 dark:hover:bg-slate-900/60"
                 >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500/10 text-teal-400">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-5 text-lg font-bold text-white">{pillar.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">{pillar.desc}</p>
+                  <h3 className="mt-5 text-lg font-bold text-slate-900 dark:text-white">{pillar.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{pillar.desc}</p>
                 </div>
               );
             })}
@@ -571,13 +571,13 @@ export default function ProcessView() {
       <section className="relative py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+            <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
               Production Toolchain
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
               Battle-Tested Technologies
             </h2>
-            <p className="mt-3 text-base text-slate-400">
+            <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
               We exclusively use proven, high-performance tools that guarantee maintainability, high concurrency, and long-term stability.
             </p>
           </div>
@@ -611,16 +611,16 @@ export default function ProcessView() {
             ].map((stack, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur transition hover:border-slate-700"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700"
               >
-                <div className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                <div className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
                   {stack.category}
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {stack.items.map((item, iIdx) => (
                     <span
                       key={iIdx}
-                      className="rounded-lg border border-slate-800 bg-slate-950 px-2.5 py-1 font-mono text-xs text-slate-300"
+                      className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 font-mono text-xs text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
                     >
                       {item}
                     </span>
@@ -635,13 +635,13 @@ export default function ProcessView() {
       {/* =========================================================================
           SECTION G: QUALITY STANDARDS
           ========================================================================= */}
-      <section className="relative border-t border-slate-800/80 bg-slate-900/30 py-24">
+      <section className="relative border-t border-slate-200 bg-slate-100/50 py-24 dark:border-slate-800/80 dark:bg-slate-900/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest uppercase text-teal-400">
+            <span className="text-xs font-bold tracking-widest uppercase text-teal-600 dark:text-teal-400">
               Quality Assurances
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
               Strict Engineering Quality Benchmarks
             </h2>
           </div>
@@ -667,13 +667,13 @@ export default function ProcessView() {
             ].map((benchmark, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 backdrop-blur"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-950/70"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500/10 text-teal-400">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
                   <Check className="h-4 w-4" />
                 </div>
-                <h4 className="mt-4 text-base font-bold text-white">{benchmark.title}</h4>
-                <p className="mt-2 text-xs leading-5 text-slate-400">{benchmark.desc}</p>
+                <h4 className="mt-4 text-base font-bold text-slate-900 dark:text-white">{benchmark.title}</h4>
+                <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">{benchmark.desc}</p>
               </div>
             ))}
           </div>
@@ -683,16 +683,16 @@ export default function ProcessView() {
       {/* =========================================================================
           SECTION H: ACCESSIBLE FAQ ACCORDION
           ========================================================================= */}
-      <section className="relative border-t border-slate-800/80 py-24">
+      <section className="relative border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+            <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
               Clarity &amp; Questions
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
               Process &amp; Execution FAQs
             </h2>
-            <p className="mt-3 text-sm text-slate-400">
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
               Detailed answers about sprint cadence, requirement updates, and post-launch guarantees.
             </p>
           </div>
@@ -703,20 +703,20 @@ export default function ProcessView() {
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/70 transition hover:border-slate-700"
+                  className="rounded-2xl border border-slate-200 bg-white transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-slate-700"
                 >
                   <button
                     type="button"
                     onClick={() => setExpandedFaq(isOpen ? null : index)}
                     className="flex w-full items-center justify-between p-6 text-left cursor-pointer"
                   >
-                    <span className="text-base font-bold text-slate-200">{faq.q}</span>
-                    <span className="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-slate-400">
+                    <span className="text-base font-bold text-slate-800 dark:text-slate-200">{faq.q}</span>
+                    <span className="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
                       {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="border-t border-slate-800/60 px-6 pb-6 pt-4 text-sm leading-6 text-slate-400">
+                    <div className="border-t border-slate-100 px-6 pb-6 pt-4 text-sm leading-6 text-slate-600 dark:border-slate-800/60 dark:text-slate-400">
                       {faq.a}
                     </div>
                   )}
@@ -730,18 +730,18 @@ export default function ProcessView() {
       {/* =========================================================================
           SECTION I: FINAL CONVERSION & CRM INTAKE FORM
           ========================================================================= */}
-      <section id="process-intake" className="relative scroll-mt-20 border-t border-slate-800/80 py-24">
+      <section id="process-intake" className="relative scroll-mt-20 border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-8 shadow-2xl sm:p-12">
+          <div className="rounded-3xl border border-cyan-500/30 bg-white p-8 shadow-2xl dark:bg-gradient-to-b dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 sm:p-12">
             <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 border border-cyan-500/20">
-                <Sparkles className="h-3 w-3 text-cyan-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-100/60 px-3 py-1 text-xs font-semibold text-cyan-800 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
+                <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
                 Technical Scoping Initiation
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
+              <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
                 Ready to Plan Your Engineering Sprint?
               </h2>
-              <p className="mt-3 text-sm text-slate-300">
+              <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
                 Submit your project goals. A Principal Architect will review your technical constraints and schedule an architectural roadmap consultation within 24 hours.
               </p>
             </div>
@@ -755,70 +755,75 @@ export default function ProcessView() {
             >
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    First Name <span className="text-cyan-400">*</span>
+                  <label htmlFor="process-first-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    First Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
+                    id="process-first-name"
                     type="text"
                     required
                     value={form.first_name}
                     onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                     placeholder="Michael"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Last Name <span className="text-cyan-400">*</span>
+                  <label htmlFor="process-last-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Last Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
+                    id="process-last-name"
                     type="text"
                     required
                     value={form.last_name}
                     onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                     placeholder="Chang"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Work Email <span className="text-cyan-400">*</span>
+                  <label htmlFor="process-email" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Work Email <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
+                    id="process-email"
                     type="email"
                     required
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="m.chang@enterprise.com"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label htmlFor="process-company" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Company Name
                   </label>
                   <input
+                    id="process-company"
                     type="text"
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="OmniCorp Logistics"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label htmlFor="process-discipline" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Target Engineering Discipline
                   </label>
                   <select
+                    id="process-discipline"
                     value={form.service_discipline}
                     onChange={(e) => setForm({ ...form, service_discipline: e.target.value })}
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-200 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
                     <option value="Enterprise Full-Stack Architecture">Custom Software Development (Next.js / Node.js)</option>
                     <option value="Cloud Infrastructure & DevOps">Cloud Infrastructure &amp; DevOps (AWS / Kubernetes)</option>
@@ -830,13 +835,14 @@ export default function ProcessView() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label htmlFor="process-timeline" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Target Timeline
                   </label>
                   <select
+                    id="process-timeline"
                     value={form.target_timeline}
                     onChange={(e) => setForm({ ...form, target_timeline: e.target.value })}
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-200 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
                     <option value="immediate">Immediate (Ready to scope this week)</option>
                     <option value="1-2 months">1–2 Months (Planning phase)</option>
@@ -846,22 +852,23 @@ export default function ProcessView() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300">
-                  Project Scope &amp; Target Outcomes <span className="text-cyan-400">*</span>
+                <label htmlFor="process-requirements" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  Project Scope &amp; Target Outcomes <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
+                  id="process-requirements"
                   rows={4}
                   required
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
                   placeholder="Outline your application requirements, expected traffic load, current stack, and any compliance constraints..."
-                  className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
 
               <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <Lock className="h-4 w-4 text-emerald-400" />
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Lock className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                   <span>Strict NDA confidential review. Zero vendor lock-in.</span>
                 </div>
 
@@ -881,4 +888,5 @@ export default function ProcessView() {
     </div>
   );
 }
+
 

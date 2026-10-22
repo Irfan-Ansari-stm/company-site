@@ -147,59 +147,59 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
   const packages = service.packages || [];
 
   return (
-    <div className="relative isolate w-full bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="relative isolate w-full bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* =========================================================================
           HERO & BREADCRUMBS
           ========================================================================= */}
-      <section className="relative isolate overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+      <section className="relative isolate overflow-hidden border-b border-slate-200 bg-gradient-to-b from-slate-100 via-white to-slate-50 pt-16 pb-20 dark:border-slate-800/80 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 sm:pt-24 sm:pb-28">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_50%_at_50%_-20%,rgba(14,165,233,0.18),transparent)]" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1e293b0a_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
-          <nav className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-400">
-            <Link href="/" className="hover:text-slate-200">
+          <nav className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <Link href="/" className="hover:text-slate-900 dark:hover:text-slate-200">
               Home
             </Link>
             <span>/</span>
-            <Link href="/services" className="hover:text-slate-200">
+            <Link href="/services" className="hover:text-slate-900 dark:hover:text-slate-200">
               Services
             </Link>
             <span>/</span>
-            <span className="text-cyan-400">{service.title || service.name}</span>
+            <span className="text-cyan-600 dark:text-cyan-400">{service.title || service.name}</span>
           </nav>
 
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-8">
               {/* Category Pill */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-semibold tracking-wider text-cyan-300 uppercase">
-                <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-3.5 py-1 text-xs font-semibold tracking-wider text-cyan-800 uppercase dark:bg-cyan-950/40 dark:text-cyan-300">
+                <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
                 <span>{service.category_name || 'Engineering Discipline'}</span>
               </div>
 
               {/* Title & Tagline */}
-              <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-5xl sm:leading-tight">
+              <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl sm:leading-tight dark:text-white">
                 {service.title || service.name}
               </h1>
 
-              <p className="mt-4 text-lg font-medium text-slate-300">
+              <p className="mt-4 text-lg font-medium text-slate-700 dark:text-slate-300">
                 {service.tagline || 'Production-grade software architecture engineered for high concurrency and zero downtime.'}
               </p>
 
-              <p className="mt-4 text-sm leading-7 text-slate-400">
+              <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
                 {service.summary || service.description}
               </p>
 
               {/* Badges / Metrics */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/80 px-4 py-2 text-xs text-slate-300">
-                  <Clock className="h-4 w-4 text-cyan-400" />
+                <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2 text-xs text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-900/80 dark:text-slate-300">
+                  <Clock className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                   <span>
                     Estimated Delivery: <strong>{service.duration_min || 4}–{service.duration_max || 8} weeks</strong>
                   </span>
                 </div>
-                <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/80 px-4 py-2 text-xs text-slate-300">
-                  <Shield className="h-4 w-4 text-emerald-400" />
+                <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2 text-xs text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-900/80 dark:text-slate-300">
+                  <Shield className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                   <span>
                     Investment from: <strong>{formatCurrency(service.starting_price || service.base_price || 15000, service.currency || 'USD')}</strong>
                   </span>
@@ -216,7 +216,7 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                 </a>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-5 py-3.5 text-sm font-semibold text-slate-300 transition hover:bg-slate-800"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:bg-slate-800"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   All Services
@@ -226,37 +226,37 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
 
             {/* Quick Scope Card */}
             <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur">
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
                 <div className="flex items-center gap-2">
-                  <PackageCheck className="h-5 w-5 text-cyan-400" />
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">Engagement Guarantee</h3>
+                  <PackageCheck className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">Engagement Guarantee</h3>
                 </div>
-                <div className="mt-4 space-y-3 border-t border-slate-800/80 pt-4 text-xs text-slate-300">
+                <div className="mt-4 space-y-3 border-t border-slate-100 pt-4 text-xs text-slate-600 dark:border-slate-800/80 dark:text-slate-300">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
                     <span>100% intellectual property & code repository transfer</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
                     <span>60-day post-launch SLA bug warranty & performance monitoring</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
                     <span>Bi-weekly staging environment demos & automated CI/CD</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500 dark:text-emerald-400" />
                     <span>OWASP Top 10 penetration sweeps & threat modeling</span>
                   </div>
                 </div>
 
-                <div className="mt-6 border-t border-slate-800/80 pt-4">
-                  <div className="text-[11px] font-semibold uppercase text-slate-500">Core Technologies</div>
+                <div className="mt-6 border-t border-slate-100 pt-4 dark:border-slate-800/80">
+                  <div className="text-[11px] font-semibold uppercase text-slate-400">Core Technologies</div>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {techStack.map((tech, i) => (
                       <span
                         key={i}
-                        className="rounded-md border border-slate-800 bg-slate-950 px-2 py-1 font-mono text-[11px] text-cyan-300"
+                        className="rounded-md border border-slate-200 bg-slate-100 px-2 py-1 font-mono text-[11px] text-slate-800 dark:border-slate-800 dark:bg-slate-950 dark:text-cyan-300"
                       >
                         {tech}
                       </span>
@@ -277,9 +277,9 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Left: What We Deliver */}
             <div>
-              <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">Engineered Outcomes</span>
-              <h2 className="mt-2 text-2xl font-extrabold text-white sm:text-3xl">Comprehensive Deliverables</h2>
-              <p className="mt-2 text-sm text-slate-400">
+              <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Engineered Outcomes</span>
+              <h2 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">Comprehensive Deliverables</h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 Every project delivery is thoroughly vetted against enterprise acceptance criteria before handoff.
               </p>
 
@@ -288,10 +288,10 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                   deliveryItems.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3 rounded-xl border border-slate-800/80 bg-slate-900/40 p-4 transition hover:border-slate-700"
+                      className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-slate-300 dark:border-slate-800/80 dark:bg-slate-900/40 dark:hover:border-slate-700"
                     >
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-teal-400" />
-                      <span className="text-sm text-slate-200">{item}</span>
+                      <CheckCircle2 className="h-5 w-5 shrink-0 text-teal-600 dark:text-teal-400" />
+                      <span className="text-sm text-slate-800 dark:text-slate-200">{item}</span>
                     </div>
                   ))
                 ) : (
@@ -304,10 +304,10 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                   ].map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3 rounded-xl border border-slate-800/80 bg-slate-900/40 p-4"
+                      className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800/80 dark:bg-slate-900/40"
                     >
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-teal-400" />
-                      <span className="text-sm text-slate-200">{item}</span>
+                      <CheckCircle2 className="h-5 w-5 shrink-0 text-teal-600 dark:text-teal-400" />
+                      <span className="text-sm text-slate-800 dark:text-slate-200">{item}</span>
                     </div>
                   ))
                 )}
@@ -316,9 +316,9 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
 
             {/* Right: Technical Architecture Pillars */}
             <div>
-              <span className="text-xs font-bold tracking-widest text-teal-400 uppercase">Architecture Philosophy</span>
-              <h2 className="mt-2 text-2xl font-extrabold text-white sm:text-3xl">Built for Reliability & Speed</h2>
-              <p className="mt-2 text-sm text-slate-400">
+              <span className="text-xs font-bold tracking-widest text-teal-600 uppercase dark:text-teal-400">Architecture Philosophy</span>
+              <h2 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">Built for Reliability & Speed</h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 How our senior engineering teams approach this discipline to prevent technical debt.
               </p>
 
@@ -337,9 +337,9 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                     desc: 'All endpoints enforce token-based RBAC, input validation with strict zod schemas, parameter sanitization, and structured audit logs.',
                   },
                 ].map((pillar, pIdx) => (
-                  <div key={pIdx} className="rounded-xl border border-slate-800 bg-slate-950/70 p-5">
-                    <h4 className="text-base font-bold text-white">{pillar.title}</h4>
-                    <p className="mt-1.5 text-xs leading-6 text-slate-400">{pillar.desc}</p>
+                  <div key={pIdx} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950/70">
+                    <h4 className="text-base font-bold text-slate-900 dark:text-white">{pillar.title}</h4>
+                    <p className="mt-1.5 text-xs leading-6 text-slate-600 dark:text-slate-400">{pillar.desc}</p>
                   </div>
                 ))}
               </div>
@@ -352,12 +352,12 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
           PACKAGES & TIERS MATRIX
           ========================================================================= */}
       {packages.length > 0 && (
-        <section className="relative border-t border-slate-800/80 bg-slate-900/30 py-20">
+        <section className="relative border-t border-slate-200 bg-slate-100/50 py-20 dark:border-slate-800/80 dark:bg-slate-900/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">Available Packages</span>
-              <h2 className="mt-2 text-2xl font-extrabold text-white sm:text-3xl">Implementation Packages</h2>
-              <p className="mt-2 text-sm text-slate-400">
+              <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Available Packages</span>
+              <h2 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">Implementation Packages</h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 Choose the scope tier that aligns with your timeline and infrastructure objectives.
               </p>
             </div>
@@ -370,27 +370,27 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                     key={pkg.id || idx}
                     className={`flex flex-col justify-between rounded-2xl p-8 transition ${
                       isSelected
-                        ? 'border-2 border-cyan-500 bg-slate-900/90 shadow-xl shadow-cyan-500/10'
-                        : 'border border-slate-800 bg-slate-950/80 hover:border-slate-700'
+                        ? 'border-2 border-cyan-500 bg-white shadow-xl shadow-cyan-500/10 dark:bg-slate-900/90'
+                        : 'border border-slate-200 bg-white hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/80 dark:hover:border-slate-700'
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-bold text-white">{pkg.name}</h3>
-                        <span className="rounded bg-slate-800 px-2.5 py-1 text-xs font-mono text-cyan-400">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">{pkg.name}</h3>
+                        <span className="rounded bg-slate-100 px-2.5 py-1 text-xs font-mono text-cyan-700 dark:bg-slate-800 dark:text-cyan-400">
                           {pkg.delivery_days ? `${pkg.delivery_days} days` : '4-8 weeks'}
                         </span>
                       </div>
-                      <p className="mt-2 text-xs leading-5 text-slate-400">{pkg.description}</p>
+                      <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">{pkg.description}</p>
 
-                      <div className="mt-6 text-3xl font-extrabold text-white">
+                      <div className="mt-6 text-3xl font-extrabold text-slate-900 dark:text-white">
                         {formatCurrency(pkg.price || 25000, pkg.currency || 'USD')}
                       </div>
 
-                      <div className="mt-6 space-y-2.5 border-t border-slate-800/80 pt-6">
+                      <div className="mt-6 space-y-2.5 border-t border-slate-100 pt-6 dark:border-slate-800/80">
                         {(Array.isArray(pkg.features) ? pkg.features : []).map((feat: string, fIdx: number) => (
-                          <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                            <Check className="h-4 w-4 shrink-0 text-cyan-400" />
+                          <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+                            <Check className="h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400" />
                             <span>{feat}</span>
                           </div>
                         ))}
@@ -405,10 +405,10 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                           const el = document.getElementById('service-inquiry');
                           if (el) el.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className={`w-full rounded-xl py-3 text-center text-xs font-bold transition ${
+                        className={`w-full rounded-xl py-3 text-center text-xs font-bold transition cursor-pointer ${
                           isSelected
                             ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950'
-                            : 'border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
+                            : 'border border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'
                         }`}
                       >
                         {isSelected ? 'Selected Package' : 'Select This Package'}
@@ -426,12 +426,12 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
           PROCESS ROADMAP
           ========================================================================= */}
       {processSteps.length > 0 && (
-        <section className="relative border-t border-slate-800/80 py-20">
+        <section className="relative border-t border-slate-200 py-20 dark:border-slate-800/80">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="text-xs font-bold tracking-widest text-teal-400 uppercase">Milestone Roadmap</span>
-              <h2 className="mt-2 text-2xl font-extrabold text-white sm:text-3xl">Implementation Lifecycle</h2>
-              <p className="mt-2 text-sm text-slate-400">
+              <span className="text-xs font-bold tracking-widest text-teal-600 uppercase dark:text-teal-400">Milestone Roadmap</span>
+              <h2 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">Implementation Lifecycle</h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 Predictable milestones tailored specifically for this discipline.
               </p>
             </div>
@@ -440,14 +440,14 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
               {processSteps.map((step: any, sIdx: number) => (
                 <div
                   key={sIdx}
-                  className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur transition hover:border-slate-700"
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-950/60 font-mono text-sm font-black text-cyan-400 border border-cyan-500/30">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-100 font-mono text-sm font-black text-cyan-700 border border-cyan-300 dark:bg-cyan-950/60 dark:text-cyan-400 dark:border-cyan-500/30">
                     {String(sIdx + 1).padStart(2, '0')}
                   </div>
-                  <h4 className="mt-4 text-base font-bold text-white">{step.title}</h4>
-                  <div className="mt-1 text-xs font-semibold text-teal-400">{step.timeline || 'Sprint phase'}</div>
-                  <p className="mt-2 text-xs leading-5 text-slate-400">{step.desc || step.description}</p>
+                  <h4 className="mt-4 text-base font-bold text-slate-900 dark:text-white">{step.title}</h4>
+                  <div className="mt-1 text-xs font-semibold text-teal-600 dark:text-teal-400">{step.timeline || 'Sprint phase'}</div>
+                  <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">{step.desc || step.description}</p>
                 </div>
               ))}
             </div>
@@ -459,11 +459,11 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
           SERVICE FAQS
           ========================================================================= */}
       {faqItems.length > 0 && (
-        <section className="relative border-t border-slate-800/80 bg-slate-900/30 py-20">
+        <section className="relative border-t border-slate-200 bg-slate-100/40 py-20 dark:border-slate-800/80 dark:bg-slate-900/30">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">Questions & Answers</span>
-              <h2 className="mt-2 text-2xl font-extrabold text-white sm:text-3xl">Service Delivery FAQs</h2>
+              <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Questions & Answers</span>
+              <h2 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">Service Delivery FAQs</h2>
             </div>
 
             <div className="mt-10 space-y-4">
@@ -472,20 +472,20 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                 return (
                   <div
                     key={idx}
-                    className="rounded-2xl border border-slate-800 bg-slate-950/70 transition hover:border-slate-700"
+                    className="rounded-2xl border border-slate-200 bg-white transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-slate-700"
                   >
                     <button
                       type="button"
                       onClick={() => setExpandedFaq(isOpen ? null : idx)}
-                      className="flex w-full items-center justify-between p-5 text-left"
+                      className="flex w-full items-center justify-between p-5 text-left cursor-pointer"
                     >
-                      <span className="text-sm font-bold text-slate-200">{faq.q || faq.question}</span>
-                      <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-slate-400">
+                      <span className="text-sm font-bold text-slate-800 dark:text-slate-200">{faq.q || faq.question}</span>
+                      <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
                         {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                       </span>
                     </button>
                     {isOpen && (
-                      <div className="border-t border-slate-800/60 px-5 pb-5 pt-3 text-xs leading-6 text-slate-400">
+                      <div className="border-t border-slate-100 px-5 pb-5 pt-3 text-xs leading-6 text-slate-600 dark:border-slate-800/60 dark:text-slate-400">
                         {faq.a || faq.answer}
                       </div>
                     )}
@@ -500,18 +500,18 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
       {/* =========================================================================
           DIRECT SCOPING INQUIRY FORM
           ========================================================================= */}
-      <section id="service-inquiry" className="relative scroll-mt-20 border-t border-slate-800/80 py-24">
+      <section id="service-inquiry" className="relative scroll-mt-20 border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-8 shadow-2xl sm:p-12">
+          <div className="rounded-3xl border border-cyan-500/30 bg-white p-8 shadow-2xl dark:bg-gradient-to-b dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 sm:p-12">
             <div className="text-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 border border-cyan-500/20">
-                <Sparkles className="h-3 w-3 text-cyan-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-100/60 px-3 py-1 text-xs font-semibold text-cyan-800 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
+                <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
                 Technical Engagement Scope
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold text-white">
+              <h2 className="mt-4 text-3xl font-extrabold text-slate-900 dark:text-white">
                 Request Architecture Consultation
               </h2>
-              <p className="mt-2 text-sm text-slate-300">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                 Scoping: <strong>{service.title || service.name}</strong> ({selectedPackage})
               </p>
             </div>
@@ -525,8 +525,8 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
             >
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    First Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    First Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -534,12 +534,12 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                     value={form.first_name}
                     onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                     placeholder="Jane"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Last Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Last Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -547,15 +547,15 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                     value={form.last_name}
                     onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                     placeholder="Doe"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Work Email <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Work Email <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -563,11 +563,11 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="jane@company.com"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Company Name
                   </label>
                   <input
@@ -575,14 +575,14 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="Acme Enterprises"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300">
-                  Target Objectives & Key Functional Requirements <span className="text-cyan-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  Target Objectives & Key Functional Requirements <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
                   rows={4}
@@ -590,20 +590,20 @@ export default function ServiceDetailView({ slug }: ServiceDetailViewProps) {
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
                   placeholder="Describe your current tech stack, target throughput, expected timeline, and any third-party systems to integrate..."
-                  className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
 
               <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <Lock className="h-4 w-4 text-emerald-400" />
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Lock className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                   <span>Confidential NDA protected communication</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={leadMutation.isPending}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-bold text-slate-950 shadow-xl transition hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 sm:w-auto"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-bold text-slate-950 shadow-xl transition hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 cursor-pointer sm:w-auto"
                 >
                   <Send className="h-4 w-4" />
                   {leadMutation.isPending ? 'Sending...' : 'Submit Inquiry'}

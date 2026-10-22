@@ -166,32 +166,32 @@ export default function IndustriesView() {
   }, [allIndustries, selectedFilter, searchQuery]);
 
   return (
-    <div className="relative isolate w-full bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="relative isolate w-full bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* =========================================================================
           SECTION A: INDUSTRIES HERO
           ========================================================================= */}
-      <section className="relative isolate overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-20 pb-20 sm:pt-28 sm:pb-28">
+      <section className="relative isolate overflow-hidden border-b border-slate-200 bg-gradient-to-b from-slate-100 via-white to-slate-50 pt-20 pb-20 dark:border-slate-800/80 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 sm:pt-28 sm:pb-28">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(14,165,233,0.18),transparent)]" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1e293b0d_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0d_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-300 uppercase shadow-inner shadow-cyan-500/20">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-800 uppercase shadow-inner shadow-cyan-500/10 dark:bg-cyan-950/40 dark:text-cyan-300 dark:shadow-cyan-500/20">
+              <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
               <span>Mission-Critical Industry Architectures &amp; Regulatory Compliance</span>
             </div>
 
             {/* Headline */}
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl sm:leading-tight">
+            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-tight dark:text-white">
               Sector-Specific Platforms{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400">
                 Engineered for High Stakes &amp; Zero Failure
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-6 text-lg leading-8 text-slate-300 sm:text-xl">
+            <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-300">
               We do not apply generic templates. From PCI-DSS financial settlement engines and HIPAA-isolated telehealth portals to real-time IoT fleet telemetry and private RAG legal intelligence—every architecture is shaped around the regulatory and operational realities of your vertical.
             </p>
 
@@ -206,7 +206,7 @@ export default function IndustriesView() {
               </a>
               <a
                 href="#industry-inquiry"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur transition hover:border-slate-500 hover:bg-slate-800"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:backdrop-blur dark:hover:border-slate-500 dark:hover:bg-slate-800"
               >
                 Scope Your Industry Architecture
               </a>
@@ -214,7 +214,7 @@ export default function IndustriesView() {
           </div>
 
           {/* Stats Bar */}
-          <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-800/80 pt-10 sm:grid-cols-4 sm:gap-6">
+          <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-200 pt-10 dark:border-slate-800/80 sm:grid-cols-4 sm:gap-6">
             {[
               { label: 'Daily FinTech Volume', value: '$250M+', sub: 'Zero reconciliation discrepancies' },
               { label: 'Daily IoT Telemetry Pings', value: '50M+', sub: 'Real-time GPS vehicle events' },
@@ -223,11 +223,11 @@ export default function IndustriesView() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="group rounded-2xl border border-slate-800/60 bg-slate-900/40 p-4 text-center backdrop-blur transition hover:border-cyan-500/40 hover:bg-slate-900/80"
+                className="group rounded-2xl border border-slate-200 bg-white/80 p-4 text-center shadow-sm backdrop-blur transition hover:border-cyan-500/40 hover:bg-white dark:border-slate-800/60 dark:bg-slate-900/40 dark:shadow-none dark:hover:bg-slate-900/80"
               >
-                <div className="text-2xl font-black text-cyan-400 sm:text-3xl">{stat.value}</div>
-                <div className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-200">{stat.label}</div>
-                <div className="mt-0.5 text-xs text-slate-500">{stat.sub}</div>
+                <div className="text-2xl font-black text-cyan-600 sm:text-3xl dark:text-cyan-400">{stat.value}</div>
+                <div className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">{stat.label}</div>
+                <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{stat.sub}</div>
               </div>
             ))}
           </div>
@@ -237,16 +237,16 @@ export default function IndustriesView() {
       {/* =========================================================================
           SECTION B: CROSS-INDUSTRY ENGINEERING PILLARS
           ========================================================================= */}
-      <section className="relative border-b border-slate-800/80 bg-slate-900/30 py-20">
+      <section className="relative border-b border-slate-200 bg-slate-100/50 py-20 dark:border-slate-800/80 dark:bg-slate-900/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+            <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
               Universal Engineering Standards
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
               Architectural Pillars Across Every Sector
             </h2>
-            <p className="mt-3 text-sm text-slate-400">
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
               Regardless of the vertical, every enterprise platform is built upon four non-negotiable architectural foundations.
             </p>
           </div>
@@ -257,18 +257,18 @@ export default function IndustriesView() {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 backdrop-blur transition hover:border-slate-700 hover:bg-slate-900/60"
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-950/70 dark:shadow-none dark:hover:border-slate-700 dark:hover:bg-slate-900/60"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-500/20">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700 border border-cyan-300 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/20">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <span className="rounded-full bg-slate-800/80 px-2.5 py-0.5 text-[10px] font-semibold text-slate-300">
+                    <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold text-slate-700 dark:bg-slate-800/80 dark:text-slate-300">
                       {pillar.badge}
                     </span>
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-white">{pillar.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">{pillar.description}</p>
+                  <h3 className="mt-5 text-lg font-bold text-slate-900 dark:text-white">{pillar.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{pillar.description}</p>
                 </div>
               );
             })}
@@ -282,15 +282,15 @@ export default function IndustriesView() {
       <section id="industries-catalog" className="relative scroll-mt-20 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header & Search */}
-          <div className="flex flex-col items-start justify-between gap-6 border-b border-slate-800 pb-8 md:flex-row md:items-end">
+          <div className="flex flex-col items-start justify-between gap-6 border-b border-slate-200 pb-8 dark:border-slate-800 md:flex-row md:items-end">
             <div>
-              <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+              <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
                 Industry Solutions
               </span>
-              <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+              <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
                 Dedicated Vertical Practices
               </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
                 Explore our sector practices. Each solution includes domain compliance frameworks, battle-tested data topologies, and tailored deliverables.
               </p>
             </div>
@@ -303,7 +303,7 @@ export default function IndustriesView() {
                 placeholder="Search by sector, compliance, challenge..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl border border-slate-700 bg-slate-900/80 py-2.5 pl-10 pr-4 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                className="w-full rounded-xl border border-slate-300 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
               />
             </div>
           </div>
@@ -314,8 +314,8 @@ export default function IndustriesView() {
               onClick={() => setSelectedFilter('all')}
               className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 selectedFilter === 'all'
-                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
-                  : 'border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                  ? 'bg-cyan-600 text-white font-bold shadow-md shadow-cyan-600/20 dark:bg-cyan-500 dark:text-slate-950'
+                  : 'border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-slate-200'
               }`}
             >
               All Sectors ({allIndustries.length})
@@ -326,8 +326,8 @@ export default function IndustriesView() {
                 onClick={() => setSelectedFilter(ind.slug || 'all')}
                 className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
                   selectedFilter === ind.slug
-                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
-                    : 'border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                    ? 'bg-cyan-600 text-white font-bold shadow-md shadow-cyan-600/20 dark:bg-cyan-500 dark:text-slate-950'
+                    : 'border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-slate-200'
                 }`}
               >
                 {ind.name.split(' ')[0]}
@@ -357,16 +357,16 @@ export default function IndustriesView() {
           </div>
 
           {filteredIndustries.length === 0 && (
-            <div className="mt-12 rounded-2xl border border-dashed border-slate-800 p-12 text-center">
-              <Search className="mx-auto h-10 w-10 text-slate-600" />
-              <h3 className="mt-4 text-base font-semibold text-slate-300">No matching industries found</h3>
+            <div className="mt-12 rounded-2xl border border-dashed border-slate-300 p-12 text-center dark:border-slate-800">
+              <Search className="mx-auto h-10 w-10 text-slate-400 dark:text-slate-600" />
+              <h3 className="mt-4 text-base font-semibold text-slate-800 dark:text-slate-300">No matching industries found</h3>
               <p className="mt-1 text-sm text-slate-500">Try adjusting your search query or reset the filter.</p>
               <button
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedFilter('all');
                 }}
-                className="mt-4 rounded-lg bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700 cursor-pointer"
+                className="mt-4 rounded-lg bg-slate-200 px-4 py-2 text-xs font-semibold text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 cursor-pointer"
               >
                 Reset Filters
               </button>
@@ -378,20 +378,20 @@ export default function IndustriesView() {
       {/* =========================================================================
           SECTION D: CROSS-INDUSTRY CASE STUDIES MATRIX
           ========================================================================= */}
-      <section className="relative border-t border-slate-800/80 bg-slate-900/30 py-24">
+      <section className="relative border-t border-slate-200 bg-slate-100/50 py-24 dark:border-slate-800/80 dark:bg-slate-900/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-800 pb-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6 dark:border-slate-800">
             <div>
-              <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+              <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
                 Verified Deployments
               </span>
-              <h2 className="mt-2 text-3xl font-extrabold text-white">
+              <h2 className="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white">
                 Proven Track Record Across Sectors
               </h2>
             </div>
             <Link
               href="/work"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
             >
               View All 6 Case Studies
               <ArrowRight className="h-4 w-4" />
@@ -445,27 +445,27 @@ export default function IndustriesView() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/80 p-6 backdrop-blur transition hover:border-cyan-500/40 hover:bg-slate-900/60"
+                className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-cyan-500/40 hover:shadow-md dark:border-slate-800 dark:bg-slate-950/80 dark:shadow-none dark:hover:bg-slate-900/60"
               >
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
                     {item.sector}
                   </div>
-                  <h4 className="mt-2 text-base font-bold text-white group-hover:text-cyan-300 transition">
+                  <h4 className="mt-2 text-base font-bold text-slate-900 group-hover:text-cyan-600 transition dark:text-white dark:group-hover:text-cyan-300">
                     {item.title}
                   </h4>
-                  <div className="mt-2 text-xs text-slate-400">
+                  <div className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                     Client: {item.client}
                   </div>
                 </div>
 
-                <div className="mt-6 border-t border-slate-800/80 pt-4 flex items-center justify-between">
-                  <span className="font-mono text-xs font-semibold text-emerald-400">
+                <div className="mt-6 border-t border-slate-100 pt-4 flex items-center justify-between dark:border-slate-800/80">
+                  <span className="font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                     {item.metric}
                   </span>
                   <Link
                     href={`/work/${item.slug}`}
-                    className="text-xs font-bold text-cyan-400 group-hover:underline"
+                    className="text-xs font-bold text-cyan-600 group-hover:underline dark:text-cyan-400"
                   >
                     Read Study &rarr;
                   </Link>
@@ -479,16 +479,16 @@ export default function IndustriesView() {
       {/* =========================================================================
           SECTION E: INDUSTRY FAQS
           ========================================================================= */}
-      <section className="relative border-t border-slate-800/80 py-24">
+      <section className="relative border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+            <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
               Clear Answers
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
               Industry Architecture FAQs
             </h2>
-            <p className="mt-3 text-sm text-slate-400">
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
               Key questions about compliance audits, data isolation, and legacy integrations.
             </p>
           </div>
@@ -499,20 +499,20 @@ export default function IndustriesView() {
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/70 transition hover:border-slate-700"
+                  className="rounded-2xl border border-slate-200 bg-white transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-slate-700"
                 >
                   <button
                     type="button"
                     onClick={() => setExpandedFaq(isOpen ? null : index)}
                     className="flex w-full items-center justify-between p-6 text-left cursor-pointer"
                   >
-                    <span className="text-base font-bold text-slate-200">{faq.q}</span>
-                    <span className="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-slate-400">
+                    <span className="text-base font-bold text-slate-800 dark:text-slate-200">{faq.q}</span>
+                    <span className="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
                       {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="border-t border-slate-800/60 px-6 pb-6 pt-4 text-sm leading-6 text-slate-400">
+                    <div className="border-t border-slate-100 px-6 pb-6 pt-4 text-sm leading-6 text-slate-600 dark:border-slate-800/60 dark:text-slate-400">
                       {faq.a}
                     </div>
                   )}
@@ -526,18 +526,18 @@ export default function IndustriesView() {
       {/* =========================================================================
           SECTION F: CONTEXTUAL INQUIRY FORM
           ========================================================================= */}
-      <section id="industry-inquiry" className="relative scroll-mt-20 border-t border-slate-800/80 py-24">
+      <section id="industry-inquiry" className="relative scroll-mt-20 border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-8 shadow-2xl sm:p-12">
+          <div className="rounded-3xl border border-cyan-500/30 bg-white p-8 shadow-2xl dark:bg-gradient-to-b dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 sm:p-12">
             <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 border border-cyan-500/20">
-                <Sparkles className="h-3 w-3 text-cyan-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-100/60 px-3 py-1 text-xs font-semibold text-cyan-800 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
+                <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
                 Industry Engineering Scoping
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
+              <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
                 Scope Your Vertical Architecture
               </h2>
-              <p className="mt-3 text-sm text-slate-300">
+              <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
                 Submit your domain requirements. A Principal Architect with deep experience in your industry will evaluate your compliance boundaries and outline a tailored roadmap within 24 hours.
               </p>
             </div>
@@ -551,8 +551,8 @@ export default function IndustriesView() {
             >
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    First Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    First Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -560,12 +560,12 @@ export default function IndustriesView() {
                     value={form.first_name}
                     onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                     placeholder="Sarah"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Last Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Last Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -573,15 +573,15 @@ export default function IndustriesView() {
                     value={form.last_name}
                     onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                     placeholder="Jenkins"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Work Email <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Work Email <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -589,11 +589,11 @@ export default function IndustriesView() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="sarah.jenkins@enterprise.com"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Company Name
                   </label>
                   <input
@@ -601,20 +601,20 @@ export default function IndustriesView() {
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="Vanguard Capital"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Industry Vertical
                   </label>
                   <select
                     value={form.industry_sector}
                     onChange={(e) => setForm({ ...form, industry_sector: e.target.value })}
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-200 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
                     {allIndustries.map((ind) => (
                       <option key={ind.slug} value={ind.name}>
@@ -626,13 +626,13 @@ export default function IndustriesView() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Target Timeline
                   </label>
                   <select
                     value={form.target_timeline}
                     onChange={(e) => setForm({ ...form, target_timeline: e.target.value })}
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-200 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
                     <option value="immediate">Immediate (&lt; 30 Days)</option>
                     <option value="1-2 months">1–2 Months (Active Planning)</option>
@@ -642,8 +642,8 @@ export default function IndustriesView() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300">
-                  Technical Objectives &amp; Compliance Constraints <span className="text-cyan-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  Technical Objectives &amp; Compliance Constraints <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
                   rows={4}
@@ -651,13 +651,13 @@ export default function IndustriesView() {
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
                   placeholder="Describe your current system, target scale, compliance requirements (e.g. HIPAA, PCI, SOC2), and existing legacy databases to integrate..."
-                  className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
 
               <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <Lock className="h-4 w-4 text-emerald-400" />
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Lock className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                   <span>Confidential NDA protected communication. 100% IP ownership.</span>
                 </div>
 

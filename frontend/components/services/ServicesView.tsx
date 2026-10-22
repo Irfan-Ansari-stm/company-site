@@ -298,7 +298,7 @@ export default function ServicesView() {
   }, [currentTier, couponResult]);
 
   return (
-    <div className="relative isolate w-full bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="relative isolate w-full bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* Quick View Modal */}
       <ServiceQuickModal
         service={quickViewService}
@@ -315,7 +315,7 @@ export default function ServicesView() {
       {/* =========================================================================
           SECTION A: SERVICES HERO
           ========================================================================= */}
-      <section className="relative isolate overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-20 pb-20 sm:pt-28 sm:pb-28">
+      <section className="relative isolate overflow-hidden border-b border-slate-200 bg-gradient-to-b from-slate-100 via-white to-slate-50 pt-20 pb-20 dark:border-slate-800/80 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 sm:pt-28 sm:pb-28">
         {/* Glow backdrop */}
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(14,165,233,0.18),rgba(255,255,255,0))]" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1e293b0d_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0d_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
@@ -323,21 +323,21 @@ export default function ServicesView() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             {/* Pill badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-300 uppercase shadow-inner shadow-cyan-500/20">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-4 py-1.5 text-xs font-semibold tracking-wider text-cyan-800 uppercase shadow-inner shadow-cyan-500/10 dark:bg-cyan-950/40 dark:text-cyan-300 dark:shadow-cyan-500/20">
+              <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
               <span>Full-Stack Engineering & Architecture Services</span>
             </div>
 
             {/* Headline */}
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl sm:leading-tight">
+            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-tight dark:text-white">
               Engineering Mission-Critical{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400">
                 Digital Platforms & Cloud Systems
               </span>
             </h1>
 
             {/* Subheading */}
-            <p className="mt-6 text-lg leading-8 text-slate-300 sm:text-xl">
+            <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl dark:text-slate-300">
               From high-concurrency Next.js applications and private RAG AI pipelines to automated Kubernetes clouds and SOC2-compliant APIs. We build, scale, and maintain software that never fails.
             </p>
 
@@ -352,7 +352,7 @@ export default function ServicesView() {
               </a>
               <a
                 href="#services-catalog"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur transition hover:border-slate-500 hover:bg-slate-800"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:backdrop-blur dark:hover:border-slate-500 dark:hover:bg-slate-800"
               >
                 Explore 6 Core Capabilities
               </a>
@@ -360,7 +360,7 @@ export default function ServicesView() {
           </div>
 
           {/* Stats Bar */}
-          <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-800/80 pt-10 sm:grid-cols-4 sm:gap-6">
+          <div className="mt-16 grid grid-cols-2 gap-4 border-t border-slate-200 pt-10 dark:border-slate-800/80 sm:grid-cols-4 sm:gap-6">
             {[
               { label: 'SLA Uptime Commitment', value: '99.99%', sub: 'High availability clusters' },
               { label: 'P95 Edge Latency', value: '< 120ms', sub: 'Global CDN distribution' },
@@ -369,11 +369,11 @@ export default function ServicesView() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="group rounded-2xl border border-slate-800/60 bg-slate-900/40 p-4 text-center backdrop-blur transition hover:border-cyan-500/40 hover:bg-slate-900/80"
+                className="group rounded-2xl border border-slate-200 bg-white/80 p-4 text-center shadow-sm backdrop-blur transition hover:border-cyan-500/40 hover:bg-white dark:border-slate-800/60 dark:bg-slate-900/40 dark:shadow-none dark:hover:bg-slate-900/80"
               >
-                <div className="text-2xl font-black text-cyan-400 sm:text-3xl">{stat.value}</div>
-                <div className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-200">{stat.label}</div>
-                <div className="mt-0.5 text-xs text-slate-500">{stat.sub}</div>
+                <div className="text-2xl font-black text-cyan-600 sm:text-3xl dark:text-cyan-400">{stat.value}</div>
+                <div className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">{stat.label}</div>
+                <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{stat.sub}</div>
               </div>
             ))}
           </div>
@@ -386,11 +386,11 @@ export default function ServicesView() {
       <section id="services-catalog" className="relative scroll-mt-20 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="flex flex-col items-start justify-between gap-6 border-b border-slate-800 pb-8 md:flex-row md:items-end">
+          <div className="flex flex-col items-start justify-between gap-6 border-b border-slate-200 pb-8 dark:border-slate-800 md:flex-row md:items-end">
             <div>
-              <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">Production Offerings</span>
-              <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Comprehensive Engineering Disciplines</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
+              <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Production Offerings</span>
+              <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Comprehensive Engineering Disciplines</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
                 Explore our fully-staffed engineering practices. Each service delivers complete architectural documentation, tested source code, and dedicated launch hypercare.
               </p>
             </div>
@@ -403,7 +403,7 @@ export default function ServicesView() {
                 placeholder="Search tech stack, service name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl border border-slate-700 bg-slate-900/80 py-2.5 pl-10 pr-4 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                className="w-full rounded-xl border border-slate-300 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
               />
             </div>
           </div>
@@ -412,10 +412,10 @@ export default function ServicesView() {
           <div className="mt-6 flex flex-wrap items-center gap-2">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition ${
+              className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 selectedCategory === 'all'
-                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
-                  : 'border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                  ? 'bg-cyan-600 text-white font-bold shadow-md shadow-cyan-600/20 dark:bg-cyan-500 dark:text-slate-950'
+                  : 'border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-slate-200'
               }`}
             >
               All Practices ({allServices.length})
@@ -424,10 +424,10 @@ export default function ServicesView() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition ${
+                className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
                   selectedCategory.toLowerCase() === cat.toLowerCase()
-                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
-                    : 'border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                    ? 'bg-cyan-600 text-white font-bold shadow-md shadow-cyan-600/20 dark:bg-cyan-500 dark:text-slate-950'
+                    : 'border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-slate-200'
                 }`}
               >
                 {cat}
@@ -468,16 +468,16 @@ export default function ServicesView() {
           </div>
 
           {filteredServices.length === 0 && (
-            <div className="mt-12 rounded-2xl border border-dashed border-slate-800 p-12 text-center">
-              <Search className="mx-auto h-10 w-10 text-slate-600" />
-              <h3 className="mt-4 text-base font-semibold text-slate-300">No matching services found</h3>
+            <div className="mt-12 rounded-2xl border border-dashed border-slate-300 p-12 text-center dark:border-slate-800">
+              <Search className="mx-auto h-10 w-10 text-slate-400 dark:text-slate-600" />
+              <h3 className="mt-4 text-base font-semibold text-slate-800 dark:text-slate-300">No matching services found</h3>
               <p className="mt-1 text-sm text-slate-500">Try adjusting your search criteria or reset category filters.</p>
               <button
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedCategory('all');
                 }}
-                className="mt-4 rounded-lg bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700"
+                className="mt-4 rounded-lg bg-slate-200 px-4 py-2 text-xs font-semibold text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 cursor-pointer"
               >
                 Reset Filters
               </button>
@@ -489,12 +489,12 @@ export default function ServicesView() {
       {/* =========================================================================
           SECTION D: BENEFITS & DIFFERENTIATORS
           ========================================================================= */}
-      <section className="relative border-y border-slate-800/80 bg-slate-900/40 py-24">
+      <section className="relative border-y border-slate-200 bg-slate-100/60 py-24 dark:border-slate-800/80 dark:bg-slate-900/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest text-teal-400 uppercase">Why Choose SysMaira</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Engineered for Technical Excellence</h2>
-            <p className="mt-3 text-base text-slate-400">
+            <span className="text-xs font-bold tracking-widest text-teal-600 uppercase dark:text-teal-400">Why Choose SysMaira</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Engineered for Technical Excellence</h2>
+            <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
               We do not build flimsy templates. We deliver resilient architectures backed by battle-tested engineering standards.
             </p>
           </div>
@@ -530,18 +530,18 @@ export default function ServicesView() {
               return (
                 <div
                   key={i}
-                  className="relative rounded-2xl border border-slate-800 bg-slate-950/70 p-6 backdrop-blur transition hover:border-slate-700 hover:bg-slate-900/60"
+                  className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-950/70 dark:shadow-none dark:hover:border-slate-700 dark:hover:bg-slate-900/60"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500/10 text-teal-400">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <span className="rounded-full bg-slate-800/80 px-2.5 py-0.5 text-[10px] font-semibold text-slate-300">
+                    <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold text-slate-700 dark:bg-slate-800/80 dark:text-slate-300">
                       {benefit.badge}
                     </span>
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-white">{benefit.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">{benefit.description}</p>
+                  <h3 className="mt-5 text-lg font-bold text-slate-900 dark:text-white">{benefit.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{benefit.description}</p>
                 </div>
               );
             })}
@@ -555,9 +555,9 @@ export default function ServicesView() {
       <section className="relative py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">Transparent Execution</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Our 5-Step Engineering Lifecycle</h2>
-            <p className="mt-3 text-base text-slate-400">
+            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Transparent Execution</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Our 5-Step Engineering Lifecycle</h2>
+            <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
               Clear roadmaps, predictable deliverables, and weekly production demos. Here is exactly how we deliver on time.
             </p>
           </div>
@@ -566,20 +566,20 @@ export default function ServicesView() {
             {lifecycleSteps.map((step, idx) => (
               <div
                 key={step.step}
-                className="group relative flex flex-col gap-6 rounded-2xl border border-slate-800/80 bg-slate-900/40 p-6 backdrop-blur transition hover:border-cyan-500/30 hover:bg-slate-900/80 md:flex-row md:items-center md:justify-between lg:p-8"
+                className="group relative flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-cyan-500/40 hover:shadow-md dark:border-slate-800/80 dark:bg-slate-900/40 dark:shadow-none dark:hover:border-cyan-500/30 dark:hover:bg-slate-900/80 md:flex-row md:items-center md:justify-between lg:p-8"
               >
                 <div className="flex items-start gap-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-950/60 font-mono text-lg font-black text-cyan-400 border border-cyan-500/30">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-100 font-mono text-lg font-black text-cyan-700 border border-cyan-300 dark:bg-cyan-950/60 dark:text-cyan-400 dark:border-cyan-500/30">
                     {step.step}
                   </div>
                   <div>
                     <div className="flex items-center gap-3">
-                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition">{step.title}</h3>
-                      <span className="rounded-md bg-slate-800 px-2.5 py-0.5 text-xs font-semibold text-slate-300">
+                      <h3 className="text-xl font-bold text-slate-900 group-hover:text-cyan-600 transition dark:text-white dark:group-hover:text-cyan-300">{step.title}</h3>
+                      <span className="rounded-md bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                         {step.timeline}
                       </span>
                     </div>
-                    <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-400">{step.description}</p>
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">{step.description}</p>
                   </div>
                 </div>
 
@@ -588,9 +588,9 @@ export default function ServicesView() {
                   {step.deliverables.map((item, dIdx) => (
                     <span
                       key={dIdx}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700/60 bg-slate-950/60 px-2.5 py-1 text-xs text-slate-300"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-slate-700 dark:border-slate-700/60 dark:bg-slate-950/60 dark:text-slate-300"
                     >
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" />
+                      <CheckCircle2 className="h-3 w-3 text-emerald-500 dark:text-emerald-400" />
                       {item}
                     </span>
                   ))}
@@ -604,19 +604,19 @@ export default function ServicesView() {
       {/* =========================================================================
           SECTION F: SELECTED WORK & CASE STUDIES
           ========================================================================= */}
-      <section className="relative border-t border-slate-800/80 bg-slate-900/30 py-24">
+      <section className="relative border-t border-slate-200 bg-slate-100/50 py-24 dark:border-slate-800/80 dark:bg-slate-900/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-start justify-between gap-4 border-b border-slate-800 pb-8 sm:flex-row sm:items-end">
+          <div className="flex flex-col items-start justify-between gap-4 border-b border-slate-200 pb-8 dark:border-slate-800 sm:flex-row sm:items-end">
             <div>
-              <span className="text-xs font-bold tracking-widest text-teal-400 uppercase">Proven Outcomes</span>
-              <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Selected Enterprise Implementations</h2>
-              <p className="mt-2 text-sm text-slate-400">
+              <span className="text-xs font-bold tracking-widest text-teal-600 uppercase dark:text-teal-400">Proven Outcomes</span>
+              <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Selected Enterprise Implementations</h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 Real case studies with measurable business results delivered by our senior engineering teams.
               </p>
             </div>
             <Link
               href="/work"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-cyan-400 hover:text-cyan-300"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
             >
               View Full Portfolio
               <ArrowRight className="h-4 w-4" />
@@ -652,25 +652,25 @@ export default function ServicesView() {
             ]).map((proj: any, idx: number) => (
               <div
                 key={proj.id || idx}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/80 p-6 backdrop-blur transition hover:border-cyan-500/40 hover:bg-slate-900/60"
+                className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-cyan-500/40 hover:shadow-md dark:border-slate-800 dark:bg-slate-950/80 dark:shadow-none dark:hover:bg-slate-900/60"
               >
                 <div>
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-500">
                     <span>{proj.client_name || 'Enterprise Client'}</span>
-                    <span className="text-cyan-400 font-mono">{proj.result || 'Production Verified'}</span>
+                    <span className="text-cyan-600 font-mono dark:text-cyan-400">{proj.result || 'Production Verified'}</span>
                   </div>
-                  <h3 className="mt-3 text-lg font-bold text-white group-hover:text-cyan-300 transition">
+                  <h3 className="mt-3 text-lg font-bold text-slate-900 group-hover:text-cyan-600 transition dark:text-white dark:group-hover:text-cyan-300">
                     {proj.title}
                   </h3>
-                  <p className="mt-2 text-xs leading-5 text-slate-400 line-clamp-3">
+                  <p className="mt-2 text-xs leading-5 text-slate-600 line-clamp-3 dark:text-slate-400">
                     {proj.summary}
                   </p>
                 </div>
 
-                <div className="mt-6 border-t border-slate-800/80 pt-4">
+                <div className="mt-6 border-t border-slate-100 pt-4 dark:border-slate-800/80">
                   <div className="flex flex-wrap gap-1.5">
                     {(Array.isArray(proj.tech_stack) ? proj.tech_stack : ['Next.js', 'PostgreSQL']).slice(0, 4).map((tech: string, tIdx: number) => (
-                      <span key={tIdx} className="rounded bg-slate-800/80 px-2 py-0.5 text-[10px] font-mono text-slate-300">
+                      <span key={tIdx} className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-mono text-slate-600 dark:border-transparent dark:bg-slate-800/80 dark:text-slate-300">
                         {tech}
                       </span>
                     ))}
@@ -685,12 +685,12 @@ export default function ServicesView() {
       {/* =========================================================================
           SECTION G: TRANSPARENT PRICING & ENGAGEMENT MODELS WITH LIVE COUPON CALCULATOR
           ========================================================================= */}
-      <section className="relative border-t border-slate-800/80 py-24">
+      <section className="relative border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">Transparent Investment</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Engagement Models & Pricing</h2>
-            <p className="mt-3 text-base text-slate-400">
+            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Transparent Investment</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Engagement Models & Pricing</h2>
+            <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
               Clear, fixed-scope pricing with milestone deliverables. Select an engagement model below to inspect features and calculate verified promotional discounts.
             </p>
           </div>
@@ -711,8 +711,8 @@ export default function ServicesView() {
                   }}
                   className={`relative flex flex-col justify-between rounded-2xl p-8 transition cursor-pointer ${
                     isSelected
-                      ? 'border-2 border-cyan-500 bg-slate-900/90 shadow-2xl shadow-cyan-500/10'
-                      : 'border border-slate-800 bg-slate-950/60 hover:border-slate-700 hover:bg-slate-900/40'
+                      ? 'border-2 border-cyan-500 bg-white shadow-2xl shadow-cyan-500/10 dark:bg-slate-900/90'
+                      : 'border border-slate-200 bg-white hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-950/60 dark:hover:border-slate-700 dark:hover:bg-slate-900/40'
                   }`}
                 >
                   {tier.popular && (
@@ -723,28 +723,28 @@ export default function ServicesView() {
 
                   <div>
                     <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-white">{tier.name}</h3>
-                      <div className="rounded-md bg-slate-800 px-2.5 py-1 text-xs font-mono text-cyan-400">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white">{tier.name}</h3>
+                      <div className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-mono text-cyan-700 dark:bg-slate-800 dark:text-cyan-400">
                         {tier.duration}
                       </div>
                     </div>
-                    <p className="mt-2 text-xs leading-5 text-slate-400">{tier.tagline}</p>
+                    <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">{tier.tagline}</p>
 
                     <div className="mt-6 flex items-baseline gap-1">
-                      <span className="text-4xl font-extrabold text-white">
+                      <span className="text-4xl font-extrabold text-slate-900 dark:text-white">
                         {formatCurrency(tier.price, 'USD')}
                       </span>
-                      <span className="text-xs text-slate-400">/ {tier.period}</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400">/ {tier.period}</span>
                     </div>
 
-                    <div className="mt-2 text-[11px] font-semibold text-teal-400">
+                    <div className="mt-2 text-[11px] font-semibold text-teal-600 dark:text-teal-400">
                       Best for: {tier.recommendedFor}
                     </div>
 
-                    <div className="mt-8 space-y-3 border-t border-slate-800/80 pt-6">
+                    <div className="mt-8 space-y-3 border-t border-slate-200 pt-6 dark:border-slate-800/80">
                       {tier.features.map((feature, fIdx) => (
-                        <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                          <Check className="h-4 w-4 shrink-0 text-cyan-400" />
+                        <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+                          <Check className="h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400" />
                           <span>{feature}</span>
                         </div>
                       ))}
@@ -765,10 +765,10 @@ export default function ServicesView() {
                         const el = document.getElementById('inquiry-section');
                         if (el) el.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className={`w-full rounded-xl py-3 text-center text-xs font-bold transition ${
+                      className={`w-full rounded-xl py-3 text-center text-xs font-bold transition cursor-pointer ${
                         isSelected
                           ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 shadow-lg shadow-cyan-500/20'
-                          : 'border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
+                          : 'border border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'
                       }`}
                     >
                       {isSelected ? 'Selected Model — Request Scope' : 'Select This Model'}
@@ -780,26 +780,26 @@ export default function ServicesView() {
           </div>
 
           {/* Interactive Promo / Coupon Calculator Bar */}
-          <div className="mt-12 rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900/90 via-slate-950 to-slate-900/90 p-6 lg:p-8">
+          <div className="mt-12 rounded-2xl border border-slate-200 bg-gradient-to-r from-white via-slate-50 to-white p-6 shadow-sm dark:border-slate-800 dark:from-slate-900/90 dark:via-slate-950 dark:to-slate-900/90 lg:p-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <Tag className="h-4 w-4 text-cyan-400" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <Tag className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
                     Live Enterprise Coupon Calculator
                   </span>
                 </div>
-                <h4 className="mt-1 text-lg font-bold text-white">
+                <h4 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">
                   Have an executive coupon or early-access discount code?
                 </h4>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
                   Calculates real discounts from backend database records. Try clicking verified codes:{' '}
                   <button
                     onClick={() => {
                       setCouponCode('ENTERPRISE2026');
                       handleValidateCoupon('ENTERPRISE2026');
                     }}
-                    className="font-mono text-cyan-400 underline decoration-cyan-400/50 hover:text-cyan-300"
+                    className="font-mono text-cyan-600 underline decoration-cyan-500/50 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300 cursor-pointer"
                   >
                     ENTERPRISE2026 (15% Off)
                   </button>
@@ -809,7 +809,7 @@ export default function ServicesView() {
                       setCouponCode('SYSMAIRA1000');
                       handleValidateCoupon('SYSMAIRA1000');
                     }}
-                    className="font-mono text-cyan-400 underline decoration-cyan-400/50 hover:text-cyan-300"
+                    className="font-mono text-cyan-600 underline decoration-cyan-500/50 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300 cursor-pointer"
                   >
                     SYSMAIRA1000 ($1k Off)
                   </button>
@@ -819,7 +819,7 @@ export default function ServicesView() {
                       setCouponCode('VIPCLIENT20');
                       handleValidateCoupon('VIPCLIENT20');
                     }}
-                    className="font-mono text-cyan-400 underline decoration-cyan-400/50 hover:text-cyan-300"
+                    className="font-mono text-cyan-600 underline decoration-cyan-500/50 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300 cursor-pointer"
                   >
                     VIPCLIENT20 (20% Off)
                   </button>
@@ -835,24 +835,24 @@ export default function ServicesView() {
                     value={couponCode}
                     onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                     placeholder="ENTER CODE"
-                    className="w-40 rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2.5 font-mono text-xs uppercase text-slate-200 placeholder-slate-600 outline-none focus:border-cyan-500"
+                    className="w-40 rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-xs uppercase text-slate-900 placeholder-slate-400 outline-none focus:border-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:placeholder-slate-600"
                   />
                   <button
                     disabled={validatingCoupon}
                     onClick={() => handleValidateCoupon()}
-                    className="rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition hover:bg-cyan-400 disabled:opacity-50"
+                    className="rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition hover:bg-cyan-400 disabled:opacity-50 cursor-pointer"
                   >
                     {validatingCoupon ? 'Validating...' : 'Apply Code'}
                   </button>
                 </div>
 
                 {couponResult && (
-                  <div className="rounded-xl border border-emerald-500/40 bg-emerald-950/30 px-4 py-2 text-right">
-                    <div className="text-[11px] font-semibold text-emerald-400">
+                  <div className="rounded-xl border border-emerald-500/40 bg-emerald-50 px-4 py-2 text-right dark:bg-emerald-950/30">
+                    <div className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
                       Code applied: {couponResult.coupon.code} (-{formatCurrency(couponResult.discount_amount, 'USD')})
                     </div>
-                    <div className="text-sm font-extrabold text-white">
-                      Adjusted: <span className="text-emerald-300">{formatCurrency(finalTierPrice, 'USD')}</span>
+                    <div className="text-sm font-extrabold text-slate-900 dark:text-white">
+                      Adjusted: <span className="text-emerald-600 dark:text-emerald-300">{formatCurrency(finalTierPrice, 'USD')}</span>
                     </div>
                   </div>
                 )}
@@ -865,12 +865,12 @@ export default function ServicesView() {
       {/* =========================================================================
           SECTION H: FREQUENTLY ASKED QUESTIONS ACCORDION
           ========================================================================= */}
-      <section className="relative border-t border-slate-800/80 bg-slate-900/30 py-24">
+      <section className="relative border-t border-slate-200 bg-slate-100/40 py-24 dark:border-slate-800/80 dark:bg-slate-900/30">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">Clarity & Confidence</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Service Delivery FAQs</h2>
-            <p className="mt-3 text-sm text-slate-400">
+            <span className="text-xs font-bold tracking-widest text-cyan-600 uppercase dark:text-cyan-400">Clarity & Confidence</span>
+            <h2 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">Service Delivery FAQs</h2>
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
               Clear answers regarding intellectual property, engineering methodologies, and ongoing support.
             </p>
           </div>
@@ -881,20 +881,20 @@ export default function ServicesView() {
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/70 transition hover:border-slate-700"
+                  className="rounded-2xl border border-slate-200 bg-white transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-slate-700"
                 >
                   <button
                     type="button"
                     onClick={() => setExpandedFaq(isOpen ? null : index)}
-                    className="flex w-full items-center justify-between p-6 text-left"
+                    className="flex w-full items-center justify-between p-6 text-left cursor-pointer"
                   >
-                    <span className="text-base font-bold text-slate-200">{faq.q}</span>
-                    <span className="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-slate-400">
+                    <span className="text-base font-bold text-slate-800 dark:text-slate-200">{faq.q}</span>
+                    <span className="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
                       {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="border-t border-slate-800/60 px-6 pb-6 pt-4 text-sm leading-6 text-slate-400">
+                    <div className="border-t border-slate-100 px-6 pb-6 pt-4 text-sm leading-6 text-slate-600 dark:border-slate-800/60 dark:text-slate-400">
                       {faq.a}
                     </div>
                   )}
@@ -908,18 +908,18 @@ export default function ServicesView() {
       {/* =========================================================================
           SECTION I: FINAL CONVERSION & CRM INTAKE FORM
           ========================================================================= */}
-      <section id="inquiry-section" className="relative scroll-mt-20 border-t border-slate-800/80 py-24">
+      <section id="inquiry-section" className="relative scroll-mt-20 border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-8 shadow-2xl shadow-cyan-950/40 sm:p-12">
+          <div className="rounded-3xl border border-cyan-500/30 bg-white p-8 shadow-2xl shadow-cyan-900/10 dark:bg-gradient-to-b dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 dark:shadow-cyan-950/40 sm:p-12">
             <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 border border-cyan-500/20">
-                <Sparkles className="h-3 w-3 text-cyan-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
+                <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
                 Direct Engineering Scoping
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
+              <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl dark:text-white">
                 Start Your Project Engagement
               </h2>
-              <p className="mt-3 text-sm text-slate-300">
+              <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
                 Submit your technical requirements. A Principal Architect will review your scope and schedule a 30-minute technical roadmap consultation within 24 hours.
               </p>
             </div>
@@ -933,8 +933,8 @@ export default function ServicesView() {
             >
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    First Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    First Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -942,12 +942,12 @@ export default function ServicesView() {
                     value={form.first_name}
                     onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                     placeholder="Alexander"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Last Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Last Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -955,15 +955,15 @@ export default function ServicesView() {
                     value={form.last_name}
                     onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                     placeholder="Vance"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Work Email <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Work Email <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -971,11 +971,11 @@ export default function ServicesView() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="alex@enterprise.com"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Phone / Signal (Optional)
                   </label>
                   <input
@@ -983,29 +983,29 @@ export default function ServicesView() {
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+1 (555) 000-0000"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">Company Name</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">Company Name</label>
                   <input
                     type="text"
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="Acme Technologies"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">Service Required</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">Service Required</label>
                   <select
                     value={form.service_needed}
                     onChange={(e) => setForm({ ...form, service_needed: e.target.value })}
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-200 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
                     {allServices.map((s) => (
                       <option key={s.id} value={s.title || s.name}>
@@ -1017,11 +1017,11 @@ export default function ServicesView() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">Estimated Budget</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">Estimated Budget</label>
                   <select
                     value={form.budget_range}
                     onChange={(e) => setForm({ ...form, budget_range: e.target.value })}
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-200 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                   >
                     <option value="under-$10k">&lt; $15,000 (Advisory / POC)</option>
                     <option value="$10k-$25k">$15,000 – $25,000 (Starter)</option>
@@ -1032,8 +1032,8 @@ export default function ServicesView() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300">
-                  Project Scope & Technical Objectives <span className="text-cyan-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  Project Scope & Technical Objectives <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
                   rows={4}
@@ -1041,20 +1041,20 @@ export default function ServicesView() {
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
                   placeholder="Outline your application goals, target users, expected scale, integration points, and any compliance constraints..."
-                  className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
 
               <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <Lock className="h-4 w-4 text-emerald-400" />
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Lock className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                   <span>Strict NDA protection. We never share your project details.</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={leadMutation.isPending}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-bold text-slate-950 shadow-xl shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 sm:w-auto"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-bold text-slate-950 shadow-xl shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 cursor-pointer sm:w-auto"
                 >
                   <Send className="h-4 w-4" />
                   {leadMutation.isPending ? 'Submitting to CRM...' : 'Submit Engineering Scope'}

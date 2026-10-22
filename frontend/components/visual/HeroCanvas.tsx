@@ -27,13 +27,23 @@ export default function HeroCanvas() {
     let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth);
     let height = (canvas.height = canvas.parentElement?.clientHeight || window.innerHeight);
 
-    let isDark = document.documentElement.classList.contains('dark');
-
-    const handleThemeChange = () => {
-      isDark = document.documentElement.classList.contains('dark');
+    const checkIsDark = (e?: any): boolean => {
+      if (e?.detail?.theme) {
+        return e.detail.theme === 'dark';
+      }
+      return (
+        document.getElementById('public-theme-root')?.classList.contains('dark') ??
+        document.documentElement.classList.contains('dark')
+      );
     };
 
-    window.addEventListener('themechange', handleThemeChange);
+    let isDark = checkIsDark();
+
+    const handleThemeChange = (e: Event) => {
+      isDark = checkIsDark(e as CustomEvent);
+    };
+
+    window.addEventListener('themechange', handleThemeChange as EventListener);
 
     const mouse = {
       x: width / 2,

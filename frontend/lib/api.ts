@@ -374,6 +374,7 @@ export const blogApi = {
   getPosts: (params?: any) => api.get('/blog/posts', { params }),
   getPublishedPosts: () => api.get('/blog/posts/published'),
   getPost: (slugOrId: string) => api.get(`/blog/posts/${slugOrId}`),
+  getPostBySlug: (slugOrId: string) => api.get(`/blog/posts/${slugOrId}`),
   createPost: (data: any) => api.post('/blog/posts', data),
   updatePost: (id: string, data: any) => api.patch(`/blog/posts/${id}`, data),
   deletePost: (id: string) => api.delete(`/blog/posts/${id}`),

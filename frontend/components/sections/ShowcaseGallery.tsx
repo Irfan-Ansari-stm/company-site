@@ -83,9 +83,10 @@ export default function ShowcaseGallery() {
   // Merge API data with rich fallback case study content
   const projects = (apiProjects && apiProjects.length > 0)
     ? apiProjects.map((p: any, idx: number) => {
-        const fallback = fallbackProjects[idx] || fallbackProjects[0];
+        const fallback = fallbackProjects[idx % fallbackProjects.length];
         return {
-          id: fallback.id,
+          id: p.id ? String(p.id) : (p.slug || `${fallback.id}-${idx}`),
+          categoryFilterId: fallback.id,
           title: p.title || fallback.title,
           client_name: p.client_name || fallback.client_name,
           summary: p.summary || fallback.summary,
@@ -98,12 +99,12 @@ export default function ShowcaseGallery() {
           tag: fallback.tag,
         };
       })
-    : fallbackProjects;
+    : fallbackProjects.map((f) => ({ ...f, categoryFilterId: f.id }));
 
   const filtered =
     activeTab === 'all'
       ? projects
-      : projects.filter((item: any) => item.id === activeTab);
+      : projects.filter((item: any) => item.categoryFilterId === activeTab || item.id === activeTab);
 
   return (
     <section id="work" className="relative bg-white py-24 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white">
@@ -156,9 +157,9 @@ export default function ShowcaseGallery() {
 
         {/* Case Studies Display Grid */}
         <div className="mt-10 grid gap-8 lg:grid-cols-3">
-          {filtered.map((study: any) => (
+          {filtered.map((study: any, idx: number) => (
             <article
-              key={study.id}
+              key={study.id || `study-${idx}`}
               className="flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-slate-50/70 p-7 shadow-sm transition hover:border-slate-300 hover:bg-white hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-slate-700 dark:hover:shadow-2xl dark:hover:shadow-violet-950/30"
             >
               <div>

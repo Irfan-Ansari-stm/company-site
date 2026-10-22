@@ -107,56 +107,56 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
   const linkedProjects = industry.projects || [];
 
   return (
-    <div className="relative isolate w-full bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="relative isolate w-full bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* =========================================================================
           HERO & BREADCRUMBS
           ========================================================================= */}
-      <section className="relative isolate overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-16 pb-20 sm:pt-24 sm:pb-28">
+      <section className="relative isolate overflow-hidden border-b border-slate-200 bg-gradient-to-b from-slate-100 via-white to-slate-50 pt-16 pb-20 dark:border-slate-800/80 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 sm:pt-24 sm:pb-28">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_50%_at_50%_-20%,rgba(14,165,233,0.18),transparent)]" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1e293b0a_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
-          <nav className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-400">
-            <Link href="/" className="hover:text-slate-200">
+          <nav className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <Link href="/" className="hover:text-slate-900 dark:hover:text-slate-200">
               Home
             </Link>
             <span>/</span>
-            <Link href="/industries" className="hover:text-slate-200">
+            <Link href="/industries" className="hover:text-slate-900 dark:hover:text-slate-200">
               Industries
             </Link>
             <span>/</span>
-            <span className="text-cyan-400">{industry.name}</span>
+            <span className="text-cyan-600 dark:text-cyan-400">{industry.name}</span>
           </nav>
 
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-8">
               {/* Sector Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-semibold tracking-wider text-cyan-300 uppercase">
-                <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/60 px-3.5 py-1 text-xs font-semibold tracking-wider text-cyan-800 uppercase dark:bg-cyan-950/40 dark:text-cyan-300">
+                <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
                 <span>Sector Architecture Practice</span>
               </div>
 
               {/* Title */}
-              <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-5xl sm:leading-tight">
+              <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl sm:leading-tight dark:text-white">
                 {industry.name}
               </h1>
 
               {/* Description */}
-              <p className="mt-6 text-lg leading-relaxed text-slate-300">
+              <p className="mt-6 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
                 {industry.description}
               </p>
 
               {/* Compliance Badges */}
               {compliance.length > 0 && (
                 <div className="mt-8 flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-2">
                     Regulatory Mandates:
                   </span>
                   {compliance.map((std, idx) => (
                     <span
                       key={idx}
-                      className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-1 font-mono text-xs text-cyan-300"
+                      className="rounded-lg border border-slate-200 bg-white px-3 py-1 font-mono text-xs text-slate-800 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-cyan-300"
                     >
                       {std}
                     </span>
@@ -174,7 +174,7 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                 </a>
                 <Link
                   href="/industries"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-5 py-3.5 text-sm font-semibold text-slate-300 transition hover:bg-slate-800"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:bg-slate-800"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   All Industries
@@ -184,40 +184,40 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
 
             {/* Right Top Metric Card */}
             <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur">
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   Verified Performance Standard
                 </div>
 
                 {stats.metric_value && (
                   <div className="mt-4">
-                    <div className="text-3xl font-black text-cyan-300 sm:text-4xl">
+                    <div className="text-3xl font-black text-cyan-600 sm:text-4xl dark:text-cyan-300">
                       {stats.metric_value}
                     </div>
-                    <div className="mt-1 text-xs text-slate-300">
+                    <div className="mt-1 text-xs text-slate-600 dark:text-slate-300">
                       {stats.metric_label}
                     </div>
                   </div>
                 )}
 
                 {stats.sla && (
-                  <div className="mt-6 rounded-xl border border-emerald-500/30 bg-emerald-950/30 p-3">
-                    <div className="text-[11px] font-semibold uppercase text-emerald-400">
+                  <div className="mt-6 rounded-xl border border-emerald-300 bg-emerald-50 p-3 dark:border-emerald-500/30 dark:bg-emerald-950/30">
+                    <div className="text-[11px] font-semibold uppercase text-emerald-800 dark:text-emerald-400">
                       Production SLA Guarantee
                     </div>
-                    <div className="mt-1 text-sm font-bold text-white">
+                    <div className="mt-1 text-sm font-bold text-slate-900 dark:text-white">
                       {stats.sla}
                     </div>
                   </div>
                 )}
 
-                <div className="mt-6 border-t border-slate-800 pt-4 text-xs text-slate-400 space-y-2">
+                <div className="mt-6 border-t border-slate-100 pt-4 text-xs text-slate-600 dark:border-slate-800 dark:text-slate-400 space-y-2">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0" />
+                    <CheckCircle2 className="h-4 w-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
                     <span>Single-tenant PostgreSQL relational isolation</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0" />
+                    <CheckCircle2 className="h-4 w-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
                     <span>100% intellectual property & code ownership</span>
                   </div>
                 </div>
@@ -234,19 +234,19 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Left: Operational Bottlenecks */}
-            <div className="rounded-3xl border border-slate-800/80 bg-slate-900/40 p-8 sm:p-10">
+            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800/80 dark:bg-slate-900/40 sm:p-10">
               <div className="flex items-center gap-2">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-950 text-amber-400 border border-amber-500/30 text-xs font-bold font-mono">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-700 border border-amber-300 text-xs font-bold font-mono dark:bg-amber-950 dark:text-amber-400 dark:border-amber-500/30">
                   01
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
                   Critical Sector Challenges
                 </span>
               </div>
-              <h3 className="mt-3 text-2xl font-black text-white">
+              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
                 Operational &amp; Compliance Bottlenecks
               </h3>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 The core structural hurdles enterprise organizations face in this vertical.
               </p>
 
@@ -254,31 +254,31 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                 {challenges.map((c, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3 rounded-xl border border-slate-800 bg-slate-950/70 p-4"
+                    className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/70"
                   >
-                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-800 text-[10px] font-bold text-slate-300 mt-0.5">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold text-slate-700 mt-0.5 dark:bg-slate-800 dark:text-slate-300">
                       {idx + 1}
                     </div>
-                    <span className="text-sm text-slate-200">{c}</span>
+                    <span className="text-sm text-slate-800 dark:text-slate-200">{c}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Right: Engineered Solutions */}
-            <div className="rounded-3xl border border-slate-800/80 bg-slate-900/40 p-8 sm:p-10">
+            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800/80 dark:bg-slate-900/40 sm:p-10">
               <div className="flex items-center gap-2">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-950 text-cyan-400 border border-cyan-500/30 text-xs font-bold font-mono">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-100 text-cyan-700 border border-cyan-300 text-xs font-bold font-mono dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/30">
                   02
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400">
                   Architectural Solutions
                 </span>
               </div>
-              <h3 className="mt-3 text-2xl font-black text-white">
+              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
                 How SysMaira Engineers the Fix
               </h3>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 Our senior engineering methodology designed to guarantee resilience and regulatory compliance.
               </p>
 
@@ -286,10 +286,10 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                 {solutions.map((s, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3 rounded-xl border border-slate-800 bg-slate-950/70 p-4"
+                    className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/70"
                   >
-                    <CheckCircle2 className="h-5 w-5 shrink-0 text-teal-400 mt-0.5" />
-                    <span className="text-sm text-slate-200">{s}</span>
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-teal-600 mt-0.5 dark:text-teal-400" />
+                    <span className="text-sm text-slate-800 dark:text-slate-200">{s}</span>
                   </div>
                 ))}
               </div>
@@ -302,16 +302,16 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
           DELIVERABLES
           ========================================================================= */}
       {deliverables.length > 0 && (
-        <section className="relative border-t border-slate-800/80 bg-slate-900/30 py-20">
+        <section className="relative border-t border-slate-200 bg-slate-100/50 py-20 dark:border-slate-800/80 dark:bg-slate-900/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+              <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
                 Concrete Outputs
               </span>
-              <h2 className="mt-2 text-3xl font-extrabold text-white">
+              <h2 className="mt-2 text-3xl font-extrabold text-slate-900 dark:text-white">
                 Standard Industry Deliverables
               </h2>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                 Production-ready software components delivered with complete Git repository history.
               </p>
             </div>
@@ -320,13 +320,13 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
               {deliverables.map((item, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 backdrop-blur transition hover:border-slate-700"
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur transition hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/70"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-950 font-mono text-sm font-black text-cyan-400 border border-cyan-500/20">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-100 font-mono text-sm font-black text-cyan-700 border border-cyan-300 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/20">
                     {String(idx + 1).padStart(2, '0')}
                   </div>
-                  <h4 className="mt-4 text-base font-bold text-white">{item}</h4>
-                  <div className="mt-3 flex items-center gap-1.5 text-xs text-emerald-400">
+                  <h4 className="mt-4 text-base font-bold text-slate-900 dark:text-white">{item}</h4>
+                  <div className="mt-3 flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400">
                     <Check className="h-3.5 w-3.5" />
                     <span>Production Verified</span>
                   </div>
@@ -341,27 +341,27 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
           LINKED VERIFIED CASE STUDY
           ========================================================================= */}
       {linkedProjects.length > 0 && (
-        <section className="relative border-t border-slate-800/80 py-20">
+        <section className="relative border-t border-slate-200 py-20 dark:border-slate-800/80">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 p-8 shadow-2xl lg:p-12">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+            <div className="overflow-hidden rounded-3xl border border-cyan-500/30 bg-white p-8 shadow-2xl dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 lg:p-12">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4 dark:border-slate-800">
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
                   Verified Case Study in {industry.name}
                 </span>
-                <span className="rounded bg-emerald-950 px-2.5 py-1 text-[10px] font-mono text-emerald-400 border border-emerald-500/30">
+                <span className="rounded bg-emerald-100 px-2.5 py-1 text-[10px] font-mono text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-500/30">
                   Live Production System
                 </span>
               </div>
 
               {linkedProjects.slice(0, 1).map((proj: any) => (
                 <div key={proj.id || proj.slug} className="mt-6">
-                  <div className="text-xs text-slate-400 font-semibold">
+                  <div className="text-xs text-slate-500 font-semibold dark:text-slate-400">
                     Client: {proj.client_name || 'Enterprise Client'}
                   </div>
-                  <h3 className="mt-2 text-2xl font-extrabold text-white sm:text-3xl">
+                  <h3 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-white">
                     {proj.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                     {proj.summary}
                   </p>
 
@@ -369,15 +369,15 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                     {(proj.tech_stack || []).map((tech: string, tIdx: number) => (
                       <span
                         key={tIdx}
-                        className="rounded-md border border-slate-800 bg-slate-900 px-2.5 py-1 font-mono text-[11px] text-cyan-300"
+                        className="rounded-md border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-[11px] text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-cyan-300"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="mt-8 flex items-center justify-between border-t border-slate-800/80 pt-6">
-                    <span className="text-xs text-slate-400">
+                  <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6 dark:border-slate-800/80">
+                    <span className="text-xs text-slate-500 dark:text-slate-400">
                       Scope: {proj.budget_range || 'Enterprise Platform'}
                     </span>
                     <Link
@@ -399,20 +399,20 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
           RELATED INDUSTRIES
           ========================================================================= */}
       {relatedIndustries.length > 0 && (
-        <section className="relative border-t border-slate-800/80 bg-slate-900/20 py-20">
+        <section className="relative border-t border-slate-200 bg-slate-100/40 py-20 dark:border-slate-800/80 dark:bg-slate-900/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between border-b border-slate-800 pb-6">
+            <div className="flex items-end justify-between border-b border-slate-200 pb-6 dark:border-slate-800">
               <div>
-                <span className="text-xs font-bold tracking-widest uppercase text-cyan-400">
+                <span className="text-xs font-bold tracking-widest uppercase text-cyan-600 dark:text-cyan-400">
                   Complementary Practices
                 </span>
-                <h3 className="mt-1 text-2xl font-extrabold text-white">
+                <h3 className="mt-1 text-2xl font-extrabold text-slate-900 dark:text-white">
                   Other Supported Verticals
                 </h3>
               </div>
               <Link
                 href="/industries"
-                className="text-xs font-bold text-cyan-400 hover:text-cyan-300"
+                className="text-xs font-bold text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
               >
                 All Industries &rarr;
               </Link>
@@ -423,15 +423,15 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                 <Link
                   key={ind.id || ind.slug}
                   href={`/industries/${ind.slug}`}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 transition hover:border-cyan-500/40 hover:bg-slate-900/60"
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-cyan-500/40 hover:shadow-md dark:border-slate-800 dark:bg-slate-950/70 dark:hover:bg-slate-900/60"
                 >
-                  <h4 className="text-lg font-bold text-white hover:text-cyan-300 transition">
+                  <h4 className="text-lg font-bold text-slate-900 hover:text-cyan-600 transition dark:text-white dark:hover:text-cyan-300">
                     {ind.name}
                   </h4>
-                  <p className="mt-2 text-xs leading-5 text-slate-400 line-clamp-2">
+                  <p className="mt-2 text-xs leading-5 text-slate-600 line-clamp-2 dark:text-slate-400">
                     {ind.description}
                   </p>
-                  <div className="mt-4 text-xs font-semibold text-cyan-400">
+                  <div className="mt-4 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
                     Explore Solutions &rarr;
                   </div>
                 </Link>
@@ -444,18 +444,18 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
       {/* =========================================================================
           CONTEXTUAL SCOPING INTAKE FORM
           ========================================================================= */}
-      <section id="industry-scope" className="relative scroll-mt-20 border-t border-slate-800/80 py-24">
+      <section id="industry-scope" className="relative scroll-mt-20 border-t border-slate-200 py-24 dark:border-slate-800/80">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-8 shadow-2xl sm:p-12">
+          <div className="rounded-3xl border border-cyan-500/30 bg-white p-8 shadow-2xl dark:bg-gradient-to-b dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 sm:p-12">
             <div className="text-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 border border-cyan-500/20">
-                <Sparkles className="h-3 w-3 text-cyan-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-100/60 px-3 py-1 text-xs font-semibold text-cyan-800 border border-cyan-200 dark:bg-cyan-950/80 dark:text-cyan-300 dark:border-cyan-500/20">
+                <Sparkles className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
                 Dedicated Scoping
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold text-white">
+              <h2 className="mt-4 text-3xl font-extrabold text-slate-900 dark:text-white">
                 Initiate {industry.name} Consultation
               </h2>
-              <p className="mt-2 text-sm text-slate-300">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                 Speak directly with an architect experienced in your compliance boundaries.
               </p>
             </div>
@@ -469,8 +469,8 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
             >
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    First Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    First Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -478,12 +478,12 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                     value={form.first_name}
                     onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                     placeholder="Jordan"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Last Name <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Last Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -491,15 +491,15 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                     value={form.last_name}
                     onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                     placeholder="Cole"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
-                    Work Email <span className="text-cyan-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Work Email <span className="text-cyan-600 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -507,11 +507,11 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="j.cole@company.com"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Company Name
                   </label>
                   <input
@@ -519,14 +519,14 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="Apex Systems"
-                    className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                    className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300">
-                  System Goals &amp; Specific Compliance Criteria <span className="text-cyan-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  System Goals &amp; Specific Compliance Criteria <span className="text-cyan-600 dark:text-cyan-400">*</span>
                 </label>
                 <textarea
                   rows={4}
@@ -534,13 +534,13 @@ export default function IndustryDetailView({ slug }: IndustryDetailViewProps) {
                   value={form.requirements}
                   onChange={(e) => setForm({ ...form, requirements: e.target.value })}
                   placeholder={`Describe your current technical architecture, throughput expectations, and any compliance constraints for ${industry.name}...`}
-                  className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-cyan-500"
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:placeholder-slate-500"
                 />
               </div>
 
               <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <Lock className="h-4 w-4 text-emerald-400" />
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Lock className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
                   <span>Strict NDA confidential review</span>
                 </div>
 

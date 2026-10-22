@@ -319,9 +319,9 @@ export default function PricingMatrix() {
                   Click any active database promotion to test:
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {coupons.map((c: any) => (
+                  {coupons.map((c: any, idx: number) => (
                     <button
-                      key={c.code}
+                      key={c.code || c.id || `coupon-${idx}`}
                       type="button"
                       onClick={() => handleApplyCoupon(undefined, c.code)}
                       className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-100/80 px-3 py-1.5 font-mono text-xs font-bold text-violet-700 transition hover:border-violet-400 hover:bg-violet-50 dark:border-slate-800 dark:bg-slate-900 dark:text-cyan-300 dark:hover:border-cyan-500"

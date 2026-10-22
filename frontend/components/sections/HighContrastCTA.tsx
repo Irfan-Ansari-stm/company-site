@@ -192,9 +192,9 @@ export default function HighContrastCTA() {
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {testimonials.slice(0, 3).map((item: any) => (
+            {testimonials.slice(0, 3).map((item: any, idx: number) => (
               <figure
-                key={item.id}
+                key={item.id || `testimonial-${idx}`}
                 className="flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition hover:shadow-md dark:border-slate-800 dark:bg-slate-950/70"
               >
                 <div>

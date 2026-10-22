@@ -27,7 +27,7 @@ export default function HeroSection({
   return (
     <section
       id="hero"
-      className="relative isolate min-h-screen overflow-hidden bg-slate-50 pt-24 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white"
+      className="relative isolate overflow-hidden bg-slate-50 pt-4 pb-14 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white sm:pt-6 sm:pb-16 lg:pt-8 lg:pb-20 lg:min-h-[calc(100vh-4.5rem)] lg:flex lg:flex-col lg:justify-center"
     >
       {/* Background Interactive Particle Canvas */}
       <HeroCanvas />
@@ -36,7 +36,7 @@ export default function HeroSection({
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(115deg,rgba(248,250,252,0.92)_0%,rgba(241,245,249,0.85)_45%,rgba(238,242,255,0.7)_100%)] repeating-linear-gradient(90deg,rgba(15,23,42,0.025)_0_1px,transparent_1px_110px) repeating-linear-gradient(0deg,rgba(15,23,42,0.02)_0_1px,transparent_1px_110px) dark:bg-[linear-gradient(115deg,rgba(2,6,23,0.94)_0%,rgba(15,23,42,0.88)_45%,rgba(30,27,75,0.75)_100%)] dark:repeating-linear-gradient(90deg,rgba(255,255,255,0.04)_0_1px,transparent_1px_110px) dark:repeating-linear-gradient(0deg,rgba(255,255,255,0.03)_0_1px,transparent_1px_110px)" />
 
       {/* Main Container */}
-      <div className="relative z-10 mx-auto grid min-h-[calc(100vh-6rem)] max-w-7xl items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-start gap-10 px-4 pt-2 pb-6 sm:px-6 sm:pt-4 sm:pb-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:px-8">
         {/* Left Column: Headlines & Call to Actions */}
         <div className="max-w-3xl">
           {/* Eyebrow Badge */}

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { Layers3, ArrowRight, Menu, X, Sun, Moon, Sparkles } from 'lucide-react';
+import { Layers3, ArrowRight, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { systemApi } from '@/lib/api';
 
@@ -13,7 +13,7 @@ interface SiteHeaderProps {
 }
 
 export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps) {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isDark } = useTheme();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,8 +39,9 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -94,16 +95,14 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
     return pathname === href;
   };
 
-  const isDark = theme === 'dark';
-
   return (
-    <header className="sticky top-0 z-50 w-full transition-all duration-300">
-      <div className={`w-full px-3 transition-all duration-300 ${scrolled ? 'pt-2 sm:pt-2.5' : 'pt-3 sm:pt-4'}`}>
+    <header className="sticky top-0 z-50 w-full pointer-events-none bg-transparent">
+      <div className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-all duration-300 pointer-events-auto ${scrolled ? 'py-2 sm:py-2.5' : 'pt-3 pb-2 sm:pt-4 sm:pb-3'}`}>
         <div
-          className={`mx-auto flex max-w-7xl items-center justify-between rounded-2xl px-4 transition-all duration-300 sm:px-6 ${
+          className={`flex w-full items-center justify-between rounded-2xl px-4 transition-all duration-300 sm:px-6 ${
             scrolled
-              ? 'h-14 sm:h-15 border border-slate-200/90 bg-white/90 shadow-xl shadow-slate-900/10 backdrop-blur-xl dark:border-slate-800/90 dark:bg-slate-950/90 dark:shadow-2xl dark:shadow-black/60'
-              : 'h-16 sm:h-17 border border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-slate-950/70'
+              ? 'h-14 sm:h-15 border border-slate-200/90 bg-white/95 shadow-lg shadow-slate-900/5 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95 dark:shadow-2xl dark:shadow-black/60'
+              : 'h-16 sm:h-17 border border-slate-200/70 bg-white/85 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-slate-950/80'
           }`}
         >
           {/* Brand Logo & Wordmark */}
@@ -145,29 +144,29 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
 
           {/* Action Controls */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Light / Dark Mode Toggle */}
+            {/* Dark / Light Mode Toggle (WCAG 2.2 touch target compliant) */}
             <button
               type="button"
               onClick={toggleTheme}
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="group relative inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-100/90 text-slate-700 transition hover:border-slate-300 hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:bg-slate-800 cursor-pointer"
-              title={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
+              className="group relative inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-slate-100/90 text-slate-700 transition hover:border-slate-300 hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:bg-slate-800 cursor-pointer"
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {mounted ? (
                 isDark ? (
-                  <Moon className="h-4 w-4 text-cyan-300 transition-transform duration-300 group-hover:-rotate-12" />
+                  <Moon aria-hidden="true" className="h-4 w-4 text-cyan-300 transition-transform duration-300 group-hover:-rotate-12" />
                 ) : (
-                  <Sun className="h-4 w-4 text-amber-500 transition-transform duration-300 group-hover:rotate-45" />
+                  <Sun aria-hidden="true" className="h-4 w-4 text-amber-500 transition-transform duration-300 group-hover:rotate-45" />
                 )
               ) : (
-                <Sun className="h-4 w-4 text-amber-500" />
+                <Sun aria-hidden="true" className="h-4 w-4 text-amber-500" />
               )}
             </button>
 
             {/* Client Portal Link */}
             <Link
               href="/auth/login"
-              className="hidden rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white md:inline-block cursor-pointer"
+              className="hidden rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white md:inline-block cursor-pointer"
             >
               Client portal
             </Link>
@@ -175,21 +174,21 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
             {/* Primary CTA */}
             <Link
               href="/contact"
-              className="group hidden sm:inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-indigo-600 px-4 py-2 text-xs font-bold text-slate-950 shadow-md shadow-cyan-500/20 transition hover:brightness-110 hover:shadow-lg hover:shadow-cyan-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-950 cursor-pointer"
+              className="group hidden sm:inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-indigo-600 px-4 py-2.5 text-xs font-bold text-slate-950 shadow-md shadow-cyan-500/20 transition hover:brightness-110 hover:shadow-lg hover:shadow-cyan-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-950 cursor-pointer"
             >
               <span>Start a project</span>
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+              <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
 
-            {/* Mobile Menu Hamburger Button */}
+            {/* Mobile Menu Hamburger Button (WCAG 2.2 touch target compliant) */}
             <button
               type="button"
               onClick={() => setMobileOpen((prev) => !prev)}
-              className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:border-white/15 dark:bg-white/10 dark:text-slate-200 lg:hidden cursor-pointer"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:border-white/15 dark:bg-white/10 dark:text-slate-200 lg:hidden cursor-pointer"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileOpen ? <X aria-hidden="true" className="h-5 w-5" /> : <Menu aria-hidden="true" className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -197,9 +196,14 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
 
       {/* Mobile Navigation Drawer / Overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 top-[68px] z-40 bg-slate-950/80 backdrop-blur-xl lg:hidden animate-in fade-in duration-200">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          className="fixed inset-0 top-[68px] z-40 bg-slate-950/40 backdrop-blur-md dark:bg-slate-950/80 lg:hidden animate-in fade-in duration-200 pointer-events-auto"
+        >
           <div className="mx-auto max-w-lg px-4 pt-4 pb-8">
-            <div className="rounded-3xl border border-slate-800 bg-slate-900/95 p-6 shadow-2xl backdrop-blur-2xl">
+            <div className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-2xl backdrop-blur-2xl transition-colors duration-200 dark:border-slate-800 dark:bg-slate-900/95">
               <nav className="flex flex-col gap-1.5" aria-label="Mobile navigation">
                 {navLinks.map((item) => {
                   const active = isActive(item.href);
@@ -210,21 +214,46 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
                       onClick={() => setMobileOpen(false)}
                       className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition cursor-pointer ${
                         active
-                          ? 'bg-cyan-500/10 text-cyan-400 font-bold border border-cyan-500/20'
-                          : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                          ? 'bg-cyan-50 text-cyan-700 font-bold border border-cyan-200 dark:bg-cyan-500/10 dark:text-cyan-400 dark:border-cyan-500/20'
+                          : 'text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'
                       }`}
                     >
                       <span>{item.label}</span>
-                      {active && <span className="h-2 w-2 rounded-full bg-cyan-400" />}
+                      {active && <span className="h-2 w-2 rounded-full bg-cyan-600 dark:bg-cyan-400" />}
                     </Link>
                   );
                 })}
 
-                <div className="mt-4 border-t border-slate-800 pt-4 flex flex-col gap-2.5">
+                {/* Mobile Drawer Theme Switcher Row */}
+                <div className="mt-2 flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-slate-800 dark:bg-slate-950/60">
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Appearance
+                  </span>
+                  <button
+                    type="button"
+                    onClick={toggleTheme}
+                    className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-800 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 cursor-pointer"
+                    aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                  >
+                    {isDark ? (
+                      <>
+                        <Moon className="h-3.5 w-3.5 text-cyan-400" />
+                        <span>Dark mode</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sun className="h-3.5 w-3.5 text-amber-500" />
+                        <span>Light mode</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div className="mt-3 border-t border-slate-200 dark:border-slate-800 pt-4 flex flex-col gap-2.5">
                   <Link
                     href="/auth/login"
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-center text-xs font-semibold text-slate-300 hover:text-white hover:border-slate-700 cursor-pointer"
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-xs font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300 dark:hover:text-white dark:hover:border-slate-700 cursor-pointer transition"
                   >
                     Client Portal Login &rarr;
                   </Link>
@@ -232,7 +261,7 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
                   <Link
                     href="/contact"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-indigo-600 px-4 py-3.5 text-sm font-bold text-slate-950 shadow-md shadow-cyan-500/20 cursor-pointer"
+                    className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-indigo-600 px-4 py-3.5 text-sm font-bold text-slate-950 shadow-md shadow-cyan-500/20 cursor-pointer transition hover:brightness-105"
                   >
                     <span>Start a Project</span>
                     <ArrowRight className="h-4 w-4" />

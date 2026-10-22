@@ -115,7 +115,7 @@ export default function FeatureBento() {
     <section id="services" className="relative bg-slate-50 py-24 text-slate-900 transition-colors duration-300 dark:bg-slate-900 dark:text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between max-w-7xl">
+        <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-3xl">
             <p className="text-xs font-bold tracking-widest uppercase text-violet-600 dark:text-cyan-400">
               Enterprise Solutions
@@ -153,7 +153,7 @@ export default function FeatureBento() {
 
             return (
               <div
-                key={service.slug || service.id}
+                key={service.slug || service.id || `service-${idx}`}
                 className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-950/70 dark:hover:border-slate-700 dark:hover:shadow-2xl dark:hover:shadow-violet-950/20"
               >
                 <div>
@@ -235,7 +235,7 @@ export default function FeatureBento() {
 
               return (
                 <button
-                  key={cat.slug || cat.id}
+                  key={cat.slug || cat.id || `cap-${cat.name || 'item'}`}
                   type="button"
                   onClick={() => setSelectedCategory(isSelected ? null : cat.slug)}
                   className={`flex flex-col text-left rounded-2xl border p-5 transition-all duration-200 ${

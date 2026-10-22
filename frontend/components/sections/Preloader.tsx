@@ -75,6 +75,8 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
           }}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white"
+          role="status"
+          aria-label="Loading SysMaira Enterprise"
         >
           {/* Subtle background glow */}
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.12)_0,transparent_65%)]" />

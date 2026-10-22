@@ -61,32 +61,30 @@ export default function LegalView({ type }: LegalViewProps) {
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -90;
+      const yOffset = -100;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
   const handlePrint = () => {
-    if (typeof window !== 'undefined') {
-      window.print();
-    }
+    window.print();
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
-      {/* Background Ambience */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(14,165,233,0.08)_0,transparent_60%)]" />
+    <div className="relative min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-black">
+      {/* Background Ambience Gradients */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(14,165,233,0.06)_0,transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(14,165,233,0.12)_0,transparent_60%)]" />
 
       {/* Header Breadcrumbs Bar */}
-      <div className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+      <div className="border-b border-slate-200 bg-white/70 backdrop-blur-md transition-colors dark:border-slate-800/80 dark:bg-slate-950/80">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-xs font-mono text-slate-400">
-            <Link href="/" className="hover:text-white transition cursor-pointer">
+          <nav className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400">
+            <Link href="/" className="hover:text-slate-900 dark:hover:text-white transition cursor-pointer">
               Home
             </Link>
-            <ChevronRight className="h-3 w-3 text-slate-600" />
-            <span className="text-cyan-400 font-semibold">
+            <ChevronRight className="h-3 w-3 text-slate-400 dark:text-slate-600" />
+            <span className="text-cyan-600 dark:text-cyan-400 font-semibold">
               {isPrivacy ? 'Privacy Policy' : 'Terms of Service'}
             </span>
           </nav>
@@ -96,24 +94,24 @@ export default function LegalView({ type }: LegalViewProps) {
       {/* Hero Header */}
       <header className="px-4 pt-12 pb-8 sm:px-6 sm:pt-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-slate-800 pb-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-slate-200 pb-8 dark:border-slate-800">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/70 px-3.5 py-1 text-xs font-semibold text-cyan-800 backdrop-blur-md dark:border-cyan-500/30 dark:bg-cyan-950/40 dark:text-cyan-300">
                 {isPrivacy ? (
-                  <ShieldCheck className="h-3.5 w-3.5 text-cyan-400" />
+                  <ShieldCheck className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
                 ) : (
-                  <Scale className="h-3.5 w-3.5 text-cyan-400" />
+                  <Scale className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
                 )}
                 <span className="tracking-wide uppercase font-mono">
                   {isPrivacy ? 'Data Governance & Trust' : 'Legal Operating Framework'}
                 </span>
               </div>
 
-              <h1 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
                 {isPrivacy ? 'Privacy Policy' : 'Terms of Service'}
               </h1>
 
-              <p className="mt-4 text-base text-slate-300 leading-relaxed sm:text-lg">
+              <p className="mt-4 text-base text-slate-600 leading-relaxed dark:text-slate-300 sm:text-lg">
                 {isPrivacy
                   ? 'Our binding commitment to client confidentiality, zero AI model training on private codebases, and strict compliance with global privacy regulations (GDPR, CCPA/CPRA, and SOC2 Type II).'
                   : 'The legal framework and terms governing enterprise advisory engagements, Statements of Work (SOW), 100% intellectual property transfer, and delivery milestone warranties with SysMaira Enterprise.'}
@@ -122,14 +120,14 @@ export default function LegalView({ type }: LegalViewProps) {
 
             {/* Quick Actions & Last Updated */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0">
-              <div className="text-xs font-mono text-slate-400">
-                <span className="text-slate-500 block">Effective Date:</span>
-                <span className="text-white font-semibold">{lastUpdated}</span>
+              <div className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                <span className="text-slate-400 dark:text-slate-500 block">Effective Date:</span>
+                <span className="text-slate-900 dark:text-white font-semibold">{lastUpdated}</span>
               </div>
 
               <button
                 onClick={handlePrint}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-4 py-2.5 text-xs font-bold text-slate-300 transition hover:border-slate-700 hover:text-white cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:text-white cursor-pointer shadow-sm"
               >
                 <Printer className="h-4 w-4" />
                 <span>Print Document</span>
@@ -144,8 +142,8 @@ export default function LegalView({ type }: LegalViewProps) {
         <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
           {/* Sticky Table of Contents Sidebar */}
           <aside className="lg:col-span-4 space-y-6">
-            <div className="sticky top-20 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-md">
-              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
+            <div className="sticky top-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur-md transition-colors dark:border-slate-800 dark:bg-slate-900/60">
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 flex items-center gap-2">
                 <FileText className="h-4 w-4" />
                 Table of Contents
               </h3>
@@ -157,8 +155,8 @@ export default function LegalView({ type }: LegalViewProps) {
                     onClick={() => scrollTo(sec.id)}
                     className={`block w-full text-left text-xs transition cursor-pointer line-clamp-1 py-1 ${
                       activeSection === sec.id
-                        ? 'font-bold text-cyan-300 translate-x-1'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'font-bold text-cyan-600 dark:text-cyan-300 translate-x-1'
+                        : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                     }`}
                   >
                     {sec.title}
@@ -166,38 +164,38 @@ export default function LegalView({ type }: LegalViewProps) {
                 ))}
               </nav>
 
-              <div className="mt-6 border-t border-slate-800 pt-5 space-y-3">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <Mail className="h-3.5 w-3.5 text-cyan-400" />
+              <div className="mt-6 border-t border-slate-200 pt-5 space-y-3 dark:border-slate-800">
+                <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                  <Mail className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
                   <span>
                     Direct Inquiries:{' '}
                     <a
                       href={`mailto:${isPrivacy ? 'privacy@sysmaira.com' : 'legal@sysmaira.com'}`}
-                      className="text-white font-semibold hover:underline"
+                      className="text-slate-900 dark:text-white font-semibold hover:underline"
                     >
                       {isPrivacy ? 'privacy@sysmaira.com' : 'legal@sysmaira.com'}
                     </a>
                   </span>
                 </div>
-                <div className="flex items-start gap-2 text-xs text-slate-400">
-                  <Building2 className="h-3.5 w-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
+                  <Building2 className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                   <span>100 Montgomery St, Suite 1800, San Francisco, CA, 94104</span>
                 </div>
               </div>
             </div>
 
             {/* Mutual NDA Quick Callout */}
-            <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-950/40 via-slate-900 to-slate-950 p-6">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-400">
+            <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-50/80 via-white to-slate-50 p-6 shadow-sm transition-colors dark:border-cyan-500/20 dark:bg-gradient-to-br dark:from-cyan-950/40 dark:via-slate-900 dark:to-slate-950">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400">
                 <ShieldCheck className="h-4 w-4" />
                 <span>Enterprise Assurance</span>
               </div>
-              <p className="mt-2 text-xs leading-relaxed text-slate-300">
+              <p className="mt-2 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
                 Need our standard bilateral Mutual Non-Disclosure Agreement (NDA) executed prior to technical discovery? Our legal team turns around signed bilateral NDAs within 4 hours.
               </p>
               <Link
                 href="/contact"
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition cursor-pointer"
+                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300 transition cursor-pointer"
               >
                 <span>Request Mutual NDA</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -206,13 +204,13 @@ export default function LegalView({ type }: LegalViewProps) {
           </aside>
 
           {/* Main Legal Document Body */}
-          <main className="lg:col-span-8 space-y-12 text-slate-300 text-sm leading-relaxed">
+          <main className="lg:col-span-8 space-y-12 text-slate-700 text-sm leading-relaxed dark:text-slate-300">
             {isPrivacy ? (
               /* ── Privacy Policy Content ── */
               <div className="space-y-12">
                 {/* Section 1 */}
                 <section id="overview" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     1. Executive Privacy Overview
                   </h2>
                   <p>
@@ -221,15 +219,15 @@ export default function LegalView({ type }: LegalViewProps) {
                   <p>
                     We recognize that enterprise clients, technology leaders, and partners entrust us with mission-critical technical roadmaps, database topologies, and strategic objectives. This Privacy Policy details how we collect, store, isolate, process, and protect your information when visiting our website, submitting project inquiries, or engaging our engineering pods.
                   </p>
-                  <div className="rounded-2xl border border-cyan-500/30 bg-cyan-950/30 p-5 text-xs text-slate-200">
-                    <strong className="text-cyan-300 block mb-1 font-mono uppercase">Key Privacy Guarantee:</strong>
+                  <div className="rounded-2xl border border-cyan-500/30 bg-cyan-50 p-5 text-xs text-slate-800 dark:bg-cyan-950/30 dark:text-slate-200">
+                    <strong className="text-cyan-700 dark:text-cyan-300 block mb-1 font-mono uppercase">Key Privacy Guarantee:</strong>
                     SysMaira maintains a strict <strong>Zero Third-Party Training Protocol</strong>: no client source code, database schemas, architectural specifications, or project inquiries are ever provided to public commercial artificial intelligence models for model fine-tuning or training purposes.
                   </div>
                 </section>
 
                 {/* Section 2 */}
                 <section id="collection" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     2. Information We Collect
                   </h2>
                   <p>We collect information only to the extent strictly necessary to deliver our services, qualify architectural inquiries, and maintain platform security:</p>
@@ -251,7 +249,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 3 */}
                 <section id="usage" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     3. How We Process &amp; Use Data
                   </h2>
                   <p>We process collected data exclusively for legitimate commercial and engineering purposes:</p>
@@ -273,7 +271,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 4 */}
                 <section id="client-ip" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     4. Enterprise Data &amp; Intellectual Property Isolation
                   </h2>
                   <p>
@@ -294,7 +292,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 5 */}
                 <section id="legal-basis" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     5. Legal Bases for Processing (GDPR &amp; CCPA/CPRA)
                   </h2>
                   <p>Under the European Union General Data Protection Regulation (GDPR Article 6), we rely on the following lawful bases:</p>
@@ -307,7 +305,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 6 */}
                 <section id="subprocessors" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     6. Subprocessors &amp; Data Disclosures
                   </h2>
                   <p>
@@ -322,7 +320,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 7 */}
                 <section id="retention" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     7. Data Retention &amp; Archival Protocols
                   </h2>
                   <p>
@@ -332,7 +330,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 8 */}
                 <section id="rights" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     8. Your Rights &amp; Choices
                   </h2>
                   <p>Regardless of your geographic location, you enjoy the following privacy rights:</p>
@@ -343,13 +341,13 @@ export default function LegalView({ type }: LegalViewProps) {
                     <li><strong>Right to Restrict or Object:</strong> Object to legitimate interest processing or opt out of newsletter communications at any time.</li>
                   </ul>
                   <p>
-                    To exercise any of these rights, email our Data Protection Officer at <a href="mailto:privacy@sysmaira.com" className="text-cyan-400 font-bold hover:underline">privacy@sysmaira.com</a>. We respond to all verified requests within 14 business days.
+                    To exercise any of these rights, email our Data Protection Officer at <a href="mailto:privacy@sysmaira.com" className="text-cyan-600 dark:text-cyan-400 font-bold hover:underline">privacy@sysmaira.com</a>. We respond to all verified requests within 14 business days.
                   </p>
                 </section>
 
                 {/* Section 9 */}
                 <section id="security" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     9. Technical &amp; Operational Security Safeguards
                   </h2>
                   <p>Our security posture includes the following defense-in-depth measures:</p>
@@ -363,7 +361,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 10 */}
                 <section id="international" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     10. International Transfers &amp; Standard Contractual Clauses
                   </h2>
                   <p>
@@ -373,17 +371,17 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 11 */}
                 <section id="contact" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     11. Data Protection Officer (DPO) Contact
                   </h2>
                   <p>
                     For inquiries, data subject access requests, or regulatory communications regarding our data governance practices, please contact:
                   </p>
-                  <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 space-y-2 text-xs font-mono">
-                    <p className="text-white font-bold text-sm">SysMaira Enterprise — Privacy &amp; Data Governance</p>
+                  <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-2 text-xs font-mono shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+                    <p className="text-slate-900 dark:text-white font-bold text-sm">SysMaira Enterprise — Privacy &amp; Data Governance</p>
                     <p>Attn: Data Protection Officer</p>
                     <p>100 Montgomery St, Suite 1800, San Francisco, CA, 94104</p>
-                    <p>Email: <a href="mailto:privacy@sysmaira.com" className="text-cyan-400 hover:underline">privacy@sysmaira.com</a></p>
+                    <p>Email: <a href="mailto:privacy@sysmaira.com" className="text-cyan-600 dark:text-cyan-400 hover:underline">privacy@sysmaira.com</a></p>
                     <p>Hotline: +1 (555) 019-2831</p>
                   </div>
                 </section>
@@ -393,7 +391,7 @@ export default function LegalView({ type }: LegalViewProps) {
               <div className="space-y-12">
                 {/* Section 1 */}
                 <section id="agreement" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     1. Agreement to Terms &amp; Parties
                   </h2>
                   <p>
@@ -406,7 +404,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 2 */}
                 <section id="services" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     2. Scope of Architecture &amp; Engineering Services
                   </h2>
                   <p>
@@ -419,7 +417,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 3 */}
                 <section id="sow-msa" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     3. Statements of Work (SOW) &amp; Precedence
                   </h2>
                   <p>
@@ -429,11 +427,11 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 4 */}
                 <section id="ip-ownership" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     4. Intellectual Property &amp; Repository Ownership
                   </h2>
-                  <div className="rounded-2xl border border-teal-500/30 bg-teal-950/30 p-5 text-xs text-slate-200">
-                    <strong className="text-teal-300 block mb-1 font-mono uppercase">100% Client IP Ownership Standard:</strong>
+                  <div className="rounded-2xl border border-teal-500/30 bg-teal-50 p-5 text-xs text-slate-800 dark:bg-teal-950/30 dark:text-slate-200">
+                    <strong className="text-teal-700 dark:text-teal-300 block mb-1 font-mono uppercase">100% Client IP Ownership Standard:</strong>
                     Upon receipt of full payment for services rendered under an executed SOW, all custom source code, documentation, database schemas, Docker container definitions, and Terraform infrastructure configurations developed specifically for Client become the exclusive, unencumbered intellectual property of the Client.
                   </div>
                   <p>
@@ -443,7 +441,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 5 */}
                 <section id="confidentiality" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     5. Confidentiality &amp; Mutual NDA
                   </h2>
                   <p>
@@ -456,7 +454,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 6 */}
                 <section id="fees-payment" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     6. Fees, Invoicing &amp; Payment Terms
                   </h2>
                   <ul className="list-disc pl-5 space-y-2">
@@ -469,7 +467,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 7 */}
                 <section id="sla-warranty" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     7. 60-Day SLA Warranty &amp; Remediation
                   </h2>
                   <p>
@@ -482,7 +480,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 8 */}
                 <section id="liability" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     8. Limitation of Liability
                   </h2>
                   <p>
@@ -495,7 +493,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 9 */}
                 <section id="termination" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     9. Term, Termination &amp; Transition Protocols
                   </h2>
                   <p>
@@ -508,7 +506,7 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 10 */}
                 <section id="governing-law" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     10. Governing Law &amp; Dispute Resolution
                   </h2>
                   <p>
@@ -521,16 +519,16 @@ export default function LegalView({ type }: LegalViewProps) {
 
                 {/* Section 11 */}
                 <section id="general" className="scroll-mt-24 space-y-4">
-                  <h2 className="text-2xl font-black text-white tracking-tight border-b border-slate-800 pb-3">
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-3 dark:border-slate-800 dark:text-white">
                     11. Amendments &amp; General Provisions
                   </h2>
                   <p>
                     We reserve the right to update these public Terms periodically to reflect evolving regulatory frameworks or operational improvements. Continued use of our digital platforms following the posting of updated Terms constitutes acceptance.
                   </p>
-                  <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 space-y-2 text-xs font-mono">
-                    <p className="text-white font-bold text-sm">SysMaira Enterprise — Legal &amp; Corporate Counsel</p>
+                  <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-2 text-xs font-mono shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+                    <p className="text-slate-900 dark:text-white font-bold text-sm">SysMaira Enterprise — Legal &amp; Corporate Counsel</p>
                     <p>100 Montgomery St, Suite 1800, San Francisco, CA, 94104</p>
-                    <p>Email: <a href="mailto:legal@sysmaira.com" className="text-cyan-400 hover:underline">legal@sysmaira.com</a></p>
+                    <p>Email: <a href="mailto:legal@sysmaira.com" className="text-cyan-600 dark:text-cyan-400 hover:underline">legal@sysmaira.com</a></p>
                     <p>Corporate Office: +1 (555) 019-2831</p>
                   </div>
                 </section>
@@ -542,4 +540,3 @@ export default function LegalView({ type }: LegalViewProps) {
     </div>
   );
 }
-

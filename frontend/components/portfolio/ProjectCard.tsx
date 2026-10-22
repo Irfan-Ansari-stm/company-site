@@ -60,59 +60,59 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const topMetric = project.metrics && project.metrics.length > 0 ? project.metrics[0] : null;
 
   return (
-    <article className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/40 hover:bg-slate-900/90 hover:shadow-2xl hover:shadow-cyan-950/30 sm:p-7">
+    <article className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-cyan-500/40 dark:hover:bg-slate-900/90 dark:hover:shadow-2xl dark:hover:shadow-cyan-950/30 sm:p-7">
       {/* Top row: Client & Category Badge */}
       <div>
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-cyan-950/80 text-cyan-400 border border-cyan-500/20 shadow-sm">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-cyan-50 text-cyan-700 border border-cyan-200 shadow-sm dark:bg-cyan-950/80 dark:text-cyan-400 dark:border-cyan-500/20">
               <Icon className="h-4 w-4" />
             </span>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               {project.category_name || 'Engineering Discipline'}
             </span>
           </div>
 
           {project.is_featured && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-950/40 px-2.5 py-0.5 text-[10px] font-bold text-amber-300 uppercase">
-              <Sparkles className="h-3 w-3 text-amber-400" />
+            <span className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50 px-2.5 py-0.5 text-[10px] font-bold text-amber-800 uppercase dark:border-amber-500/30 dark:bg-amber-950/40 dark:text-amber-300">
+              <Sparkles className="h-3 w-3 text-amber-600 dark:text-amber-400" />
               Featured
             </span>
           )}
         </div>
 
         {/* Client Name */}
-        <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-cyan-400">
+        <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-cyan-700 dark:text-cyan-400">
           <span>Client: {project.client_name || 'Enterprise Client'}</span>
-          <span className="text-slate-600">•</span>
-          <span className="text-slate-400">{project.duration_weeks ? `${project.duration_weeks} Weeks Delivery` : 'Production Deployed'}</span>
+          <span className="text-slate-300 dark:text-slate-600">•</span>
+          <span className="text-slate-500 dark:text-slate-400">{project.duration_weeks ? `${project.duration_weeks} Weeks Delivery` : 'Production Deployed'}</span>
         </div>
 
         {/* Project Title */}
-        <h3 className="mt-2 text-xl font-bold text-white transition-colors group-hover:text-cyan-300">
+        <h3 className="mt-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-cyan-600 dark:text-white dark:group-hover:text-cyan-300">
           <Link href={`/work/${project.slug}`}>
             {project.title}
           </Link>
         </h3>
 
         {/* Summary */}
-        <p className="mt-3 text-sm leading-relaxed text-slate-400 line-clamp-3">
+        <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-3">
           {project.summary}
         </p>
 
         {/* Top Metric Banner if present */}
         {topMetric && (
-          <div className="mt-5 rounded-xl border border-cyan-500/20 bg-cyan-950/20 p-3">
+          <div className="mt-5 rounded-xl border border-cyan-200 bg-cyan-50/70 p-3 dark:border-cyan-500/20 dark:bg-cyan-950/20">
             <div className="flex items-baseline gap-1">
-              <span className="text-xl font-black text-cyan-300">
+              <span className="text-xl font-black text-cyan-700 dark:text-cyan-300">
                 {topMetric.prefix}{topMetric.value}{topMetric.suffix}
               </span>
-              <span className="text-xs font-semibold text-slate-300">
+              <span className="text-xs font-semibold text-slate-800 dark:text-slate-300">
                 — {topMetric.metric_name}
               </span>
             </div>
             {topMetric.description && (
-              <p className="mt-1 text-[11px] text-slate-400 line-clamp-1">
+              <p className="mt-1 text-[11px] text-slate-600 dark:text-slate-400 line-clamp-1">
                 {topMetric.description}
               </p>
             )}
@@ -121,19 +121,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Bottom Section: Tech Stack & Link */}
-      <div className="mt-6 border-t border-slate-800/80 pt-5">
+      <div className="mt-6 border-t border-slate-100 pt-5 dark:border-slate-800/80">
         {/* Tech Stack Chips */}
         <div className="flex flex-wrap gap-1.5">
           {(project.tech_stack || []).slice(0, 4).map((tech, idx) => (
             <span
               key={idx}
-              className="rounded-md border border-slate-800 bg-slate-950 px-2 py-0.5 font-mono text-[10px] font-medium text-slate-300"
+              className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 font-mono text-[10px] font-medium text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
             >
               {tech}
             </span>
           ))}
           {(project.tech_stack || []).length > 4 && (
-            <span className="rounded-md bg-slate-800/80 px-2 py-0.5 text-[10px] text-slate-400">
+            <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600 dark:bg-slate-800/80 dark:text-slate-400">
               +{(project.tech_stack || []).length - 4} more
             </span>
           )}
@@ -147,7 +147,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
           <Link
             href={`/work/${project.slug}`}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 transition-colors group-hover:text-cyan-300 group-hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 transition-colors group-hover:text-cyan-700 group-hover:underline dark:text-cyan-400 dark:group-hover:text-cyan-300"
           >
             Read Case Study
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

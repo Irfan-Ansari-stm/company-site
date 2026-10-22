@@ -100,46 +100,52 @@ export default function ContactView() {
     staleTime: 60000,
   });
 
-  const supportEmail = settings?.['email.support'] || 'hello@sysmaira.com';
-  const phoneFormatted = '+1 (555) 019-2831';
-  const headquarters = '100 Montgomery St, Suite 1800, San Francisco, CA, 94104';
+  const supportEmail = settings?.['contact.email'] || 'hello@sysmaira.com';
+  const phoneFormatted = settings?.['contact.phone'] || '+1 (555) 019-2831';
+  const headquarters = settings?.['company.address'] || '100 Montgomery St, Suite 1800, San Francisco, CA, 94104';
 
   const leadMutation = useMutation({
-    mutationFn: () => {
-      return crmApi.submitPublicLead({
-        name: formData.name.trim(),
+    mutationFn: async () => {
+      // Split full name for API schema
+      const parts = formData.name.trim().split(' ');
+      const first_name = parts[0] || 'Enterprise';
+      const last_name = parts.slice(1).join(' ') || 'Partner';
+
+      const res = await crmApi.submitPublicLead({
+        first_name,
+        last_name,
         email: formData.email.trim(),
-        company: formData.company.trim(),
-        phone: formData.phone.trim(),
+        company: formData.company.trim() || undefined,
+        phone: formData.phone.trim() || undefined,
         services_needed: [formData.discipline],
         budget_range: formData.budget,
-        requirements: formData.message.trim(),
-        urgency: formData.timeline.includes('< 1 month') ? 'high' : 'medium',
-        source: 'contact_page',
-        website_url: formData.website_url, // Honeypot
-        metadata: {
-          timeline: formData.timeline,
-          consent_confirmed: formData.consent,
-          referrer_url: typeof window !== 'undefined' ? window.location.href : '',
-          user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
-        },
+        timeline: formData.timeline,
+        requirements: formData.message,
+        source: 'contact_page_form',
       });
+      return res.data;
     },
-    onSuccess: (res) => {
-      const publicId = res.data?.data?.public_id || 'CONFIRMED';
-      setSubmittedLeadId(publicId);
-      toast.success('Inquiry received. A Principal Architect will be in touch within 24 hours.');
+    onSuccess: (data) => {
+      const leadId = data?.data?.id || `SYS-${Math.floor(100000 + Math.random() * 900000)}`;
+      setSubmittedLeadId(leadId);
+      toast.success('Your architectural scoping brief was transmitted successfully!');
     },
-    onError: (err) => {
-      toast.error(extractApiError(err) || 'Submission failed. Please check your connection.');
+    onError: (err: any) => {
+      toast.error(extractApiError(err) || 'Failed to submit inquiry. Please try again.');
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Honeypot spam check
+    if (formData.website_url) {
+      toast.success('Inquiry submitted!');
+      return;
+    }
+
     if (!formData.name.trim()) {
-      toast.error('Please enter your full name.');
+      toast.error('Please provide your full name.');
       return;
     }
     if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
@@ -166,27 +172,27 @@ export default function ContactView() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-black">
+    <div className="relative min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-black">
       {/* Background Ambience */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(14,165,233,0.12)_0,transparent_60%)]" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom_right,rgba(20,184,166,0.08)_0,transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(14,165,233,0.08)_0,transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(14,165,233,0.12)_0,transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom_right,rgba(20,184,166,0.05)_0,transparent_50%)] dark:bg-[radial-gradient(ellipse_at_bottom_right,rgba(20,184,166,0.08)_0,transparent_50%)]" />
 
       {/* Hero Section */}
       <section className="relative px-4 pt-14 pb-8 sm:px-6 sm:pt-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-md">
-            <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
-            <span className="tracking-wide uppercase font-mono">Let's Connect / Architectural Inquiry</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-100/70 px-3.5 py-1 text-xs font-semibold text-cyan-800 backdrop-blur-md dark:border-cyan-500/30 dark:bg-cyan-950/40 dark:text-cyan-300">
+            <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+            <span className="tracking-wide uppercase font-mono">Let&apos;s Connect / Architectural Inquiry</span>
           </div>
 
-          <h1 className="mt-5 text-4xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.08]">
-            Let's engineer something <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-indigo-300 bg-clip-text text-transparent">
+          <h1 className="mt-5 text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
+            Let&apos;s engineer something <br className="hidden sm:inline" />
+            <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-indigo-600 dark:from-cyan-300 dark:via-teal-300 dark:to-indigo-300 bg-clip-text text-transparent">
               extraordinary together.
             </span>
           </h1>
 
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
             Direct access to our senior engineering partners and staff architects. Whether you need to decouple a monolithic backend, audit database indexing, or scale an enterprise SaaS core, we are ready to assist.
           </p>
         </div>
@@ -199,42 +205,42 @@ export default function ContactView() {
             {/* Left Column: Contact Details, Roadmap & Trust Badges */}
             <div className="space-y-8 lg:col-span-5">
               {/* Contact Information Card */}
-              <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900/90 to-slate-950/80 p-6 sm:p-8 backdrop-blur-md shadow-2xl">
-                <h2 className="text-xl font-black text-white">Direct Advisory Channels</h2>
-                <p className="mt-1 text-xs text-slate-400">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl backdrop-blur-md transition-colors sm:p-8 dark:border-slate-800 dark:bg-gradient-to-br dark:from-slate-900/90 dark:to-slate-950/80">
+                <h2 className="text-xl font-black text-slate-900 dark:text-white">Direct Advisory Channels</h2>
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                   Connect directly with our San Francisco architecture office.
                 </p>
 
                 <div className="mt-6 space-y-5 text-sm">
                   {/* Email */}
                   <div className="flex items-start gap-3.5 group">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-950/40 text-cyan-400">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-50 text-cyan-600 dark:bg-cyan-950/40 dark:text-cyan-400">
                       <Mail className="h-5 w-5" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                      <p className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
                         Inquiries &amp; Architecture Scoping
                       </p>
                       <div className="mt-0.5 flex items-center gap-2">
                         <a
                           href={`mailto:${supportEmail}`}
-                          className="font-bold text-white hover:text-cyan-300 transition truncate cursor-pointer"
+                          className="font-bold text-slate-900 hover:text-cyan-600 dark:text-white dark:hover:text-cyan-300 transition truncate cursor-pointer"
                         >
                           {supportEmail}
                         </a>
                         <button
                           onClick={handleCopyEmail}
-                          className="text-slate-400 hover:text-white transition cursor-pointer"
+                          className="text-slate-400 hover:text-slate-700 dark:hover:text-white transition cursor-pointer"
                           aria-label="Copy email"
                         >
                           {copiedEmail ? (
-                            <Check className="h-4 w-4 text-teal-400" />
+                            <Check className="h-4 w-4 text-teal-600 dark:text-teal-400" />
                           ) : (
                             <Copy className="h-4 w-4" />
                           )}
                         </button>
                       </div>
-                      <p className="text-[11px] text-teal-400 font-semibold mt-0.5">
+                      <p className="text-[11px] text-teal-600 dark:text-teal-400 font-semibold mt-0.5">
                         • 24-Hour SLA Response Time
                       </p>
                     </div>
@@ -242,20 +248,20 @@ export default function ContactView() {
 
                   {/* Phone */}
                   <div className="flex items-start gap-3.5">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-950/40 text-cyan-400">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-50 text-cyan-600 dark:bg-cyan-950/40 dark:text-cyan-400">
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                      <p className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
                         Urgent Architecture Hotline
                       </p>
                       <a
                         href="tel:+15550192831"
-                        className="mt-0.5 block font-bold text-white hover:text-cyan-300 transition cursor-pointer"
+                        className="mt-0.5 block font-bold text-slate-900 hover:text-cyan-600 dark:text-white dark:hover:text-cyan-300 transition cursor-pointer"
                       >
                         {phoneFormatted}
                       </a>
-                      <p className="text-[11px] text-slate-400 mt-0.5">
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                         Mon – Fri: 8:00 AM – 6:00 PM PST
                       </p>
                     </div>
@@ -263,21 +269,21 @@ export default function ContactView() {
 
                   {/* Address */}
                   <div className="flex items-start gap-3.5">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-950/40 text-cyan-400">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-50 text-cyan-600 dark:bg-cyan-950/40 dark:text-cyan-400">
                       <MapPin className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                      <p className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
                         Executive Headquarters
                       </p>
-                      <p className="mt-0.5 font-bold text-white leading-snug">
+                      <p className="mt-0.5 font-bold text-slate-900 leading-snug dark:text-white">
                         {headquarters}
                       </p>
                       <a
                         href="https://maps.google.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-cyan-400 hover:underline cursor-pointer"
+                        className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer"
                       >
                         <span>View on Google Maps</span>
                         <ExternalLink className="h-3 w-3" />
@@ -288,46 +294,46 @@ export default function ContactView() {
               </div>
 
               {/* 3-Step Client Onboarding Lifecycle */}
-              <div className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 sm:p-8 backdrop-blur-md">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-cyan-400">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur-md transition-colors sm:p-8 dark:border-slate-800 dark:bg-slate-900/50">
+                <h3 className="font-mono text-xs uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
                   What Happens Next
                 </h3>
-                <h4 className="mt-2 text-xl font-black text-white">
+                <h4 className="mt-2 text-xl font-black text-slate-900 dark:text-white">
                   Our 3-Phase Scoping Protocol
                 </h4>
 
                 <div className="mt-6 space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 font-mono text-xs font-bold text-cyan-300 ring-1 ring-cyan-500/30">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 font-mono text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/30 dark:bg-cyan-500/20 dark:text-cyan-300">
                       01
                     </div>
                     <div>
-                      <h5 className="text-sm font-bold text-white">Automated Intake &amp; Staff Assignment</h5>
-                      <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                      <h5 className="text-sm font-bold text-slate-900 dark:text-white">Automated Intake &amp; Staff Assignment</h5>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
                         Your brief is logged into our secure PostgreSQL CRM and reviewed by a Principal Systems Architect matching your industry vertical.
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 font-mono text-xs font-bold text-cyan-300 ring-1 ring-cyan-500/30">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 font-mono text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/30 dark:bg-cyan-500/20 dark:text-cyan-300">
                       02
                     </div>
                     <div>
-                      <h5 className="text-sm font-bold text-white">Mutual NDA &amp; Technical Discovery</h5>
-                      <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                      <h5 className="text-sm font-bold text-slate-900 dark:text-white">Mutual NDA &amp; Technical Discovery</h5>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
                         We execute a bilateral NDA before conducting a 45-minute architectural deep dive into your infrastructure bottlenecks and latency targets.
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 font-mono text-xs font-bold text-cyan-300 ring-1 ring-cyan-500/30">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 font-mono text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/30 dark:bg-cyan-500/20 dark:text-cyan-300">
                       03
                     </div>
                     <div>
-                      <h5 className="text-sm font-bold text-white">Milestone Roadmap &amp; Fixed-Fee Scoping</h5>
-                      <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                      <h5 className="text-sm font-bold text-slate-900 dark:text-white">Milestone Roadmap &amp; Fixed-Fee Scoping</h5>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
                         You receive an actionable technical blueprint detailing sprint deliverables, team allocation, and clear performance SLA criteria.
                       </p>
                     </div>
@@ -336,14 +342,14 @@ export default function ContactView() {
               </div>
 
               {/* Enterprise Security & Privacy Badges */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-5">
+              <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="flex items-center gap-3">
-                  <ShieldCheck className="h-6 w-6 text-cyan-400 shrink-0" />
+                  <ShieldCheck className="h-6 w-6 text-cyan-600 dark:text-cyan-400 shrink-0" />
                   <div>
-                    <h5 className="text-xs font-bold uppercase tracking-wider text-white">
+                    <h5 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                       Confidentiality &amp; IP Protection Guaranteed
                     </h5>
-                    <p className="mt-0.5 text-xs text-slate-400">
+                    <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-400">
                       Zero client technical data is used for machine learning models. Complete repository ownership is transferred on cutover.
                     </p>
                   </div>
@@ -355,25 +361,25 @@ export default function ContactView() {
             <div className="lg:col-span-7">
               {submittedLeadId ? (
                 /* Success Confirmation View */
-                <div className="rounded-3xl border border-teal-500/40 bg-gradient-to-br from-slate-900 via-slate-900/90 to-teal-950/40 p-8 sm:p-12 text-center shadow-2xl backdrop-blur-md">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-500/20 text-teal-400 ring-4 ring-teal-500/30">
+                <div className="rounded-3xl border border-teal-500/40 bg-white p-8 text-center shadow-2xl backdrop-blur-md dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900/90 dark:to-teal-950/40 sm:p-12">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-50 text-teal-600 ring-4 ring-teal-500/30 dark:bg-teal-500/20 dark:text-teal-400">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
 
-                  <h3 className="mt-6 text-2xl font-black text-white sm:text-3xl">
+                  <h3 className="mt-6 text-2xl font-black text-slate-900 dark:text-white sm:text-3xl">
                     Architectural Brief Received
                   </h3>
 
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300 max-w-lg mx-auto">
-                    Thank you, <span className="font-bold text-white">{formData.name}</span>. Your scoping brief has been assigned reference ID:
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300 max-w-lg mx-auto">
+                    Thank you, <span className="font-bold text-slate-900 dark:text-white">{formData.name}</span>. Your scoping brief has been assigned reference ID:
                   </p>
 
-                  <div className="mt-4 inline-block rounded-xl border border-teal-500/40 bg-teal-950/60 px-5 py-2 font-mono text-sm font-bold text-teal-300">
+                  <div className="mt-4 inline-block rounded-xl border border-teal-200 bg-teal-50 px-5 py-2 font-mono text-sm font-bold text-teal-800 dark:border-teal-500/40 dark:bg-teal-950/60 dark:text-teal-300">
                     REF: {submittedLeadId}
                   </div>
 
-                  <p className="mt-4 text-xs text-slate-400 max-w-md mx-auto">
-                    A confirmation email has been logged. A Principal Systems Architect will review your requirements and reach out to <span className="text-white font-semibold">{formData.email}</span> within 24 business hours.
+                  <p className="mt-4 text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+                    A confirmation email has been logged. A Principal Systems Architect will review your requirements and reach out to <span className="text-slate-900 dark:text-white font-semibold">{formData.email}</span> within 24 business hours.
                   </p>
 
                   <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -393,14 +399,14 @@ export default function ContactView() {
                           website_url: '',
                         });
                       }}
-                      className="rounded-xl border border-slate-700 bg-slate-800 px-5 py-3 text-xs font-bold text-white transition hover:bg-slate-700 cursor-pointer"
+                      className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-xs font-bold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700 cursor-pointer shadow-sm"
                     >
                       Submit Another Inquiry
                     </button>
 
                     <Link
                       href="/work"
-                      className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-xs font-bold text-slate-950 transition hover:bg-cyan-400 cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-5 py-3 text-xs font-bold text-slate-950 transition hover:brightness-110 shadow-md cursor-pointer"
                     >
                       <span>Explore Verified Work</span>
                       <ArrowRight className="h-4 w-4" />
@@ -411,13 +417,13 @@ export default function ContactView() {
                 /* Main Scoping Form */
                 <form
                   onSubmit={handleSubmit}
-                  className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 sm:p-10 backdrop-blur-md shadow-2xl space-y-6"
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl backdrop-blur-md transition-colors space-y-6 sm:p-10 dark:border-slate-800 dark:bg-slate-900/60"
                 >
                   <div>
-                    <h2 className="text-2xl font-black text-white sm:text-3xl">
+                    <h2 className="text-2xl font-black text-slate-900 dark:text-white sm:text-3xl">
                       Request Architecture Scoping
                     </h2>
-                    <p className="mt-1 text-sm text-slate-400">
+                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
                       Complete the briefing form below. All inquiries are strictly confidential.
                     </p>
                   </div>
@@ -436,30 +442,32 @@ export default function ContactView() {
                   {/* Row 1: Full Name & Work Email */}
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-300">
-                        Full Name <span className="text-cyan-400">*</span>
+                      <label htmlFor="contact-full-name" className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                        Full Name <span className="text-cyan-600 dark:text-cyan-400">*</span>
                       </label>
                       <input
+                        id="contact-full-name"
                         required
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Alex Mercer"
-                        className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                        className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-300">
-                        Work Email <span className="text-cyan-400">*</span>
+                      <label htmlFor="contact-work-email" className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                        Work Email <span className="text-cyan-600 dark:text-cyan-400">*</span>
                       </label>
                       <input
+                        id="contact-work-email"
                         required
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="alex@enterprise.com"
-                        className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                        className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
                       />
                     </div>
                   </div>
@@ -467,47 +475,50 @@ export default function ContactView() {
                   {/* Row 2: Company & Phone */}
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-300">
+                      <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300">
                         Organization / Company
                       </label>
                       <input
+                        id="contact-company"
                         type="text"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                         placeholder="e.g. Apex Financial Systems"
-                        className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                        className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-300">
+                      <label htmlFor="contact-phone" className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300">
                         Phone / WhatsApp
                       </label>
                       <input
+                        id="contact-phone"
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+1 (555) 000-0000"
-                        className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                        className="mt-2 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
                       />
                     </div>
                   </div>
 
                   {/* Row 3: Primary Discipline */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
+                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                       Primary Architectural Discipline
                     </label>
-                    <div className="grid gap-2 sm:grid-cols-2">
+                    <div role="group" aria-label="Select primary architectural discipline" className="grid gap-2 sm:grid-cols-2">
                       {disciplines.map((d) => (
                         <button
                           key={d}
                           type="button"
+                          aria-pressed={formData.discipline === d}
                           onClick={() => setFormData({ ...formData, discipline: d })}
                           className={`rounded-xl border p-3 text-left text-xs font-semibold transition cursor-pointer ${
                             formData.discipline === d
-                              ? 'border-cyan-500 bg-cyan-950/60 text-white shadow-sm ring-1 ring-cyan-500/40'
-                              : 'border-slate-800 bg-slate-950/60 text-slate-400 hover:border-slate-700 hover:text-white'
+                              ? 'border-cyan-500 bg-cyan-50 text-cyan-800 shadow-sm ring-1 ring-cyan-500/40 dark:bg-cyan-950/60 dark:text-white'
+                              : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white'
                           }`}
                         >
                           {d}
@@ -518,19 +529,20 @@ export default function ContactView() {
 
                   {/* Row 4: Estimated Budget Range */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
+                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                       Estimated Investment Range
                     </label>
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                    <div role="group" aria-label="Select estimated investment range" className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                       {budgetRanges.map((b) => (
                         <button
                           key={b}
                           type="button"
+                          aria-pressed={formData.budget === b}
                           onClick={() => setFormData({ ...formData, budget: b })}
                           className={`rounded-xl border p-2.5 text-center text-xs font-semibold transition cursor-pointer ${
                             formData.budget === b
-                              ? 'border-cyan-500 bg-cyan-950/60 text-white ring-1 ring-cyan-500/40'
-                              : 'border-slate-800 bg-slate-950/60 text-slate-400 hover:border-slate-700 hover:text-white'
+                              ? 'border-cyan-500 bg-cyan-50 text-cyan-800 ring-1 ring-cyan-500/40 dark:bg-cyan-950/60 dark:text-white'
+                              : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white'
                           }`}
                         >
                           {b}
@@ -541,19 +553,20 @@ export default function ContactView() {
 
                   {/* Row 5: Delivery Timeline */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
+                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                       Target Implementation Timeline
                     </label>
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                    <div role="group" aria-label="Select target implementation timeline" className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                       {timelines.map((t) => (
                         <button
                           key={t}
                           type="button"
+                          aria-pressed={formData.timeline === t}
                           onClick={() => setFormData({ ...formData, timeline: t })}
                           className={`rounded-xl border p-2 text-center text-[11px] font-semibold transition cursor-pointer ${
                             formData.timeline === t
-                              ? 'border-cyan-500 bg-cyan-950/60 text-white ring-1 ring-cyan-500/40'
-                              : 'border-slate-800 bg-slate-950/60 text-slate-400 hover:border-slate-700 hover:text-white'
+                              ? 'border-cyan-500 bg-cyan-50 text-cyan-800 ring-1 ring-cyan-500/40 dark:bg-cyan-950/60 dark:text-white'
+                              : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white'
                           }`}
                         >
                           {t}
@@ -564,16 +577,17 @@ export default function ContactView() {
 
                   {/* Row 6: Project Brief / Message */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-300">
-                      Project Brief &amp; Technical Objectives <span className="text-cyan-400">*</span>
+                    <label htmlFor="contact-message" className="block text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                      Project Brief &amp; Technical Objectives <span className="text-cyan-600 dark:text-cyan-400">*</span>
                     </label>
                     <textarea
+                      id="contact-message"
                       required
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Outline your existing stack, bottleneck, scalability target, or key requirements..."
-                      className="mt-2 w-full resize-none rounded-xl border border-slate-700 bg-slate-950 p-4 text-sm text-white placeholder-slate-500 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                      className="mt-2 w-full resize-none rounded-xl border border-slate-300 bg-slate-50 p-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-1 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
                     />
                   </div>
 
@@ -584,9 +598,9 @@ export default function ContactView() {
                       type="checkbox"
                       checked={formData.consent}
                       onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                      className="mt-1 h-4 w-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-cyan-500 cursor-pointer"
+                      className="mt-1 h-4 w-4 rounded border-slate-300 bg-white text-cyan-600 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 cursor-pointer"
                     />
-                    <label htmlFor="consent-check" className="text-xs text-slate-400 cursor-pointer">
+                    <label htmlFor="consent-check" className="text-xs text-slate-600 dark:text-slate-400 cursor-pointer">
                       I agree to confidential enterprise architectural consultation and understand that all project discussions are protected under standard mutual NDA policies.
                     </label>
                   </div>
@@ -617,13 +631,13 @@ export default function ContactView() {
       </section>
 
       {/* Enterprise FAQs Accordion */}
-      <section className="border-t border-slate-800 bg-slate-950 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-t border-slate-200 bg-slate-100/50 px-4 py-16 transition-colors sm:px-6 lg:px-8 dark:border-slate-800 dark:bg-slate-950">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-10">
-            <p className="font-mono text-xs uppercase tracking-wider text-cyan-400">
+            <p className="font-mono text-xs uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
               Frequently Asked Questions
             </p>
-            <h3 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+            <h3 className="mt-2 text-2xl font-black text-slate-900 dark:text-white sm:text-3xl">
               Engagement &amp; Consultation Protocol
             </h3>
           </div>
@@ -632,22 +646,23 @@ export default function ContactView() {
             {contactFaqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm overflow-hidden transition"
+                className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden transition-colors dark:border-slate-800 dark:bg-slate-900/50"
               >
                 <button
                   type="button"
+                  aria-expanded={openFaq === idx}
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="flex w-full items-center justify-between p-5 text-left text-sm font-bold text-white hover:text-cyan-300 transition cursor-pointer"
+                  className="flex w-full items-center justify-between p-5 text-left text-sm font-bold text-slate-900 hover:text-cyan-600 dark:text-white dark:hover:text-cyan-300 transition cursor-pointer"
                 >
                   <span>{faq.question}</span>
                   {openFaq === idx ? (
-                    <ChevronUp className="h-4 w-4 text-cyan-400 shrink-0" />
+                    <ChevronUp className="h-4 w-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
                   ) : (
                     <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
                   )}
                 </button>
                 {openFaq === idx && (
-                  <div className="border-t border-slate-800/80 px-5 pb-5 pt-3 text-xs leading-relaxed text-slate-300">
+                  <div className="border-t border-slate-200 px-5 pb-5 pt-3 text-xs leading-relaxed text-slate-600 dark:border-slate-800/80 dark:text-slate-300">
                     {faq.answer}
                   </div>
                 )}
@@ -659,4 +674,3 @@ export default function ContactView() {
     </div>
   );
 }
-

@@ -22,6 +22,14 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
     }
   }, [hasHydrated, isAuthenticated, router]);
 
+  // Strict Dashboard Isolation: ensure documentElement and body have no public dark theme classes
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
+    }
+  }, []);
+
   // Wait for Zustand to restore localStorage before deciding that a session is absent.
   if (!hasHydrated || !isAuthenticated) return null;
 

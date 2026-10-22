@@ -93,7 +93,7 @@ export default function FAQAccordion() {
                         : 'border-slate-300 bg-white text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400'
                     }`}
                   >
-                    <ChevronDown className="h-4 w-4" />
+                    <ChevronDown aria-hidden="true" className="h-4 w-4" />
                   </span>
                 </button>
 
