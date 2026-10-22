@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/store/auth';
 import { authApi } from '@/lib/api';
 import { Alert } from '@/components/ui';
@@ -13,7 +13,8 @@ import { useTheme } from '@/context/ThemeContext';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { setAuth } = useAuthStore();
+  const searchParams = useSearchParams();
+  const { isAuthenticated, hasHydrated, setAuth } = useAuthStore();
   const { theme, toggleTheme } = useTheme();
 
   const [email, setEmail] = useState('');
@@ -22,6 +23,27 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [twoFA, setTwoFA] = useState<{ partialToken: string } | null>(null);
   const [code2FA, setCode2FA] = useState('');
+
+  // Auto-redirect if user already has an active authenticated session
+  useEffect(() => {
+    if (hasHydrated && isAuthenticated) {
+      const redirect = searchParams.get('redirect') || '/dashboard';
+      router.replace(redirect);
+    }
+  }, [hasHydrated, isAuthenticated, router, searchParams]);
+
+  if (hasHydrated && isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 animate-spin text-cyan-500" />
+          <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+            Redirecting to your dashboard...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +60,8 @@ export default function LoginPage() {
 
       setAuth(result.user, result.accessToken, result.refreshToken);
       toast.success('Welcome back!');
-      router.push('/dashboard');
+      const redirect = searchParams.get('redirect') || '/dashboard';
+      router.push(redirect);
     } catch (err: any) {
       setError(extractApiError(err));
     } finally {
@@ -56,7 +79,8 @@ export default function LoginPage() {
       const meRes = await authApi.me();
       setAuth(meRes.data.data, result.accessToken, result.refreshToken);
       toast.success('Welcome back!');
-      router.push('/dashboard');
+      const redirect = searchParams.get('redirect') || '/dashboard';
+      router.push(redirect);
     } catch (err: any) {
       setError(extractApiError(err));
     } finally {

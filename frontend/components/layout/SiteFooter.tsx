@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { marketingApi, systemApi } from '@/lib/api';
 import { extractApiError } from '@/lib/utils';
+import { useAuthStore } from '@/store/auth';
 
 interface SiteFooterProps {
   brandName?: string;
@@ -25,6 +26,12 @@ interface SiteFooterProps {
 
 export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps) {
   const [email, setEmail] = useState('');
+  const { isAuthenticated, hasHydrated } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { data: settings } = useQuery({
     queryKey: ['public-settings'],
@@ -72,37 +79,39 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom,rgba(14,165,233,0.06)_0,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_bottom,rgba(14,165,233,0.12)_0,transparent_70%)]" />
 
       {/* ── Top Pre-Footer Closing Section ── */}
-      <div className="border-b border-slate-200/80 bg-white/60 px-4 py-16 transition-colors duration-300 sm:px-6 sm:py-20 lg:px-8 dark:border-slate-800/80 dark:bg-slate-950/60">
-        <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-cyan-50/50 p-8 shadow-xl backdrop-blur-md transition-all duration-300 sm:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12 dark:border-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900/90 dark:to-cyan-950/40 dark:shadow-2xl">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-100/70 px-3 py-1 text-xs font-semibold text-cyan-800 dark:border-cyan-500/30 dark:bg-cyan-950/60 dark:text-cyan-300">
-                <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-                <span className="apple-eyebrow">Start Your Project</span>
+      <div className="border-b border-slate-200/80 bg-white/60 transition-colors duration-300 dark:border-slate-800/80 dark:bg-slate-950/60">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="px-4 sm:px-6">
+            <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-cyan-50/50 p-8 shadow-xl backdrop-blur-md transition-all duration-300 sm:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12 dark:border-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900/90 dark:to-cyan-950/40 dark:shadow-2xl">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-100/70 px-3 py-1 text-xs font-semibold text-cyan-800 dark:border-cyan-500/30 dark:bg-cyan-950/60 dark:text-cyan-300">
+                  <Sparkles className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+                  <span className="apple-eyebrow">Start Your Project</span>
+                </div>
+                <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl dark:text-white">
+                  Have an ambitious project to build? <br className="hidden sm:inline" />
+                  Let&apos;s talk about what you need.
+                </h2>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed dark:text-slate-300">
+                  Connect directly with our team to discuss your project requirements, target launch date, and budget. We will help you turn your idea into a working product.
+                </p>
               </div>
-              <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl dark:text-white">
-                Have an ambitious project to build? <br className="hidden sm:inline" />
-                Let&apos;s talk about what you need.
-              </h2>
-              <p className="mt-3 text-sm text-slate-600 leading-relaxed dark:text-slate-300">
-                Connect directly with our team to discuss your project requirements, target launch date, and budget. We will help you turn your idea into a working product.
-              </p>
-            </div>
 
-            <div className="mt-8 lg:mt-0 flex flex-col sm:flex-row gap-4 shrink-0">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-4 text-sm font-bold text-slate-950 transition hover:brightness-110 shadow-lg shadow-cyan-500/20 cursor-pointer"
-              >
-                <span>Talk to Our Team</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/work"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-4 text-sm font-bold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800 cursor-pointer shadow-sm"
-              >
-                <span>Explore Our Work</span>
-              </Link>
+              <div className="mt-8 lg:mt-0 flex flex-col sm:flex-row gap-4 shrink-0">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-4 text-sm font-bold text-slate-950 transition hover:brightness-110 shadow-lg shadow-cyan-500/20 cursor-pointer"
+                >
+                  <span>Talk to Our Team</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/work"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-4 text-sm font-bold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800 cursor-pointer shadow-sm"
+                >
+                  <span>Explore Our Work</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -110,6 +119,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
 
       {/* ── Main Footer Layout ── */}
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6">
         {/* Newsletter Subscription Bar */}
         <div className="rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-lg backdrop-blur-xl transition-colors duration-300 md:flex md:items-center md:justify-between md:gap-8 dark:border-slate-800 dark:bg-slate-900/60 dark:shadow-xl">
           <div className="max-w-xl">
@@ -289,9 +299,15 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
                 </Link>
               </li>
               <li>
-                <Link href="/auth/login" className="hover:text-cyan-600 dark:hover:text-white transition font-semibold text-cyan-600 dark:text-cyan-400 cursor-pointer">
-                  Client Portal Login &rarr;
-                </Link>
+                {mounted && hasHydrated && isAuthenticated ? (
+                  <Link href="/dashboard" className="hover:text-cyan-600 dark:hover:text-white transition font-semibold text-cyan-600 dark:text-cyan-400 cursor-pointer">
+                    Dashboard Console &rarr;
+                  </Link>
+                ) : (
+                  <Link href="/auth/login" className="hover:text-cyan-600 dark:hover:text-white transition font-semibold text-cyan-600 dark:text-cyan-400 cursor-pointer">
+                    Client Portal Login &rarr;
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
@@ -354,6 +370,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
               <span>SOC2 Type II &amp; HIPAA Aligned</span>
             </span>
           </div>
+        </div>
         </div>
       </div>
     </footer>

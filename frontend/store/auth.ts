@@ -39,6 +39,7 @@ interface AuthState {
   isClientPreview: boolean;
 
   setAuth: (user: User, accessToken: string, refreshToken: string) => void;
+  setTokens: (accessToken: string, refreshToken: string) => void;
   setUser: (user: User) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
   setClientModules: (modules: DashboardModuleConfig[]) => void;
@@ -66,9 +67,23 @@ export const useAuthStore = create<AuthState>()(
       isClientPreview: false,
 
       setAuth: (user, accessToken, refreshToken) => {
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
+          } catch (_) {}
+        }
         set({ user, accessToken, refreshToken, isAuthenticated: true });
+      },
+
+      setTokens: (accessToken, refreshToken) => {
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
+          } catch (_) {}
+        }
+        set({ accessToken, refreshToken });
       },
 
       setUser: (user) => set({ user }),
@@ -80,8 +95,12 @@ export const useAuthStore = create<AuthState>()(
       setClientPreview: (preview) => set({ isClientPreview: preview }),
 
       logout: () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+          } catch (_) {}
+        }
         set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false, isClientPreview: false });
       },
 
@@ -173,7 +192,26 @@ export const useAuthStore = create<AuthState>()(
         clientModules: state.clientModules,
       }),
       onRehydrateStorage: () => (state) => {
-        state?.setHasHydrated(true);
+        if (state) {
+          if (state.accessToken && typeof window !== 'undefined') {
+            try { localStorage.setItem('accessToken', state.accessToken); } catch (_) {}
+          }
+          if (state.refreshToken && typeof window !== 'undefined') {
+            try { localStorage.setItem('refreshToken', state.refreshToken); } catch (_) {}
+          }
+          if (state.accessToken) {
+            useAuthStore.setState({ isAuthenticated: true });
+          }
+          state.setHasHydrated(true);
+        } else {
+          if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('accessToken');
+            if (token) {
+              useAuthStore.setState({ isAuthenticated: true, accessToken: token });
+            }
+          }
+          useAuthStore.getState().setHasHydrated(true);
+        }
       },
     }
   )

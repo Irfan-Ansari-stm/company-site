@@ -168,8 +168,8 @@ export function Sidebar() {
 
   return (
     <aside className="fixed left-0 top-0 h-full w-64 bg-slate-900 flex flex-col z-30 overflow-hidden border-r border-slate-800">
-      {/* Logo */}
-      <div className="px-6 py-5 border-b border-slate-800">
+      {/* Logo & Public Website Link */}
+      <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-sm">E</span>
@@ -187,6 +187,13 @@ export function Sidebar() {
             </p>
           </div>
         </div>
+        <Link
+          href="/"
+          className="text-slate-400 hover:text-cyan-400 p-1.5 rounded-lg hover:bg-slate-800 transition"
+          title="View Public Website"
+        >
+          <Globe className="w-4 h-4" />
+        </Link>
       </div>
 
       {/* Client Preview Mode Warning Banner */}

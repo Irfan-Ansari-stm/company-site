@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { Layers3, ArrowRight, Menu, X, Sun, Moon } from 'lucide-react';
+import { Layers3, ArrowRight, Menu, X, Sun, Moon, LayoutDashboard, LogOut } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { useAuthStore } from '@/store/auth';
 import { systemApi } from '@/lib/api';
 
 interface SiteHeaderProps {
@@ -14,6 +15,7 @@ interface SiteHeaderProps {
 
 export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps) {
   const { theme, toggleTheme, isDark } = useTheme();
+  const { user, isAuthenticated, hasHydrated, logout } = useAuthStore();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -163,13 +165,35 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
               )}
             </button>
 
-            {/* Client Portal Link */}
-            <Link
-              href="/auth/login"
-              className="hidden rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white md:inline-block cursor-pointer"
-            >
-              Client portal
-            </Link>
+            {/* Client Portal / Authenticated Dashboard Access */}
+            {mounted && hasHydrated && isAuthenticated && user ? (
+              <div className="hidden md:flex items-center gap-1.5">
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-50/80 px-3 py-1.5 text-xs font-bold text-cyan-900 shadow-sm transition hover:bg-cyan-100 hover:border-cyan-400 dark:border-cyan-500/30 dark:bg-cyan-950/60 dark:text-cyan-300 dark:hover:bg-cyan-900/60 cursor-pointer"
+                  title="Open Dashboard Console"
+                >
+                  <LayoutDashboard className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+                  <span className="max-w-[130px] truncate">{user.display_name || 'Dashboard'}</span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => logout()}
+                  className="rounded-xl border border-slate-200 bg-white/80 p-2 text-slate-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 dark:border-slate-800 dark:bg-slate-900/80 dark:text-slate-400 dark:hover:text-red-400 transition cursor-pointer"
+                  title="Sign Out"
+                  aria-label="Sign Out"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="hidden rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white md:inline-block cursor-pointer"
+              >
+                Client portal
+              </Link>
+            )}
 
             {/* Primary CTA */}
             <Link
@@ -250,13 +274,52 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
                 </div>
 
                 <div className="mt-3 border-t border-slate-200 dark:border-slate-800 pt-4 flex flex-col gap-2.5">
-                  <Link
-                    href="/auth/login"
-                    onClick={() => setMobileOpen(false)}
-                    className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-xs font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300 dark:hover:text-white dark:hover:border-slate-700 cursor-pointer transition"
-                  >
-                    Client Portal Login &rarr;
-                  </Link>
+                  {mounted && hasHydrated && isAuthenticated && user ? (
+                    <div className="rounded-2xl border border-cyan-500/30 bg-cyan-50/60 p-3.5 dark:border-cyan-500/20 dark:bg-cyan-950/40">
+                      <div className="flex items-center gap-2.5 mb-3">
+                        <div className="w-9 h-9 rounded-xl bg-cyan-600 text-white font-bold flex items-center justify-center text-xs shadow-sm">
+                          {user.display_name?.charAt(0).toUpperCase() || 'U'}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                            {user.display_name}
+                          </p>
+                          <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                            {user.email}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Link
+                          href="/dashboard"
+                          onClick={() => setMobileOpen(false)}
+                          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-cyan-600 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-cyan-500 transition"
+                        >
+                          <LayoutDashboard className="w-3.5 h-3.5" />
+                          Dashboard
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileOpen(false);
+                            logout();
+                          }}
+                          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 transition"
+                        >
+                          <LogOut className="w-3.5 h-3.5" />
+                          Sign Out
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href="/auth/login"
+                      onClick={() => setMobileOpen(false)}
+                      className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-xs font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300 dark:hover:text-white dark:hover:border-slate-700 cursor-pointer transition"
+                    >
+                      Client Portal Login &rarr;
+                    </Link>
+                  )}
 
                   <Link
                     href="/contact"

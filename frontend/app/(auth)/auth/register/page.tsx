@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/store/auth';
@@ -13,7 +13,7 @@ import { useTheme } from '@/context/ThemeContext';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { setAuth } = useAuthStore();
+  const { isAuthenticated, hasHydrated, setAuth } = useAuthStore();
   const { theme, toggleTheme } = useTheme();
 
   const [loading, setLoading] = useState(false);
@@ -25,6 +25,26 @@ export default function RegisterPage() {
     password: '',
     phone: '',
   });
+
+  // Auto-redirect if user already has an active authenticated session
+  useEffect(() => {
+    if (hasHydrated && isAuthenticated) {
+      router.replace('/dashboard');
+    }
+  }, [hasHydrated, isAuthenticated, router]);
+
+  if (hasHydrated && isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 animate-spin text-cyan-500" />
+          <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+            Redirecting to your dashboard...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 

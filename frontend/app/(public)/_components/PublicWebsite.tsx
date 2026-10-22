@@ -35,6 +35,7 @@ import {
   systemApi,
 } from '@/lib/api';
 import { extractApiError, formatCurrency } from '@/lib/utils';
+import { useAuthStore } from '@/store/auth';
 
 type ApiPage<T> = {
   data?: T[];
@@ -208,6 +209,7 @@ function serviceSummary(service: PublicService) {
 }
 
 export default function PublicWebsite() {
+  const { isAuthenticated, hasHydrated } = useAuthStore();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [leadForm, setLeadForm] = useState({
     name: '',
@@ -331,8 +333,11 @@ export default function PublicWebsite() {
           </nav>
 
           <div className="hidden items-center gap-3 md:flex">
-            <Link href="/auth/login" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-white/70 hover:text-slate-950">
-              Client login
+            <Link
+              href={hasHydrated && isAuthenticated ? '/dashboard' : '/auth/login'}
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-white/70 hover:text-slate-950"
+            >
+              {hasHydrated && isAuthenticated ? 'Dashboard' : 'Client login'}
             </Link>
             <Link href="/contact" className="premium-button inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-bold text-white transition">
               Start a project
@@ -357,8 +362,12 @@ export default function PublicWebsite() {
                 {item.label}
               </Link>
               ))}
-              <Link href="/auth/login" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white/70">
-                Client login
+              <Link
+                href={hasHydrated && isAuthenticated ? '/dashboard' : '/auth/login'}
+                className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white/70"
+                onClick={() => setMobileOpen(false)}
+              >
+                {hasHydrated && isAuthenticated ? 'Dashboard' : 'Client login'}
               </Link>
             </div>
           </div>
@@ -698,8 +707,8 @@ export default function PublicWebsite() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="/auth/login" className="hover:text-white">
-                Dashboard
+              <Link href={hasHydrated && isAuthenticated ? '/dashboard' : '/auth/login'} className="hover:text-white">
+                {hasHydrated && isAuthenticated ? 'Dashboard Console' : 'Dashboard'}
               </Link>
             </div>
           </div>
