@@ -246,6 +246,11 @@ router.post('/leads', requirePermission('lead.create'), asyncHandler(async (req,
 
 // Public lead submission (contact/inquiry form)
 router.post('/leads/public', asyncHandler(async (req, res) => {
+  // Honeypot spam protection: silently filter bot submissions
+  if (req.body.website_url || req.body.honeypot || req.body.hp_company) {
+    return created(res, { public_id: 'SPAM-FILTERED' }, 'Inquiry submitted successfully. We will be in touch shortly.');
+  }
+
   let {
     first_name, last_name, name, email, phone, company, services_needed,
     budget_range, budget, requirements, message, urgency, source = 'website',
@@ -262,7 +267,9 @@ router.post('/leads/public', asyncHandler(async (req, res) => {
   if (!first_name) first_name = 'Inquirer';
   if (!last_name) last_name = 'Contact';
 
-  if (!email) throw new AppError('email required', 400);
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    throw new AppError('A valid work email address is required', 400);
+  }
 
   // Validate against PostgreSQL lead_source enum
   const allowedSources = ['website', 'referral', 'linkedin', 'google_ads', 'meta_ads', 'cold_outreach', 'partner', 'event', 'other'];

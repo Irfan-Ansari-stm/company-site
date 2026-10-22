@@ -81,7 +81,7 @@ router.post('/tags', authenticate, asyncHandler(async (req, res) => {
 
 // ── Posts ────────────────────────────────────────────────────
 router.get('/posts', optionalAuth, paginate, asyncHandler(async (req, res) => {
-  const { status, category_id, author_id, is_featured, search, tag } = req.query;
+  const { status, category_id, category, author_id, is_featured, search, tag, sort } = req.query;
   const isAdmin = req.user?.role && !['client','candidate'].includes(req.user?.role);
 
   const conditions = ['p.deleted_at IS NULL'];
@@ -91,35 +91,64 @@ router.get('/posts', optionalAuth, paginate, asyncHandler(async (req, res) => {
   if (!isAdmin) conditions.push(`p.status='published'`);
   else if (status) { conditions.push(`p.status=$${idx}::post_status`); params.push(status); idx++; }
 
-  if (category_id) { conditions.push(`p.category_id=$${idx}`); params.push(category_id); idx++; }
+  const catFilter = category_id || category;
+  if (catFilter) {
+    if (isUUID(catFilter)) {
+      conditions.push(`p.category_id=$${idx}`);
+      params.push(catFilter);
+      idx++;
+    } else {
+      conditions.push(`c.slug=$${idx}`);
+      params.push(catFilter);
+      idx++;
+    }
+  }
+
   if (author_id)   { conditions.push(`p.author_id=$${idx}`);   params.push(author_id); idx++; }
   if (is_featured !== undefined) { conditions.push(`p.is_featured=$${idx}`); params.push(is_featured === 'true'); idx++; }
+
   if (search) {
-    conditions.push(`to_tsvector('english', p.title || ' ' || COALESCE(p.excerpt,'')) @@ plainto_tsquery('english',$${idx})`);
-    params.push(search); idx++;
+    conditions.push(`(to_tsvector('english', p.title || ' ' || COALESCE(p.excerpt,'')) @@ plainto_tsquery('english',$${idx}) OR p.title ILIKE $${idx+1} OR COALESCE(p.excerpt,'') ILIKE $${idx+1})`);
+    params.push(search, `%${search}%`);
+    idx += 2;
   }
+
   if (tag) {
     conditions.push(`EXISTS (SELECT 1 FROM blog_schema.post_tags pt JOIN blog_schema.tags t ON pt.tag_id=t.id WHERE pt.post_id=p.id AND t.slug=$${idx})`);
-    params.push(tag); idx++;
+    params.push(tag);
+    idx++;
+  }
+
+  // Determine sort order
+  let orderBy = 'p.published_at DESC NULLS LAST, p.created_at DESC';
+  if (sort === 'featured') {
+    orderBy = 'p.is_featured DESC, p.published_at DESC NULLS LAST, p.created_at DESC';
+  } else if (sort === 'popular') {
+    orderBy = 'p.view_count DESC, p.like_count DESC, p.published_at DESC NULLS LAST';
+  } else if (sort === 'oldest') {
+    orderBy = 'p.published_at ASC NULLS LAST, p.created_at ASC';
   }
 
   const where = conditions.join(' AND ');
   const [dataRes, countRes] = await Promise.all([
     query(
       `SELECT p.id, p.title, p.slug, p.excerpt, p.status, p.is_featured,
-              p.read_time_min, p.view_count, p.like_count, p.cover_image,
+              p.read_time_min, p.view_count, p.like_count,
+              COALESCE(m.cdn_url, m.file_path, p.cover_image_url) AS cover_image,
+              COALESCE(m.cdn_url, m.file_path, p.cover_image_url) AS cover_image_url,
               p.published_at, p.created_at,
-              c.name AS category_name, c.slug AS category_slug,
+              c.name AS category_name, c.slug AS category_slug, c.color AS category_color,
               u.display_name AS author_name, u.avatar_url AS author_avatar
          FROM blog_schema.posts p
+         LEFT JOIN cms_schema.media        m ON p.cover_image=m.id
          LEFT JOIN blog_schema.categories c ON p.category_id=c.id
          LEFT JOIN auth_schema.users       u ON p.author_id=u.id
         WHERE ${where}
-        ORDER BY p.published_at DESC NULLS LAST, p.created_at DESC
+        ORDER BY ${orderBy}
         LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM blog_schema.posts p WHERE ${where}`, params),
+    query(`SELECT COUNT(*) FROM blog_schema.posts p LEFT JOIN blog_schema.categories c ON p.category_id=c.id WHERE ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
@@ -133,10 +162,13 @@ router.get('/posts/:slugOrId', optionalAuth, asyncHandler(async (req, res) => {
   const byId = isUUID(req.params.slugOrId);
   const { rows } = await query(
     `SELECT p.*,
-            c.name AS category_name, c.slug AS category_slug,
+            COALESCE(m.cdn_url, m.file_path, p.cover_image_url) AS cover_image_url,
+            COALESCE(m.cdn_url, m.file_path, p.cover_image_url) AS cover_image,
+            c.name AS category_name, c.slug AS category_slug, c.color AS category_color,
             u.id AS author_id, u.display_name AS author_name, u.avatar_url AS author_avatar, u.bio AS author_bio,
             sm.meta_title, sm.meta_description, sm.og_image_url, sm.canonical_url, sm.schema_json
        FROM blog_schema.posts p
+       LEFT JOIN cms_schema.media        m ON p.cover_image=m.id
        LEFT JOIN blog_schema.categories c ON p.category_id=c.id
        LEFT JOIN auth_schema.users       u ON p.author_id=u.id
        LEFT JOIN cms_schema.seo_meta    sm ON p.seo_id=sm.id
@@ -150,16 +182,39 @@ router.get('/posts/:slugOrId', optionalAuth, asyncHandler(async (req, res) => {
   const [tags, related] = await Promise.all([
     query(`SELECT t.id, t.name, t.slug FROM blog_schema.tags t
             JOIN blog_schema.post_tags pt ON t.id=pt.tag_id WHERE pt.post_id=$1`, [post.id]),
-    query(`SELECT pr.id, pr.title, pr.slug, pr.cover_image FROM blog_schema.posts pr
-            JOIN blog_schema.post_relations rel ON pr.id=rel.related_post_id
-           WHERE rel.post_id=$1 AND pr.status='published' AND pr.deleted_at IS NULL
-           ORDER BY rel.sort_order LIMIT 5`, [post.id]),
+    query(`SELECT pr.id, pr.title, pr.slug, pr.read_time_min, pr.published_at,
+                  COALESCE(m.cdn_url, m.file_path, pr.cover_image_url) AS cover_image,
+                  COALESCE(m.cdn_url, m.file_path, pr.cover_image_url) AS cover_image_url,
+                  c.name AS category_name, c.slug AS category_slug
+             FROM blog_schema.posts pr
+             LEFT JOIN cms_schema.media        m ON pr.cover_image=m.id
+             LEFT JOIN blog_schema.categories c ON pr.category_id=c.id
+             JOIN blog_schema.post_relations rel ON pr.id=rel.related_post_id
+            WHERE rel.post_id=$1 AND pr.status='published' AND pr.deleted_at IS NULL
+            ORDER BY rel.sort_order LIMIT 5`, [post.id]),
   ]);
+
+  let relatedPosts = related.rows;
+  if (relatedPosts.length < 2) {
+    const fallbackRelated = await query(
+      `SELECT pr.id, pr.title, pr.slug, pr.read_time_min, pr.published_at,
+              COALESCE(m.cdn_url, m.file_path, pr.cover_image_url) AS cover_image,
+              COALESCE(m.cdn_url, m.file_path, pr.cover_image_url) AS cover_image_url,
+              c.name AS category_name, c.slug AS category_slug
+         FROM blog_schema.posts pr
+         LEFT JOIN cms_schema.media        m ON pr.cover_image=m.id
+         LEFT JOIN blog_schema.categories c ON pr.category_id=c.id
+        WHERE pr.id != $1 AND pr.status='published' AND pr.deleted_at IS NULL
+        ORDER BY (pr.category_id = $2) DESC, pr.published_at DESC LIMIT 3`,
+      [post.id, post.category_id]
+    );
+    relatedPosts = fallbackRelated.rows;
+  }
 
   // Increment view count (fire and forget)
   query(`UPDATE blog_schema.posts SET view_count=view_count+1 WHERE id=$1`, [post.id]).catch(() => {});
 
-  return success(res, { ...post, tags: tags.rows, related_posts: related.rows });
+  return success(res, { ...post, tags: tags.rows, related_posts: relatedPosts });
 }));
 
 router.post('/posts', authenticate, requirePermission('post.write'), asyncHandler(async (req, res) => {

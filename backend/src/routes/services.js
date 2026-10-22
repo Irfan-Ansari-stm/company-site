@@ -264,7 +264,19 @@ industriesRouter.get('/:slugOrId', asyncHandler(async (req, res) => {
     [req.params.slugOrId]
   );
   if (!rows.length) throw new AppError('Industry not found', 404);
-  return success(res, rows[0]);
+
+  const projectsRes = await query(
+    `SELECT id, title, slug, client_name, summary, tech_stack, budget_range, duration_weeks
+     FROM portfolio_schema.projects
+     WHERE industry_id = $1 AND is_published = TRUE AND deleted_at IS NULL
+     ORDER BY display_order ASC`,
+    [rows[0].id]
+  );
+
+  return success(res, {
+    ...rows[0],
+    projects: projectsRes.rows,
+  });
 }));
 
 industriesRouter.post('/', authenticate, requirePermission('service.manage'), asyncHandler(async (req, res) => {

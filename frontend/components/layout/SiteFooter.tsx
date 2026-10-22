@@ -15,6 +15,7 @@ import {
   Database,
   Lock,
   Globe,
+  Sparkles,
 } from 'lucide-react';
 import { marketingApi, systemApi } from '@/lib/api';
 import { extractApiError } from '@/lib/utils';
@@ -68,12 +69,50 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
 
   return (
     <footer className="relative border-t border-slate-800 bg-slate-950 text-white selection:bg-cyan-500 selection:text-black">
-      {/* Subtle Background Glow */}
+      {/* Background Ambient Glow */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom,rgba(14,165,233,0.12)_0,transparent_70%)]" />
 
+      {/* ── Top Pre-Footer Closing Section ── */}
+      <div className="border-b border-slate-800/80 bg-slate-950/60 px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900/90 to-cyan-950/40 p-8 sm:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12 shadow-2xl backdrop-blur-md">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/60 px-3 py-1 text-xs font-semibold text-cyan-300">
+                <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+                <span>Next-Gen Enterprise Engineering</span>
+              </div>
+              <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl">
+                Have an ambitious platform to build? <br className="hidden sm:inline" />
+                Let&apos;s engineer something meaningful.
+              </h2>
+              <p className="mt-3 text-sm text-slate-300 leading-relaxed">
+                Connect directly with our Principal Systems Architects in San Francisco for distributed system scoping, high-throughput database tuning, and cloud infrastructure migration.
+              </p>
+            </div>
+
+            <div className="mt-8 lg:mt-0 flex flex-col sm:flex-row gap-4 shrink-0">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-4 text-sm font-bold text-slate-950 transition hover:brightness-110 shadow-lg shadow-cyan-500/20 cursor-pointer"
+              >
+                <span>Schedule Architecture Scoping</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/work"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-6 py-4 text-sm font-bold text-white transition hover:bg-slate-800 cursor-pointer"
+              >
+                <span>Explore Verified Work</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Main Footer Layout ── */}
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        {/* Top Newsletter Bar */}
-        <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 backdrop-blur-xl md:flex md:items-center md:justify-between md:gap-8">
+        {/* Newsletter Subscription Bar */}
+        <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 backdrop-blur-xl md:flex md:items-center md:justify-between md:gap-8 shadow-xl">
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3 py-1 text-xs font-semibold text-cyan-300">
               <ShieldCheck className="h-3.5 w-3.5 text-cyan-400" />
@@ -83,7 +122,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
               Subscribe to Engineering Insights
             </h3>
             <p className="mt-1 text-sm text-slate-400">
-              Technical breakdowns on distributed PostgreSQL indexing, microservice scalability, and Kubernetes cloud infrastructure directly to your inbox. Zero spam.
+              In-depth technical papers on distributed PostgreSQL indexing, micro-frontends, and cloud DevOps directly to your inbox. Zero spam.
             </p>
           </div>
 
@@ -111,7 +150,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
         <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Corporate Profile Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 cursor-pointer">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-600 via-indigo-600 to-violet-700 text-white shadow-lg shadow-cyan-500/20">
                 <Layers3 className="h-5 w-5" />
               </span>
@@ -131,13 +170,15 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-cyan-400 shrink-0" />
-                <a href="mailto:hello@sysmaira.com" className="hover:text-white transition">
+                <a href="mailto:hello@sysmaira.com" className="hover:text-white transition cursor-pointer">
                   hello@sysmaira.com
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-cyan-400 shrink-0" />
-                <span>+1 (555) 019-2831</span>
+                <a href="tel:+15550192831" className="hover:text-white transition cursor-pointer">
+                  +1 (555) 019-2831
+                </a>
               </div>
             </div>
 
@@ -147,7 +188,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-cyan-500 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-cyan-500 hover:text-white cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -158,7 +199,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-cyan-500 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-cyan-500 hover:text-white cursor-pointer"
                 aria-label="GitHub"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -169,7 +210,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-cyan-500 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-cyan-500 hover:text-white cursor-pointer"
                 aria-label="Twitter"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -179,35 +220,40 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
             </div>
           </div>
 
-          {/* Column 2: Solutions & Services */}
+          {/* Column 2: Explore Navigation */}
           <div>
             <h4 className="font-mono text-xs font-bold tracking-wider text-white uppercase">
-              Disciplines
+              Explore
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
               <li>
-                <Link href="/services" className="hover:text-white transition">
+                <Link href="/" className="hover:text-white transition cursor-pointer">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-white transition cursor-pointer">
+                  About SysMaira
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="hover:text-white transition cursor-pointer">
                   All Services
                 </Link>
               </li>
               <li>
-                <Link href="/work" className="hover:text-white transition">
+                <Link href="/work" className="hover:text-white transition cursor-pointer">
                   Case Studies &amp; Work
                 </Link>
               </li>
               <li>
-                <Link href="/process" className="hover:text-white transition">
-                  5-Step Lifecycle
+                <Link href="/process" className="hover:text-white transition cursor-pointer">
+                  Engineering Lifecycle
                 </Link>
               </li>
               <li>
-                <Link href="/industries" className="hover:text-white transition">
-                  Industry Solutions
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions" className="hover:text-white transition">
-                  Enterprise Architecture
+                <Link href="/industries" className="hover:text-white transition cursor-pointer">
+                  Industry Verticals
                 </Link>
               </li>
             </ul>
@@ -216,62 +262,62 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
           {/* Column 3: Insights & Resources */}
           <div>
             <h4 className="font-mono text-xs font-bold tracking-wider text-white uppercase">
-              Insights
+              Resources &amp; Insights
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
               <li>
-                <Link href="/blog" className="hover:text-white transition">
-                  Engineering Blog
+                <Link href="/blog" className="hover:text-white transition cursor-pointer">
+                  Engineering Journal
                 </Link>
               </li>
               <li>
-                <Link href="/resources" className="hover:text-white transition">
+                <Link href="/resources" className="hover:text-white transition cursor-pointer">
                   Technical Whitepapers
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white transition">
-                  About SysMaira
+                <Link href="/solutions" className="hover:text-white transition cursor-pointer">
+                  Enterprise Solutions
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white transition">
+                <Link href="/contact" className="hover:text-white transition cursor-pointer">
                   Contact &amp; Scoping
+                </Link>
+              </li>
+              <li>
+                <Link href="/auth/login" className="hover:text-white transition font-semibold text-cyan-400 cursor-pointer">
+                  Client Portal Login &rarr;
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Client Portal & Legal */}
+          {/* Column 4: Client & Legal */}
           <div>
             <h4 className="font-mono text-xs font-bold tracking-wider text-white uppercase">
-              Client &amp; Legal
+              Trust &amp; Legal
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
               <li>
-                <Link href="/auth/login" className="hover:text-white transition font-semibold text-cyan-400">
-                  Client Portal Login &rarr;
-                </Link>
-              </li>
-              <li>
-                <Link href="/dashboard" className="hover:text-white transition">
-                  Internal Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="hover:text-white transition">
+                <Link href="/privacy" className="hover:text-white transition cursor-pointer">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-white transition">
+                <Link href="/terms" className="hover:text-white transition cursor-pointer">
                   Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className="hover:text-white transition cursor-pointer">
+                  Internal Dashboard
                 </Link>
               </li>
             </ul>
 
-            {/* System Status Indicator Box */}
-            <div className="mt-6 rounded-xl border border-slate-800 bg-slate-900/50 p-3 text-xs">
+            {/* System Status Box */}
+            <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/50 p-4 text-xs">
               <div className="flex items-center gap-2 text-emerald-400">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
@@ -279,15 +325,17 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
                 </span>
                 <span className="font-semibold text-slate-200">PostgreSQL Engine</span>
               </div>
-              <p className="mt-1 text-[11px] text-slate-400">99.99% Operational Uptime</p>
+              <p className="mt-1.5 text-[11px] text-slate-400">
+                99.99% Operational Uptime • ACID Serialized
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Bottom Copyright & Tech Stack */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-800/80 pt-8 text-xs text-slate-400 sm:flex-row">
+        {/* Bottom Copyright & Security Standards Bar */}
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-slate-800/80 pt-8 text-xs text-slate-400 sm:flex-row">
           <p>© {new Date().getFullYear()} {brandName}. All rights reserved.</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <span className="flex items-center gap-1.5 text-slate-400">
               <Database className="h-3.5 w-3.5 text-cyan-400" />
               <span>PostgreSQL 18</span>
@@ -300,7 +348,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
             <span>•</span>
             <span className="flex items-center gap-1.5 text-slate-400">
               <Lock className="h-3.5 w-3.5 text-indigo-400" />
-              <span>SOC2 Type II Ready</span>
+              <span>SOC2 Type II &amp; HIPAA Aligned</span>
             </span>
           </div>
         </div>
@@ -308,4 +356,3 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
     </footer>
   );
 }
-

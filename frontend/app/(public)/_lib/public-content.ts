@@ -58,11 +58,35 @@ export type PublicPost = {
   excerpt?: string;
   content?: string;
   category_name?: string;
+  category_slug?: string;
+  category_color?: string;
   author_name?: string;
+  author_avatar?: string;
+  author_bio?: string;
   read_time_min?: number;
   published_at?: string;
+  created_at?: string;
   cover_image?: string;
+  cover_image_url?: string;
+  view_count?: number | string;
+  like_count?: number;
+  is_featured?: boolean;
+  status?: string;
   tags?: Array<{ id: string; name: string; slug: string }>;
+  related_posts?: PublicPost[];
+  meta_title?: string;
+  meta_description?: string;
+  canonical_url?: string;
+};
+
+export type PublicBlogCategory = {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  color?: string;
+  icon?: string;
+  post_count?: number | string;
 };
 
 export type PublicResource = {
@@ -83,6 +107,25 @@ export type PublicTaxonomy = {
   icon?: string;
   features?: string[];
   use_cases?: string[];
+  challenges?: string[];
+  solutions?: string[];
+  deliverables?: string[];
+  compliance_standards?: string[];
+  stats?: {
+    metric_value?: string;
+    metric_label?: string;
+    sla?: string;
+  };
+  projects?: Array<{
+    id: string;
+    title: string;
+    slug: string;
+    client_name?: string;
+    summary?: string;
+    tech_stack?: string[];
+    budget_range?: string;
+    duration_weeks?: number;
+  }>;
 };
 
 export type PublicMenuItem = {
@@ -144,20 +187,138 @@ export const fallbackProjects: PublicProject[] = [
 
 export const fallbackPosts: PublicPost[] = [
   {
-    id: 'website-operating-system',
-    title: 'Your website should be an operating system, not a brochure',
-    slug: 'website-operating-system',
-    excerpt: 'How public pages, CMS content, lead forms, analytics, and dashboards should work together.',
-    category_name: 'Strategy',
-    read_time_min: 6,
+    id: 'building-resilient-distributed-systems',
+    title: 'Building Resilient Distributed Systems with Micro-Frontends & Event Sourcing',
+    slug: 'building-resilient-distributed-systems',
+    excerpt: 'How modern engineering organizations decouple legacy monoliths into distributed micro-frontends and event-sourced backends without sacrificing transactional consistency.',
+    category_name: 'Engineering & Architecture',
+    category_slug: 'engineering-architecture',
+    category_color: '#06b6d4',
+    author_name: 'Elena Rostova',
+    author_avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    author_bio: 'Principal Distributed Systems Architect at SysMaira. Specializes in multi-region PostgreSQL clusters, event-driven architectures, and high-throughput financial settlements.',
+    cover_image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85',
+    cover_image_url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85',
+    read_time_min: 8,
+    view_count: 2480,
+    like_count: 142,
+    is_featured: true,
+    published_at: '2026-10-18T10:00:00Z',
+    tags: [
+      { id: '1', name: 'Distributed Systems', slug: 'distributed-systems' },
+      { id: '2', name: 'Cloud Architecture', slug: 'cloud-architecture' },
+      { id: '3', name: 'Next.js & Edge', slug: 'nextjs-edge' },
+    ],
   },
   {
-    id: 'deployment-ready',
-    title: 'A practical deployment checklist for enterprise web platforms',
-    slug: 'deployment-ready',
-    excerpt: 'The pages, forms, data flows, SEO files, and empty states you want before launch.',
-    category_name: 'Deployment',
-    read_time_min: 5,
+    id: 'zero-downtime-postgresql-migrations',
+    title: 'Zero-Downtime PostgreSQL Migrations for High-Traffic Workloads',
+    slug: 'zero-downtime-postgresql-migrations',
+    excerpt: 'Battle-tested strategies for applying schema changes, composite foreign keys, and massive column backfills safely on production database clusters handling 10,000+ writes/second.',
+    category_name: 'Cloud & DevOps',
+    category_slug: 'cloud-devops',
+    category_color: '#3b82f6',
+    author_name: 'Elena Rostova',
+    author_avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    cover_image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1600&q=85',
+    cover_image_url: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1600&q=85',
+    read_time_min: 10,
+    view_count: 3820,
+    like_count: 215,
+    is_featured: true,
+    published_at: '2026-10-15T14:30:00Z',
+    tags: [
+      { id: '4', name: 'PostgreSQL', slug: 'postgresql' },
+      { id: '5', name: 'DevOps & SRE', slug: 'devops-sre' },
+    ],
+  },
+  {
+    id: 'atomic-design-systems-enterprise',
+    title: 'Atomic Design Systems in Enterprise: From Tokens to Production Code',
+    slug: 'atomic-design-systems-enterprise',
+    excerpt: 'Standardizing multi-brand typography, semantic color tokens, and strict component contracts across distributed cross-functional product squads.',
+    category_name: 'Design Systems',
+    category_slug: 'design-systems',
+    category_color: '#ec4899',
+    author_name: 'Elena Rostova',
+    author_avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    cover_image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1600&q=85',
+    cover_image_url: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1600&q=85',
+    read_time_min: 6,
+    view_count: 1890,
+    like_count: 98,
+    is_featured: false,
+    published_at: '2026-10-12T09:15:00Z',
+    tags: [
+      { id: '6', name: 'Design Systems', slug: 'design-systems' },
+      { id: '3', name: 'Next.js & Edge', slug: 'nextjs-edge' },
+    ],
+  },
+  {
+    id: 'ai-agents-enterprise-operations-2026',
+    title: 'AI Agents in Enterprise Operations: A Pragmatic Blueprint for 2026',
+    slug: 'ai-agents-enterprise-operations-2026',
+    excerpt: 'Pragmatic implementation blueprints for integrating autonomous LLM agents into internal ticketing triage, automated code review, and developer self-service workflows.',
+    category_name: 'Product Strategy',
+    category_slug: 'product-strategy',
+    category_color: '#10b981',
+    author_name: 'Elena Rostova',
+    author_avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    cover_image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=85',
+    cover_image_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=85',
+    read_time_min: 7,
+    view_count: 2940,
+    like_count: 167,
+    is_featured: false,
+    published_at: '2026-10-10T16:45:00Z',
+    tags: [
+      { id: '7', name: 'AI & Automation', slug: 'ai-automation' },
+      { id: '8', name: 'Compliance & SOC2', slug: 'compliance-soc2' },
+    ],
+  },
+  {
+    id: 'sub-120ms-edge-latency-nextjs-redis',
+    title: 'Sub-120ms Edge Latency: Next.js 16 Server Components & Redis Cache Tiering',
+    slug: 'sub-120ms-edge-latency-nextjs-redis',
+    excerpt: 'Architectural patterns for combining Next.js Server Components, streaming SSR, and multi-region Redis cluster replication for instantaneous global page loads.',
+    category_name: 'Engineering & Architecture',
+    category_slug: 'engineering-architecture',
+    category_color: '#06b6d4',
+    author_name: 'Elena Rostova',
+    author_avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    cover_image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=85',
+    cover_image_url: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=85',
+    read_time_min: 9,
+    view_count: 2150,
+    like_count: 138,
+    is_featured: false,
+    published_at: '2026-10-08T11:20:00Z',
+    tags: [
+      { id: '3', name: 'Next.js & Edge', slug: 'nextjs-edge' },
+      { id: '2', name: 'Cloud Architecture', slug: 'cloud-architecture' },
+    ],
+  },
+  {
+    id: 'enterprise-security-posture-zero-trust',
+    title: 'Enterprise Security Posture: SOC2 Type II, HIPAA & Zero Trust in Modern Cloud Stacks',
+    slug: 'enterprise-security-posture-zero-trust',
+    excerpt: 'Complete checklist and infrastructure-as-code automation for passing strict SOC2 Type II and HIPAA compliance audits without slowing engineering velocity.',
+    category_name: 'Cloud & DevOps',
+    category_slug: 'cloud-devops',
+    category_color: '#3b82f6',
+    author_name: 'Elena Rostova',
+    author_avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    cover_image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=85',
+    cover_image_url: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=85',
+    read_time_min: 8,
+    view_count: 1760,
+    like_count: 112,
+    is_featured: false,
+    published_at: '2026-10-05T08:00:00Z',
+    tags: [
+      { id: '8', name: 'Compliance & SOC2', slug: 'compliance-soc2' },
+      { id: '5', name: 'DevOps & SRE', slug: 'devops-sre' },
+    ],
   },
 ];
 
@@ -181,9 +342,78 @@ export const fallbackResources: PublicResource[] = [
 ];
 
 export const fallbackIndustries: PublicTaxonomy[] = [
-  { id: 'saas', name: 'SaaS', slug: 'saas', description: 'Public websites, product portals, CRM workflows, and reporting.' },
-  { id: 'services', name: 'Professional Services', slug: 'professional-services', description: 'Lead generation, client delivery, billing, and support operations.' },
-  { id: 'commerce', name: 'Commerce', slug: 'commerce', description: 'Customer portals, order operations, payments, and analytics.' },
+  {
+    id: 'fintech-financial-services',
+    name: 'Financial Services & FinTech',
+    slug: 'fintech-financial-services',
+    description: 'High-frequency transactional systems, algorithmic order execution, and low-latency settlement engines engineered for zero financial reconciliation loss.',
+    icon: 'ShieldCheck',
+    compliance_standards: ['SOC2 Type II', 'PCI-DSS Level 1', 'GLBA', 'FINRA Audit Trail'],
+    stats: { metric_value: '$250M+', metric_label: 'Daily Transaction Volume Processed', sla: '99.999% ACID Consistency' },
+    challenges: ['Concurrency deadlocks during market open', 'Cryptographic audit trail mandates', 'Monolithic banking bottlenecks'],
+    solutions: ['PostgreSQL range & hash partitioning', 'Event-driven Go/Node.js microservices', 'Sub-120ms global order routing'],
+    deliverables: ['High-Frequency Settlement Gateway', 'Cryptographic Audit Ledger', 'Institutional Trading Dashboard', 'Multi-Region Failover'],
+  },
+  {
+    id: 'logistics-supply-chain',
+    name: 'Logistics, Transportation & IoT',
+    slug: 'logistics-supply-chain',
+    description: 'Real-time telemetry portals, dynamic route optimization engines, and asset-tracking architectures sustaining millions of concurrent sensor events.',
+    icon: 'Truck',
+    compliance_standards: ['ISO 27001', 'SOC2 Type II', 'GDPR Telemetry Guard'],
+    stats: { metric_value: '50M+', metric_label: 'Daily GPS & Telemetry Events Ingested', sla: '99.995% Cluster Availability' },
+    challenges: ['Vehicular IoT beacon load spikes', 'Dynamic route re-calculation over unstable cellular networks', 'Siloed dispatch blind spots'],
+    solutions: ['TimescaleDB partition routing', 'WebSocket bidirectional streams with offline support', 'AWS EKS horizontal autoscaling'],
+    deliverables: ['Global Telemetry Map Portal', 'Dynamic Route Optimization Pipeline', 'Driver Offline PWA', 'Automated Maintenance Alarms'],
+  },
+  {
+    id: 'healthcare-life-sciences',
+    name: 'Healthcare, Telehealth & Life Sciences',
+    slug: 'healthcare-life-sciences',
+    description: 'HIPAA-compliant patient portals, encrypted telehealth consultation platforms, and clinical diagnostic systems with automated EMR integrations.',
+    icon: 'HeartPulse',
+    compliance_standards: ['HIPAA Title II', 'HITECH', 'SOC2 Type II', 'FDA 21 CFR Part 11'],
+    stats: { metric_value: '240k+', metric_label: 'Active Clinical Patients Onboarded', sla: '100% Cryptographic Audit Pass' },
+    challenges: ['Strict BAA patient isolation mandates', 'Video jitter during peak clinic hours', 'Legacy hospital HL7/FHIR incompatibilities'],
+    solutions: ['AWS KMS envelope encryption', 'WebRTC Selective Forwarding Units (SFU)', 'FHIR-compliant REST/GraphQL adapters'],
+    deliverables: ['Patient Telehealth Portal', 'Encrypted WebRTC Video Engine', 'EMR Synchronization Gateway', 'Cryptographic Access Audit Logger'],
+  },
+  {
+    id: 'ai-legaltech-knowledge',
+    name: 'LegalTech, Compliance & Knowledge Systems',
+    slug: 'ai-legaltech-knowledge',
+    description: 'Private enterprise LLM pipelines, autonomous RAG retrieval systems, and semantic vector indexing engineered for strict corporate data sovereignty.',
+    icon: 'Brain',
+    compliance_standards: ['Air-Gapped VPC', 'SOC2 Type II', 'ISO 27001', 'Private LLM Guard'],
+    stats: { metric_value: '14M+', metric_label: 'Legal Filings & Precedents Indexed', sla: '99.4% Verifiable Citation Accuracy' },
+    challenges: ['Public LLM privacy leakage risks', 'Hallucinations in court filings', 'Keyword search missing semantic nuances'],
+    solutions: ['Self-hosted pgvector in air-gapped VPC', 'Hybrid dense-sparse vector search', 'Verifiable paragraph citation attribution'],
+    deliverables: ['Private Enterprise RAG System', 'Regulatory Precedent Search Engine', 'Contract Clause Analyzer', 'Air-Gapped Inference Cluster'],
+  },
+  {
+    id: 'enterprise-saas',
+    name: 'Enterprise SaaS & Cloud Platforms',
+    slug: 'enterprise-saas',
+    description: 'Multi-tenant cloud architectures, accessible design systems, and role-based operational portals designed for rapid international scale.',
+    icon: 'Cloud',
+    compliance_standards: ['WCAG 2.2 AA', 'SOC2 Type II', 'GDPR', 'Multi-Tenant RBAC'],
+    stats: { metric_value: '3.8x', metric_label: 'Accelerated Front-End Feature Delivery', sla: '100% WCAG 2.2 AA Compliance' },
+    challenges: ['Fragmented multinational UI codebases', 'Cross-tenant data leakage risks', 'Redundant code slowing release velocity'],
+    solutions: ['Automated Figma design token engine', 'PostgreSQL Row-Level Security (RLS)', 'Automated WCAG linting in CI/CD'],
+    deliverables: ['Multi-Tenant SaaS Foundation', 'Design Token UI System', 'RBAC & Audit Dashboard', 'Component Library in Storybook'],
+  },
+  {
+    id: 'retail-ecommerce',
+    name: 'Omnichannel Retail & Global E-Commerce',
+    slug: 'retail-ecommerce',
+    description: 'High-throughput commerce event meshes, real-time inventory gateways, and global headless checkouts built to sustain holiday traffic surges.',
+    icon: 'ShoppingBag',
+    compliance_standards: ['PCI-DSS Level 1', 'SOC2 Type II', 'GDPR', 'Stripe Verified'],
+    stats: { metric_value: '45k/min', metric_label: 'Peak Orders Processed Without Data Loss', sla: '< 78ms P99 API Response Latency' },
+    challenges: ['Inventory desync across warehouses', 'ERP checkout timeouts during flash sales', 'Spaghetti integrations failing under load'],
+    solutions: ['Idempotent Kafka event mesh', 'Redis distributed catalog read-replicas', 'Asynchronous Stripe webhook retry queues'],
+    deliverables: ['Commerce API Event Mesh', 'Real-Time Inventory Synchronizer', 'Headless Next.js Checkout', 'Payment Replay Engine'],
+  },
 ];
 
 export const fallbackSolutions: PublicTaxonomy[] = [
@@ -215,10 +445,13 @@ export const publicQueries = {
   service: (slug: string) => servicesApi.getService(slug).then((r) => r.data.data as PublicService),
   portfolio: () => portfolioApi.list({ page: 1, limit: 24 }).then((r) => r.data as ApiPage<PublicProject>),
   project: (slug: string) => portfolioApi.get(slug).then((r) => r.data.data as PublicProject),
-  posts: () => blogApi.getPosts({ page: 1, limit: 24 }).then((r) => r.data as ApiPage<PublicPost>),
+  posts: (params?: any) => blogApi.getPosts({ page: 1, limit: 24, ...params }).then((r) => r.data as ApiPage<PublicPost>),
   post: (slug: string) => blogApi.getPost(slug).then((r) => r.data.data as PublicPost),
+  categories: () => blogApi.getCategories().then((r) => r.data.data as PublicBlogCategory[]),
+  tags: () => blogApi.getTags().then((r) => r.data.data as Array<{ id: string; name: string; slug: string; usage_count?: number }>),
   resources: () => blogApi.getResources({ page: 1, limit: 24 }).then((r) => r.data as ApiPage<PublicResource>),
   resource: (slug: string) => blogApi.getResource(slug).then((r) => r.data.data as PublicResource),
   industries: () => servicesApi.getIndustries().then((r) => r.data.data as PublicTaxonomy[]),
+  industry: (slug: string) => servicesApi.getIndustry(slug).then((r) => r.data.data as PublicTaxonomy),
   solutions: () => servicesApi.getSolutions().then((r) => r.data.data as PublicTaxonomy[]),
 };
