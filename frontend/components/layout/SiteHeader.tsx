@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Layers3, ArrowRight, Menu, X, Sun, Moon, LayoutDashboard, LogOut } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { useAuthStore } from '@/store/auth';
-import { systemApi } from '@/lib/api';
+import { systemApi, authApi } from '@/lib/api';
 
 interface SiteHeaderProps {
   brandName?: string;
@@ -47,6 +47,26 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Sync user profile if token exists but user state is pending
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('accessToken');
+      if (token && !user) {
+        authApi
+          .me()
+          .then((res) => {
+            if (res.data?.data) {
+              useAuthStore.getState().setUser(res.data.data);
+              useAuthStore.setState({ isAuthenticated: true });
+            }
+          })
+          .catch(() => {});
+      }
+    }
+  }, [user]);
+
+  const isLoggedIn = mounted && (isAuthenticated || (typeof window !== 'undefined' && !!localStorage.getItem('accessToken')));
 
   // Close mobile drawer on route change
   useEffect(() => {
@@ -166,7 +186,9 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
             </button>
 
             {/* Client Portal / Authenticated Dashboard Access */}
-            {mounted && hasHydrated && isAuthenticated && user ? (
+            {!mounted ? (
+              <div className="hidden md:inline-block w-20 h-6" />
+            ) : isLoggedIn ? (
               <div className="hidden md:flex items-center gap-1.5">
                 <Link
                   href="/dashboard"
@@ -174,7 +196,7 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
                   title="Open Dashboard Console"
                 >
                   <LayoutDashboard className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
-                  <span className="max-w-[130px] truncate">{user.display_name || 'Dashboard'}</span>
+                  <span className="max-w-[130px] truncate">{user?.display_name || 'Dashboard'}</span>
                 </Link>
                 <button
                   type="button"
@@ -274,18 +296,18 @@ export default function SiteHeader({ brandName: brandNameProp }: SiteHeaderProps
                 </div>
 
                 <div className="mt-3 border-t border-slate-200 dark:border-slate-800 pt-4 flex flex-col gap-2.5">
-                  {mounted && hasHydrated && isAuthenticated && user ? (
+                  {!mounted ? null : isLoggedIn ? (
                     <div className="rounded-2xl border border-cyan-500/30 bg-cyan-50/60 p-3.5 dark:border-cyan-500/20 dark:bg-cyan-950/40">
                       <div className="flex items-center gap-2.5 mb-3">
                         <div className="w-9 h-9 rounded-xl bg-cyan-600 text-white font-bold flex items-center justify-center text-xs shadow-sm">
-                          {user.display_name?.charAt(0).toUpperCase() || 'U'}
+                          {user?.display_name?.charAt(0).toUpperCase() || 'U'}
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                            {user.display_name}
+                            {user?.display_name || 'My Account'}
                           </p>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
-                            {user.email}
+                            {user?.email || 'Logged In'}
                           </p>
                         </div>
                       </div>

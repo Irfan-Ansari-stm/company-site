@@ -33,6 +33,8 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
     setMounted(true);
   }, []);
 
+  const isLoggedIn = mounted && (isAuthenticated || (typeof window !== 'undefined' && !!localStorage.getItem('accessToken')));
+
   const { data: settings } = useQuery({
     queryKey: ['public-settings'],
     queryFn: async () => {
@@ -299,7 +301,7 @@ export default function SiteFooter({ brandName: brandNameProp }: SiteFooterProps
                 </Link>
               </li>
               <li>
-                {mounted && hasHydrated && isAuthenticated ? (
+                {!mounted ? null : isLoggedIn ? (
                   <Link href="/dashboard" className="hover:text-cyan-600 dark:hover:text-white transition font-semibold text-cyan-600 dark:text-cyan-400 cursor-pointer">
                     Dashboard Console &rarr;
                   </Link>

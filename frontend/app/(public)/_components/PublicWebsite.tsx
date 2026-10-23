@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import {
@@ -209,8 +209,15 @@ function serviceSummary(service: PublicService) {
 }
 
 export default function PublicWebsite() {
-  const { isAuthenticated, hasHydrated } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isLoggedIn = mounted && (isAuthenticated || (typeof window !== 'undefined' && !!localStorage.getItem('accessToken')));
   const [leadForm, setLeadForm] = useState({
     name: '',
     email: '',
@@ -333,12 +340,16 @@ export default function PublicWebsite() {
           </nav>
 
           <div className="hidden items-center gap-3 md:flex">
-            <Link
-              href={hasHydrated && isAuthenticated ? '/dashboard' : '/auth/login'}
-              className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-white/70 hover:text-slate-950"
-            >
-              {hasHydrated && isAuthenticated ? 'Dashboard' : 'Client login'}
-            </Link>
+            {!mounted ? (
+              <div className="w-16 h-8" />
+            ) : (
+              <Link
+                href={isLoggedIn ? '/dashboard' : '/auth/login'}
+                className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-white/70 hover:text-slate-950"
+              >
+                {isLoggedIn ? 'Dashboard' : 'Client login'}
+              </Link>
+            )}
             <Link href="/contact" className="premium-button inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-bold text-white transition">
               Start a project
               <ArrowRight className="h-4 w-4" />
@@ -363,11 +374,11 @@ export default function PublicWebsite() {
               </Link>
               ))}
               <Link
-                href={hasHydrated && isAuthenticated ? '/dashboard' : '/auth/login'}
+                href={isLoggedIn ? '/dashboard' : '/auth/login'}
                 className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white/70"
                 onClick={() => setMobileOpen(false)}
               >
-                {hasHydrated && isAuthenticated ? 'Dashboard' : 'Client login'}
+                {isLoggedIn ? 'Dashboard' : 'Client login'}
               </Link>
             </div>
           </div>
@@ -707,8 +718,8 @@ export default function PublicWebsite() {
                   {item.label}
                 </Link>
               ))}
-              <Link href={hasHydrated && isAuthenticated ? '/dashboard' : '/auth/login'} className="hover:text-white">
-                {hasHydrated && isAuthenticated ? 'Dashboard Console' : 'Dashboard'}
+              <Link href={isLoggedIn ? '/dashboard' : '/auth/login'} className="hover:text-white">
+                {isLoggedIn ? 'Dashboard Console' : 'Dashboard'}
               </Link>
             </div>
           </div>
