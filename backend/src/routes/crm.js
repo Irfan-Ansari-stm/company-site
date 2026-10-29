@@ -252,7 +252,7 @@ router.post('/leads/public', asyncHandler(async (req, res) => {
   }
 
   let {
-    first_name, last_name, name, email, phone, company, services_needed,
+    first_name, last_name, name, email, phone, company, services_needed, subject,
     budget_range, budget, requirements, message, urgency, source = 'website',
     source_campaign, landing_page, referrer, metadata = {}
   } = req.body;
@@ -274,10 +274,11 @@ router.post('/leads/public', asyncHandler(async (req, res) => {
   // Validate against PostgreSQL lead_source enum
   const allowedSources = ['website', 'referral', 'linkedin', 'google_ads', 'meta_ads', 'cold_outreach', 'partner', 'event', 'other'];
   const sanitizedSource = allowedSources.includes(source) ? source : 'website';
-  const finalRequirements = requirements || message || '';
+  const finalRequirements = requirements || (subject ? `Subject: ${subject}\n\n${message || ''}` : message || '');
   const finalBudgetRange = budget_range || budget || null;
   const mergedMetadata = {
     ...(typeof metadata === 'object' && metadata !== null ? metadata : {}),
+    subject: subject || undefined,
     original_source: source,
     submitted_at: new Date().toISOString(),
   };

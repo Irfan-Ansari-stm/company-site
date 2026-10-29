@@ -382,3 +382,25 @@ th { text-align: left; font-weight: 600; }
 .dark .section-kicker {
   color: #a78bfa;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   PERFORMANCE & ACCESSIBILITY ENHANCEMENTS
+   ───────────────────────────────────────────────────────────── */
+/* Modern content-visibility optimization for below-the-fold content */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Respect user's system reduced-motion preference (WCAG AA requirement) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

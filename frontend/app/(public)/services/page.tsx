@@ -1,15 +1,11 @@
-import { PublicShell } from '../_components/PublicShell';
-import ServicesView from '@/components/services/ServicesView';
+import ServicesPage from '@/components/services/ServicesPage';
 
 export const metadata = {
-  title: 'Engineering & Architecture Services | SysMaira Enterprise',
-  description: 'Enterprise full-stack web applications, cloud infrastructure, AI solutions, UI/UX systems, and API integrations with guaranteed 99.99% SLA.',
+  title: 'Software Development Services | Sysmaira Software Solutions',
+  description:
+    'Explore our custom software development services, including web applications, mobile apps, UI/UX design, API integration, QA testing, and ongoing software maintenance.',
 };
 
 export default function Page() {
-  return (
-    <PublicShell>
-      <ServicesView />
-    </PublicShell>
-  );
+  return <ServicesPage />;
 }

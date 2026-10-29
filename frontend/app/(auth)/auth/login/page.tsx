@@ -1,17 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/store/auth';
 import { authApi } from '@/lib/api';
 import { Alert } from '@/components/ui';
 import { extractApiError } from '@/lib/utils';
 import Link from 'next/link';
+import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { ArrowLeft, Sun, Moon, Lock, ShieldCheck, Sparkles, Loader2 } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated, hasHydrated, setAuth } = useAuthStore();
@@ -121,8 +122,15 @@ export default function LoginPage() {
         {/* Brand header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center justify-center mb-4 group" aria-label="SysMaira Home">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 via-teal-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              <span className="text-slate-950 font-black text-2xl tracking-tighter">S</span>
+            <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-900/5 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform p-1">
+              <Image
+                src="/images/Sysmaira AI Solutions Logo.webp"
+                alt="SysMaira AI Solutions"
+                width={64}
+                height={64}
+                className="w-full h-full object-contain"
+                priority
+              />
             </div>
           </Link>
           <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -252,5 +260,17 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="w-8 h-8 rounded-full border-2 border-cyan-500 border-t-transparent animate-spin" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }

@@ -1,18 +1,29 @@
-import React, { Suspense } from 'react';
-import { PublicShell } from '../_components/PublicShell';
-import BlogView from '@/components/blog/BlogView';
+import { Metadata } from 'next';
+import BlogPageContent from '@/components/blog/BlogPageContent';
 
-export const metadata = {
-  title: 'Engineering Journal & Architecture Essays | SysMaira Enterprise',
-  description: 'In-depth architectural blueprints and technical essays on distributed micro-frontends, zero-downtime PostgreSQL migrations, multi-tenant design tokens, and cloud reliability.',
+export const metadata: Metadata = {
+  title: 'Blog & Engineering Insights | Software A–Z Insights',
+  description:
+    'Explore practical insights on custom software development, digital products, application design, system integrations, QA testing, and software modernization.',
+  alternates: {
+    canonical: '/blog',
+  },
+  openGraph: {
+    title: 'Blog & Engineering Insights | Software A–Z Insights',
+    description:
+      'Explore practical insights on custom software development, digital products, application design, system integrations, QA testing, and software modernization.',
+    url: '/blog',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog & Engineering Insights | Software A–Z Insights',
+    description:
+      'Explore practical insights on custom software development, digital products, application design, system integrations, QA testing, and software modernization.',
+  },
 };
 
-export default function Page() {
-  return (
-    <PublicShell>
-      <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">Loading engineering journal...</div>}>
-        <BlogView />
-      </Suspense>
-    </PublicShell>
-  );
+export default function BlogPage() {
+  return <BlogPageContent />;
 }
+

@@ -18,7 +18,7 @@ import Link from 'next/link';
 const COLORS = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6'];
 
 export default function DashboardPage() {
-  const { user, isSuperAdmin, hasPermission, isClientPreview, canAccessWidget } = useAuthStore();
+  const { user, isAuthenticated, isSuperAdmin, hasPermission, isClientPreview, canAccessWidget } = useAuthStore();
   const isClient = user?.role === 'client' || isClientPreview;
   const canViewAnalytics = hasPermission('analytics.read');
 
@@ -91,6 +91,7 @@ export default function DashboardPage() {
   } = useQuery({
     queryKey: ['my-tasks'],
     queryFn: () => import('@/lib/api').then((m) => m.tasksApi.myTasks()).then((r) => r.data.data),
+    enabled: !!user && isAuthenticated,
   });
 
   // Support Ticket Stats

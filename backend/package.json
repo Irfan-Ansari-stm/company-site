@@ -15,7 +15,10 @@
     "test:work": "node src/tests/work-management.test.js",
     "test:enterprise": "node src/tests/enterprise-modules.test.js",
     "test:admin": "node src/tests/admin-tools.test.js",
-    "test:all": "npm run test:rbac && npm run test:dashboard && npm run test:crm && npm run test:work && npm run test:enterprise && npm run test:admin",
+    "test:cms": "node src/tests/cms-public-api.test.js",
+    "test:speed": "node src/tests/public-website-speed-suite.test.js",
+    "test:all": "npm run test:rbac && npm run test:dashboard && npm run test:crm && npm run test:work && npm run test:enterprise && npm run test:admin && npm run test:cms && npm run test:speed",
+    "seed:cms": "node --experimental-strip-types src/scripts/seed-cms-content.js",
     "bootstrap:superadmin": "node src/scripts/bootstrap-superadmin.js"
   },
   "dependencies": {

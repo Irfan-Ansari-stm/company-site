@@ -224,9 +224,7 @@ async function runTests() {
   console.log(` TEST RESULTS: ${testPassed} PASSED, ${testFailed} FAILED`);
   console.log('======================================================\n');
 
-  if (testFailed > 0) {
-    process.exit(1);
-  }
+  process.exit(testFailed > 0 ? 1 : 0);
 }
 
 runTests();

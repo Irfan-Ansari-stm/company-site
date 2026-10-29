@@ -2236,3 +2236,440 @@
 2026-10-23 00:53:53 [error]: Error: Session not found or expired
     at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:277:27
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-29 00:26:17 [error]: Error: Invalid or expired refresh token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:266:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at router.handle (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:175:3)
+2026-10-30 00:03:59 [error]: Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at app.listen (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\application.js:635:24)
+    at startServer (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\index.js:196:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 00:08:39 [error]: error: column "status" of relation "leads" does not exist
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:480:20
+2026-10-30 00:09:29 [error]: error: value too long for type character varying(16)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:483:20
+2026-10-30 00:26:35 [error]: Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at app.listen (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\application.js:635:24)
+    at startServer (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\index.js:196:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:20:54 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:20:54 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:34:34 [error]: SyntaxError: Unterminated string in JSON at position 13 (line 1 column 14)
+    at JSON.parse (<anonymous>)
+    at parse (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\body-parser\lib\types\json.js:92:19)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+    at invokeCallback (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\raw-body\index.js:238:16)
+    at done (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-10-30 01:48:09 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:48:09 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:25 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:25 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:31 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:31 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:38 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:38 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:45 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:45 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:53 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:53 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:59 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:53:59 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:10 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:10 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:15 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:15 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:21 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:21 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:32 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 01:54:32 [error]: Error: Page not found: contact-us
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:189:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:02:14 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:02:22 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:02:35 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:02:36 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:02:36 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:02:36 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:02:36 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:02:57 [error]: error: invalid input syntax for type json
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg\lib\client.js:631:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:924:7
+    at async withTransaction (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:47:20)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\cms.js:921:3
+2026-10-30 02:19:20 [error]: error: column "primary_contact_id" does not exist
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\finance.js:158:20
+2026-10-30 02:19:20 [error]: error: column "primary_contact_id" does not exist
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\finance.js:191:20
+2026-10-30 02:26:14 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:14 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:14 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:187:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:14 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:20 [error]: Error: No active timer found to stop
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1125:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:20 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:20 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:42 [error]: Error: Cannot create roles using reserved system slugs
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:245:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:175:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:42 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:311:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:26:44 [error]: Error: Cannot delete your own account
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:164:43
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:175:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+2026-10-30 02:30:10 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:30:10 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:30:10 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:187:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:30:10 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:30:11 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:30:11 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:26 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:26 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:26 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:187:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:26 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:27 [error]: Error: No active timer found to stop
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1125:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:27 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:27 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:30 [error]: Error: Cannot create roles using reserved system slugs
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:245:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:175:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:30 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:311:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:31:32 [error]: Error: Cannot delete your own account
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:164:43
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:175:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+2026-10-30 02:39:46 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 02:39:46 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:40:14 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 02:40:14 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:40:55 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 02:40:56 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:05 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:05 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:05 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:187:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:05 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:07 [error]: Error: No active timer found to stop
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1125:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:07 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:07 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:10 [error]: Error: Cannot create roles using reserved system slugs
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:245:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:175:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:132:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:10 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:311:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 02:41:13 [error]: Error: Cannot delete your own account
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:164:43
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:175:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+2026-10-30 02:41:17 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 02:41:18 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)

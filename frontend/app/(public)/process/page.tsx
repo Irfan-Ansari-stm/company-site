@@ -1,15 +1,11 @@
-import { PublicShell } from '../_components/PublicShell';
-import ProcessView from '@/components/process/ProcessView';
+import ProcessPage from '@/components/process/ProcessPage';
 
 export const metadata = {
-  title: 'Our Engineering Delivery Process & SLA Lifecycle | SysMaira Enterprise',
-  description: 'From technical discovery to zero-downtime cutover: explore our 6-phase engineering lifecycle, bi-weekly agile sprint demos, and 60-day post-launch SLA warranty.',
+  title: 'Software Delivery Process | Sysmaira Software Solutions',
+  description:
+    'Explore the Sysmaira Software Solutions delivery process, from requirements gathering and planning to software design, development, testing, delivery, and ongoing improvements.',
 };
 
 export default function Page() {
-  return (
-    <PublicShell>
-      <ProcessView />
-    </PublicShell>
-  );
+  return <ProcessPage />;
 }

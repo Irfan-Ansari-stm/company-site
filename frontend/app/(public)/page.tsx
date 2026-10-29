@@ -1,15 +1,11 @@
-import { PublicShell } from './_components/PublicShell';
-import AwwardsLandingPage from '@/components/AwwardsLandingPage';
+import LandingPage from '@/components/landing/LandingPage';
 
 export const metadata = {
-  title: 'SysMaira Enterprise | Digital Architecture, Cloud Systems & Web Platforms',
-  description: 'Enterprise full-stack web applications, multi-cloud Kubernetes architectures, AI solutions, and SOC2-compliant engineering.',
+  title: 'Sysmaira Software Solutions | Custom Software Development & IT Services',
+  description:
+    'End-to-end custom software development, modern web applications, mobile app engineering, UI/UX design, API integrations, and ongoing software maintenance.',
 };
 
 export default function Home() {
-  return (
-    <PublicShell>
-      <AwwardsLandingPage />
-    </PublicShell>
-  );
+  return <LandingPage />;
 }

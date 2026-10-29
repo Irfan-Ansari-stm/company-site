@@ -22,6 +22,7 @@ const { apiLimiter } = require('./middleware/common');
 const authRoutes         = require('./routes/auth');
 const { router: usersRouter, rolesRouter, permissionsRouter } = require('./routes/users');
 const cmsRoutes          = require('./routes/cms');
+const publicRoutes       = require('./routes/public');
 const { router: servicesRouter, industriesRouter, solutionsRouter } = require('./routes/services');
 const portfolioRoutes    = require('./routes/portfolio');
 const blogRoutes         = require('./routes/blog');
@@ -106,6 +107,8 @@ app.use(`${PREFIX}/permissions`, permissionsRouter);
 
 // CMS / Content
 app.use(`${PREFIX}/cms`,         cmsRoutes);
+app.use(`${PREFIX}/public`,      publicRoutes);
+app.use('/api/public',           publicRoutes);
 app.use(`${PREFIX}/media`,       mediaRoutes);
 
 // Services & Products
@@ -197,7 +200,9 @@ const startServer = async () => {
   });
 };
 
-startServer();
+if (process.env.NODE_ENV !== 'test' && require.main === module) {
+  startServer();
+}
 
 // ── Graceful shutdown ─────────────────────────────────────────
 process.on('SIGTERM', async () => {

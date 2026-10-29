@@ -525,6 +525,47 @@ export const cmsApi = {
   getPopups: () => api.get('/cms/popups'),
   createPopup: (data: any) => api.post('/cms/popups', data),
   updatePopup: (id: string, data: any) => api.patch(`/cms/popups/${id}`, data),
+
+  // CMS Overview Metrics
+  getStats: () => api.get('/cms/stats'),
+
+  // Section Reorder
+  reorderSections: (pageId: string, sectionIds: string[]) =>
+    api.put(`/cms/pages/${pageId}/sections/reorder`, { sectionIds }),
+
+  // FAQs
+  getFaqs: (params?: any) => api.get('/cms/faqs', { params }),
+  createFaq: (data: any) => api.post('/cms/faqs', data),
+  updateFaq: (id: string, data: any) => api.patch(`/cms/faqs/${id}`, data),
+  deleteFaq: (id: string) => api.delete(`/cms/faqs/${id}`),
+
+  // Delivery Process
+  getDeliveryProcess: () => api.get('/cms/delivery-process'),
+  createDeliveryProcess: (data: any) => api.post('/cms/delivery-process', data),
+  updateDeliveryProcess: (id: string, data: any) => api.patch(`/cms/delivery-process/${id}`, data),
+  deleteDeliveryProcess: (id: string) => api.delete(`/cms/delivery-process/${id}`),
+
+  // Engagement Models
+  getEngagementModels: () => api.get('/cms/engagement-models'),
+  createEngagementModel: (data: any) => api.post('/cms/engagement-models', data),
+  updateEngagementModel: (id: string, data: any) => api.patch(`/cms/engagement-models/${id}`, data),
+  deleteEngagementModel: (id: string) => api.delete(`/cms/engagement-models/${id}`),
+
+  // Site Settings & Branding
+  getSiteSettings: () => api.get('/cms/site-settings'),
+  updateSiteSettings: (data: any) => api.put('/cms/site-settings', data),
+
+  // Page Revisions & Publishing
+  publishPage: (id: string, note?: string) => api.post(`/cms/pages/${id}/publish`, { note }),
+  getRevisions: (pageId: string) => api.get(`/cms/pages/${pageId}/revisions`),
+  rollbackRevision: (pageId: string, revisionId: string) =>
+    api.post(`/cms/pages/${pageId}/revisions/${revisionId}/rollback`),
+  duplicateSection: (pageId: string, sectionId: string) =>
+    api.post(`/cms/pages/${pageId}/duplicate-section/${sectionId}`),
+
+  // Global Design System & Theme Tokens
+  getThemeSettings: () => api.get('/cms/theme-settings'),
+  updateThemeSettings: (tokens: any) => api.put('/cms/theme-settings', tokens),
 };
 
 // ─── SERVICES ────────────────────────────────────────────────
@@ -545,9 +586,7 @@ export const servicesApi = {
   addFeature: (id: string, data: any) => api.post(`/services/${id}/features`, data),
   removeFeature: (id: string, featureId: string) =>
     api.delete(`/services/${id}/features/${featureId}`),
-
-  getPackages: (id: string) => api.get(`/services/${id}/packages`),
-  createPackage: (id: string, data: any) =>
+  addPackage: (id: string, data: any) =>
     api.post(`/services/${id}/packages`, data),
   updatePackage: (id: string, pkgId: string, data: any) =>
     api.patch(`/services/${id}/packages/${pkgId}`, data),
@@ -561,6 +600,8 @@ export const servicesApi = {
   getSolutions: () => api.get('/solutions'),
   getSolution: (slugOrId: string) => api.get(`/solutions/${slugOrId}`),
   createSolution: (data: any) => api.post('/solutions', data),
+  updateSolution: (id: string, data: any) => api.patch(`/solutions/${id}`, data),
+  deleteSolution: (id: string) => api.delete(`/solutions/${id}`),
 };
 
 // ─── PORTFOLIO ───────────────────────────────────────────────

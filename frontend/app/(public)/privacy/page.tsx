@@ -1,15 +1,28 @@
-import { PublicShell } from '../_components/PublicShell';
+import React from 'react';
+import LandingHeader from '@/components/landing/LandingHeader';
+import LandingFooter from '@/components/landing/LandingFooter';
 import LegalView from '@/components/legal/LegalView';
 
 export const metadata = {
-  title: 'Privacy Policy & Data Protection Standards | SysMaira Enterprise',
-  description: 'Our binding commitment to client confidentiality, zero AI model training on private codebases, and strict compliance with global privacy regulations (GDPR, CCPA/CPRA, and SOC2 Type II).',
+  title: 'Privacy Policy & Data Protection Standards | Sysmaira Software Solutions',
+  description:
+    'Our binding commitment to client confidentiality, strict data privacy, and secure custom software development practices.',
 };
 
 export default function Page() {
   return (
-    <PublicShell>
-      <LegalView type="privacy" />
-    </PublicShell>
+    <div className="flex min-h-screen flex-col bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-cyan-600 focus:px-4 focus:py-2 focus:text-white"
+      >
+        Skip to main content
+      </a>
+      <LandingHeader />
+      <main id="main-content" tabIndex={-1} className="flex-1 w-full outline-none">
+        <LegalView type="privacy" />
+      </main>
+      <LandingFooter />
+    </div>
   );
 }

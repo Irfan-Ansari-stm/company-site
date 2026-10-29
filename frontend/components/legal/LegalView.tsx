@@ -114,7 +114,7 @@ export default function LegalView({ type }: LegalViewProps) {
               <p className="apple-lead mt-4 text-slate-600 dark:text-slate-300">
                 {isPrivacy
                   ? 'Our binding commitment to client confidentiality, zero AI model training on private codebases, and strict compliance with global privacy regulations (GDPR, CCPA/CPRA, and SOC2 Type II).'
-                  : 'The legal framework and terms governing enterprise advisory engagements, Statements of Work (SOW), 100% intellectual property transfer, and delivery milestone warranties with SysMaira Enterprise.'}
+                  : 'The legal framework and terms governing enterprise software development engagements, Statements of Work (SOW), 100% intellectual property transfer, and delivery milestone warranties with Sysmaira Software Solutions.'}
               </p>
             </div>
 
@@ -214,7 +214,7 @@ export default function LegalView({ type }: LegalViewProps) {
                     1. Executive Privacy Overview
                   </h2>
                   <p>
-                    SysMaira Enterprise (&ldquo;SysMaira&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates this digital presence and provides enterprise software architecture, full-stack digital platform engineering, cloud DevOps, and related advisory services.
+                    Sysmaira Software Solutions (&ldquo;SysMaira&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates this digital presence and provides enterprise software architecture, full-stack digital platform engineering, cloud DevOps, and related advisory services.
                   </p>
                   <p>
                     We recognize that enterprise clients, technology leaders, and partners entrust us with mission-critical technical roadmaps, database topologies, and strategic objectives. This Privacy Policy details how we collect, store, isolate, process, and protect your information when visiting our website, submitting project inquiries, or engaging our engineering pods.
@@ -378,7 +378,7 @@ export default function LegalView({ type }: LegalViewProps) {
                     For inquiries, data subject access requests, or regulatory communications regarding our data governance practices, please contact:
                   </p>
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-2 text-xs font-mono shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-                    <p className="text-slate-900 dark:text-white font-bold text-sm">SysMaira Enterprise — Privacy &amp; Data Governance</p>
+                    <p className="text-slate-900 dark:text-white font-bold text-sm">Sysmaira Software Solutions — Privacy &amp; Data Governance</p>
                     <p>Attn: Data Protection Officer</p>
                     <p>100 Montgomery St, Suite 1800, San Francisco, CA, 94104</p>
                     <p>Email: <a href="mailto:privacy@sysmaira.com" className="text-cyan-600 dark:text-cyan-400 hover:underline">privacy@sysmaira.com</a></p>
@@ -395,7 +395,7 @@ export default function LegalView({ type }: LegalViewProps) {
                     1. Agreement to Terms &amp; Parties
                   </h2>
                   <p>
-                    These Terms of Service (&ldquo;Terms&rdquo;) constitute a legally binding agreement between you or the entity you represent (&ldquo;Client&rdquo;, &ldquo;you&rdquo;) and SysMaira Enterprise (&ldquo;SysMaira&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;).
+                    These Terms of Service (&ldquo;Terms&rdquo;) constitute a legally binding agreement between you or the entity you represent (&ldquo;Client&rdquo;, &ldquo;you&rdquo;) and Sysmaira Software Solutions (&ldquo;SysMaira&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;).
                   </p>
                   <p>
                     By accessing our website, submitting an architectural scoping brief, or executing a formal Statement of Work (SOW), you acknowledge that you have read, understood, and agree to be bound by these Terms.
@@ -526,7 +526,7 @@ export default function LegalView({ type }: LegalViewProps) {
                     We reserve the right to update these public Terms periodically to reflect evolving regulatory frameworks or operational improvements. Continued use of our digital platforms following the posting of updated Terms constitutes acceptance.
                   </p>
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-2 text-xs font-mono shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-                    <p className="text-slate-900 dark:text-white font-bold text-sm">SysMaira Enterprise — Legal &amp; Corporate Counsel</p>
+                    <p className="text-slate-900 dark:text-white font-bold text-sm">Sysmaira Software Solutions — Legal &amp; Corporate Counsel</p>
                     <p>100 Montgomery St, Suite 1800, San Francisco, CA, 94104</p>
                     <p>Email: <a href="mailto:legal@sysmaira.com" className="text-cyan-600 dark:text-cyan-400 hover:underline">legal@sysmaira.com</a></p>
                     <p>Corporate Office: +1 (555) 019-2831</p>

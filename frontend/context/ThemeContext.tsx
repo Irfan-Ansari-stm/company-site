@@ -1,6 +1,9 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useLayoutEffect, useState, useCallback } from 'react';
+
+// Use isomorphic layout effect so theme application happens synchronously before browser paint
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export type Theme = 'light' | 'dark';
 
@@ -45,8 +48,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Initialize theme from localStorage or OS system preference
-  useEffect(() => {
+  // Initialize theme from localStorage or OS system preference before paint
+  useIsomorphicLayoutEffect(() => {
     setMounted(true);
     try {
       const stored = localStorage.getItem('theme') as Theme | null;

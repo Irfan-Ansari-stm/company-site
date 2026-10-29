@@ -28,5 +28,16 @@ module.exports = {
       },
     },
   },
+  safelist: [
+    { pattern: /grid-cols-(1|2|3|4|5|6|12)/ },
+    { pattern: /gap-(2|3|4|6|8|10|12)/ },
+    { pattern: /col-span-(1|2|3|4|5|6|12)/ },
+    { pattern: /(p|py|px|m|my|mx)-(2|4|6|8|10|12|16|20|24)/ },
+    { pattern: /(bg|text|border)-(slate|cyan|blue|indigo|emerald|rose|amber)-(50|100|200|300|400|500|600|700|800|900|950)/ },
+    { pattern: /rounded-(sm|md|lg|xl|2xl|3xl|full)/ },
+    { pattern: /shadow-(sm|md|lg|xl|2xl)/ },
+    'text-left', 'text-center', 'text-right',
+    'flex-row', 'flex-col', 'items-center', 'justify-between', 'justify-center',
+  ],
   plugins: [],
 }

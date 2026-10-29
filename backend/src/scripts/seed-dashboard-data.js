@@ -1654,7 +1654,7 @@ async function seedData() {
 
     // 16b. System Settings
     const systemSettings = [
-      { key: 'site.name', val: 'SysMaira Enterprise', grp: 'branding', desc: 'Platform corporate brand name', pub: true },
+      { key: 'site.name', val: 'Sysmaira AI Solutions', grp: 'branding', desc: 'Platform corporate brand name', pub: true },
       { key: 'site.tagline', val: 'High-Performance Enterprise Platforms', grp: 'branding', desc: 'Site metadata tagline', pub: true },
       { key: 'site.url', val: 'https://sysmaira.example.com', grp: 'branding', desc: 'Canonical production URL', pub: true },
       { key: 'email.from_name', val: 'SysMaira Operations', grp: 'email', desc: 'Default sender name for transactional emails', pub: false },
@@ -1814,7 +1814,7 @@ async function seedData() {
       { action: 'CREATE', res_type: 'users', desc: 'Created user account jordan@techflow.io with client role', diff: { role: 'client' } },
       { action: 'UPDATE_PERMISSIONS', res_type: 'roles', desc: 'Updated permissions matrix for Client role', diff: { added: ['project.view', 'invoice.view', 'ticket.create'] } },
       { action: 'UPDATE_CLIENT_ACCESS', res_type: 'dashboard_modules', desc: 'Enabled Support Desk module with ticket submit action for client portal', diff: { module: 'support', is_client_enabled: true } },
-      { action: 'UPDATE_SETTINGS', res_type: 'system_settings', desc: 'Updated system security parameters and corporate branding', diff: { 'site.name': 'SysMaira Enterprise' } },
+      { action: 'UPDATE_SETTINGS', res_type: 'system_settings', desc: 'Updated system security parameters and corporate branding', diff: { 'site.name': 'Sysmaira AI Solutions' } },
       { action: 'CREATE', res_type: 'projects', desc: 'Initialized Enterprise Cloud Modernization project', diff: { status: 'in_progress', budget: 85000 } },
       { action: 'CREATE', res_type: 'invoices', desc: 'Generated invoice INV-2026-0001 for Acme Corporation', diff: { total: 18500, status: 'paid' } },
       { action: 'UPDATE', res_type: 'invoices', desc: 'Recorded full wire payment for invoice INV-2026-0001', diff: { amount_due: 0, status: 'paid' } },
