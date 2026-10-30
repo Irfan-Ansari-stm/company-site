@@ -51,6 +51,7 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     setError('');
     try {
@@ -192,6 +193,7 @@ export default function RegisterPage() {
                 id="reg-password"
                 type="password"
                 required
+                minLength={8}
                 value={form.password}
                 onChange={(e) => set('password', e.target.value)}
                 placeholder="Minimum 8 characters"

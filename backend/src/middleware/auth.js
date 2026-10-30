@@ -1,6 +1,7 @@
 // src/middleware/auth.js
 const jwt = require('jsonwebtoken');
 const { query } = require('../config/database');
+const { isUUID } = require('../utils/helpers');
 
 // ════════════════════════════════════════════════════════════
 //  CENTRALIZED AUTHORIZATION SERVICE
@@ -100,13 +101,23 @@ const canAccessResource = (user, resource, ownerIdField = 'user_id') => {
 // Verify JWT access token & load fresh identity and permissions
 const authenticate = async (req, res, next) => {
   try {
+    let token;
     const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.split(' ')[1];
+    } else if (req.cookies && (req.cookies.accessToken || req.cookies.token)) {
+      token = req.cookies.accessToken || req.cookies.token;
+    }
+
+    if (!token) {
       return res.status(401).json({ success: false, message: 'Access token required' });
     }
 
-    const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+
+    if (!decoded.userId || !isUUID(decoded.userId)) {
+      return res.status(401).json({ success: false, message: 'Invalid token payload' });
+    }
 
     // Load fresh user from DB
     const { rows } = await query(
@@ -141,11 +152,17 @@ const authenticate = async (req, res, next) => {
 // Optional auth — sets req.user if token present, doesn't fail
 const optionalAuth = async (req, res, next) => {
   try {
+    let token;
     const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) return next();
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.split(' ')[1];
+    } else if (req.cookies && (req.cookies.accessToken || req.cookies.token)) {
+      token = req.cookies.accessToken || req.cookies.token;
+    }
+    if (!token) return next();
 
-    const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+    if (!decoded.userId || !isUUID(decoded.userId)) return next();
 
     const { rows } = await query(
       `SELECT id, email, display_name, role, is_active,

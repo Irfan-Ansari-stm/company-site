@@ -2673,3 +2673,369 @@
 2026-10-30 02:41:18 [error]: Error: Page not found: nonexistent-route-999xyz
     at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:00:58 [error]: Error: email, password, first_name, last_name are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:51:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:00:58 [error]: Error: Please provide a valid email address
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:56:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:00:58 [error]: Error: Password must be at least 8 characters
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:59:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:01:01 [error]: Email send failed to authtest.1793309458628@sysmairatest.org:
+2026-10-30 03:01:01 [error]: Error: An account with this email address already exists
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:68:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:154:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [error]: Error: Account is deactivated
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:155:30
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:03 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:05 [error]: Email send failed to authtest.1793309458628@sysmairatest.org:
+2026-10-30 03:01:05 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:06 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:06 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:06 [error]: Error: Invalid or expired verification token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:463:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:05:59 [error]: Error: email, password, first_name, last_name are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:51:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:05:59 [error]: Error: Please provide a valid email address
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:56:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:05:59 [error]: Error: Password must be at least 8 characters
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:59:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:06:02 [error]: Email send failed to authtest.1793309759153@sysmairatest.org:
+2026-10-30 03:06:02 [error]: Error: An account with this email address already exists
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:68:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:154:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [error]: Error: Account is deactivated
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:155:30
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:06 [error]: Email send failed to authtest.1793309759153@sysmairatest.org:
+2026-10-30 03:06:06 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:06 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:07 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:07 [error]: Error: Invalid or expired verification token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:463:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:34 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 03:06:34 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:56 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:56 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:56 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:204:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:56 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:15 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:15 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:15 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:204:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:15 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:24 [error]: Error: No active timer found to stop
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1125:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:24 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:24 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:23 [error]: Error: Cannot create roles using reserved system slugs
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:245:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:23 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:311:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:25 [error]: Error: Cannot delete your own account
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:164:43
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+2026-10-30 03:12:36 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:36 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:36 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:204:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:36 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:37 [error]: Error: No active timer found to stop
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1125:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:37 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:37 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:41 [error]: Error: Cannot create roles using reserved system slugs
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:245:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:41 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:311:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:44 [error]: Error: Cannot delete your own account
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:164:43
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+2026-10-30 03:12:49 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 03:12:49 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:50 [error]: Error: email, password, first_name, last_name are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:51:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:12:50 [error]: Error: Please provide a valid email address
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:56:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:12:50 [error]: Error: Password must be at least 8 characters
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:59:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:12:53 [error]: Email send failed to authtest.1793310170486@sysmairatest.org:
+2026-10-30 03:12:53 [error]: Error: An account with this email address already exists
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:68:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:154:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [error]: Error: Account is deactivated
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:155:30
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:57 [error]: Email send failed to authtest.1793310170486@sysmairatest.org:
+2026-10-30 03:12:57 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:58 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:58 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:58 [error]: Error: Invalid or expired verification token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:463:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 22:32:29 [error]: error: invalid input value for enum lead_stage: "35000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 1)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:30 [error]: error: invalid input value for enum lead_stage: "38000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:31 [error]: error: invalid input value for enum lead_stage: "65000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:32 [error]: error: invalid input value for enum lead_stage: "38000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:33 [error]: error: invalid input value for enum lead_stage: "38000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31

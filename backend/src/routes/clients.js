@@ -212,7 +212,7 @@ router.get('/:id', authenticate, requirePermission('client.read'), asyncHandler(
 // ════════════════════════════════════════════════════════════
 //  CREATE CLIENT
 // ════════════════════════════════════════════════════════════
-router.post('/', authenticate, requirePermission('client.create'), asyncHandler(async (req, res) => {
+router.post('/', authenticate, requirePermission('client.create', 'client.manage'), asyncHandler(async (req, res) => {
   if (req.user.role === 'client') {
     throw new AppError('Client users cannot create client accounts', 403);
   }
@@ -281,7 +281,7 @@ router.post('/', authenticate, requirePermission('client.create'), asyncHandler(
 // ════════════════════════════════════════════════════════════
 //  UPDATE CLIENT
 // ════════════════════════════════════════════════════════════
-router.patch('/:id', authenticate, requirePermission('client.edit'), asyncHandler(async (req, res) => {
+router.patch('/:id', authenticate, requirePermission('client.edit', 'client.manage'), asyncHandler(async (req, res) => {
   if (req.user.role === 'client') {
     throw new AppError('Client users cannot modify client accounts', 403);
   }
@@ -345,7 +345,7 @@ router.patch('/:id', authenticate, requirePermission('client.edit'), asyncHandle
 // ════════════════════════════════════════════════════════════
 //  DELETE CLIENT (SOFT DELETE)
 // ════════════════════════════════════════════════════════════
-router.delete('/:id', authenticate, requirePermission('client.delete'), asyncHandler(async (req, res) => {
+router.delete('/:id', authenticate, requirePermission('client.delete', 'client.manage'), asyncHandler(async (req, res) => {
   if (req.user.role === 'client') {
     throw new AppError('Client users cannot delete client accounts', 403);
   }
@@ -379,7 +379,7 @@ router.get('/:id/contacts', authenticate, requirePermission('client.read'), asyn
   return success(res, rows);
 }));
 
-router.post('/:id/contacts', authenticate, requirePermission('client.edit'), asyncHandler(async (req, res) => {
+router.post('/:id/contacts', authenticate, requirePermission('client.edit', 'client.manage'), asyncHandler(async (req, res) => {
   if (req.user.role === 'client') {
     throw new AppError('Client users cannot add contacts', 403);
   }
@@ -399,7 +399,7 @@ router.post('/:id/contacts', authenticate, requirePermission('client.edit'), asy
   return created(res, rows[0]);
 }));
 
-router.delete('/:id/contacts/:contactId', authenticate, requirePermission('client.edit'), asyncHandler(async (req, res) => {
+router.delete('/:id/contacts/:contactId', authenticate, requirePermission('client.edit', 'client.manage'), asyncHandler(async (req, res) => {
   if (req.user.role === 'client') {
     throw new AppError('Client users cannot delete contacts', 403);
   }
@@ -425,7 +425,7 @@ router.get('/:id/portal', authenticate, requirePermission('client.read'), asyncH
   return success(res, rows);
 }));
 
-router.post('/:id/portal', authenticate, requirePermission('client.edit'), asyncHandler(async (req, res) => {
+router.post('/:id/portal', authenticate, requirePermission('client.edit', 'client.manage'), asyncHandler(async (req, res) => {
   if (req.user.role === 'client') {
     throw new AppError('Access denied', 403);
   }
@@ -462,7 +462,7 @@ router.get('/:id/notes', authenticate, requirePermission('client.read'), asyncHa
   return success(res, rows);
 }));
 
-router.post('/:id/notes', authenticate, requirePermission('client.edit'), asyncHandler(async (req, res) => {
+router.post('/:id/notes', authenticate, requirePermission('client.edit', 'client.manage'), asyncHandler(async (req, res) => {
   if (req.user.role === 'client') {
     throw new AppError('Clients cannot add internal notes', 403);
   }

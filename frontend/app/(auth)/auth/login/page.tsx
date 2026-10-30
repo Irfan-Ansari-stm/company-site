@@ -48,10 +48,11 @@ function LoginForm() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     setError('');
     try {
-      const { data } = await authApi.login(email, password);
+      const { data } = await authApi.login(email.trim().toLowerCase(), password);
       const result = data.data;
 
       if (result.requires2FA) {
@@ -72,6 +73,7 @@ function LoginForm() {
 
   const handle2FA = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     setError('');
     try {
@@ -183,18 +185,22 @@ function LoginForm() {
                     <input type="checkbox" className="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500" />
                     <span>Remember this device</span>
                   </label>
-                  <span className="text-slate-400 dark:text-slate-500 cursor-not-allowed">
+                  <Link
+                    href="/auth/forgot-password"
+                    className="font-semibold text-cyan-600 hover:text-cyan-500 dark:text-cyan-400 dark:hover:text-cyan-300 transition-colors"
+                  >
                     Forgot password?
-                  </span>
+                  </Link>
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 py-3 text-sm font-bold text-slate-950 shadow-md shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 cursor-pointer"
+                  aria-busy={loading}
+                  className="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 py-3 text-sm font-bold text-slate-950 shadow-md shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-teal-400 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-                  <span>Sign In to Console</span>
+                  <span>{loading ? 'Signing in...' : 'Sign In to Console'}</span>
                 </button>
               </form>
 

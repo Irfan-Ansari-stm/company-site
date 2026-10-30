@@ -10167,3 +10167,759 @@
 2026-10-30 02:48:06 [info]: ::ffff:127.0.0.1 - - [29/Oct/2026:21:18:06 +0000] "GET /api/v1/public/footer HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
 2026-10-30 02:48:06 [info]: ::ffff:127.0.0.1 - - [29/Oct/2026:21:18:06 +0000] "GET /api/v1/public/pages/engagement-models HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
 2026-10-30 02:48:10 [info]: ::ffff:127.0.0.1 - - [29/Oct/2026:21:18:10 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-30 02:49:13 [info]: ::1 - - [29/Oct/2026:21:19:13 +0000] "GET /api/v1/public/blog/practical-strategies-legacy-software-modernization HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 02:49:13 [info]: ::1 - - [29/Oct/2026:21:19:13 +0000] "GET /api/v1/public/blog/modular-web-application-architecture-best-practices HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 02:49:13 [info]: ::1 - - [29/Oct/2026:21:19:13 +0000] "GET /api/v1/public/blog/robust-api-integration-patterns-for-enterprise-software HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 02:49:13 [info]: ::1 - - [29/Oct/2026:21:19:13 +0000] "GET /api/v1/public/blog/design-systems-accelerating-digital-product-development HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 02:49:13 [info]: ::1 - - [29/Oct/2026:21:19:13 +0000] "GET /api/v1/public/blog/custom-software-vs-off-the-shelf-decision-framework HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 02:49:13 [info]: ::1 - - [29/Oct/2026:21:19:13 +0000] "GET /api/v1/public/blog/automated-qa-testing-workflows-agile-development HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 02:56:26 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 02:56:26 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 02:56:26 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 02:56:26 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 02:56:36 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 02:56:36 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 02:56:36 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 02:56:36 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 02:56:49 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 02:56:49 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 02:56:49 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 02:56:49 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 02:57:30 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 02:57:30 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 02:57:30 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 02:57:30 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 02:58:00 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 02:58:00 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 02:58:00 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 02:58:00 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:00:20 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:00:20 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:00:20 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:00:20 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:00:44 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:00:44 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:00:44 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:00:44 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:00:58 [error]: Error: email, password, first_name, last_name are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:51:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:00:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:30:58 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:00:58 [error]: Error: Please provide a valid email address
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:56:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:00:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:30:58 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:00:58 [error]: Error: Password must be at least 8 characters
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:59:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:00:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:30:58 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:01:01 [error]: Email send failed to authtest.1793309458628@sysmairatest.org:
+2026-10-30 03:01:01 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:01 +0000] "POST /api/v1/auth/register HTTP/1.1" 201 - "-" "node"
+2026-10-30 03:01:01 [error]: Error: An account with this email address already exists
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:68:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:01 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:01 +0000] "POST /api/v1/auth/register HTTP/1.1" 409 345 "-" "node"
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:01:02 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:01:02 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:154:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:01:02 [error]: Error: Account is deactivated
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:155:30
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 292 "-" "node"
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "GET /api/v1/auth/me HTTP/1.1" 200 677 "-" "node"
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 605 "-" "node"
+2026-10-30 03:01:02 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 401 304 "-" "node"
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "GET /api/v1/auth/me HTTP/1.1" 401 50 "-" "node"
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/logout HTTP/1.1" 200 64 "-" "node"
+2026-10-30 03:01:02 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:02 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 401 304 "-" "node"
+2026-10-30 03:01:03 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:03 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:01:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:03 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:01:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:03 +0000] "GET /api/v1/users HTTP/1.1" 401 51 "-" "node"
+2026-10-30 03:01:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:03 +0000] "GET /api/v1/users HTTP/1.1" 403 90 "-" "node"
+2026-10-30 03:01:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:03 +0000] "GET /api/v1/cms/stats HTTP/1.1" 200 200 "-" "node"
+2026-10-30 03:01:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:03 +0000] "GET /api/v1/users HTTP/1.1" 401 51 "-" "node"
+2026-10-30 03:01:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:03 +0000] "POST /api/v1/roles HTTP/1.1" 403 92 "-" "node"
+2026-10-30 03:01:05 [error]: Email send failed to authtest.1793309458628@sysmairatest.org:
+2026-10-30 03:01:05 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:05 +0000] "POST /api/v1/auth/forgot-password HTTP/1.1" 200 88 "-" "node"
+2026-10-30 03:01:05 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:05 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:05 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 400 308 "-" "node"
+2026-10-30 03:01:05 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:05 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 200 66 "-" "node"
+2026-10-30 03:01:06 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:06 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:01:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:06 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:01:06 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:06 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 400 308 "-" "node"
+2026-10-30 03:01:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:06 +0000] "GET /api/v1/auth/verify-email?token=test-verify-token-1793309466627 HTTP/1.1" 200 66 "-" "node"
+2026-10-30 03:01:06 [error]: Error: Invalid or expired verification token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:463:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:01:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:31:06 +0000] "GET /api/v1/auth/verify-email?token=test-verify-token-1793309466627 HTTP/1.1" 400 322 "-" "node"
+2026-10-30 03:05:08 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:05:08 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:05:08 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:05:08 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:05:12 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:05:12 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:05:12 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:05:12 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:05:53 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:05:53 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:05:53 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:05:53 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:05:59 [error]: Error: email, password, first_name, last_name are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:51:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:05:59 [info]: 127.0.0.1 - - [29/Oct/2026:21:35:59 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:05:59 [error]: Error: Please provide a valid email address
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:56:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:05:59 [info]: 127.0.0.1 - - [29/Oct/2026:21:35:59 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:05:59 [error]: Error: Password must be at least 8 characters
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:59:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:05:59 [info]: 127.0.0.1 - - [29/Oct/2026:21:35:59 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:06:02 [error]: Email send failed to authtest.1793309759153@sysmairatest.org:
+2026-10-30 03:06:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:02 +0000] "POST /api/v1/auth/register HTTP/1.1" 201 - "-" "node"
+2026-10-30 03:06:02 [error]: Error: An account with this email address already exists
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:68:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:02 +0000] "POST /api/v1/auth/register HTTP/1.1" 409 345 "-" "node"
+2026-10-30 03:06:02 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:02 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:06:03 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:06:03 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:154:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:06:03 [error]: Error: Account is deactivated
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:155:30
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 292 "-" "node"
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "GET /api/v1/auth/me HTTP/1.1" 200 677 "-" "node"
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 605 "-" "node"
+2026-10-30 03:06:03 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 401 304 "-" "node"
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "GET /api/v1/auth/me HTTP/1.1" 401 50 "-" "node"
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/logout HTTP/1.1" 200 64 "-" "node"
+2026-10-30 03:06:03 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 401 304 "-" "node"
+2026-10-30 03:06:03 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:03 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 962 "-" "node"
+2026-10-30 03:06:04 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:04 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:06:04 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:04 +0000] "GET /api/v1/users HTTP/1.1" 401 51 "-" "node"
+2026-10-30 03:06:04 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:04 +0000] "GET /api/v1/users HTTP/1.1" 403 90 "-" "node"
+2026-10-30 03:06:04 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:04 +0000] "GET /api/v1/cms/stats HTTP/1.1" 403 58 "-" "node"
+2026-10-30 03:06:04 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:04 +0000] "GET /api/v1/users HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:04 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:04 +0000] "POST /api/v1/roles HTTP/1.1" 403 92 "-" "node"
+2026-10-30 03:06:06 [error]: Email send failed to authtest.1793309759153@sysmairatest.org:
+2026-10-30 03:06:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:06 +0000] "POST /api/v1/auth/forgot-password HTTP/1.1" 200 88 "-" "node"
+2026-10-30 03:06:06 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:06 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 400 308 "-" "node"
+2026-10-30 03:06:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:06 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 200 66 "-" "node"
+2026-10-30 03:06:06 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:06 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:06 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:06:07 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:07 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:06:07 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:07 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:07 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 400 308 "-" "node"
+2026-10-30 03:06:07 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:07 +0000] "GET /api/v1/auth/verify-email?token=test-verify-token-1793309767081 HTTP/1.1" 200 66 "-" "node"
+2026-10-30 03:06:07 [error]: Error: Invalid or expired verification token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:463:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:07 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:07 +0000] "GET /api/v1/auth/verify-email?token=test-verify-token-1793309767081 HTTP/1.1" 400 322 "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/navigation HTTP/1.1" 200 609 "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/footer HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/services HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/solutions HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/showcases HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/faqs HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/delivery-process HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/engagement-models HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/blog HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/blog/categories HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "POST /api/v1/public/contact-submissions HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "POST /api/v1/public/contact-submissions HTTP/1.1" 201 369 "-" "node"
+2026-10-30 03:06:34 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/pages/nonexistent-route-999xyz HTTP/1.1" 404 330 "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/public/blog HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:06:34 [info]: 127.0.0.1 - - [29/Oct/2026:21:36:34 +0000] "GET /api/v1/cms/stats HTTP/1.1" 401 51 "-" "node"
+2026-10-30 03:06:56 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:56 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:56 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:204:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:06:56 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:09:25 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:09:25 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:09:25 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:09:25 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:09:31 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:09:31 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:09:31 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:09:31 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:09:40 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:09:40 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:09:40 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:09:40 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:09:46 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:09:46 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:09:46 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:09:46 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:09:53 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:09:53 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:09:53 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:09:53 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:10:00 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:10:00 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:10:00 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:10:00 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:10:08 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:10:08 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:10:08 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:10:08 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:10:15 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:15 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:15 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:204:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:15 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:24 [error]: Error: No active timer found to stop
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1125:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:24 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:10:24 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:07 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:12:07 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:12:07 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:12:07 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:12:23 [error]: Error: Cannot create roles using reserved system slugs
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:245:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:23 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:311:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:25 [error]: Error: Cannot delete your own account
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:164:43
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+2026-10-30 03:12:36 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:36 [error]: Error: Access to CRM module is restricted to administrators and staff members
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:19:19
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:36 [error]: Error: Access to client directory is restricted to administrators
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:46:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at paginate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\common.js:13:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:204:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:36 [error]: Error: Access denied: You can only view your own client record
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\clients.js:147:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:37 [error]: Error: No active timer found to stop
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1125:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:37 [error]: Error: Forbidden: You do not have access to this project
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:190:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:37 [error]: Error: Forbidden: Clients cannot log time entries
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\projects.js:1070:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:41 [error]: Error: Cannot create roles using reserved system slugs
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:245:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:41 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:311:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:44 [error]: Error: Cannot delete your own account
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:164:43
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:192:47
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/navigation HTTP/1.1" 200 609 "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/footer HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/services HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/solutions HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/showcases HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/faqs HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/delivery-process HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/engagement-models HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/blog HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/blog/categories HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [error]: Error: Name and valid email address are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:471:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\utils\cache.js:41:16
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "POST /api/v1/public/contact-submissions HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "POST /api/v1/public/contact-submissions HTTP/1.1" 201 369 "-" "node"
+2026-10-30 03:12:49 [error]: Error: Page not found: nonexistent-route-999xyz
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\public.js:193:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/pages/nonexistent-route-999xyz HTTP/1.1" 404 330 "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/public/blog HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:49 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:49 +0000] "GET /api/v1/cms/stats HTTP/1.1" 401 51 "-" "node"
+2026-10-30 03:12:50 [error]: Error: email, password, first_name, last_name are required
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:51:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:12:50 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:50 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:12:50 [error]: Error: Please provide a valid email address
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:56:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:12:50 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:50 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:12:50 [error]: Error: Password must be at least 8 characters
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:59:11
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\errorHandler.js:58:66
+    at Layer.handle [as handle_request] (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express\lib\router\route.js:149:13)
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-10-30 03:12:50 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:50 +0000] "POST /api/v1/auth/register HTTP/1.1" 400 - "-" "node"
+2026-10-30 03:12:53 [error]: Email send failed to authtest.1793310170486@sysmairatest.org:
+2026-10-30 03:12:53 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:53 +0000] "POST /api/v1/auth/register HTTP/1.1" 201 - "-" "node"
+2026-10-30 03:12:53 [error]: Error: An account with this email address already exists
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:68:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:53 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:53 +0000] "POST /api/v1/auth/register HTTP/1.1" 409 345 "-" "node"
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:12:54 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:12:54 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:154:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:12:54 [error]: Error: Account is deactivated
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:155:30
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 292 "-" "node"
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "GET /api/v1/auth/me HTTP/1.1" 200 677 "-" "node"
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 605 "-" "node"
+2026-10-30 03:12:54 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 401 304 "-" "node"
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "GET /api/v1/auth/me HTTP/1.1" 401 50 "-" "node"
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/logout HTTP/1.1" 200 64 "-" "node"
+2026-10-30 03:12:54 [error]: Error: Session not found or expired
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:329:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:54 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:54 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 401 304 "-" "node"
+2026-10-30 03:12:55 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:55 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 962 "-" "node"
+2026-10-30 03:12:55 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:55 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:12:55 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:55 +0000] "GET /api/v1/users HTTP/1.1" 401 51 "-" "node"
+2026-10-30 03:12:55 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:55 +0000] "GET /api/v1/users HTTP/1.1" 403 90 "-" "node"
+2026-10-30 03:12:55 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:55 +0000] "GET /api/v1/cms/stats HTTP/1.1" 403 58 "-" "node"
+2026-10-30 03:12:55 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:55 +0000] "GET /api/v1/users HTTP/1.1" 200 - "-" "node"
+2026-10-30 03:12:55 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:55 +0000] "POST /api/v1/roles HTTP/1.1" 403 92 "-" "node"
+2026-10-30 03:12:57 [error]: Email send failed to authtest.1793310170486@sysmairatest.org:
+2026-10-30 03:12:57 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:57 +0000] "POST /api/v1/auth/forgot-password HTTP/1.1" 200 88 "-" "node"
+2026-10-30 03:12:57 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:57 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:57 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 400 308 "-" "node"
+2026-10-30 03:12:57 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:57 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 200 66 "-" "node"
+2026-10-30 03:12:58 [error]: Error: Invalid credentials
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:169:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:58 +0000] "POST /api/v1/auth/login HTTP/1.1" 401 286 "-" "node"
+2026-10-30 03:12:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:58 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 1001 "-" "node"
+2026-10-30 03:12:58 [error]: Error: Invalid or expired reset token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:426:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:58 +0000] "POST /api/v1/auth/reset-password HTTP/1.1" 400 308 "-" "node"
+2026-10-30 03:12:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:58 +0000] "GET /api/v1/auth/verify-email?token=test-verify-token-1793310178923 HTTP/1.1" 200 66 "-" "node"
+2026-10-30 03:12:58 [error]: Error: Invalid or expired verification token
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\auth.js:463:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-30 03:12:58 [info]: 127.0.0.1 - - [29/Oct/2026:21:42:58 +0000] "GET /api/v1/auth/verify-email?token=test-verify-token-1793310178923 HTTP/1.1" 400 322 "-" "node"
+2026-10-30 03:15:28 [info]: ::ffff:127.0.0.1 - - [29/Oct/2026:21:45:28 +0000] "GET /api/v1/public/blog/robust-api-integration-patterns-for-enterprise-software HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 03:15:28 [info]: ::1 - - [29/Oct/2026:21:45:28 +0000] "GET /api/v1/public/blog/custom-software-vs-off-the-shelf-decision-framework HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 03:15:28 [info]: ::1 - - [29/Oct/2026:21:45:28 +0000] "GET /api/v1/public/blog/automated-qa-testing-workflows-agile-development HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 03:15:29 [info]: ::1 - - [29/Oct/2026:21:45:29 +0000] "GET /api/v1/public/blog/practical-strategies-legacy-software-modernization HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 03:15:29 [info]: ::1 - - [29/Oct/2026:21:45:29 +0000] "GET /api/v1/public/blog/modular-web-application-architecture-best-practices HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 03:15:29 [info]: ::1 - - [29/Oct/2026:21:45:29 +0000] "GET /api/v1/public/blog/design-systems-accelerating-digital-product-development HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-30 03:16:05 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:16:05 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:16:05 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:16:05 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 03:16:24 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 03:16:24 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 03:16:24 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 03:16:24 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 22:24:37 [info]: ::1 - - [30/Oct/2026:16:54:37 +0000] "GET /api/v1/cms/stats HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:24:37 [info]: ::1 - - [30/Oct/2026:16:54:37 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:24:37 [info]: ::1 - - [30/Oct/2026:16:54:37 +0000] "GET /api/v1/cms/pages/db523585-1b26-443c-ac44-ab9575d9b654/sections HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:24:37 [info]: ::1 - - [30/Oct/2026:16:54:37 +0000] "GET /api/v1/cms/pages?page=1&limit=30 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:24:41 [info]: ::1 - - [30/Oct/2026:16:54:41 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:24:46 [info]: ::1 - - [30/Oct/2026:16:54:46 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:24:46 [info]: ::1 - - [30/Oct/2026:16:54:46 +0000] "GET /api/v1/cms/stats HTTP/1.1" 200 200 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:02 [info]: ::1 - - [30/Oct/2026:16:59:02 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 962 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/tasks/my HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/projects?limit=5 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 200 233 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/analytics/dashboard HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/support/tickets/stats HTTP/1.1" 200 161 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/finance/reports/revenue HTTP/1.1" 200 278 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:16 [info]: ::1 - - [30/Oct/2026:16:59:16 +0000] "GET /api/v1/analytics/realtime HTTP/1.1" 200 90 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:20 [info]: ::1 - - [30/Oct/2026:16:59:20 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:20 [info]: ::1 - - [30/Oct/2026:16:59:20 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:20 [info]: ::1 - - [30/Oct/2026:16:59:20 +0000] "GET /api/v1/projects?limit=100 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:20 [info]: ::1 - - [30/Oct/2026:16:59:20 +0000] "GET /api/v1/tasks?page=1&limit=200 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:23 [info]: ::1 - - [30/Oct/2026:16:59:23 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:23 [info]: ::1 - - [30/Oct/2026:16:59:23 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:53 [info]: ::1 - - [30/Oct/2026:16:59:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:29:53 [info]: ::1 - - [30/Oct/2026:16:59:53 +0000] "GET /api/v1/analytics/realtime HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:05 [info]: ::1 - - [30/Oct/2026:17:00:05 +0000] "GET /api/v1/projects?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:05 [info]: ::1 - - [30/Oct/2026:17:00:05 +0000] "GET /api/v1/projects/overdue HTTP/1.1" 200 46 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:05 [info]: ::1 - - [30/Oct/2026:17:00:05 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:05 [info]: ::1 - - [30/Oct/2026:17:00:05 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:05 [info]: ::1 - - [30/Oct/2026:17:00:05 +0000] "GET /api/v1/projects/summary HTTP/1.1" 200 156 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:08 [info]: ::1 - - [30/Oct/2026:17:00:08 +0000] "GET /api/v1/projects?page=1&limit=20&status=planning HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:12 [info]: ::1 - - [30/Oct/2026:17:00:12 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:12 [info]: ::1 - - [30/Oct/2026:17:00:12 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:15 [info]: ::1 - - [30/Oct/2026:17:00:15 +0000] "PATCH /api/v1/tasks/d2000000-0000-0000-0000-000000000008 HTTP/1.1" 200 687 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:15 [info]: ::1 - - [30/Oct/2026:17:00:15 +0000] "GET /api/v1/tasks?page=1&limit=200 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:33 [info]: ::1 - - [30/Oct/2026:17:00:33 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:33 [info]: ::1 - - [30/Oct/2026:17:00:33 +0000] "GET /api/v1/time-entries/summary HTTP/1.1" 200 165 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:33 [info]: ::1 - - [30/Oct/2026:17:00:33 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:33 [info]: ::1 - - [30/Oct/2026:17:00:33 +0000] "GET /api/v1/time-entries/my?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:33 [info]: ::1 - - [30/Oct/2026:17:00:33 +0000] "GET /api/v1/time-entries/active HTTP/1.1" 200 106 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:33 [info]: ::1 - - [30/Oct/2026:17:00:33 +0000] "GET /api/v1/projects?limit=100 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:45 [info]: ::1 - - [30/Oct/2026:17:00:45 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:45 [info]: ::1 - - [30/Oct/2026:17:00:45 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:54 [info]: ::1 - - [30/Oct/2026:17:00:54 +0000] "GET /api/v1/cms/pages?page=1&limit=30 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:54 [info]: ::1 - - [30/Oct/2026:17:00:54 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:54 [info]: ::1 - - [30/Oct/2026:17:00:54 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:54 [info]: ::1 - - [30/Oct/2026:17:00:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:54 [info]: ::1 - - [30/Oct/2026:17:00:54 +0000] "GET /api/v1/cms/stats HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:57 [info]: ::1 - - [30/Oct/2026:17:00:57 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:30:57 [info]: ::1 - - [30/Oct/2026:17:00:57 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:27 [info]: ::1 - - [30/Oct/2026:17:01:27 +0000] "PATCH /api/v1/auth/me HTTP/1.1" 200 439 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:33 [info]: ::1 - - [30/Oct/2026:17:01:33 +0000] "GET /api/v1/auth/me HTTP/1.1" 200 784 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:33 [info]: ::1 - - [30/Oct/2026:17:01:33 +0000] "GET /api/v1/cms/stats HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:33 [info]: ::1 - - [30/Oct/2026:17:01:33 +0000] "GET /api/v1/cms/pages?page=1&limit=30 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:39 [info]: ::1 - - [30/Oct/2026:17:01:39 +0000] "GET /api/v1/auth/me HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:39 [info]: ::1 - - [30/Oct/2026:17:01:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:39 [info]: ::1 - - [30/Oct/2026:17:01:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:39 [info]: ::1 - - [30/Oct/2026:17:01:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/finance/reports/revenue HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/projects?limit=5 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/analytics/dashboard HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/tasks/my HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/support/tickets/stats HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:46 [info]: ::1 - - [30/Oct/2026:17:01:46 +0000] "GET /api/v1/analytics/realtime HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:48 [info]: ::1 - - [30/Oct/2026:17:01:48 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:48 [info]: ::1 - - [30/Oct/2026:17:01:48 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:48 [info]: ::1 - - [30/Oct/2026:17:01:48 +0000] "GET /api/v1/analytics/dashboard?days=30 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:48 [info]: ::1 - - [30/Oct/2026:17:01:48 +0000] "GET /api/v1/analytics/traffic-sources?days=30 HTTP/1.1" 200 664 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:48 [info]: ::1 - - [30/Oct/2026:17:01:48 +0000] "GET /api/v1/analytics/conversion HTTP/1.1" 200 98 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:57 [info]: ::1 - - [30/Oct/2026:17:01:57 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:57 [info]: ::1 - - [30/Oct/2026:17:01:57 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:57 [info]: ::1 - - [30/Oct/2026:17:01:57 +0000] "GET /api/v1/crm/overview HTTP/1.1" 200 918 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:57 [info]: ::1 - - [30/Oct/2026:17:01:57 +0000] "GET /api/v1/crm/leads?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:31:57 [info]: ::1 - - [30/Oct/2026:17:01:57 +0000] "GET /api/v1/crm/leads/pipeline HTTP/1.1" 200 784 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:01 [info]: ::1 - - [30/Oct/2026:17:02:01 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=contacted HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:03 [info]: ::1 - - [30/Oct/2026:17:02:03 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=new HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:06 [info]: ::1 - - [30/Oct/2026:17:02:06 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=won HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:15 [info]: ::1 - - [30/Oct/2026:17:02:15 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:15 [info]: ::1 - - [30/Oct/2026:17:02:15 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:15 [info]: ::1 - - [30/Oct/2026:17:02:15 +0000] "GET /api/v1/crm/leads/c3000000-0000-0000-0000-000000000025 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:19 [info]: ::1 - - [30/Oct/2026:17:02:19 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:19 [info]: ::1 - - [30/Oct/2026:17:02:19 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:26 [info]: ::1 - - [30/Oct/2026:17:02:26 +0000] "GET /api/v1/crm/leads?page=2&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:29 [error]: error: invalid input value for enum lead_stage: "35000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 1)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:29 [info]: ::1 - - [30/Oct/2026:17:02:29 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=35000 HTTP/1.1" 400 50 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:30 [error]: error: invalid input value for enum lead_stage: "38000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:30 [info]: ::1 - - [30/Oct/2026:17:02:30 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=38000 HTTP/1.1" 400 50 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:31 [error]: error: invalid input value for enum lead_stage: "65000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:31 [info]: ::1 - - [30/Oct/2026:17:02:31 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=65000 HTTP/1.1" 400 50 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:32 [error]: error: invalid input value for enum lead_stage: "38000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:32 [info]: ::1 - - [30/Oct/2026:17:02:32 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=38000 HTTP/1.1" 400 50 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:33 [error]: error: invalid input value for enum lead_stage: "38000"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async Promise.all (index 0)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:126:31
+2026-10-30 22:32:33 [info]: ::1 - - [30/Oct/2026:17:02:33 +0000] "GET /api/v1/crm/leads?page=1&limit=20&stage=38000 HTTP/1.1" 400 50 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:36 [info]: ::1 - - [30/Oct/2026:17:02:36 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:36 [info]: ::1 - - [30/Oct/2026:17:02:36 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:39 [info]: ::1 - - [30/Oct/2026:17:02:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:32:39 [info]: ::1 - - [30/Oct/2026:17:02:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:06 [info]: ::1 - - [30/Oct/2026:17:03:06 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:06 [info]: ::1 - - [30/Oct/2026:17:03:06 +0000] "GET /api/v1/finance/reports/revenue HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:06 [info]: ::1 - - [30/Oct/2026:17:03:06 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:06 [info]: ::1 - - [30/Oct/2026:17:03:06 +0000] "GET /api/v1/projects?limit=5 HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:07 [info]: ::1 - - [30/Oct/2026:17:03:07 +0000] "GET /api/v1/support/tickets/stats HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:07 [info]: ::1 - - [30/Oct/2026:17:03:07 +0000] "GET /api/v1/analytics/realtime HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:07 [info]: ::1 - - [30/Oct/2026:17:03:07 +0000] "GET /api/v1/tasks/my HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:07 [info]: ::1 - - [30/Oct/2026:17:03:07 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:07 [info]: ::1 - - [30/Oct/2026:17:03:07 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:07 [info]: ::1 - - [30/Oct/2026:17:03:07 +0000] "GET /api/v1/notifications/count HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:07 [info]: ::1 - - [30/Oct/2026:17:03:07 +0000] "GET /api/v1/analytics/dashboard HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/finance/reports/revenue HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/projects?limit=5 HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/support/tickets/stats HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/analytics/realtime HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/tasks/my HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:08 [info]: ::1 - - [30/Oct/2026:17:03:08 +0000] "GET /api/v1/notifications/count HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/analytics/dashboard HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/finance/reports/revenue HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/projects?limit=5 HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/support/tickets/stats HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/analytics/realtime HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/tasks/my HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/auth/me HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:10 [info]: ::1 - - [30/Oct/2026:17:03:10 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:24 [info]: ::1 - - [30/Oct/2026:17:03:24 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/navigation HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/footer HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/navigation HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/footer HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:33:31 [info]: ::1 - - [30/Oct/2026:17:03:31 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/navigation HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/footer HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/pages/services HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/navigation HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/footer HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:03 [info]: ::1 - - [30/Oct/2026:17:04:03 +0000] "GET /api/v1/public/pages/services HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:10 [info]: ::1 - - [30/Oct/2026:17:04:10 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:10 [info]: ::1 - - [30/Oct/2026:17:04:10 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:34:21 [info]: ::1 - - [30/Oct/2026:17:04:21 +0000] "POST /api/v1/auth/login HTTP/1.1" 429 71 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+2026-10-30 22:51:50 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 22:51:50 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 22:51:50 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 22:51:50 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 22:52:03 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 22:52:03 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 22:52:03 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 22:52:03 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-30 22:52:16 [info]: ✅ PostgreSQL connected successfully
+2026-10-30 22:52:16 [info]: 🚀 Server running on port 5000 [development]
+2026-10-30 22:52:16 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-30 22:52:16 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health

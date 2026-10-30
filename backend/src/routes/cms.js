@@ -1,7 +1,7 @@
 // src/routes/cms.js
 const router = require('express').Router();
 const { query, withTransaction } = require('../config/database');
-const { authenticate, optionalAuth, requirePermission } = require('../middleware/auth');
+const { authenticate, optionalAuth, requirePermission, requireRole } = require('../middleware/auth');
 const { paginate, paginateResponse, safeSort } = require('../middleware/common');
 const { generateSlug, success, created, noContent, isUUID } = require('../utils/helpers');
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
@@ -652,7 +652,7 @@ router.patch('/popups/:id', authenticate, asyncHandler(async (req, res) => {
 // ════════════════════════════════════════════════════════════
 //  CMS OVERVIEW & METRICS
 // ════════════════════════════════════════════════════════════
-router.get('/stats', authenticate, asyncHandler(async (_req, res) => {
+router.get('/stats', authenticate, requireRole('super_admin', 'admin', 'editor', 'author', 'marketer'), asyncHandler(async (_req, res) => {
   const [
     totalPages,
     publishedPages,

@@ -5,7 +5,7 @@ const speakeasy = require('speakeasy');
 const qrcode  = require('qrcode');
 const { query, withTransaction } = require('../config/database');
 const { authenticate, requirePermission } = require('../middleware/auth');
-const { authLimiter, paginate } = require('../middleware/common');
+const { authLimiter, paginate, isAccountLockoutActive } = require('../middleware/common');
 const { recordAuditLog } = require('../utils/audit');
 const {
   generateAccessToken, generateRefreshToken, hashToken,
@@ -14,13 +14,59 @@ const {
 } = require('../utils/helpers');
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
 
+// ── Cookie helpers for session token management ─────────────
+const setAuthCookies = (res, accessToken, refreshToken) => {
+  const isProd = process.env.NODE_ENV === 'production';
+  const cookieOptions = {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: isProd ? 'strict' : 'lax',
+    path: '/',
+  };
+  if (accessToken) {
+    res.cookie('accessToken', accessToken, {
+      ...cookieOptions,
+      maxAge: 15 * 60 * 1000, // 15 minutes
+    });
+  }
+  if (refreshToken) {
+    res.cookie('refreshToken', refreshToken, {
+      ...cookieOptions,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+  }
+};
+
+const clearAuthCookies = (res) => {
+  res.clearCookie('accessToken', { path: '/' });
+  res.clearCookie('refreshToken', { path: '/' });
+};
+
 // ── POST /auth/register ───────────────────────────────────────
 // Enforces Server-Side Client Assignment:
 // Ignores any client-supplied role, roleId, isSuperAdmin, permissions or isAdmin
 router.post('/register', authLimiter, asyncHandler(async (req, res) => {
   const { email, password, first_name, last_name, phone } = req.body;
   if (!email || !password || !first_name || !last_name)
-    throw new AppError('email, password, first_name, last_name are required');
+    throw new AppError('email, password, first_name, last_name are required', 400);
+
+  const normalizedEmail = email.toLowerCase().trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(normalizedEmail)) {
+    throw new AppError('Please provide a valid email address', 400);
+  }
+  if (password.length < 8) {
+    throw new AppError('Password must be at least 8 characters', 400);
+  }
+
+  // Check if account already exists
+  const existing = await query(
+    `SELECT id FROM auth_schema.users WHERE email = $1 AND deleted_at IS NULL`,
+    [normalizedEmail]
+  );
+  if (existing.rows.length > 0) {
+    throw new AppError('An account with this email address already exists', 409);
+  }
 
   const passwordHash = await hashPassword(password);
   const publicId     = generatePublicId();
@@ -31,7 +77,7 @@ router.post('/register', authLimiter, asyncHandler(async (req, res) => {
        (email, password_hash, first_name, last_name, phone, role, public_id)
      VALUES ($1,$2,$3,$4,$5,'client',$6)
      RETURNING id, email, display_name, first_name, last_name, role, created_at`,
-    [email, passwordHash, first_name, last_name, phone, publicId]
+    [normalizedEmail, passwordHash, first_name.trim(), last_name.trim(), phone || null, publicId]
   );
 
   const user = rows[0];
@@ -57,12 +103,12 @@ router.post('/register', authLimiter, asyncHandler(async (req, res) => {
   const verifyToken = generateSecureToken();
   await query(
     `INSERT INTO auth_schema.email_verification_tokens (user_id, email, token_hash) VALUES ($1,$2,$3)`,
-    [user.id, email, hashToken(verifyToken)]
+    [user.id, normalizedEmail, hashToken(verifyToken)]
   );
   await sendEmail({
-    to: email,
+    to: normalizedEmail,
     subject: 'Verify your email address',
-    html: `<p>Click <a href="${process.env.FRONTEND_URL}/verify-email?token=${verifyToken}">here</a> to verify your email.</p>`,
+    html: `<p>Click <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email?token=${verifyToken}">here</a> to verify your email.</p>`,
   });
 
   const accessToken  = generateAccessToken(user.id, user.role);
@@ -74,6 +120,8 @@ router.post('/register', authLimiter, asyncHandler(async (req, res) => {
      req.headers['user-agent']?.substring(0, 200),
      req.headers['x-browser'], req.headers['x-os']]
   );
+
+  setAuthCookies(res, accessToken, refreshToken);
 
   return created(res, {
     user: {
@@ -90,39 +138,43 @@ router.post('/register', authLimiter, asyncHandler(async (req, res) => {
 // ── POST /auth/login ──────────────────────────────────────────
 router.post('/login', authLimiter, asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) throw new AppError('email and password required');
+  if (!email || !password) throw new AppError('email and password required', 400);
 
+  const normalizedEmail = email.toLowerCase().trim();
   const { rows } = await query(
     `SELECT id, email, password_hash, role, is_active, is_verified, display_name,
             first_name, last_name, avatar_url,
             two_factor_enabled, failed_login_attempts, locked_until
        FROM auth_schema.users
       WHERE email = $1 AND deleted_at IS NULL`,
-    [email]
+    [normalizedEmail]
   );
 
   const user = rows[0];
   if (!user) throw new AppError('Invalid credentials', 401);
   if (!user.is_active) throw new AppError('Account is deactivated', 401);
-  if (user.locked_until && new Date(user.locked_until) > new Date())
+  const lockoutActive = isAccountLockoutActive();
+  if (lockoutActive && user.locked_until && new Date(user.locked_until) > new Date())
     throw new AppError('Account temporarily locked. Try again later.', 401);
 
   const valid = await comparePassword(password, user.password_hash || '');
   if (!valid) {
-    // Increment failed attempts
-    await query(
-      `UPDATE auth_schema.users
-          SET failed_login_attempts = failed_login_attempts + 1,
-              locked_until = CASE WHEN failed_login_attempts >= 4 THEN NOW() + INTERVAL '30 minutes' ELSE NULL END
-        WHERE id = $1`,
-      [user.id]
-    );
+    if (lockoutActive) {
+      // Increment failed attempts and lock out after repeated failures in production
+      await query(
+        `UPDATE auth_schema.users
+            SET failed_login_attempts = failed_login_attempts + 1,
+                locked_until = CASE WHEN failed_login_attempts >= 4 THEN NOW() + INTERVAL '30 minutes' ELSE NULL END
+          WHERE id = $1`,
+        [user.id]
+      );
+    }
     throw new AppError('Invalid credentials', 401);
   }
 
-  // Reset failed attempts
+  // Reset failed attempts & clear lockout upon successful authentication
   await query(
-    `UPDATE auth_schema.users SET failed_login_attempts=0, last_login_at=NOW(), last_login_ip=$2 WHERE id=$1`,
+    `UPDATE auth_schema.users SET failed_login_attempts=0, locked_until=NULL, last_login_at=NOW(), last_login_ip=$2 WHERE id=$1`,
     [user.id, req.ip]
   );
 
@@ -139,6 +191,8 @@ router.post('/login', authLimiter, asyncHandler(async (req, res) => {
      VALUES ($1,$2, NOW() + INTERVAL '7 days', $3,$4)`,
     [user.id, hashToken(refreshToken), req.ip, req.headers['user-agent']?.substring(0, 200)]
   );
+
+  setAuthCookies(res, accessToken, refreshToken);
 
   // Load permissions and roles for immediate frontend hydration
   const [permsRes, rolesRes] = await Promise.all([
@@ -255,8 +309,8 @@ router.post('/2fa/disable', authenticate, asyncHandler(async (req, res) => {
 
 // ── POST /auth/refresh ────────────────────────────────────────
 router.post('/refresh', asyncHandler(async (req, res) => {
-  const { refreshToken } = req.body;
-  if (!refreshToken) throw new AppError('Refresh token required');
+  const refreshToken = req.body?.refreshToken || req.cookies?.refreshToken;
+  if (!refreshToken) throw new AppError('Refresh token required', 400);
 
   const jwt = require('jsonwebtoken');
   let decoded;
@@ -268,9 +322,10 @@ router.post('/refresh', asyncHandler(async (req, res) => {
 
   const tokenHash = hashToken(refreshToken);
   const { rows } = await query(
-    `SELECT s.id, u.id as user_id, u.role FROM auth_schema.sessions s
+    `SELECT s.id, u.id as user_id, u.role, u.is_active FROM auth_schema.sessions s
       JOIN auth_schema.users u ON s.user_id = u.id
-     WHERE s.token_hash=$1 AND s.is_active=TRUE AND s.expires_at > NOW() AND u.deleted_at IS NULL`,
+     WHERE s.token_hash=$1 AND s.is_active=TRUE AND s.expires_at > NOW()
+       AND u.is_active=TRUE AND u.deleted_at IS NULL`,
     [tokenHash]
   );
 
@@ -280,41 +335,67 @@ router.post('/refresh', asyncHandler(async (req, res) => {
   const newAccessToken  = generateAccessToken(session.user_id, session.role);
   const newRefreshToken = generateRefreshToken(session.user_id);
 
-  // Rotate refresh token
+  // Rotate refresh token (single-use token rotation: previous token invalidated)
   await query(
     `UPDATE auth_schema.sessions SET token_hash=$1, last_used_at=NOW(), expires_at=NOW()+INTERVAL '7 days' WHERE id=$2`,
     [hashToken(newRefreshToken), session.id]
   );
+
+  setAuthCookies(res, newAccessToken, newRefreshToken);
 
   return success(res, { accessToken: newAccessToken, refreshToken: newRefreshToken });
 }));
 
 // ── POST /auth/logout ─────────────────────────────────────────
 router.post('/logout', authenticate, asyncHandler(async (req, res) => {
-  const { refreshToken } = req.body;
+  const refreshToken = req.body?.refreshToken || req.cookies?.refreshToken;
   if (refreshToken) {
     await query(
       `UPDATE auth_schema.sessions SET is_active=FALSE WHERE token_hash=$1 AND user_id=$2`,
       [hashToken(refreshToken), req.userId]
     );
+  } else {
+    // If no explicit token provided, deactivate the most recent active session for this user
+    await query(
+      `UPDATE auth_schema.sessions
+          SET is_active = FALSE
+        WHERE id = (
+          SELECT id FROM auth_schema.sessions
+           WHERE user_id = $1 AND is_active = TRUE
+           ORDER BY last_used_at DESC NULLS LAST, created_at DESC
+           LIMIT 1
+        )`,
+      [req.userId]
+    );
   }
-  return noContent(res);
+
+  clearAuthCookies(res);
+
+  return success(res, null, 'Logged out successfully');
 }));
 
 // ── POST /auth/logout-all ──────────────────────────────────────
 router.post('/logout-all', authenticate, asyncHandler(async (req, res) => {
   await query(`UPDATE auth_schema.sessions SET is_active=FALSE WHERE user_id=$1`, [req.userId]);
-  return noContent(res);
+  clearAuthCookies(res);
+  return success(res, null, 'Logged out from all devices');
 }));
 
 // ── POST /auth/forgot-password ────────────────────────────────
 router.post('/forgot-password', authLimiter, asyncHandler(async (req, res) => {
   const { email } = req.body;
-  if (!email) throw new AppError('Email required');
+  if (!email) throw new AppError('Email required', 400);
 
-  const { rows } = await query(`SELECT id FROM auth_schema.users WHERE email=$1 AND deleted_at IS NULL`, [email]);
+  const normalizedEmail = email.toLowerCase().trim();
+  const { rows } = await query(
+    `SELECT id, is_active FROM auth_schema.users WHERE email=$1 AND deleted_at IS NULL`,
+    [normalizedEmail]
+  );
+
   // Always return 200 (security: don't reveal if email exists)
-  if (!rows.length) return success(res, {}, 'If an account exists, a reset email has been sent');
+  if (!rows.length || !rows[0].is_active) {
+    return success(res, {}, 'If an account exists, a reset email has been sent');
+  }
 
   const token     = generateSecureToken();
   const tokenHash = hashToken(token);
@@ -323,10 +404,11 @@ router.post('/forgot-password', authLimiter, asyncHandler(async (req, res) => {
     [rows[0].id, tokenHash]
   );
 
+  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
   await sendEmail({
-    to: email,
+    to: normalizedEmail,
     subject: 'Reset your password',
-    html: `<p>Reset your password: <a href="${process.env.FRONTEND_URL}/reset-password?token=${token}">Click here</a>. Expires in 2 hours.</p>`,
+    html: `<p>Reset your password: <a href="${frontendUrl}/auth/reset-password?token=${token}">Click here</a>. Expires in 2 hours.</p>`,
   });
 
   return success(res, {}, 'If an account exists, a reset email has been sent');
@@ -335,8 +417,8 @@ router.post('/forgot-password', authLimiter, asyncHandler(async (req, res) => {
 // ── POST /auth/reset-password ─────────────────────────────────
 router.post('/reset-password', authLimiter, asyncHandler(async (req, res) => {
   const { token, password } = req.body;
-  if (!token || !password) throw new AppError('Token and new password required');
-  if (password.length < 8) throw new AppError('Password must be at least 8 characters');
+  if (!token || !password) throw new AppError('Token and new password required', 400);
+  if (password.length < 8) throw new AppError('Password must be at least 8 characters', 400);
 
   const tokenHash = hashToken(token);
   const { rows } = await query(
@@ -344,21 +426,28 @@ router.post('/reset-password', authLimiter, asyncHandler(async (req, res) => {
       WHERE token_hash=$1 AND expires_at > NOW() AND used_at IS NULL`,
     [tokenHash]
   );
-  if (!rows.length) throw new AppError('Invalid or expired reset token');
+  if (!rows.length) throw new AppError('Invalid or expired reset token', 400);
 
   const passwordHash = await hashPassword(password);
   await withTransaction(async (client) => {
     await client.query(
-      `UPDATE auth_schema.users SET password_hash=$1, password_changed_at=NOW() WHERE id=$2`,
+      `UPDATE auth_schema.users
+          SET password_hash=$1,
+              password_changed_at=NOW(),
+              failed_login_attempts=0,
+              locked_until=NULL
+        WHERE id=$2`,
       [passwordHash, rows[0].user_id]
     );
     await client.query(
       `UPDATE auth_schema.password_reset_tokens SET used_at=NOW() WHERE id=$1`,
       [rows[0].id]
     );
-    // Invalidate all sessions
+    // Invalidate all sessions across all devices
     await client.query(`UPDATE auth_schema.sessions SET is_active=FALSE WHERE user_id=$1`, [rows[0].user_id]);
   });
+
+  clearAuthCookies(res);
 
   return success(res, {}, 'Password reset successfully');
 }));
