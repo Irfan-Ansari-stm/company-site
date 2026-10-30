@@ -201,6 +201,10 @@ export const crmApi = {
     api.get('/crm/leads/pipeline', { params: { assigned_to } }),
   getLeadFunnel: () => api.get('/crm/leads/funnel'),
   getLeadSourceStats: () => api.get('/crm/leads/source-stats'),
+  getAssignees: () => api.get('/crm/assignees'),
+  exportLeads: (params?: any) => api.get('/crm/leads/export', { params, responseType: 'blob' }),
+  manageFollowUp: (id: string, data: any) =>
+    api.post(`/crm/leads/${id}/follow-up`, data),
 
   // Lead Notes
   getLeadNotes: (id: string) => api.get(`/crm/leads/${id}/notes`),
@@ -388,6 +392,8 @@ export const clientsApi = {
     api.post(`/clients/${id}/portal`, data),
   getNotes: (id: string) => api.get(`/clients/${id}/notes`),
   addNote: (id: string, data: any) => api.post(`/clients/${id}/notes`, data),
+  getAccountManagers: () => api.get('/clients/account-managers'),
+  exportClients: (params?: any) => api.get('/clients/export', { params, responseType: 'blob' }),
 };
 
 // ─── SUPPORT ─────────────────────────────────────────────────

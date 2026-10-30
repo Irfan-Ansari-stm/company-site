@@ -2,8 +2,9 @@
 const router = require('express').Router();
 const { query, withTransaction } = require('../config/database');
 const { authenticate, requirePermission } = require('../middleware/auth');
-const { paginate, paginateResponse } = require('../middleware/common');
+const { paginate, paginateResponse, safeSort } = require('../middleware/common');
 const { success, created, noContent } = require('../utils/helpers');
+const { recordAuditLog } = require('../utils/audit');
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
 
 // Helper to resolve client_id for authenticated user
@@ -35,6 +36,83 @@ router.get('/overview', authenticate, asyncHandler(async (req, res) => {
   `);
 
   return success(res, rows[0] || { total: 0, active: 0, companies: 0, individuals: 0, new_this_month: 0 });
+}));
+
+// ════════════════════════════════════════════════════════════
+//  ACCOUNT MANAGERS LIST
+// ════════════════════════════════════════════════════════════
+router.get('/account-managers', authenticate, asyncHandler(async (req, res) => {
+  const { rows } = await query(`
+    SELECT id, email, display_name, first_name, last_name, avatar_url, role
+    FROM auth_schema.users
+    WHERE role != 'client' AND is_active = TRUE
+    ORDER BY display_name ASC, first_name ASC
+  `);
+  return success(res, rows);
+}));
+
+// ════════════════════════════════════════════════════════════
+//  CLIENTS CSV EXPORT
+// ════════════════════════════════════════════════════════════
+router.get('/export', authenticate, requirePermission('client.read'), asyncHandler(async (req, res) => {
+  if (req.user.role === 'client') {
+    throw new AppError('Access to client export is restricted to administrators', 403);
+  }
+
+  const { search, type, status, industry } = req.query;
+  const conditions = ['c.deleted_at IS NULL'];
+  const params = [];
+  let idx = 1;
+
+  if (search) {
+    conditions.push(`(c.company_name ILIKE $${idx} OR c.name ILIKE $${idx} OR c.email ILIKE $${idx} OR c.billing_email ILIKE $${idx} OR c.phone ILIKE $${idx})`);
+    params.push(`%${search}%`); idx++;
+  }
+  if (type) { conditions.push(`c.type = $${idx}`); params.push(type); idx++; }
+  if (status) { conditions.push(`c.status = $${idx}`); params.push(status); idx++; }
+  if (industry) { conditions.push(`c.industry = $${idx}`); params.push(industry); idx++; }
+
+  const where = conditions.join(' AND ');
+  const { rows } = await query(
+    `SELECT c.id,
+            COALESCE(c.name, c.company_name) AS name,
+            COALESCE(c.type, 'company') AS type,
+            c.industry,
+            COALESCE(c.email, c.billing_email) AS email,
+            c.phone,
+            COALESCE(c.status, CASE WHEN c.is_active = FALSE THEN 'inactive' ELSE 'active' END) AS status,
+            COUNT(DISTINCT p.id)::int AS project_count,
+            c.created_at,
+            u.display_name AS account_manager_name
+       FROM client_schema.clients c
+       LEFT JOIN auth_schema.users u ON c.account_manager = u.id
+       LEFT JOIN client_schema.client_projects p ON p.client_id = c.id
+      WHERE ${where}
+      GROUP BY c.id, u.display_name
+      ORDER BY c.created_at DESC`,
+    params
+  );
+
+  const headers = ['"Client ID"', '"Name"', '"Type"', '"Industry"', '"Email"', '"Phone"', '"Status"', '"Projects"', '"Created At"', '"Account Manager"'];
+  const csvRows = [headers.join(',')];
+  for (const r of rows) {
+    csvRows.push([
+      `"${r.id || ''}"`,
+      `"${(r.name || '').replace(/"/g, '""')}"`,
+      `"${r.type || 'company'}"`,
+      `"${r.industry || ''}"`,
+      `"${(r.email || '').replace(/"/g, '""')}"`,
+      `"${(r.phone || '').replace(/"/g, '""')}"`,
+      `"${r.status || 'active'}"`,
+      r.project_count || 0,
+      `"${r.created_at ? new Date(r.created_at).toISOString() : ''}"`,
+      `"${(r.account_manager_name || '').replace(/"/g, '""')}"`
+    ].join(','));
+  }
+
+  res.setHeader('Content-Type', 'text/csv');
+  res.setHeader('Content-Disposition', `attachment; filename="clients-export-${Date.now()}.csv"`);
+  return res.send(csvRows.join('\n'));
 }));
 
 // ════════════════════════════════════════════════════════════
@@ -76,6 +154,17 @@ router.get('/', authenticate, requirePermission('client.read'), paginate, asyncH
     params.push(is_active === 'true'); idx++;
   }
 
+  const allowedSortCols = {
+    created_at: 'c.created_at',
+    name: 'COALESCE(c.name, c.company_name)',
+    type: 'c.type',
+    status: 'c.status',
+    industry: 'c.industry',
+  };
+  const sortColKey = req.query.sort_by || 'created_at';
+  const sortDir = (req.query.sort_dir || 'DESC').toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
+  const sortExpr = allowedSortCols[sortColKey] || 'c.created_at';
+
   const where = conditions.join(' AND ');
   const [dataRes, countRes, summaryRes] = await Promise.all([
     query(
@@ -106,7 +195,7 @@ router.get('/', authenticate, requirePermission('client.read'), paginate, asyncH
          LEFT JOIN client_schema.client_projects p ON p.client_id = c.id
         WHERE ${where}
         GROUP BY c.id, u.display_name
-        ORDER BY c.created_at DESC
+        ORDER BY ${sortExpr} ${sortDir}
         LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
@@ -221,7 +310,7 @@ router.post('/', authenticate, requirePermission('client.create', 'client.manage
     name, company_name, email, billing_email, phone, type, industry,
     company_size, website, country, city, address, timezone, currency,
     account_manager, account_manager_id, logo_url, description, tags,
-    contacts = []
+    contact_person, first_name, last_name, contacts = []
   } = req.body;
 
   const clientName = name || company_name;
@@ -229,6 +318,26 @@ router.post('/', authenticate, requirePermission('client.create', 'client.manage
 
   const clientEmail = email || billing_email;
   const managerId = account_manager || account_manager_id || null;
+
+  // Process contact_person if passed
+  const initialContacts = [...contacts];
+  if ((contact_person || first_name) && !initialContacts.length) {
+    let fn = first_name;
+    let ln = last_name;
+    if (!fn && contact_person) {
+      const parts = contact_person.trim().split(/\s+/);
+      fn = parts[0] || 'Contact';
+      ln = parts.slice(1).join(' ') || 'Person';
+    }
+    initialContacts.push({
+      first_name: fn || 'Primary',
+      last_name: ln || 'Contact',
+      email: clientEmail,
+      phone: phone || null,
+      designation: 'Primary Contact',
+      is_primary: true,
+    });
+  }
 
   const createdClient = await withTransaction(async (client) => {
     const clientRes = await client.query(
@@ -262,7 +371,7 @@ router.post('/', authenticate, requirePermission('client.create', 'client.manage
     const clientRecord = clientRes.rows[0];
 
     // Add primary contacts if provided
-    for (const ct of contacts) {
+    for (const ct of initialContacts) {
       if (ct.first_name && ct.last_name) {
         await client.query(
           `INSERT INTO client_schema.client_contacts
@@ -275,6 +384,14 @@ router.post('/', authenticate, requirePermission('client.create', 'client.manage
     return clientRecord;
   });
 
+  await recordAuditLog({
+    req,
+    action: 'CREATE',
+    resourceType: 'client',
+    resourceId: createdClient.id,
+    newData: createdClient,
+  });
+
   return created(res, createdClient);
 }));
 
@@ -285,6 +402,10 @@ router.patch('/:id', authenticate, requirePermission('client.edit', 'client.mana
   if (req.user.role === 'client') {
     throw new AppError('Client users cannot modify client accounts', 403);
   }
+
+  const existingRes = await query(`SELECT * FROM client_schema.clients WHERE id = $1 AND deleted_at IS NULL`, [req.params.id]);
+  if (!existingRes.rows.length) throw new AppError('Client not found', 404);
+  const existing = existingRes.rows[0];
 
   const {
     name, company_name, email, billing_email, phone, type, industry,
@@ -339,6 +460,16 @@ router.patch('/:id', authenticate, requirePermission('client.edit', 'client.mana
     ]
   );
   if (!rows.length) throw new AppError('Client not found', 404);
+
+  await recordAuditLog({
+    req,
+    action: 'UPDATE',
+    resourceType: 'client',
+    resourceId: req.params.id,
+    oldData: existing,
+    newData: rows[0],
+  });
+
   return success(res, rows[0]);
 }));
 
@@ -350,6 +481,10 @@ router.delete('/:id', authenticate, requirePermission('client.delete', 'client.m
     throw new AppError('Client users cannot delete client accounts', 403);
   }
 
+  const existingRes = await query(`SELECT * FROM client_schema.clients WHERE id = $1 AND deleted_at IS NULL`, [req.params.id]);
+  if (!existingRes.rows.length) throw new AppError('Client not found', 404);
+  const existing = existingRes.rows[0];
+
   await query(
     `UPDATE client_schema.clients
         SET deleted_at = NOW(),
@@ -358,6 +493,15 @@ router.delete('/:id', authenticate, requirePermission('client.delete', 'client.m
       WHERE id = $1`,
     [req.params.id]
   );
+
+  await recordAuditLog({
+    req,
+    action: 'DELETE',
+    resourceType: 'client',
+    resourceId: req.params.id,
+    oldData: existing,
+  });
+
   return noContent(res);
 }));
 

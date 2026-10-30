@@ -4,6 +4,7 @@ const { query, withTransaction } = require('../config/database');
 const { authenticate, requirePermission } = require('../middleware/auth');
 const { paginate, paginateResponse, safeSort } = require('../middleware/common');
 const { generatePublicId, success, created, noContent, isUUID } = require('../utils/helpers');
+const { recordAuditLog } = require('../utils/audit');
 const { asyncHandler, AppError } = require('../middleware/errorHandler');
 
 // ════════════════════════════════════════════════════════════
@@ -79,12 +80,25 @@ router.get('/overview', requirePermission('lead.read'), asyncHandler(async (req,
   });
 }));
 
+// ════════════════════════════════════════════════════════════
+//  ASSIGNEES & TEAM
+// ════════════════════════════════════════════════════════════
+router.get('/assignees', requirePermission('lead.read'), asyncHandler(async (req, res) => {
+  const { rows } = await query(`
+    SELECT id, email, display_name, first_name, last_name, avatar_url, role
+    FROM auth_schema.users
+    WHERE role != 'client' AND is_active = TRUE
+    ORDER BY display_name ASC, first_name ASC
+  `);
+  return success(res, rows);
+}));
+
 // Follow-ups list
 router.get('/follow-ups', requirePermission('lead.read'), asyncHandler(async (req, res) => {
   const { rows } = await query(`
     SELECT l.id, l.public_id, l.full_name, l.email, l.company, l.phone,
            l.stage, l.lead_score, l.lead_temperature, l.next_follow_up,
-           l.expected_value, l.currency,
+           l.expected_value, l.deal_value, l.currency, l.urgency,
            u.display_name AS assigned_to_name
       FROM crm_schema.leads l
       LEFT JOIN auth_schema.users u ON l.assigned_to = u.id
@@ -93,7 +107,7 @@ router.get('/follow-ups', requirePermission('lead.read'), asyncHandler(async (re
        AND l.is_archived = FALSE
        AND l.stage NOT IN ('won', 'lost')
      ORDER BY l.next_follow_up ASC
-     LIMIT 50
+     LIMIT 100
   `);
   return success(res, rows);
 }));
@@ -101,6 +115,54 @@ router.get('/follow-ups', requirePermission('lead.read'), asyncHandler(async (re
 // ════════════════════════════════════════════════════════════
 //  LEADS
 // ════════════════════════════════════════════════════════════
+router.get('/leads/export', requirePermission('lead.read'), asyncHandler(async (req, res) => {
+  const { stage, search } = req.query;
+  const conditions = ['l.deleted_at IS NULL', 'l.is_archived = FALSE'];
+  const params = [];
+  let idx = 1;
+  if (stage) { conditions.push(`l.stage = $${idx}::lead_stage`); params.push(stage); idx++; }
+  if (search) {
+    conditions.push(`(l.full_name ILIKE $${idx} OR l.email ILIKE $${idx} OR l.company ILIKE $${idx} OR l.phone ILIKE $${idx})`);
+    params.push(`%${search}%`); idx++;
+  }
+  const where = conditions.join(' AND ');
+  const { rows } = await query(`
+    SELECT l.public_id, l.full_name, l.email, l.phone, l.company,
+           l.stage, l.lead_score, l.source, l.urgency,
+           COALESCE(l.deal_value, l.expected_value, 0) AS value,
+           l.currency, l.next_follow_up, l.created_at,
+           u.display_name AS assigned_to
+    FROM crm_schema.leads l
+    LEFT JOIN auth_schema.users u ON l.assigned_to = u.id
+    WHERE ${where}
+    ORDER BY l.created_at DESC
+  `, params);
+
+  const headers = ['"Public ID"', '"Name"', '"Email"', '"Phone"', '"Company"', '"Stage"', '"Score"', '"Source"', '"Priority"', '"Value"', '"Currency"', '"Next Follow-up"', '"Created At"', '"Assigned To"'];
+  const csvRows = [headers.join(',')];
+  for (const r of rows) {
+    csvRows.push([
+      `"${r.public_id || ''}"`,
+      `"${(r.full_name || '').replace(/"/g, '""')}"`,
+      `"${(r.email || '').replace(/"/g, '""')}"`,
+      `"${(r.phone || '').replace(/"/g, '""')}"`,
+      `"${(r.company || '').replace(/"/g, '""')}"`,
+      `"${r.stage || ''}"`,
+      r.lead_score || 0,
+      `"${r.source || ''}"`,
+      `"${r.urgency || ''}"`,
+      r.value || 0,
+      `"${r.currency || 'USD'}"`,
+      `"${r.next_follow_up ? new Date(r.next_follow_up).toISOString() : ''}"`,
+      `"${r.created_at ? new Date(r.created_at).toISOString() : ''}"`,
+      `"${(r.assigned_to || '').replace(/"/g, '""')}"`
+    ].join(','));
+  }
+  res.setHeader('Content-Type', 'text/csv');
+  res.setHeader('Content-Disposition', `attachment; filename="leads-export-${Date.now()}.csv"`);
+  return res.send(csvRows.join('\n'));
+}));
+
 router.get('/leads', requirePermission('lead.read'), paginate, asyncHandler(async (req, res) => {
   const { stage, assigned_to, temperature, source, search, is_archived, from_date, to_date } = req.query;
   const { col, dir } = safeSort(req.query.sort_by, req.query.sort_dir, 'created_at');
@@ -125,11 +187,11 @@ router.get('/leads', requirePermission('lead.read'), paginate, asyncHandler(asyn
   const where = conditions.join(' AND ');
   const [dataRes, countRes] = await Promise.all([
     query(
-      `SELECT l.id, l.public_id, l.full_name, l.email, l.company, l.phone,
+      `SELECT l.id, l.public_id, l.first_name, l.last_name, l.full_name, l.email, l.company, l.phone,
               l.stage, l.lead_score, l.lead_temperature, l.budget_range,
-              l.expected_value, l.currency, l.source, l.urgency,
-              l.services_needed, l.next_follow_up, l.last_contact_at,
-              l.created_at, l.updated_at,
+              l.expected_value, l.deal_value, l.currency, l.source, l.urgency,
+              l.services_needed, l.requirements, l.next_follow_up, l.last_contact_at,
+              l.created_at, l.updated_at, l.assigned_to,
               u.display_name AS assigned_to_name, u.avatar_url AS assigned_to_avatar
          FROM crm_schema.leads l
          LEFT JOIN auth_schema.users u ON l.assigned_to=u.id
@@ -218,30 +280,61 @@ router.post('/leads', requirePermission('lead.create'), asyncHandler(async (req,
     first_name, last_name, email, phone, company, company_size, designation,
     website, linkedin_url, country, city, timezone,
     project_type, services_needed, budget_range, timeline, requirements, urgency,
-    assigned_to, expected_value, currency, tags, metadata, next_follow_up
+    assigned_to, expected_value, deal_value, currency, tags, metadata, next_follow_up,
+    stage = 'new', initial_note
   } = req.body;
 
   if (!first_name || !last_name || !email) throw new AppError('first_name, last_name, email required');
 
   const publicId = generatePublicId();
+  const isWon = stage === 'won';
+  const finalDealVal = isWon ? (deal_value || expected_value || 0) : (deal_value || null);
+  const wonAt = isWon ? new Date() : null;
+
   const { rows } = await query(
     `INSERT INTO crm_schema.leads
        (public_id, source, source_campaign, source_medium, landing_page, referrer,
         first_name, last_name, email, phone, company, company_size, designation,
         website, linkedin_url, country, city, timezone,
         project_type, services_needed, budget_range, timeline, requirements, urgency,
-        assigned_to, expected_value, currency, tags, metadata, next_follow_up)
+        assigned_to, expected_value, deal_value, won_at, stage, currency, tags, metadata, next_follow_up)
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,
-             $19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29::jsonb,$30)
+             $19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29::lead_stage,$30,$31,$32::jsonb,$33)
      RETURNING *`,
     [publicId, source || 'website', source_campaign, source_medium, landing_page, referrer,
      first_name, last_name, email, phone, company, company_size, designation,
      website, linkedin_url, country, city, timezone,
      project_type, services_needed || [], budget_range, timeline, requirements, urgency || 'medium',
-     assigned_to || null, expected_value || 0, currency || 'USD', tags || [],
+     assigned_to || null, expected_value || 0, finalDealVal, wonAt, stage, currency || 'USD', tags || [],
      JSON.stringify(metadata || {}), next_follow_up || null]
   );
-  return created(res, rows[0]);
+  const lead = rows[0];
+
+  // Insert initial activity
+  await query(
+    `INSERT INTO crm_schema.lead_activities (lead_id, actor_id, activity_type, subject, description)
+     VALUES ($1, $2, 'creation', 'Lead created', 'Lead profile initialized in CRM pipeline')`,
+    [lead.id, req.userId]
+  );
+
+  // If initial_note was provided, create note
+  if (initial_note && initial_note.trim()) {
+    await query(
+      `INSERT INTO crm_schema.lead_notes (lead_id, author_id, content) VALUES ($1, $2, $3)`,
+      [lead.id, req.userId, initial_note.trim()]
+    );
+  }
+
+  // Audit log
+  await recordAuditLog({
+    req,
+    action: 'CREATE',
+    resourceType: 'lead',
+    resourceId: lead.id,
+    newData: lead,
+  });
+
+  return created(res, lead);
 }));
 
 // Public lead submission (contact/inquiry form)
@@ -301,18 +394,40 @@ router.post('/leads/public', asyncHandler(async (req, res) => {
 
 // PATCH /crm/leads/:id
 router.patch('/leads/:id', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
-  const { stage, assigned_to, lead_score, expected_value, next_follow_up, lost_reason,
-          deal_value, tags, urgency, budget_range, requirements, company,
-          services_needed, phone, designation, website } = req.body;
+  const currentLeadRes = await query(`SELECT * FROM crm_schema.leads WHERE id = $1 AND deleted_at IS NULL`, [req.params.id]);
+  if (!currentLeadRes.rows.length) throw new AppError('Lead not found', 404);
+  const existing = currentLeadRes.rows[0];
+
+  const {
+    stage, assigned_to, lead_score, expected_value, next_follow_up, lost_reason,
+    deal_value, tags, urgency, budget_range, requirements, company,
+    services_needed, phone, designation, website, first_name, last_name, email
+  } = req.body;
+
+  const newFirstName = first_name !== undefined ? first_name : existing.first_name;
+  const newLastName = last_name !== undefined ? last_name : existing.last_name;
+  const newFullName = `${newFirstName} ${newLastName}`.trim();
+
+  let newNextFollowUp = existing.next_follow_up;
+  if ('next_follow_up' in req.body) {
+    newNextFollowUp = (next_follow_up && next_follow_up !== '') ? next_follow_up : null;
+  }
+
+  const isChangingToWon = stage === 'won' && existing.stage !== 'won';
+  const isChangingToLost = stage === 'lost' && existing.stage !== 'lost';
+  const newStage = stage !== undefined ? stage : existing.stage;
+  const newDealValue = isChangingToWon
+    ? (deal_value || expected_value || existing.deal_value || existing.expected_value || 0)
+    : (deal_value !== undefined ? deal_value : existing.deal_value);
 
   const { rows } = await query(
     `UPDATE crm_schema.leads
-        SET stage          = COALESCE($2::lead_stage, stage),
-            assigned_to    = COALESCE($3, assigned_to),
+        SET stage          = $2::lead_stage,
+            assigned_to    = $3,
             expected_value = COALESCE($4, expected_value),
-            next_follow_up = COALESCE($5, next_follow_up),
+            next_follow_up = $5,
             lost_reason    = COALESCE($6, lost_reason),
-            deal_value     = COALESCE($7, deal_value),
+            deal_value     = $7,
             tags           = COALESCE($8, tags),
             urgency        = COALESCE($9, urgency),
             budget_range   = COALESCE($10, budget_range),
@@ -323,32 +438,131 @@ router.patch('/leads/:id', requirePermission('lead.edit'), asyncHandler(async (r
             designation    = COALESCE($15, designation),
             website        = COALESCE($16, website),
             lead_score     = COALESCE($17, lead_score),
-            won_at         = CASE WHEN $2='won' AND stage != 'won' THEN NOW() ELSE won_at END,
-            lost_at        = CASE WHEN $2='lost' AND stage != 'lost' THEN NOW() ELSE lost_at END,
+            first_name     = $18,
+            last_name      = $19,
+            email          = COALESCE($20, email),
+            won_at         = CASE WHEN $21 THEN NOW() ELSE won_at END,
+            lost_at        = CASE WHEN $22 THEN NOW() ELSE lost_at END,
             updated_at     = NOW()
       WHERE id=$1 AND deleted_at IS NULL
       RETURNING *`,
-    [req.params.id, stage, assigned_to, expected_value, next_follow_up, lost_reason,
-     deal_value, tags, urgency, budget_range, requirements, company, services_needed,
-     phone, designation, website, lead_score]
+    [
+      req.params.id,
+      newStage,
+      assigned_to !== undefined ? (assigned_to || null) : existing.assigned_to,
+      expected_value !== undefined ? expected_value : existing.expected_value,
+      newNextFollowUp,
+      lost_reason !== undefined ? lost_reason : existing.lost_reason,
+      newDealValue,
+      tags !== undefined ? tags : existing.tags,
+      urgency !== undefined ? urgency : existing.urgency,
+      budget_range !== undefined ? budget_range : existing.budget_range,
+      requirements !== undefined ? requirements : existing.requirements,
+      company !== undefined ? company : existing.company,
+      services_needed !== undefined ? services_needed : existing.services_needed,
+      phone !== undefined ? phone : existing.phone,
+      designation !== undefined ? designation : existing.designation,
+      website !== undefined ? website : existing.website,
+      lead_score !== undefined ? lead_score : existing.lead_score,
+      newFirstName,
+      newLastName,
+      email,
+      isChangingToWon,
+      isChangingToLost,
+    ]
   );
-  if (!rows.length) throw new AppError('Lead not found', 404);
+  const updatedLead = rows[0];
 
   // If stage changed, log activity
-  if (stage) {
+  if (stage && stage !== existing.stage) {
     await query(
       `INSERT INTO crm_schema.lead_activities (lead_id, actor_id, activity_type, subject, description)
-       VALUES ($1, $2, 'stage_change', 'Stage updated', 'Stage changed to ' || $3)`,
-      [req.params.id, req.userId, stage]
+       VALUES ($1, $2, 'stage_change', 'Stage updated', 'Stage changed from ' || $3 || ' to ' || $4)`,
+      [req.params.id, req.userId, existing.stage, stage]
     );
   }
 
-  return success(res, rows[0]);
+  // Record audit log
+  await recordAuditLog({
+    req,
+    action: 'UPDATE',
+    resourceType: 'lead',
+    resourceId: req.params.id,
+    oldData: existing,
+    newData: updatedLead,
+  });
+
+  return success(res, updatedLead);
+}));
+
+// Follow-up actions (complete, reschedule, schedule)
+router.post('/leads/:id/follow-up', requirePermission('lead.edit'), asyncHandler(async (req, res) => {
+  const { action, next_follow_up, activity_type = 'call', subject, description, outcome } = req.body;
+
+  const leadRes = await query(`SELECT * FROM crm_schema.leads WHERE id = $1 AND deleted_at IS NULL`, [req.params.id]);
+  if (!leadRes.rows.length) throw new AppError('Lead not found', 404);
+
+  if (action === 'complete') {
+    // Log completion activity
+    await query(
+      `INSERT INTO crm_schema.lead_activities (lead_id, actor_id, activity_type, subject, description, outcome, occurred_at)
+       VALUES ($1, $2, $3, $4, $5, $6, NOW())`,
+      [req.params.id, req.userId, activity_type, subject || 'Follow-up completed', description || null, outcome || null]
+    );
+
+    // Update lead follow-up
+    const newNext = next_follow_up ? next_follow_up : null;
+    const { rows } = await query(
+      `UPDATE crm_schema.leads
+          SET next_follow_up = $2,
+              last_contact_at = NOW(),
+              follow_up_count = follow_up_count + 1,
+              updated_at = NOW()
+        WHERE id = $1 RETURNING *`,
+      [req.params.id, newNext]
+    );
+    return success(res, rows[0], 'Follow-up marked as completed');
+  } else {
+    // Schedule or reschedule
+    if (!next_follow_up) throw new AppError('next_follow_up date required', 400);
+    const { rows } = await query(
+      `UPDATE crm_schema.leads
+          SET next_follow_up = $2,
+              updated_at = NOW()
+        WHERE id = $1 RETURNING *`,
+      [req.params.id, next_follow_up]
+    );
+    await query(
+      `INSERT INTO crm_schema.lead_activities (lead_id, actor_id, activity_type, subject, description)
+       VALUES ($1, $2, 'task', 'Follow-up scheduled', 'Next follow-up set for ' || $3)`,
+      [req.params.id, req.userId, new Date(next_follow_up).toLocaleString()]
+    );
+    return success(res, rows[0], 'Follow-up scheduled');
+  }
 }));
 
 // DELETE /crm/leads/:id (soft)
 router.delete('/leads/:id', requirePermission('lead.delete'), asyncHandler(async (req, res) => {
+  const currentLeadRes = await query(`SELECT * FROM crm_schema.leads WHERE id = $1 AND deleted_at IS NULL`, [req.params.id]);
+  if (!currentLeadRes.rows.length) throw new AppError('Lead not found', 404);
+  const existing = currentLeadRes.rows[0];
+
   await query(`UPDATE crm_schema.leads SET deleted_at = NOW() WHERE id = $1`, [req.params.id]);
+
+  await query(
+    `INSERT INTO crm_schema.lead_activities (lead_id, actor_id, activity_type, subject, description)
+     VALUES ($1, $2, 'deletion', 'Lead deleted', 'Lead removed from active pipeline')`,
+    [req.params.id, req.userId]
+  );
+
+  await recordAuditLog({
+    req,
+    action: 'DELETE',
+    resourceType: 'lead',
+    resourceId: req.params.id,
+    oldData: existing,
+  });
+
   return noContent(res);
 }));
 

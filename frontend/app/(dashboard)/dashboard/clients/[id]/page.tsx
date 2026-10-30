@@ -69,6 +69,19 @@ export default function ClientDetailPage({ params }: { params: Promise<{ id: str
     queryFn: () => clientsApi.get(id).then(r => r.data.data),
   });
 
+  const { data: managersData } = useQuery({
+    queryKey: ['account-managers'],
+    queryFn: () => clientsApi.getAccountManagers().then(r => r.data.data),
+  });
+
+  const managerOptions = [
+    { value: '', label: 'Unassigned' },
+    ...(managersData || []).map((m: any) => ({
+      value: m.id,
+      label: `${m.full_name || m.email} (${m.role})`,
+    })),
+  ];
+
   const updateMutation = useMutation({
     mutationFn: (formData: any) => clientsApi.update(id, formData),
     onSuccess: () => {
@@ -143,6 +156,7 @@ export default function ClientDetailPage({ params }: { params: Promise<{ id: str
       status: client.status || 'active',
       country: client.country || '',
       city: client.city || '',
+      account_manager_id: client.account_manager_id || '',
       description: client.notes || '',
     });
     setShowEdit(true);
@@ -479,6 +493,14 @@ export default function ClientDetailPage({ params }: { params: Promise<{ id: str
           <Input label="Website" value={editForm.website || ''} onChange={e => setEditForm((f: any) => ({ ...f, website: e.target.value }))} />
           <Input label="Country" value={editForm.country || ''} onChange={e => setEditForm((f: any) => ({ ...f, country: e.target.value }))} />
           <Input label="City" value={editForm.city || ''} onChange={e => setEditForm((f: any) => ({ ...f, city: e.target.value }))} />
+          <div className="col-span-2">
+            <Select
+              label="Assigned Account Manager"
+              options={managerOptions}
+              value={editForm.account_manager_id || ''}
+              onChange={e => setEditForm((f: any) => ({ ...f, account_manager_id: e.target.value }))}
+            />
+          </div>
           <div className="col-span-2">
             <Textarea label="Internal Description" value={editForm.description || ''} onChange={e => setEditForm((f: any) => ({ ...f, description: e.target.value }))} rows={2} />
           </div>

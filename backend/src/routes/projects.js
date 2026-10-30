@@ -12,6 +12,12 @@ const { asyncHandler, AppError } = require('../middleware/errorHandler');
 async function recalculateProjectProgress(projectId) {
   if (!projectId) return;
   try {
+    const { rows: projRows } = await query(
+      `SELECT status FROM client_schema.client_projects WHERE id = $1`,
+      [projectId]
+    );
+    const status = projRows[0]?.status;
+
     const { rows } = await query(
       `SELECT
          COUNT(*) AS total_tasks,
@@ -22,7 +28,10 @@ async function recalculateProjectProgress(projectId) {
     );
     const total = parseInt(rows[0]?.total_tasks || 0, 10);
     const done = parseInt(rows[0]?.done_tasks || 0, 10);
-    const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+    const percent = total > 0
+      ? Math.min(100, Math.max(0, Math.round((done / total) * 100)))
+      : (status === 'completed' || status === 'delivered' ? 100 : 0);
+
     await query(
       `UPDATE client_schema.client_projects
           SET progress_percent = $1,
@@ -314,43 +323,75 @@ router.patch('/:id', authenticate, requirePermission('project.edit', 'project.ma
     throw new AppError('Forbidden: Clients cannot modify project details', 403);
   }
 
-  const { name, title, description, status, priority, health_status, health, end_date,
-          budget, progress_percent } = req.body;
+  const {
+    name, title, client_id, description, type, status, priority,
+    health_status, health, start_date, end_date, budget, currency,
+    progress_percent, project_manager, manager_id
+  } = req.body;
 
-  const projectTitle = name || title;
-  const projectHealth = health_status || health;
+  const projectTitle = name !== undefined ? name : title;
+  const projectHealth = health_status !== undefined ? health_status : health;
+  const managerUser = project_manager !== undefined ? project_manager : manager_id;
 
   const { rows } = await query(
     `UPDATE client_schema.client_projects
         SET title            = COALESCE($2, title),
-            description      = COALESCE($3, description),
-            status           = COALESCE($4::project_status, status),
-            priority         = COALESCE($5, priority),
-            health           = COALESCE($6, health),
-            end_date         = COALESCE($7, end_date),
-            budget           = COALESCE($8, budget),
-            progress_percent = COALESCE($9, progress_percent),
+            client_id        = COALESCE($3, client_id),
+            description      = COALESCE($4, description),
+            type             = COALESCE($5, type),
+            status           = COALESCE($6::project_status, status),
+            priority         = COALESCE($7, priority),
+            health           = COALESCE($8, health),
+            start_date       = COALESCE($9, start_date),
+            end_date         = COALESCE($10, end_date),
+            budget           = COALESCE($11, budget),
+            currency         = COALESCE($12, currency),
+            progress_percent = COALESCE($13, progress_percent),
+            project_manager  = COALESCE($14, project_manager),
+            actual_end_date  = CASE
+                                 WHEN $6::project_status IN ('completed', 'delivered') AND actual_end_date IS NULL THEN NOW()
+                                 ELSE actual_end_date
+                               END,
             updated_at       = NOW()
       WHERE id=$1 AND deleted_at IS NULL RETURNING *`,
     [
       req.params.id,
-      projectTitle,
-      description,
-      status,
-      priority,
-      projectHealth,
-      end_date,
-      budget ? parseFloat(budget) : null,
-      progress_percent !== undefined ? parseInt(progress_percent, 10) : null,
+      projectTitle !== undefined ? projectTitle : null,
+      client_id !== undefined ? client_id : null,
+      description !== undefined ? description : null,
+      type !== undefined ? type : null,
+      status !== undefined ? status : null,
+      priority !== undefined ? priority : null,
+      projectHealth !== undefined ? projectHealth : null,
+      start_date !== undefined ? start_date : null,
+      end_date !== undefined ? end_date : null,
+      budget !== undefined ? (budget === '' || budget === null ? null : parseFloat(budget)) : null,
+      currency !== undefined ? currency : null,
+      progress_percent !== undefined ? Math.min(100, Math.max(0, parseInt(progress_percent, 10))) : null,
+      managerUser !== undefined ? (managerUser || null) : null,
     ]
   );
   if (!rows.length) throw new AppError('Project not found', 404);
+
+  // If manager changed, ensure they are registered in project_members
+  if (managerUser) {
+    await query(
+      `INSERT INTO client_schema.project_members (project_id, user_id, role, added_by)
+       VALUES ($1, $2, 'manager', $3) ON CONFLICT (project_id, user_id) DO UPDATE SET role = 'manager'`,
+      [req.params.id, managerUser, req.userId]
+    );
+  }
+
+  // Recalculate progress if status changed
+  if (status) {
+    await recalculateProjectProgress(req.params.id);
+  }
 
   // Log activity
   await query(
     `INSERT INTO client_schema.project_activity_log (project_id, user_id, action, metadata)
      VALUES ($1, $2, 'Project updated', $3::jsonb)`,
-    [req.params.id, req.userId, JSON.stringify({ status, priority, progress_percent })]
+    [req.params.id, req.userId, JSON.stringify({ status, priority, progress_percent, title: projectTitle })]
   );
 
   return success(res, {
@@ -541,6 +582,7 @@ tasksRouter.get('/', authenticate, requirePermission('task.read', 'task.manage')
               t.due_date, t.estimated_h AS estimated_hours, t.logged_h AS actual_hours,
               t.story_points, t.tags, t.created_at, t.completed_at,
               u.display_name AS assignee_name, u.avatar_url AS assignee_avatar,
+              t.assigned_to AS assignee_id,
               p.title AS project_name, COALESCE(p.code, 'PRJ') AS project_code,
               t.project_id,
               COUNT(sub.id) FILTER (WHERE sub.deleted_at IS NULL) AS subtask_count
@@ -549,7 +591,7 @@ tasksRouter.get('/', authenticate, requirePermission('task.read', 'task.manage')
          LEFT JOIN client_schema.client_projects p ON t.project_id=p.id
          LEFT JOIN client_schema.tasks   sub ON sub.parent_id=t.id
         WHERE ${where}
-        GROUP BY t.id, u.display_name, u.avatar_url, p.title, p.code
+        GROUP BY t.id, u.display_name, u.avatar_url, t.assigned_to, p.title, p.code
         ORDER BY t.created_at DESC
         LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
@@ -773,7 +815,10 @@ tasksRouter.patch('/:id', authenticate, requirePermission('task.edit', 'task.man
     if (!clientCheck.length) throw new AppError('Forbidden: Cannot edit this task', 403);
   }
 
+  const assignedProvided = assignee_id !== undefined || assigned_to !== undefined;
   const assignedUser = assignee_id !== undefined ? assignee_id : assigned_to;
+  const cleanAssignedUser = (assignedUser === '' || assignedUser === null || assignedUser === 'unassigned') ? null : assignedUser;
+
   const isDoneNow = status === 'done';
   const wasDone = currentTask.status === 'done';
 
@@ -790,29 +835,30 @@ tasksRouter.patch('/:id', authenticate, requirePermission('task.edit', 'task.man
             description    = COALESCE($3, description),
             status         = COALESCE($4, status),
             priority       = COALESCE($5, priority),
-            assigned_to    = CASE WHEN $6::uuid IS NOT NULL THEN $6::uuid ELSE assigned_to END,
-            due_date       = COALESCE($7, due_date),
-            estimated_h    = COALESCE($8, estimated_h),
-            story_points   = COALESCE($9, story_points),
-            tags           = COALESCE($10, tags),
-            completed_at   = CASE WHEN $11::boolean IS TRUE THEN $12::timestamptz ELSE completed_at END,
-            sprint_id      = COALESCE($13, sprint_id),
+            assigned_to    = CASE WHEN $6::boolean THEN $7::uuid ELSE assigned_to END,
+            due_date       = COALESCE($8, due_date),
+            estimated_h    = COALESCE($9, estimated_h),
+            story_points   = COALESCE($10, story_points),
+            tags           = COALESCE($11, tags),
+            completed_at   = CASE WHEN $12::boolean IS TRUE THEN $13::timestamptz ELSE completed_at END,
+            sprint_id      = COALESCE($14, sprint_id),
             updated_at     = NOW()
       WHERE id=$1 AND deleted_at IS NULL RETURNING *`,
     [
       req.params.id,
-      title,
-      description,
-      status,
-      priority,
-      assignedUser || null,
-      due_date,
-      estimated_hours ? parseFloat(estimated_hours) : null,
-      story_points,
-      tags,
+      title !== undefined ? title : null,
+      description !== undefined ? description : null,
+      status !== undefined ? status : null,
+      priority !== undefined ? priority : null,
+      assignedProvided,
+      cleanAssignedUser,
+      due_date !== undefined ? due_date : null,
+      estimated_hours !== undefined ? (estimated_hours === '' || estimated_hours === null ? null : parseFloat(estimated_hours)) : null,
+      story_points !== undefined ? story_points : null,
+      tags !== undefined ? tags : null,
       (status !== undefined || completed_at !== undefined),
       finalCompletedAt,
-      sprint_id
+      sprint_id !== undefined ? sprint_id : null,
     ]
   );
 
@@ -1321,7 +1367,8 @@ timeRouter.get('/summary', authenticate, asyncHandler(async (req, res) => {
        COALESCE(SUM(hours) FILTER (WHERE started_at >= CURRENT_DATE), 0) AS today,
        COALESCE(SUM(hours) FILTER (WHERE is_billable = TRUE), 0) AS billable_hours,
        COALESCE(SUM(hours) FILTER (WHERE is_billable = FALSE), 0) AS non_billable_hours,
-       COALESCE(SUM(hours), 0) AS total_hours
+       COALESCE(SUM(hours), 0) AS total_hours,
+       COUNT(*)::int AS total_entries
      FROM client_schema.time_entries
     WHERE is_active_timer = FALSE AND ${scopeCondition}`
   );
@@ -1334,6 +1381,7 @@ timeRouter.get('/summary', authenticate, asyncHandler(async (req, res) => {
     billable_hours: parseFloat(stats.billable_hours || 0),
     non_billable_hours: parseFloat(stats.non_billable_hours || 0),
     total_hours: parseFloat(stats.total_hours || 0),
+    total_entries: parseInt(stats.total_entries || 0, 10),
   });
 }));
 

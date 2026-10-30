@@ -69,7 +69,7 @@ export default function FinanceOverviewPage() {
           <Alert type="warning">
             <strong>{overdueList.length} invoices are currently overdue</strong> totaling{' '}
             {formatCurrency(overview?.overdue_amount || 0)}. Review them promptly.
-            <Link href="/dashboard/finance/invoices" className="ml-2 font-semibold underline text-amber-900">
+            <Link href="/dashboard/finance/invoices?status=overdue" className="ml-2 font-semibold underline text-amber-900">
               Go to Invoices &rarr;
             </Link>
           </Alert>
