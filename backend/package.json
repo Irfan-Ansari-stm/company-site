@@ -19,7 +19,10 @@
     "test:speed": "node src/tests/public-website-speed-suite.test.js",
     "test:auth": "node src/tests/auth-lifecycle.test.js",
     "test:rate-limit": "node src/tests/auth-rate-limiting.test.js",
-    "test:all": "npm run test:rbac && npm run test:dashboard && npm run test:crm && npm run test:work && npm run test:enterprise && npm run test:admin && npm run test:cms && npm run test:speed && npm run test:auth && npm run test:rate-limit",
+    "test:hr-support": "node src/tests/hr-support-comprehensive-verification.test.js",
+    "test:dashboard-modules": "node src/tests/dashboard-modules-verification.test.js",
+    "test:audit-roles": "node src/tests/audit-clientaccess-roles.test.js",
+    "test:all": "npm run test:rbac && npm run test:dashboard && npm run test:crm && npm run test:work && npm run test:enterprise && npm run test:hr-support && npm run test:admin && npm run test:cms && npm run test:speed && npm run test:auth && npm run test:rate-limit",
     "seed:cms": "node --experimental-strip-types src/scripts/seed-cms-content.js",
     "bootstrap:superadmin": "node src/scripts/bootstrap-superadmin.js"
   },

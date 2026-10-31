@@ -218,21 +218,23 @@ router.get('/posts/:slugOrId', optionalAuth, asyncHandler(async (req, res) => {
 }));
 
 router.post('/posts', authenticate, requirePermission('post.write'), asyncHandler(async (req, res) => {
-  const { title, slug, excerpt, content, content_json, category_id, cover_image, status,
+  const { title, slug, excerpt, content, content_json, category_id, cover_image, cover_image_url, status,
           is_featured, allow_comments, scheduled_at, locale, seo_id, tags, metadata } = req.body;
   if (!title || !content) throw new AppError('title and content required');
 
   const finalSlug = slug || generateSlug(title);
-  const { rows } = await withTransaction(async (client) => {
+  const createdPost = await withTransaction(async (client) => {
     const postRes = await client.query(
       `INSERT INTO blog_schema.posts
-         (title, slug, excerpt, content, content_json, author_id, category_id, cover_image,
-          status, is_featured, allow_comments, scheduled_at, locale, seo_id, metadata)
-       VALUES ($1,$2,$3,$4,$5::jsonb,$6,$7,$8,$9::post_status,$10,$11,$12,$13,$14,$15::jsonb)
+         (title, slug, excerpt, content, content_json, author_id, category_id, cover_image, cover_image_url,
+          status, is_featured, allow_comments, scheduled_at, published_at, locale, seo_id, metadata)
+       VALUES ($1,$2,$3,$4,$5::jsonb,$6,$7,$8,$9,$10::post_status,$11,$12,$13,
+               CASE WHEN $10::post_status='published' THEN NOW() ELSE NULL END,
+               $14,$15,$16::jsonb)
        RETURNING *`,
       [title, finalSlug, excerpt, content,
        content_json ? JSON.stringify(content_json) : null,
-       req.userId, category_id || null, cover_image || null,
+       req.userId, category_id || null, cover_image || null, cover_image_url || null,
        status || 'draft', is_featured || false, allow_comments !== false,
        scheduled_at || null, locale || 'en', seo_id || null,
        JSON.stringify(metadata || {})]
@@ -248,33 +250,37 @@ router.post('/posts', authenticate, requirePermission('post.write'), asyncHandle
         );
       }
     }
-    return postRes.rows;
+    return post;
   });
 
-  return created(res, rows[0]);
+  return created(res, createdPost);
 }));
 
 router.patch('/posts/:id', authenticate, requirePermission('post.write'), asyncHandler(async (req, res) => {
-  const { title, excerpt, content, content_json, status, is_featured, allow_comments,
-          category_id, cover_image, scheduled_at, tags } = req.body;
+  const { title, slug, excerpt, content, content_json, status, is_featured, allow_comments,
+          category_id, cover_image, cover_image_url, scheduled_at, tags } = req.body;
 
   await withTransaction(async (client) => {
     await client.query(
       `UPDATE blog_schema.posts
-          SET title         = COALESCE($2, title),
-              excerpt       = COALESCE($3, excerpt),
-              content       = COALESCE($4, content),
-              content_json  = CASE WHEN $5::jsonb IS NOT NULL THEN $5::jsonb ELSE content_json END,
-              status        = COALESCE($6::post_status, status),
-              is_featured   = COALESCE($7, is_featured),
-              allow_comments= COALESCE($8, allow_comments),
-              category_id   = COALESCE($9, category_id),
-              cover_image   = COALESCE($10, cover_image),
-              scheduled_at  = COALESCE($11, scheduled_at)
+          SET title          = COALESCE($2, title),
+              slug           = COALESCE($3, slug),
+              excerpt        = COALESCE($4, excerpt),
+              content        = COALESCE($5, content),
+              content_json   = CASE WHEN $6::jsonb IS NOT NULL THEN $6::jsonb ELSE content_json END,
+              status         = COALESCE($7::post_status, status),
+              published_at   = CASE WHEN $7::post_status = 'published' AND published_at IS NULL THEN NOW() ELSE published_at END,
+              is_featured    = COALESCE($8, is_featured),
+              allow_comments = COALESCE($9, allow_comments),
+              category_id    = COALESCE($10, category_id),
+              cover_image    = COALESCE($11, cover_image),
+              cover_image_url= COALESCE($12, cover_image_url),
+              scheduled_at   = COALESCE($13, scheduled_at),
+              updated_at     = NOW()
         WHERE id=$1 AND deleted_at IS NULL`,
-      [req.params.id, title, excerpt, content,
+      [req.params.id, title, slug, excerpt, content,
        content_json ? JSON.stringify(content_json) : null,
-       status, is_featured, allow_comments, category_id, cover_image, scheduled_at]
+       status, is_featured, allow_comments, category_id, cover_image, cover_image_url, scheduled_at]
     );
 
     if (tags !== undefined) {

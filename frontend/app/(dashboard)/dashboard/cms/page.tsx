@@ -13,6 +13,7 @@ import {
   Textarea,
   TabBar,
   Badge,
+  ConfirmDialog,
 } from '@/components/ui';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { cmsApi, servicesApi } from '@/lib/api';
@@ -145,6 +146,13 @@ export default function CMSPage() {
 
   // Revisions modal
   const [showRevisionsModal, setShowRevisionsModal] = useState(false);
+
+  // Destructive Action Confirmation Dialog
+  const [confirmAction, setConfirmAction] = useState<{
+    title: string;
+    description: React.ReactNode;
+    onConfirm: () => void;
+  } | null>(null);
 
   // 1. CMS Stats
   const { data: statsData } = useQuery({
@@ -748,7 +756,7 @@ export default function CMSPage() {
            ════════════════════════════════════════════════════════════ */}
         {tab === 'overview' && (
           <div className="space-y-6">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
               <Card>
                 <div className="flex flex-col">
                   <span className="text-xs font-semibold uppercase text-slate-500">Live Pages</span>
@@ -948,9 +956,11 @@ export default function CMSPage() {
                                 type="button"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  if (confirm(`Delete page "${p.title}"?`)) {
-                                    deletePageMutation.mutate(p.id);
-                                  }
+                                  setConfirmAction({
+                                    title: 'Delete CMS Page',
+                                    description: `Are you sure you want to permanently delete page "${p.title}" (/${p.slug})? All of its sections and revisions will be removed.`,
+                                    onConfirm: () => deletePageMutation.mutate(p.id),
+                                  });
                                 }}
                                 className="p-1.5 text-slate-400 hover:text-rose-600 transition"
                                 title="Delete Page"
@@ -1140,12 +1150,15 @@ export default function CMSPage() {
                               <button
                                 type="button"
                                 onClick={() => {
-                                  if (confirm('Delete this section permanently?')) {
-                                    deleteSectionMutation.mutate({
-                                      pageId: selectedPage.id,
-                                      sectionId: sec.id,
-                                    });
-                                  }
+                                  setConfirmAction({
+                                    title: 'Delete Section',
+                                    description: `Are you sure you want to permanently delete section "${sec.title || sec.type}" from this page?`,
+                                    onConfirm: () =>
+                                      deleteSectionMutation.mutate({
+                                        pageId: selectedPage.id,
+                                        sectionId: sec.id,
+                                      }),
+                                  });
                                 }}
                                 className="p-1 rounded border border-slate-200 text-slate-500 hover:bg-slate-100 dark:border-slate-800"
                                 title="Delete Section"
@@ -1633,9 +1646,11 @@ export default function CMSPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          if (confirm(`Delete service "${s.title}"?`)) {
-                            deleteServiceMutation.mutate(s.id);
-                          }
+                          setConfirmAction({
+                            title: 'Delete Service',
+                            description: `Are you sure you want to delete service "${s.title}"?`,
+                            onConfirm: () => deleteServiceMutation.mutate(s.id),
+                          });
                         }}
                         className="p-1.5 text-slate-400 hover:text-rose-600 transition"
                         title="Delete Service"
@@ -1713,9 +1728,11 @@ export default function CMSPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          if (confirm(`Delete solution "${sol.title}"?`)) {
-                            deleteSolutionMutation.mutate(sol.id);
-                          }
+                          setConfirmAction({
+                            title: 'Delete Solution',
+                            description: `Are you sure you want to delete solution "${sol.title}"?`,
+                            onConfirm: () => deleteSolutionMutation.mutate(sol.id),
+                          });
                         }}
                         className="p-1.5 text-slate-400 hover:text-rose-600 transition"
                         title="Delete Solution"
@@ -1777,9 +1794,11 @@ export default function CMSPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          if (confirm('Delete FAQ permanently?')) {
-                            deleteFaqMutation.mutate(faq.id);
-                          }
+                          setConfirmAction({
+                            title: 'Delete FAQ',
+                            description: 'Are you sure you want to permanently delete this FAQ item?',
+                            onConfirm: () => deleteFaqMutation.mutate(faq.id),
+                          });
                         }}
                         className="p-1.5 text-slate-400 hover:text-rose-600 transition"
                       >
@@ -1995,16 +2014,15 @@ export default function CMSPage() {
                     variant="outline"
                     icon={<RotateCcw className="w-3.5 h-3.5" />}
                     onClick={() => {
-                      if (
-                        confirm(
-                          `Roll back "${selectedPage?.title}" to Revision #${rev.revision_num}? All current sections will be replaced with this version's snapshot.`
-                        )
-                      ) {
-                        rollbackMutation.mutate({
-                          pageId: selectedPage.id,
-                          revisionId: rev.id,
-                        });
-                      }
+                      setConfirmAction({
+                        title: `Roll Back to Revision #${rev.revision_num}`,
+                        description: `Roll back "${selectedPage?.title}" to Revision #${rev.revision_num}? All current sections will be replaced with this version's snapshot.`,
+                        onConfirm: () =>
+                          rollbackMutation.mutate({
+                            pageId: selectedPage.id,
+                            revisionId: rev.id,
+                          }),
+                      });
                     }}
                   >
                     Rollback
@@ -2476,6 +2494,18 @@ export default function CMSPage() {
           </div>
         )}
       </Modal>
+
+      {/* Confirmation Dialog */}
+      <ConfirmDialog
+        open={!!confirmAction}
+        onClose={() => setConfirmAction(null)}
+        onConfirm={() => {
+          confirmAction?.onConfirm();
+          setConfirmAction(null);
+        }}
+        title={confirmAction?.title}
+        description={confirmAction?.description}
+      />
     </DashboardLayout>
   );
 }

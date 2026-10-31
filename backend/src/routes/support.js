@@ -29,7 +29,7 @@ router.get('/tickets', authenticate, requirePermission('ticket.read'), paginate,
   if (from_date)   { conditions.push(`t.created_at >= $${idx}`); params.push(from_date); idx++; }
   if (to_date)     { conditions.push(`t.created_at <= $${idx}`); params.push(to_date);   idx++; }
   if (search) {
-    conditions.push(`(t.subject ILIKE $${idx} OR t.ticket_number ILIKE $${idx})`);
+    conditions.push(`(t.subject ILIKE $${idx} OR t.ticket_number ILIKE $${idx} OR cl.company_name ILIKE $${idx} OR COALESCE(reporter.display_name, t.reporter_name) ILIKE $${idx})`);
     params.push(`%${search}%`); idx++;
   }
 
@@ -53,7 +53,14 @@ router.get('/tickets', authenticate, requirePermission('ticket.read'), paginate,
         LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM support_schema.tickets t WHERE ${where}`, params),
+    query(
+      `SELECT COUNT(DISTINCT t.id)
+         FROM support_schema.tickets t
+         LEFT JOIN client_schema.clients cl       ON t.client_id=cl.id
+         LEFT JOIN auth_schema.users     reporter ON t.reporter_id=reporter.id
+        WHERE ${where}`,
+      params
+    ),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
@@ -141,18 +148,18 @@ router.get('/tickets/:id', authenticate, requirePermission('ticket.read'), async
 
 router.post('/tickets', optionalAuth, asyncHandler(async (req, res) => {
   const { client_id, subject, description, type, priority, project_id,
-          reporter_email, reporter_name, cc_emails } = req.body;
+          reporter_email, reporter_name, cc_emails, assigned_to } = req.body;
   if (!subject || !description) throw new AppError('subject and description required');
 
   const ticketNumber = `TKT-${Date.now().toString(36).toUpperCase()}`;
   const { rows } = await query(
     `INSERT INTO support_schema.tickets
        (ticket_number, client_id, reporter_id, reporter_email, reporter_name, project_id,
-        subject, description, type, priority, cc_emails, status)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::ticket_priority,$11,'open') RETURNING *`,
+        subject, description, type, priority, cc_emails, assigned_to, status)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::ticket_priority,$11,$12,'open') RETURNING *`,
     [ticketNumber, client_id || null, req.userId || null, reporter_email || null, reporter_name || null,
      project_id || null, subject, description, type || 'support',
-     priority || 'medium', cc_emails || []]
+     priority || 'medium', cc_emails || [], assigned_to || null]
   );
   return created(res, rows[0]);
 }));
@@ -176,6 +183,11 @@ router.patch('/tickets/:id', authenticate, requirePermission('ticket.manage'), a
   );
   if (!rows.length) throw new AppError('Ticket not found', 404);
   return success(res, rows[0]);
+}));
+
+router.delete('/tickets/:id', authenticate, requirePermission('ticket.manage'), asyncHandler(async (req, res) => {
+  await query(`UPDATE support_schema.tickets SET deleted_at=NOW(), updated_at=NOW() WHERE id=$1`, [req.params.id]);
+  return noContent(res);
 }));
 
 // Ticket Replies

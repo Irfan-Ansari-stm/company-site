@@ -85,7 +85,7 @@ router.get('/', optionalAuth, paginate, asyncHandler(async (req, res) => {
     query(
       `SELECT s.id, s.title, s.slug, s.tagline, s.summary, s.icon, s.pricing_type,
               s.starting_price, s.currency, s.duration_min, s.duration_max,
-              s.is_featured, s.sort_order, s.tech_stack,
+              s.is_featured, s.is_active, s.sort_order, s.tech_stack,
               sc.name AS category_name, sc.slug AS category_slug, sc.icon AS category_icon,
               COUNT(sp.id) FILTER (WHERE sp.is_active=TRUE) AS package_count
          FROM cms_schema.services s

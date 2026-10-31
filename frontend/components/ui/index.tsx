@@ -87,7 +87,7 @@ interface CardProps {
 
 export function Card({ children, className, padding = true, style }: CardProps) {
   return (
-    <div style={style} className={cn('bg-white rounded-xl border border-slate-200 shadow-sm', padding && 'p-6', className)}>
+    <div style={style} className={cn('bg-white rounded-xl border border-slate-200 shadow-sm min-w-0 max-w-full', padding && 'p-6', className)}>
       {children}
     </div>
   );
@@ -305,6 +305,52 @@ export function Modal({ open, onClose, title, children, size = 'md', footer }: M
   );
 }
 
+// ─── Confirm Dialog ──────────────────────────────────────────
+export function ConfirmDialog({
+  open,
+  onClose,
+  onConfirm,
+  title = 'Confirm Action',
+  description = 'Are you sure you want to proceed? This action cannot be undone.',
+  confirmText = 'Delete',
+  cancelText = 'Cancel',
+  variant = 'danger',
+  loading = false,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  title?: string;
+  description?: React.ReactNode;
+  confirmText?: string;
+  cancelText?: string;
+  variant?: 'danger' | 'primary';
+  loading?: boolean;
+}) {
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={title}
+      size="sm"
+      footer={
+        <>
+          <Button variant="outline" onClick={onClose} disabled={loading}>
+            {cancelText}
+          </Button>
+          <Button variant={variant} onClick={onConfirm} loading={loading}>
+            {confirmText}
+          </Button>
+        </>
+      }
+    >
+      <div className="text-sm text-slate-700 py-1 leading-relaxed">
+        {description}
+      </div>
+    </Modal>
+  );
+}
+
 // ─── Table ───────────────────────────────────────────────────
 interface TableProps {
   headers: string[];
@@ -316,12 +362,12 @@ interface TableProps {
 
 export function Table({ headers, children, loading, empty, emptyMessage = 'No data found' }: TableProps) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full">
+    <div className="overflow-x-auto w-full max-w-full">
+      <table className="min-w-full divide-y divide-slate-200 text-left">
         <thead>
-          <tr className="border-b border-slate-200">
+          <tr className="border-b border-slate-200 bg-slate-50/50">
             {headers.map((h) => (
-              <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+              <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide whitespace-nowrap">
                 {h}
               </th>
             ))}
@@ -361,7 +407,7 @@ export function Tr({ children, className, onClick }: { children: React.ReactNode
 }
 
 export function Td({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <td className={cn('px-4 py-3 text-sm text-slate-700', className)}>{children}</td>;
+  return <td className={cn('px-4 py-3 text-sm text-slate-700 align-middle', className)}>{children}</td>;
 }
 
 // ─── Pagination ──────────────────────────────────────────────
@@ -426,16 +472,16 @@ export function StatCard({
     purple: 'bg-purple-50 text-purple-600',
   };
   return (
-    <Card className="flex items-start gap-4">
+    <Card className="flex items-start gap-4 h-full min-w-0">
       {icon && (
         <div className={cn('w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0', colors[color])}>
           {icon}
         </div>
       )}
       <div className="flex-1 min-w-0">
-        <p className="text-sm text-slate-500 font-medium">{title}</p>
-        <p className="text-2xl font-bold text-slate-900 mt-0.5">{value}</p>
-        {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+        <p className="text-sm text-slate-500 font-medium truncate">{title}</p>
+        <p className="text-2xl font-bold text-slate-900 mt-0.5 truncate">{value}</p>
+        {subtitle && <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">{subtitle}</p>}
         {trend && (
           <div className={cn('flex items-center gap-1 mt-1 text-xs font-medium', trend.value >= 0 ? 'text-green-600' : 'text-red-600')}>
             <span>{trend.value >= 0 ? '↑' : '↓'} {Math.abs(trend.value)}%</span>
@@ -480,27 +526,30 @@ export function TabBar({
   tabs,
   active,
   onChange,
+  className,
 }: {
   tabs: Array<{ id: string; label: string; count?: number }>;
   active: string;
   onChange: (id: string) => void;
+  className?: string;
 }) {
   return (
-    <div className="flex items-center gap-1 border-b border-slate-200 mb-6">
+    <div className={cn('flex items-center gap-1 border-b border-slate-200 mb-6 overflow-x-auto pb-px scrollbar-none w-full max-w-full', className)}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
+          type="button"
           onClick={() => onChange(tab.id)}
           className={cn(
-            'px-4 py-2.5 text-sm font-medium rounded-t-lg -mb-px transition-colors flex items-center gap-2',
+            'px-4 py-2.5 text-sm font-medium rounded-t-lg -mb-px transition-colors flex items-center gap-2 whitespace-nowrap flex-shrink-0 select-none',
             active === tab.id
-              ? 'text-blue-600 border-b-2 border-blue-600'
+              ? 'text-blue-600 border-b-2 border-blue-600 font-semibold bg-blue-50/20'
               : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
           )}
         >
-          {tab.label}
+          <span>{tab.label}</span>
           {tab.count != null && (
-            <span className={cn('text-xs rounded-full px-1.5 py-0.5', active === tab.id ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600')}>
+            <span className={cn('text-xs rounded-full px-2 py-0.5 font-medium', active === tab.id ? 'bg-blue-100 text-blue-700 font-semibold' : 'bg-slate-100 text-slate-600')}>
               {tab.count}
             </span>
           )}

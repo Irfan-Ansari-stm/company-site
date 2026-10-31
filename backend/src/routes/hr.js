@@ -17,6 +17,21 @@ const blockClientFromHR = (req, res, next) => {
   next();
 };
 
+// ── HR Statistics ─────────────────────────────────────────────
+router.get('/stats', authenticate, blockClientFromHR, asyncHandler(async (req, res) => {
+  const [jobsRes, appsRes, teamRes] = await Promise.all([
+    query(`SELECT COUNT(*)::bigint AS count FROM careers_schema.jobs WHERE is_published=TRUE AND deleted_at IS NULL`),
+    query(`SELECT COUNT(*)::bigint AS count FROM careers_schema.applications`),
+    query(`SELECT COUNT(*)::bigint AS count FROM system_schema.team_members WHERE is_active=TRUE`)
+  ]);
+
+  return success(res, {
+    open_positions: parseInt(jobsRes.rows[0]?.count || 0),
+    total_applications: parseInt(appsRes.rows[0]?.count || 0),
+    total_team: parseInt(teamRes.rows[0]?.count || 0),
+  });
+}));
+
 // ── Job Departments ──────────────────────────────────────────
 router.get('/departments', asyncHandler(async (req, res) => {
   const { rows } = await query(`SELECT id, name, slug, head_id, created_at FROM careers_schema.departments ORDER BY name`);
@@ -35,7 +50,7 @@ router.post('/departments', authenticate, blockClientFromHR, requirePermission('
 
 // ── Job Openings ──────────────────────────────────────────────
 router.get('/jobs', paginate, asyncHandler(async (req, res) => {
-  const { department_id, employment_type, location_type, is_featured, is_active } = req.query;
+  const { department_id, employment_type, location_type, is_featured, is_active, search } = req.query;
   const conditions = ['j.deleted_at IS NULL'];
   const params     = [];
   let   idx        = 1;
@@ -49,11 +64,16 @@ router.get('/jobs', paginate, asyncHandler(async (req, res) => {
   if (location_type === 'remote') conditions.push(`j.is_remote=TRUE`);
   if (location_type === 'hybrid') conditions.push(`j.is_hybrid=TRUE`);
   if (is_featured !== undefined) { conditions.push(`j.is_urgent=$${idx}`); params.push(is_featured === 'true'); idx++; }
+  if (search) {
+    conditions.push(`(j.title ILIKE $${idx} OR d.name ILIKE $${idx} OR j.location ILIKE $${idx})`);
+    params.push(`%${search}%`);
+    idx++;
+  }
 
   const where = conditions.join(' AND ');
   const [dataRes, countRes] = await Promise.all([
     query(
-      `SELECT j.id, j.title, j.slug, j.description,
+      `SELECT j.id, j.title, j.slug, j.description, j.department_id,
               j.job_type AS employment_type,
               CASE WHEN j.is_remote THEN 'remote' WHEN j.is_hybrid THEN 'hybrid' ELSE 'on_site' END AS location_type,
               j.location, j.salary_min, j.salary_max, j.currency,
@@ -73,7 +93,7 @@ router.get('/jobs', paginate, asyncHandler(async (req, res) => {
         LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM careers_schema.jobs j WHERE ${where}`, params),
+    query(`SELECT COUNT(*) FROM careers_schema.jobs j LEFT JOIN careers_schema.departments d ON j.department_id=d.id WHERE ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
@@ -125,20 +145,35 @@ router.post('/jobs', authenticate, blockClientFromHR, requirePermission('hr.mana
 }));
 
 router.patch('/jobs/:id', authenticate, blockClientFromHR, requirePermission('hr.manage'), asyncHandler(async (req, res) => {
-  const { title, description, is_active, is_featured, salary_min, salary_max, positions, closes_at } = req.body;
+  const { title, description, is_active, is_featured, salary_min, salary_max, positions, closes_at,
+          department_id, employment_type, location_type, location } = req.body;
+
+  let isRemote = undefined;
+  let isHybrid = undefined;
+  if (location_type !== undefined) {
+    isRemote = location_type === 'remote';
+    isHybrid = location_type === 'hybrid';
+  }
+
   const { rows } = await query(
     `UPDATE careers_schema.jobs
-        SET title        = COALESCE($2, title),
-            description  = COALESCE($3, description),
-            is_published = COALESCE($4, is_published),
-            is_urgent    = COALESCE($5, is_urgent),
-            salary_min   = COALESCE($6, salary_min),
-            salary_max   = COALESCE($7, salary_max),
-            openings     = COALESCE($8, openings),
-            apply_by     = COALESCE($9, apply_by),
-            updated_at   = NOW()
+        SET title         = COALESCE($2, title),
+            description   = COALESCE($3, description),
+            is_published  = COALESCE($4, is_published),
+            is_urgent     = COALESCE($5, is_urgent),
+            salary_min    = COALESCE($6, salary_min),
+            salary_max    = COALESCE($7, salary_max),
+            openings      = COALESCE($8, openings),
+            apply_by      = COALESCE($9, apply_by),
+            department_id = COALESCE($10, department_id),
+            job_type      = COALESCE($11::job_type, job_type),
+            is_remote     = COALESCE($12, is_remote),
+            is_hybrid     = COALESCE($13, is_hybrid),
+            location      = COALESCE($14, location),
+            updated_at    = NOW()
       WHERE id=$1 AND deleted_at IS NULL RETURNING *`,
-    [req.params.id, title, description, is_active, is_featured, salary_min, salary_max, positions, closes_at]
+    [req.params.id, title, description, is_active, is_featured, salary_min, salary_max, positions, closes_at,
+     department_id, employment_type, isRemote, isHybrid, location]
   );
   if (!rows.length) throw new AppError('Job not found', 404);
   return success(res, rows[0]);
@@ -151,7 +186,7 @@ router.delete('/jobs/:id', authenticate, blockClientFromHR, requirePermission('h
 
 // ── Applications ──────────────────────────────────────────────
 router.get('/applications', authenticate, blockClientFromHR, requirePermission('hr.manage'), paginate, asyncHandler(async (req, res) => {
-  const { job_id, stage, from_date, to_date } = req.query;
+  const { job_id, stage, from_date, to_date, search } = req.query;
   const conditions = [];
   const params     = [];
   let   idx        = 1;
@@ -159,6 +194,11 @@ router.get('/applications', authenticate, blockClientFromHR, requirePermission('
   if (stage)    { conditions.push(`a.stage::text=$${idx}`); params.push(stage); idx++; }
   if (from_date){ conditions.push(`a.applied_at >= $${idx}`); params.push(from_date); idx++; }
   if (to_date)  { conditions.push(`a.applied_at <= $${idx}`); params.push(to_date); idx++; }
+  if (search) {
+    conditions.push(`(c.first_name ILIKE $${idx} OR c.last_name ILIKE $${idx} OR c.email ILIKE $${idx} OR j.title ILIKE $${idx})`);
+    params.push(`%${search}%`);
+    idx++;
+  }
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const [dataRes, countRes] = await Promise.all([
     query(
@@ -176,7 +216,7 @@ router.get('/applications', authenticate, blockClientFromHR, requirePermission('
         ORDER BY a.applied_at DESC LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM careers_schema.applications a ${where}`, params),
+    query(`SELECT COUNT(*) FROM careers_schema.applications a JOIN careers_schema.jobs j ON a.job_id=j.id LEFT JOIN careers_schema.candidates c ON a.candidate_id=c.id ${where}`, params),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
 }));
@@ -217,7 +257,7 @@ router.post('/jobs/:jobId/apply', asyncHandler(async (req, res) => {
   );
   if (!jobRows.length) throw new AppError('Job not found or no longer active', 404);
 
-  const { rows } = await withTransaction(async (client) => {
+  const application = await withTransaction(async (client) => {
     // Find or create candidate
     let candidateId;
     const candRes = await client.query(`SELECT id FROM careers_schema.candidates WHERE email=$1`, [email]);
@@ -243,10 +283,10 @@ router.post('/jobs/:jobId/apply', asyncHandler(async (req, res) => {
 
     await client.query(`UPDATE careers_schema.jobs SET applications_count = applications_count + 1 WHERE id=$1`, [req.params.jobId]);
 
-    return appRes.rows;
+    return appRes.rows[0];
   });
 
-  return created(res, rows[0], 'Application submitted successfully');
+  return created(res, application, 'Application submitted successfully');
 }));
 
 router.patch('/applications/:id', authenticate, blockClientFromHR, requirePermission('hr.manage'), asyncHandler(async (req, res) => {
@@ -306,12 +346,26 @@ router.post('/applications/:id/notes', authenticate, blockClientFromHR, requireP
 
 // ── Team Members (public-facing & dashboard) ────────────────
 router.get('/team', asyncHandler(async (req, res) => {
-  const { department, is_featured } = req.query;
-  const conditions = ['t.is_active=TRUE'];
+  const { department, is_featured, is_active, search } = req.query;
+  const conditions = [];
   const params     = [];
   let   idx        = 1;
+
+  if (is_active !== undefined) {
+    conditions.push(`t.is_active=$${idx}`);
+    params.push(is_active === 'true');
+    idx++;
+  } else if (!req.user || ['client', 'candidate'].includes(req.user?.role)) {
+    conditions.push(`t.is_active=TRUE`);
+  }
+
   if (department) { conditions.push(`t.department=$${idx}`); params.push(department); idx++; }
   if (is_featured !== undefined) { conditions.push(`t.is_featured=$${idx}`); params.push(is_featured === 'true'); idx++; }
+  if (search) {
+    conditions.push(`(t.name ILIKE $${idx} OR t.designation ILIKE $${idx} OR t.department ILIKE $${idx})`);
+    params.push(`%${search}%`);
+    idx++;
+  }
   const where = conditions.join(' AND ');
   const { rows } = await query(
     `SELECT t.*, t.department AS department_name

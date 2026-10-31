@@ -3402,3 +3402,43 @@
     at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\crm.js:20:19
     at authenticate (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\middleware\auth.js:143:5)
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 17:38:38 [error]: TypeError: Cannot read properties of undefined (reading '0')
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\hr.js:289:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 17:38:38 [error]: error: invalid input syntax for type uuid: "undefined"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\hr.js:294:20
+2026-10-31 17:38:38 [error]: error: invalid input syntax for type uuid: "undefined"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\hr.js:340:20
+2026-10-31 18:09:36 [error]: TypeError: Cannot read properties of undefined (reading '0')
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\blog.js:256:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:37:38 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:37:38 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:39:42 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:39:42 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:55:20 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:55:20 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 19:29:19 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 19:29:19 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)

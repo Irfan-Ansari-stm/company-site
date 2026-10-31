@@ -12191,3 +12191,770 @@
 2026-10-31 03:19:51 [info]: ::1 - - [30/Oct/2026:21:49:51 +0000] "GET /api/v1/public/blog/practical-strategies-legacy-software-modernization HTTP/1.1" 200 - "-" "axios/1.16.1"
 2026-10-31 03:19:51 [info]: ::1 - - [30/Oct/2026:21:49:51 +0000] "GET /api/v1/public/blog/modular-web-application-architecture-best-practices HTTP/1.1" 200 - "-" "axios/1.16.1"
 2026-10-31 03:19:55 [info]: ::1 - - [30/Oct/2026:21:49:55 +0000] "GET /api/v1/public/blog/design-systems-accelerating-digital-product-development HTTP/1.1" 200 - "-" "axios/1.16.1"
+2026-10-31 16:52:33 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 16:52:33 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 16:52:33 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 16:52:33 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/auth/me HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/finance/invoices?page=1&limit=20 HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/auth/me HTTP/1.1" 200 784 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 200 238 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:48 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:48 +0000] "GET /api/v1/finance/invoices?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:54 +0000] "GET /api/v1/support/tickets/stats HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:54 +0000] "GET /api/v1/support/tickets?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:54 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:53:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:23:54 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:54:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:24:10 +0000] "GET /api/v1/hr/departments HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:54:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:24:10 +0000] "GET /api/v1/hr/jobs?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:54:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:24:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:54:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:24:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:54:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:24:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:55:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:25:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:55:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:25:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:56:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:26:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:56:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:26:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:57:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:27:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:57:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:27:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:58:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:28:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:58:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:28:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:59:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:29:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 16:59:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:29:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:00:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:30:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:00:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:30:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:01:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:31:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:01:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:31:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:02:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:32:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:02:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:32:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:03:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:33:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:03:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:33:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:04:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:34:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:04:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:34:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:05:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:35:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:05:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:35:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:06:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:36:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:06:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:36:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:07:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:37:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:07:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:37:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:08:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:38:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:08:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:38:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:09:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:39:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:09:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:39:10 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:09:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:39:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:09:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:39:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:10:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:40:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:10:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:40:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:11:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:41:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:11:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:41:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:12:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:42:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:12:40 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:42:40 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:13:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:43:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:13:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:43:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:14:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:44:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:14:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:44:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:15:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:45:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:15:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:45:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:16:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:46:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:16:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:46:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:17:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:47:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:17:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:47:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:18:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:48:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:18:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:48:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:19:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:49:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:19:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:49:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:20:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:50:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:20:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:50:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:21:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:51:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:21:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:51:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:22:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:52:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:22:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:52:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:23:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:53:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:23:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:53:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:24:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:54:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:24:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:54:11 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:24:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:54:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:24:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:54:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:25:11 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:55:11 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:25:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:55:41 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:25:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:55:59 +0000] "GET /api/v1/blog/categories HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:25:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:55:59 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:25:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:55:59 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:25:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:55:59 +0000] "GET /api/v1/blog/posts?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:07 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:07 +0000] "GET /api/v1/blog/categories HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:07 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:07 +0000] "GET /api/v1/auth/me HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:07 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:07 +0000] "GET /api/v1/blog/posts?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:07 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:07 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:07 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:07 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:07 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:07 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:10 +0000] "GET /api/v1/blog/categories HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:10 +0000] "GET /api/v1/blog/posts?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:10 +0000] "GET /api/v1/auth/me HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:10 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:24 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:24 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:24 +0000] "GET /api/v1/cms/pages?page=1&limit=30 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:24 +0000] "GET /api/v1/cms/stats HTTP/1.1" 200 200 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:28 +0000] "GET /api/v1/portfolio?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:28 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:28 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:31 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:26:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:56:31 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:27:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:57:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:27:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:57:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:28:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:58:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:28:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:58:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:29:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:59:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:29:19 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:29:19 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:29:19 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:29:19 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:29:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:11:59:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:29:52 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:29:52 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:29:52 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:29:52 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:30:02 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:00:02 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:30:22 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:30:22 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:30:22 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:30:22 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:30:32 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:00:32 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:30:57 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:30:57 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:30:57 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:30:57 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:31:02 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:01:02 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:31:32 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:01:32 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:01 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:32:01 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:32:01 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:32:01 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:32:02 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:02 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:26 +0000] "GET /api/v1/auth/me HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:26 +0000] "GET /api/v1/blog/categories HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:26 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:26 +0000] "GET /api/v1/blog/posts?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:26 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:27 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:32:27 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:32:27 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:32:27 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:32:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:28 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:28 +0000] "GET /api/v1/cms/pages?page=1&limit=30 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:28 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:28 +0000] "GET /api/v1/cms/stats HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:31 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:31 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:31 +0000] "GET /api/v1/portfolio?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:33 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:33 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:33 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:33 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:39 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:32:39 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:32:39 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:32:39 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:32:47 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:47 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:47 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:47 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:58 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:58 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:32:58 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:02:58 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:10 +0000] "GET /api/v1/services/categories HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:10 +0000] "GET /api/v1/services?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:10 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:10 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:29 +0000] "GET /api/v1/marketing/campaigns?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:29 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:29 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:33:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:03:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:34 +0000] "GET /api/v1/permissions HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:34 +0000] "GET /api/v1/roles HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:34 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:34 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:39 +0000] "GET /api/v1/system/client-modules HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:49 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:49 +0000] "GET /api/v1/system/audit-logs?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:49 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:49 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:34:49 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:04:49 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:35:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:05:00 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:35:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:05:00 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:37:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:07:24 +0000] "GET /api/v1/permissions HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:37:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:07:24 +0000] "GET /api/v1/roles HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:38:31 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:38:31 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:38:31 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:38:31 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:38:38 [error]: TypeError: Cannot read properties of undefined (reading '0')
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\hr.js:289:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 17:38:38 [error]: error: invalid input syntax for type uuid: "undefined"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\hr.js:294:20
+2026-10-31 17:38:38 [error]: error: invalid input syntax for type uuid: "undefined"
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async query (D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\config\database.js:34:15)
+    at async D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\hr.js:340:20
+2026-10-31 17:39:12 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:39:12 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:39:12 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:39:12 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:39:50 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:39:50 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:39:50 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:39:50 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:40:01 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:40:01 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:40:01 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:40:01 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:50:20 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:50:20 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:50:20 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:50:20 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:54:10 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:54:10 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:54:10 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:54:10 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:54:44 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:54:44 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:54:44 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:54:44 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:55:08 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:55:08 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:55:08 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:55:08 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:55:21 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:55:21 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:55:21 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:55:21 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:55:46 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:55:46 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:55:46 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:55:46 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:56:06 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:56:06 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:56:06 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:56:06 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:56:16 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:56:16 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:56:16 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:56:16 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:56:28 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 17:56:28 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 17:56:28 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 17:56:28 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 17:56:51 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:26:51 +0000] "GET /api/v1/roles HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:56:51 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:26:51 +0000] "GET /api/v1/permissions HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:56:51 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:26:51 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:56:51 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:26:51 +0000] "GET /api/v1/permissions HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 17:56:51 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:26:51 +0000] "GET /api/v1/roles HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:00:47 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:00:47 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:00:47 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:00:47 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:01:31 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:01:31 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:01:31 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:01:31 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:01:41 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:01:41 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:01:41 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:01:41 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:02:22 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:02:22 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:02:22 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:02:22 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:07:13 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:37:13 +0000] "GET /api/v1/roles HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:07:13 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:37:13 +0000] "GET /api/v1/permissions HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:08:46 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:08:46 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:08:46 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:08:46 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:09:24 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:09:24 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:09:24 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:09:24 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:09:31 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:09:31 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:09:31 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:09:31 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:09:36 [error]: TypeError: Cannot read properties of undefined (reading '0')
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\blog.js:256:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:09:52 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:09:52 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:09:52 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:09:52 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:09:57 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:09:57 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:09:57 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:09:57 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:17:20 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:17:20 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:17:20 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:17:20 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:20:32 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:32 +0000] "GET /api/v1/roles HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:32 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:32 +0000] "GET /api/v1/permissions HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:32 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:32 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:32 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:32 +0000] "GET /api/v1/permissions HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:32 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:32 +0000] "GET /api/v1/roles HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:52 +0000] "GET /api/v1/permissions HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:52 +0000] "GET /api/v1/roles HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:52 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:52 +0000] "GET /api/v1/public/navigation HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:52 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:52 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:20:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:50:52 +0000] "GET /api/v1/public/footer HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:44 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:44 +0000] "GET /api/v1/permissions HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:44 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:44 +0000] "GET /api/v1/roles HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:46 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:46 +0000] "GET /api/v1/permissions HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:46 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:46 +0000] "GET /api/v1/roles HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/auth/me HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/finance/invoices/summary HTTP/1.1" 200 238 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/analytics/dashboard HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/support/tickets/stats HTTP/1.1" 200 161 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/finance/invoices/overdue HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/projects?limit=5 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/tasks/my HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/finance/reports/revenue HTTP/1.1" 200 277 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:50 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:50 +0000] "GET /api/v1/analytics/realtime HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:52 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:52 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:52 +0000] "GET /api/v1/clients?limit=100 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:52 +0000] "GET /api/v1/support/tickets?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:52 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:52 +0000] "GET /api/v1/users?limit=100 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:55 +0000] "GET /api/v1/hr/departments HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:55 +0000] "GET /api/v1/hr/stats HTTP/1.1" 200 102 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:55 +0000] "GET /api/v1/hr/team HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:55 +0000] "GET /api/v1/hr/jobs?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:55 +0000] "GET /api/v1/hr/applications?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:55 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:22:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:52:55 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:34 +0000] "GET /api/v1/permissions HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:34 +0000] "GET /api/v1/roles HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:34 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:34 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:45 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:45 +0000] "GET /api/v1/system/client-modules HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:45 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:45 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:45 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:45 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:45 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:45 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:45 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:45 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:54 +0000] "GET /api/v1/system/audit-logs?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:54 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:23:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:53:54 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:24:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:54:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:24:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:54:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:25:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:55:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:25:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:55:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:26:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:56:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:26:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:56:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:27:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:57:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:27:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:57:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:28:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:58:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:28:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:58:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:29:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:59:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:29:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:12:59:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:30:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:00:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:30:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:00:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:31:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:01:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:31:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:01:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:32:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:02:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:32:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:02:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:33:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:03:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:33:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:03:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:34:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:04:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:34:39 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:34:39 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:34:39 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:34:39 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:34:49 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:34:49 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:34:49 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:34:49 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:34:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:04:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:34:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:04:59 +0000] "GET /api/v1/system/audit-logs?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:35:33 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:05:33 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:35:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:05:34 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:35:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:05:34 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:35:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:05:34 +0000] "GET /api/v1/system/audit-logs?page=1&limit=20 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:35:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:05:34 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:35:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:05:34 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:36:04 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:06:04 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:36:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:06:34 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:37:04 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:07:04 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:37:28 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:37:28 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:37:28 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:37:28 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:37:33 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:37:33 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:37:33 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:37:33 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:37:34 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:07:34 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:37:38 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:37:38 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:38:05 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:38:05 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:38:05 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:38:05 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:38:05 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:08:05 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:39:42 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:39:42 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:42:53 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 18:42:53 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 18:42:53 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 18:42:53 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 18:43:37 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:37 +0000] "GET /api/v1/auth/me HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:37 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:37 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:37 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:37 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:37 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:37 +0000] "GET /api/v1/ai/conversations HTTP/1.1" 200 433 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:37 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:37 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:37 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:37 +0000] "GET /api/v1/ai/usage HTTP/1.1" 200 219 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:38 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:38 +0000] "GET /api/v1/public/navigation HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:38 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:38 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:38 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:38 +0000] "GET /api/v1/public/footer HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:38 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:38 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:38 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:38 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:38 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:38 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:41 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:41 +0000] "GET /api/v1/system/audit-logs?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:41 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:41 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:47 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:47 +0000] "GET /api/v1/system/client-modules HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:47 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:47 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:47 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:47 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:47 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:47 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:47 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:47 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:58 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:58 +0000] "GET /api/v1/blog/categories HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:58 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:58 +0000] "GET /api/v1/blog/tags HTTP/1.1" 200 946 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:58 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:58 +0000] "GET /api/v1/blog/posts?page=1&limit=15 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:58 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:58 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:43:58 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:13:58 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:15 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:15 +0000] "GET /api/v1/blog/posts?page=1&limit=15&status=draft HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:18 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:18 +0000] "GET /api/v1/blog/posts?page=1&limit=15&category_id=3bd601ce-04c1-4f2a-bc1f-89dd5153a0bb HTTP/1.1" 200 995 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:23 +0000] "GET /api/v1/blog/posts?page=1&limit=15&category_id=7f97f680-1255-422a-a3ed-6806cf85f0e2 HTTP/1.1" 200 952 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:28 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:28 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:56 +0000] "GET /api/v1/ai/conversations HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:56 +0000] "GET /api/v1/ai/usage HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:56 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:56 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:57 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:57 +0000] "GET /api/v1/ai/conversations/d0c4e65f-94d0-436e-81ca-1698926297bb HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:59 +0000] "DELETE /api/v1/ai/conversations/d0c4e65f-94d0-436e-81ca-1698926297bb HTTP/1.1" 204 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:44:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:14:59 +0000] "GET /api/v1/ai/conversations HTTP/1.1" 200 251 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:45:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:15:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:45:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:15:56 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:46:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:16:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:46:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:16:56 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:47:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:17:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:47:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:17:56 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:48:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:18:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:48:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:18:56 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:49:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:19:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:49:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:19:56 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:18 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:18 +0000] "GET /api/v1/media/folders HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:18 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:18 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:18 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:18 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:18 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:18 +0000] "GET /api/v1/media?limit=50 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:31 +0000] "GET /api/v1/permissions HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:31 +0000] "GET /api/v1/roles HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:31 +0000] "GET /api/v1/users?page=1&limit=20 HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:31 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:31 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:39 +0000] "GET /api/v1/system/settings HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:39 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:39 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:50:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:20:39 +0000] "GET /api/v1/system/settings HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:51:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:21:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:51:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:21:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:52:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:22:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:52:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:22:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:53:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:23:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:53:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:23:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:54:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:24:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:54:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:24:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:55:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:25:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:55:20 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:55:20 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 18:55:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:25:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:56:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:26:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:56:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:26:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:57:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:27:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:57:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:27:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:58:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:28:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:58:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:28:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:59:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:29:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 18:59:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:29:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:00:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:30:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:00:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:30:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:01:09 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:31:09 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:01:39 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:31:39 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:02:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:32:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:03:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:33:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:03:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:33:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:03:36 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:33:36 +0000] "GET /api/v1/system/settings HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:04:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:34:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:04:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:34:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:05:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:35:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:20:46 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 19:20:46 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 19:20:46 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 19:20:46 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 19:21:41 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 19:21:41 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 19:21:41 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 19:21:41 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 19:25:23 [info]: ✅ PostgreSQL connected successfully
+2026-10-31 19:25:23 [info]: 🚀 Server running on port 5000 [development]
+2026-10-31 19:25:23 [info]: 📍 API base: http://localhost:5000/api/v1
+2026-10-31 19:25:23 [info]: ❤️  Health:  http://localhost:5000/api/v1/system/health
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/auth/me HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/system/settings HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/system/settings HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/auth/client-config HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/auth/me HTTP/1.1" 200 784 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/public/navigation HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/public/site-settings HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/public/footer HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:28:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:58:59 +0000] "GET /api/v1/public/pages/home HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:29:19 [error]: Error: Security Policy: Protected system roles cannot be deleted
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:350:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 19:29:19 [error]: Error: Security Policy: Cannot deactivate the Super Admin role
+    at D:\0. project\1. projects\6. company website 🛠️\project\app\backend\src\routes\users.js:313:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-10-31 19:29:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:59:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:29:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:13:59:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:30:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:00:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:30:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:00:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:31:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:01:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:31:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:01:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:32:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:02:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:32:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:02:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:33:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:03:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:33:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:03:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:34:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:04:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:34:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:04:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:35:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:05:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:35:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:05:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:36:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:06:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:36:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:06:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:37:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:07:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:37:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:07:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:38:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:08:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:38:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:08:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:39:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:09:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:39:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:09:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:40:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:10:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:40:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:10:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:41:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:11:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:41:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:11:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:42:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:12:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:42:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:12:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:43:29 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:13:29 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:43:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:13:59 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:43:59 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:13:59 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:44:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:14:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:44:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:14:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:45:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:15:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:45:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:15:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:46:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:16:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:46:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:16:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:47:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:17:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:47:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:17:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:48:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:18:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:48:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:18:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:49:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:19:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:49:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:19:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:50:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:20:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:50:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:20:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:51:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:21:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:51:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:21:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:52:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:22:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:52:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:22:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:53:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:23:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:53:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:23:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:54:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:24:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:54:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:24:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:55:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:25:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:55:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:25:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:56:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:26:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:56:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:26:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:57:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:27:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:57:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:27:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:58:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:28:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:58:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:28:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:59:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:29:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:59:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:29:00 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:59:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:29:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 19:59:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:29:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:00:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:30:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:00:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:30:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:01:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:31:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:01:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:31:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:02:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:32:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:02:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:32:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:03:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:33:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:03:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:33:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:04:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:34:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:04:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:34:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:05:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:35:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:05:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:35:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:06:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:36:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:06:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:36:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:07:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:37:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:07:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:37:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:08:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:38:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:08:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:38:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:09:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:39:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:09:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:39:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:10:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:40:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:10:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:40:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:11:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:41:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:11:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:41:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:12:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:42:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:12:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:42:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:13:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:43:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:13:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:43:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:14:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:44:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:14:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:44:00 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:14:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:44:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:14:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:44:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:15:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:45:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:15:30 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:45:30 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:16:00 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:46:00 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:16:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:46:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:17:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:47:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:17:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:47:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:18:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:48:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:18:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:48:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:19:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:49:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:19:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:49:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:20:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:50:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:20:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:50:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:21:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:51:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:21:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:51:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:22:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:52:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:22:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:52:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:23:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:53:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:23:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:53:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:24:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:54:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:24:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:54:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:25:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:55:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:25:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:55:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:26:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:56:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:26:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:56:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:27:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:57:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:27:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:57:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:28:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:58:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:28:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:58:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:29:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:59:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:29:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:59:01 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:29:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:59:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:29:31 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:14:59:31 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 20:30:01 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:15:00:01 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:45:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:15:23 +0000] "GET /api/v1/system/settings HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:45:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:15:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:45:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:15:23 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:45:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:15:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:45:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:15:23 +0000] "GET /api/v1/system/settings HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:45:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:15:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:46:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:16:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:46:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:16:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:47:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:17:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:47:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:17:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:48:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:18:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:48:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:18:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:49:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:19:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:49:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:19:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:50:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:20:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:50:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:20:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:51:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:21:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:51:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:21:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:52:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:22:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:52:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:22:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:53:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:23:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:53:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:23:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:54:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:24:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:54:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:24:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:55:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:25:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:55:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:25:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:56:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:26:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:56:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:26:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:57:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:27:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:57:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:27:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:58:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:28:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:58:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:28:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:59:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:29:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 21:59:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:29:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:00:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:30:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:00:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:30:23 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:00:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:30:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:00:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:30:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:01:23 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:31:23 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:01:53 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:31:53 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:02:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:32:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:02:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:32:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:03:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:33:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:03:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:33:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:04:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:34:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:04:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:34:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:05:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:35:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:05:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:35:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:06:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:36:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:06:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:36:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:07:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:37:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:07:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:37:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:08:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:38:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:08:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:38:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:09:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:39:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:09:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:39:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:10:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:40:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:10:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:40:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:11:24 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:41:24 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:11:54 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:41:54 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:12:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:42:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:12:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:42:25 +0000] "GET /api/v1/system/settings HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:12:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:42:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:13:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:43:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:13:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:43:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:14:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:44:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:14:55 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:44:55 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:15:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:45:25 +0000] "GET /api/v1/notifications/count HTTP/1.1" 401 73 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:15:25 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:45:25 +0000] "POST /api/v1/auth/refresh HTTP/1.1" 200 612 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:15:26 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:45:26 +0000] "GET /api/v1/notifications/count HTTP/1.1" 200 55 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"
+2026-10-31 22:15:56 [info]: ::ffff:127.0.0.1 - - [31/Oct/2026:16:45:56 +0000] "GET /api/v1/notifications/count HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0"

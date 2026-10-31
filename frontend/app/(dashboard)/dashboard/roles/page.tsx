@@ -4,15 +4,39 @@ import React, { useState, useMemo } from 'react';
 import { DashboardLayout } from '@/app/(dashboard)/_components/layout/DashboardLayout';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import {
-  Card, Button, SearchInput, Table, Tr, Td, StatusBadge, Badge, Modal, Input, Textarea
+  Card,
+  Button,
+  SearchInput,
+  Table,
+  Tr,
+  Td,
+  StatusBadge,
+  Badge,
+  Modal,
+  Input,
+  Textarea,
+  ConfirmDialog,
 } from '@/components/ui';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApi } from '@/lib/api';
 import { formatDate, extractApiError } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import {
-  Shield, Plus, Edit2, Trash2, Key, CheckSquare, Square,
-  Search, AlertTriangle, Lock, Users, ArrowRight, CheckCircle2
+  Shield,
+  Plus,
+  Edit2,
+  Trash2,
+  Key,
+  CheckSquare,
+  Square,
+  Search,
+  AlertTriangle,
+  Lock,
+  Users,
+  Eye,
+  CheckCircle2,
+  Layers,
+  Check,
 } from 'lucide-react';
 
 export default function RolesManagementPage() {
@@ -20,7 +44,9 @@ export default function RolesManagementPage() {
   const [search, setSearch] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingRole, setEditingRole] = useState<any>(null);
+  const [viewingRole, setViewingRole] = useState<any>(null);
   const [permissionsRole, setPermissionsRole] = useState<any>(null);
+  const [deletingRole, setDeletingRole] = useState<any>(null);
   const [selectedPermIds, setSelectedPermIds] = useState<string[]>([]);
   const [permSearch, setPermSearch] = useState('');
 
@@ -42,6 +68,13 @@ export default function RolesManagementPage() {
   const { data: allPermissions = [], isLoading: permsLoading } = useQuery({
     queryKey: ['permissions-catalog'],
     queryFn: () => usersApi.getPermissions().then((r) => r.data.data),
+  });
+
+  // Detailed query for viewing role
+  const { data: roleDetail } = useQuery({
+    queryKey: ['role-detail', viewingRole?.id],
+    queryFn: () => usersApi.getRole(viewingRole.id).then((r) => r.data.data),
+    enabled: !!viewingRole?.id,
   });
 
   // Create role mutation
@@ -72,6 +105,7 @@ export default function RolesManagementPage() {
     mutationFn: (id: string) => usersApi.deleteRole(id),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['roles-list'] });
+      if (viewingRole?.id) setViewingRole(null);
       toast.success('Role deleted successfully');
     },
     onError: (err: any) => toast.error(extractApiError(err)),
@@ -83,6 +117,7 @@ export default function RolesManagementPage() {
       usersApi.updateRolePermissions(roleId, permissionIds),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['roles-list'] });
+      qc.invalidateQueries({ queryKey: ['role-detail', permissionsRole?.id] });
       setPermissionsRole(null);
       toast.success('Role permissions updated successfully');
     },
@@ -141,6 +176,14 @@ export default function RolesManagementPage() {
     setSelectedPermIds((prev) => prev.filter((id) => !modIds.has(id)));
   };
 
+  const selectAllCatalog = () => {
+    setSelectedPermIds(allPermissions.map((p: any) => p.id));
+  };
+
+  const clearAllCatalog = () => {
+    setSelectedPermIds([]);
+  };
+
   // Filtered roles list
   const filteredRoles = useMemo(() => {
     if (!search) return roles;
@@ -159,15 +202,15 @@ export default function RolesManagementPage() {
         title="Dynamic Roles & Permissions"
         breadcrumbs={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Roles & Permissions' }]}
       >
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
           {/* Header Summary */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-indigo-950 p-6 rounded-2xl text-white shadow-xl">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Shield className="w-6 h-6 text-indigo-400" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-6 rounded-2xl text-white shadow-xl">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Shield className="w-6 h-6 text-indigo-400 shrink-0" />
                 <h1 className="text-xl font-bold">Role-Based Access Control (RBAC)</h1>
               </div>
-              <p className="text-slate-300 text-sm max-w-2xl">
+              <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
                 Centrally configure platform roles, assign fine-grained permissions, and define module access.
                 All changes take effect immediately across all sessions.
               </p>
@@ -178,146 +221,163 @@ export default function RolesManagementPage() {
                 setRoleForm({ name: '', slug: '', description: '', is_active: true });
                 setShowCreateModal(true);
               }}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shrink-0"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shrink-0 self-start sm:self-auto"
             >
               Create New Role
             </Button>
           </div>
 
           {/* Roles Table Card */}
-          <Card padding={false}>
-            <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <Card padding={false} className="shadow-xs overflow-hidden">
+            <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white">
               <SearchInput
                 value={search}
                 onChange={setSearch}
-                placeholder="Search roles by name or slug…"
+                placeholder="Search roles by name or identifier slug…"
                 className="w-full sm:w-80"
               />
-              <div className="text-xs text-slate-500">
-                Total Roles: <span className="font-semibold text-slate-800">{filteredRoles.length}</span>
+              <div className="text-xs text-slate-500 shrink-0">
+                Total Defined Roles: <span className="font-semibold text-slate-800">{filteredRoles.length}</span>
               </div>
             </div>
 
-            <Table
-              headers={['Role Name', 'Identifier (Slug)', 'Assigned Users', 'Permissions', 'Status', 'Last Updated', 'Actions']}
-              loading={rolesLoading}
-              empty={!filteredRoles.length}
-              emptyMessage="No roles found matching your search."
-            >
-              {filteredRoles.map((role: any) => {
-                const isSuper = role.slug === 'super_admin';
-                const isClient = role.slug === 'client';
-                const isProtected = role.is_system || isSuper || isClient;
+            <div className="overflow-x-auto min-w-0">
+              <Table
+                headers={[
+                  'Role Name',
+                  'Identifier (Slug)',
+                  'Assigned Users',
+                  'Permissions',
+                  'Status',
+                  'Last Updated',
+                  'Actions',
+                ]}
+                loading={rolesLoading}
+                empty={!filteredRoles.length}
+                emptyMessage="No roles found matching your search."
+              >
+                {filteredRoles.map((role: any) => {
+                  const isSuper = role.slug === 'super_admin';
+                  const isClient = role.slug === 'client';
+                  const isProtected = role.is_system || isSuper || isClient;
 
-                return (
-                  <Tr key={role.id}>
-                    <Td>
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm ${
-                            isSuper
-                              ? 'bg-amber-100 text-amber-800'
-                              : isClient
-                              ? 'bg-emerald-100 text-emerald-800'
-                              : 'bg-indigo-100 text-indigo-800'
-                          }`}
-                        >
-                          <Shield className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-slate-900">{role.name}</span>
-                            {isSuper && <Badge variant="warning">Sole Super Admin</Badge>}
-                            {isClient && <Badge variant="success">Default Public Role</Badge>}
-                            {role.is_system && !isSuper && !isClient && <Badge>System Role</Badge>}
+                  return (
+                    <Tr key={role.id} className="hover:bg-slate-50/70 transition-colors">
+                      <Td>
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${
+                              isSuper
+                                ? 'bg-amber-100 text-amber-800'
+                                : isClient
+                                ? 'bg-emerald-100 text-emerald-800'
+                                : 'bg-indigo-100 text-indigo-800'
+                            }`}
+                          >
+                            <Shield className="w-4 h-4" />
                           </div>
-                          {role.description && (
-                            <p className="text-xs text-slate-500 line-clamp-1 max-w-sm">{role.description}</p>
-                          )}
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-semibold text-slate-900">{role.name}</span>
+                              {isSuper && <Badge variant="warning">Sole Super Admin</Badge>}
+                              {isClient && <Badge variant="success">Default Public Role</Badge>}
+                              {role.is_system && !isSuper && !isClient && <Badge>System Role</Badge>}
+                            </div>
+                            {role.description && (
+                              <p className="text-xs text-slate-500 line-clamp-1 max-w-sm mt-0.5">
+                                {role.description}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </Td>
+                      </Td>
 
-                    <Td>
-                      <code className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono text-xs">
-                        {role.slug}
-                      </code>
-                    </Td>
+                      <Td>
+                        <code className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono text-xs whitespace-nowrap">
+                          {role.slug}
+                        </code>
+                      </Td>
 
-                    <Td>
-                      <div className="flex items-center gap-1.5 text-slate-700 font-medium">
-                        <Users className="w-3.5 h-3.5 text-slate-400" />
-                        <span>{role.user_count || 0}</span>
-                      </div>
-                    </Td>
+                      <Td>
+                        <div className="flex items-center gap-1.5 text-slate-700 font-medium text-xs">
+                          <Users className="w-3.5 h-3.5 text-slate-400" />
+                          <span>{role.user_count || 0}</span>
+                        </div>
+                      </Td>
 
-                    <Td>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">
-                        {isSuper ? 'Universal (All 55+)' : `${role.permission_count || 0} granted`}
-                      </span>
-                    </Td>
+                      <Td>
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 whitespace-nowrap">
+                          {isSuper ? 'Universal (All 55+)' : `${role.permission_count || 0} granted`}
+                        </span>
+                      </Td>
 
-                    <Td>
-                      <StatusBadge status={role.is_active ? 'active' : 'inactive'} />
-                    </Td>
+                      <Td>
+                        <StatusBadge status={role.is_active ? 'active' : 'inactive'} />
+                      </Td>
 
-                    <Td className="text-xs text-slate-500">
-                      {formatDate(role.updated_at || role.created_at)}
-                    </Td>
+                      <Td className="text-xs text-slate-500 whitespace-nowrap">
+                        {formatDate(role.updated_at || role.created_at)}
+                      </Td>
 
-                    <Td>
-                      <div className="flex items-center gap-1">
-                        {/* Configure permissions button */}
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          icon={<Key className="w-3.5 h-3.5 text-indigo-600" />}
-                          onClick={() => openPermissionsModal(role)}
-                          title="Configure Permissions"
-                        >
-                          Permissions
-                        </Button>
-
-                        {/* Edit Role Metadata */}
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          icon={<Edit2 className="w-3.5 h-3.5 text-slate-600" />}
-                          onClick={() => {
-                            setEditingRole(role);
-                            setRoleForm({
-                              name: role.name,
-                              slug: role.slug,
-                              description: role.description || '',
-                              is_active: role.is_active,
-                            });
-                          }}
-                          title="Edit Role"
-                        />
-
-                        {/* Delete Role (only if not protected system role) */}
-                        {!isProtected && (
+                      <Td className="whitespace-nowrap text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          {/* View Role Details */}
                           <Button
                             variant="ghost"
                             size="sm"
-                            icon={<Trash2 className="w-3.5 h-3.5 text-red-500" />}
-                            onClick={() => {
-                              if (confirm(`Are you sure you want to delete custom role '${role.name}'?`)) {
-                                deleteRoleMutation.mutate(role.id);
-                              }
-                            }}
-                            title="Delete Role"
+                            icon={<Eye className="w-3.5 h-3.5 text-slate-600" />}
+                            onClick={() => setViewingRole(role)}
+                            title="View Role Details"
                           />
-                        )}
-                      </div>
-                    </Td>
-                  </Tr>
-                );
-              })}
-            </Table>
+
+                          {/* Configure permissions button */}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            icon={<Key className="w-3.5 h-3.5 text-indigo-600" />}
+                            onClick={() => openPermissionsModal(role)}
+                            title="Configure Permissions"
+                          >
+                            Permissions
+                          </Button>
+
+                          {/* Edit Role Metadata */}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            icon={<Edit2 className="w-3.5 h-3.5 text-slate-600" />}
+                            onClick={() => {
+                              setEditingRole(role);
+                              setRoleForm({
+                                name: role.name,
+                                slug: role.slug,
+                                description: role.description || '',
+                                is_active: role.is_active,
+                              });
+                            }}
+                            title="Edit Role"
+                          />
+
+                          {/* Delete Role (only if not protected system role) */}
+                          {!isProtected && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              icon={<Trash2 className="w-3.5 h-3.5 text-rose-500" />}
+                              onClick={() => setDeletingRole(role)}
+                              title="Delete Role"
+                            />
+                          )}
+                        </div>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Table>
+            </div>
           </Card>
 
-          {/* CREATE ROLE MODAL */}
+          {/* ─── CREATE ROLE MODAL ─── */}
           <Modal
             open={showCreateModal}
             onClose={() => setShowCreateModal(false)}
@@ -332,7 +392,7 @@ export default function RolesManagementPage() {
               className="space-y-4"
             >
               <Input
-                label="Role Display Name"
+                label="Role Display Name *"
                 placeholder="e.g. Compliance Officer"
                 value={roleForm.name}
                 onChange={(e) => {
@@ -340,18 +400,26 @@ export default function RolesManagementPage() {
                   setRoleForm((prev) => ({
                     ...prev,
                     name: val,
-                    slug: prev.slug === '' ? val.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') : prev.slug,
+                    slug:
+                      prev.slug === ''
+                        ? val.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '')
+                        : prev.slug,
                   }));
                 }}
                 required
               />
 
               <Input
-                label="Unique Slug Identifier"
+                label="Unique Identifier (Slug) *"
                 placeholder="e.g. compliance_officer"
                 value={roleForm.slug}
-                onChange={(e) => setRoleForm((prev) => ({ ...prev, slug: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') }))}
-                hint="Used internally for role definitions and API policies"
+                onChange={(e) =>
+                  setRoleForm((prev) => ({
+                    ...prev,
+                    slug: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ''),
+                  }))
+                }
+                hint="Used internally for role definitions and authorization policies"
                 required
               />
 
@@ -369,9 +437,9 @@ export default function RolesManagementPage() {
                   id="create_is_active"
                   checked={roleForm.is_active}
                   onChange={(e) => setRoleForm((prev) => ({ ...prev, is_active: e.target.checked }))}
-                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4"
                 />
-                <label htmlFor="create_is_active" className="text-sm font-medium text-slate-700">
+                <label htmlFor="create_is_active" className="text-sm font-medium text-slate-700 cursor-pointer">
                   Role is Active
                 </label>
               </div>
@@ -387,78 +455,189 @@ export default function RolesManagementPage() {
             </form>
           </Modal>
 
-          {/* EDIT ROLE MODAL */}
-          <Modal
-            open={!!editingRole}
-            onClose={() => setEditingRole(null)}
-            title={`Edit Role: ${editingRole?.name}`}
-            size="md"
-          >
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                updateRoleMutation.mutate({
-                  id: editingRole.id,
-                  data: {
-                    name: roleForm.name,
-                    description: roleForm.description,
-                    is_active: roleForm.is_active,
-                  },
-                });
-              }}
-              className="space-y-4"
+          {/* ─── EDIT ROLE MODAL ─── */}
+          {editingRole && (
+            <Modal
+              open={!!editingRole}
+              onClose={() => setEditingRole(null)}
+              title={`Edit Role: ${editingRole?.name}`}
+              size="md"
             >
-              <Input
-                label="Role Display Name"
-                value={roleForm.name}
-                onChange={(e) => setRoleForm((prev) => ({ ...prev, name: e.target.value }))}
-                required
-              />
-
-              <div className="space-y-1">
-                <label className="text-xs font-medium text-slate-700">Role Slug Identifier</label>
-                <input
-                  disabled
-                  value={editingRole?.slug || ''}
-                  className="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-500 text-sm font-mono cursor-not-allowed"
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  updateRoleMutation.mutate({
+                    id: editingRole.id,
+                    data: {
+                      name: roleForm.name,
+                      description: roleForm.description,
+                      is_active: roleForm.is_active,
+                    },
+                  });
+                }}
+                className="space-y-4"
+              >
+                <Input
+                  label="Role Display Name *"
+                  value={roleForm.name}
+                  onChange={(e) => setRoleForm((prev) => ({ ...prev, name: e.target.value }))}
+                  required
                 />
-                <p className="text-[11px] text-slate-400">Slugs of existing roles cannot be changed.</p>
-              </div>
 
-              <Textarea
-                label="Role Description"
-                value={roleForm.description}
-                onChange={(e) => setRoleForm((prev) => ({ ...prev, description: e.target.value }))}
-                rows={3}
-              />
-
-              {editingRole?.slug !== 'super_admin' && editingRole?.slug !== 'client' && (
-                <div className="flex items-center gap-2 pt-2">
+                <div className="space-y-1">
+                  <label className="text-xs font-medium text-slate-700">Role Identifier (Slug)</label>
                   <input
-                    type="checkbox"
-                    id="edit_is_active"
-                    checked={roleForm.is_active}
-                    onChange={(e) => setRoleForm((prev) => ({ ...prev, is_active: e.target.checked }))}
-                    className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                    disabled
+                    value={editingRole?.slug || ''}
+                    className="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-500 text-sm font-mono cursor-not-allowed"
                   />
-                  <label htmlFor="edit_is_active" className="text-sm font-medium text-slate-700">
-                    Role is Active (if deactivated, assigned users immediately lose access)
-                  </label>
+                  <p className="text-[11px] text-slate-400">Slugs of existing roles cannot be changed.</p>
                 </div>
-              )}
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
-                <Button variant="outline" type="button" onClick={() => setEditingRole(null)}>
-                  Cancel
-                </Button>
-                <Button type="submit" loading={updateRoleMutation.isPending}>
-                  Save Changes
-                </Button>
+                <Textarea
+                  label="Role Description"
+                  value={roleForm.description}
+                  onChange={(e) => setRoleForm((prev) => ({ ...prev, description: e.target.value }))}
+                  rows={3}
+                />
+
+                {editingRole?.slug !== 'super_admin' && editingRole?.slug !== 'client' && (
+                  <div className="flex items-center gap-2 pt-2">
+                    <input
+                      type="checkbox"
+                      id="edit_is_active"
+                      checked={roleForm.is_active}
+                      onChange={(e) => setRoleForm((prev) => ({ ...prev, is_active: e.target.checked }))}
+                      className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4"
+                    />
+                    <label htmlFor="edit_is_active" className="text-sm font-medium text-slate-700 cursor-pointer">
+                      Role is Active (if deactivated, assigned users immediately lose access)
+                    </label>
+                  </div>
+                )}
+
+                <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+                  <Button variant="outline" type="button" onClick={() => setEditingRole(null)}>
+                    Cancel
+                  </Button>
+                  <Button type="submit" loading={updateRoleMutation.isPending}>
+                    Save Changes
+                  </Button>
+                </div>
+              </form>
+            </Modal>
+          )}
+
+          {/* ─── VIEW ROLE DETAILS MODAL ─── */}
+          {viewingRole && (
+            <Modal
+              open={!!viewingRole}
+              onClose={() => setViewingRole(null)}
+              title={`Role Overview: ${viewingRole.name}`}
+              size="lg"
+              footer={
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const r = viewingRole;
+                        setViewingRole(null);
+                        openPermissionsModal(r);
+                      }}
+                    >
+                      Configure Permissions
+                    </Button>
+                  </div>
+                  <Button onClick={() => setViewingRole(null)}>Close</Button>
+                </div>
+              }
+            >
+              <div className="space-y-4">
+                {/* Header Information */}
+                <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div>
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Slug</span>
+                    <code className="text-xs font-mono font-bold text-slate-800">{viewingRole.slug}</code>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Status</span>
+                    <StatusBadge status={viewingRole.is_active ? 'active' : 'inactive'} />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Assigned Users</span>
+                    <span className="text-xs font-bold text-slate-800">{viewingRole.user_count || 0} user(s)</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Permissions</span>
+                    <span className="text-xs font-bold text-indigo-700">
+                      {viewingRole.slug === 'super_admin' ? 'Universal' : `${viewingRole.permission_count || 0} granted`}
+                    </span>
+                  </div>
+                </div>
+
+                {viewingRole.description && (
+                  <div>
+                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-1">
+                      Description
+                    </span>
+                    <p className="text-xs text-slate-700 leading-relaxed bg-white p-3 rounded-lg border border-slate-200">
+                      {viewingRole.description}
+                    </p>
+                  </div>
+                )}
+
+                {/* Assigned Users Sample */}
+                {roleDetail?.users && roleDetail.users.length > 0 && (
+                  <div>
+                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-2">
+                      Recently Assigned Users ({roleDetail.users.length})
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-40 overflow-y-auto">
+                      {roleDetail.users.map((u: any) => (
+                        <div
+                          key={u.id}
+                          className="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 text-xs"
+                        >
+                          <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold text-[10px] text-slate-600 shrink-0">
+                            {(u.display_name || u.email)[0]?.toUpperCase()}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-semibold text-slate-900 truncate">{u.display_name}</p>
+                            <p className="text-[10px] text-slate-400 truncate">{u.email}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Granted Permissions Preview */}
+                <div>
+                  <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-2">
+                    Granted Permissions ({roleDetail?.permissions?.length || 0})
+                  </span>
+                  <div className="max-h-56 overflow-y-auto space-y-1 bg-white p-2 rounded-lg border border-slate-200">
+                    {roleDetail?.permissions?.map((p: any) => (
+                      <div
+                        key={p.id}
+                        className="flex items-center justify-between text-xs py-1 px-2 hover:bg-slate-50 rounded"
+                      >
+                        <span className="font-medium text-slate-800">{p.name}</span>
+                        <code className="text-[10px] font-mono text-slate-400">{p.slug}</code>
+                      </div>
+                    ))}
+                    {!roleDetail?.permissions?.length && (
+                      <p className="text-xs text-slate-400 py-3 text-center">No permissions assigned.</p>
+                    )}
+                  </div>
+                </div>
               </div>
-            </form>
-          </Modal>
+            </Modal>
+          )}
 
-          {/* PERMISSIONS ASSIGNMENT MODAL */}
+          {/* ─── PERMISSIONS ASSIGNMENT MODAL ─── */}
           <Modal
             open={!!permissionsRole}
             onClose={() => setPermissionsRole(null)}
@@ -479,8 +658,8 @@ export default function RolesManagementPage() {
                 </div>
               ) : (
                 <>
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
-                    <div className="relative flex-1 w-full sm:w-auto">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <div className="relative flex-1">
                       <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                       <input
                         type="text"
@@ -490,10 +669,26 @@ export default function RolesManagementPage() {
                         className="w-full pl-9 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                      <span>Selected:</span>
+                    <div className="flex items-center justify-between sm:justify-end gap-3 text-xs">
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={selectAllCatalog}
+                          className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold"
+                        >
+                          Select All
+                        </button>
+                        <span className="text-slate-300">|</span>
+                        <button
+                          type="button"
+                          onClick={clearAllCatalog}
+                          className="text-xs text-slate-500 hover:text-slate-800 font-semibold"
+                        >
+                          Clear All
+                        </button>
+                      </div>
                       <Badge variant="info" className="text-xs font-bold">
-                        {selectedPermIds.length} / {allPermissions.length}
+                        {selectedPermIds.length} / {allPermissions.length} Granted
                       </Badge>
                     </div>
                   </div>
@@ -544,7 +739,7 @@ export default function RolesManagementPage() {
                                   onClick={() => togglePermission(perm.id)}
                                   className={`flex items-start gap-2.5 p-2 rounded-lg border text-left cursor-pointer transition select-none ${
                                     checked
-                                      ? 'border-indigo-300 bg-indigo-50/50'
+                                      ? 'border-indigo-300 bg-indigo-50/50 shadow-xs'
                                       : 'border-slate-100 hover:border-slate-200 bg-slate-50/30'
                                   }`}
                                 >
@@ -597,6 +792,25 @@ export default function RolesManagementPage() {
               )}
             </div>
           </Modal>
+
+          {/* Delete Role Confirmation */}
+          <ConfirmDialog
+            open={!!deletingRole}
+            onClose={() => setDeletingRole(null)}
+            onConfirm={() => {
+              const id = deletingRole.id;
+              setDeletingRole(null);
+              deleteRoleMutation.mutate(id);
+            }}
+            title="Delete Custom Role"
+            description={
+              <>
+                Are you sure you want to permanently delete custom role{' '}
+                <strong>&quot;{deletingRole?.name}&quot;</strong> ({deletingRole?.slug})? Users currently assigned to this role must be reassigned.
+              </>
+            }
+            loading={deleteRoleMutation.isPending}
+          />
         </div>
       </DashboardLayout>
     </ProtectedRoute>

@@ -6,7 +6,7 @@ import { DashboardLayout } from '@/app/(dashboard)/_components/layout/DashboardL
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 import {
   Card, Button, SearchInput, Table, Tr, Td, StatusBadge, Pagination,
-  Modal, Input, Select, Avatar, TabBar, Badge, StatCard
+  Modal, Input, Select, Avatar, TabBar, Badge, StatCard, ConfirmDialog
 } from '@/components/ui';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApi } from '@/lib/api';
@@ -14,7 +14,7 @@ import { useAuthStore } from '@/store/auth';
 import { formatDate, timeAgo, extractApiError } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import {
-  Plus, Edit2, Trash2, Key, Users, Shield, Lock, ExternalLink, ShieldCheck, CheckCircle
+  Plus, Edit2, Trash2, Key, Users, Shield, Lock, ExternalLink, ShieldCheck, CheckCircle, Eye, Phone, Mail, Calendar, Clock
 } from 'lucide-react';
 
 export default function UsersPage() {
@@ -28,6 +28,8 @@ export default function UsersPage() {
   const [showEdit, setShowEdit] = useState<any>(null);
   const [showReset, setShowReset] = useState<any>(null);
   const [viewingPermsUser, setViewingPermsUser] = useState<any>(null);
+  const [viewingUser, setViewingUser] = useState<any>(null);
+  const [deletingUser, setDeletingUser] = useState<any>(null);
   const [form, setForm] = useState({ first_name: '', last_name: '', email: '', password: '', role: 'client', phone: '' });
   const [newPassword, setNewPassword] = useState('');
 
@@ -176,25 +178,29 @@ export default function UsersPage() {
                   return (
                     <Tr key={u.id}>
                       <Td>
-                        <div className="flex items-center gap-3">
+                        <div
+                          className="flex items-center gap-3 cursor-pointer group"
+                          onClick={() => setViewingUser(u)}
+                          title="View user details"
+                        >
                           <Avatar src={u.avatar_url} name={u.display_name} size="sm" />
-                          <div>
+                          <div className="min-w-0">
                             <div className="flex items-center gap-1.5">
-                              <p className="font-semibold text-slate-900">{u.display_name}</p>
+                              <p className="font-semibold text-slate-900 group-hover:text-blue-600 transition truncate">{u.display_name}</p>
                               {isSoleSuperAdmin && <Badge variant="warning" className="text-[10px]">Sole Super Admin</Badge>}
                             </div>
-                            <p className="text-xs text-slate-500">{u.email}</p>
+                            <p className="text-xs text-slate-500 truncate">{u.email}</p>
                           </div>
                         </div>
                       </Td>
 
-                      <Td>
+                      <Td className="whitespace-nowrap">
                         <Badge variant={isSoleSuperAdmin ? 'warning' : u.role === 'client' ? 'success' : 'default'} className="capitalize">
                           {u.role.replace('_', ' ')}
                         </Badge>
                       </Td>
 
-                      <Td>
+                      <Td className="whitespace-nowrap">
                         {isSoleSuperAdmin ? (
                           <span title="Sole Super Admin cannot be deactivated">
                             <StatusBadge status="active" />
@@ -211,17 +217,26 @@ export default function UsersPage() {
                         )}
                       </Td>
 
-                      <Td>
+                      <Td className="whitespace-nowrap">
                         <Badge variant={u.is_verified ? 'success' : 'warning'}>
                           {u.is_verified ? 'Verified' : 'Pending'}
                         </Badge>
                       </Td>
 
-                      <Td className="text-xs text-slate-500">{u.last_login_at ? timeAgo(u.last_login_at) : 'Never'}</Td>
-                      <Td className="text-xs text-slate-500">{formatDate(u.created_at)}</Td>
+                      <Td className="text-xs text-slate-500 whitespace-nowrap">{u.last_login_at ? timeAgo(u.last_login_at) : 'Never'}</Td>
+                      <Td className="text-xs text-slate-500 whitespace-nowrap">{formatDate(u.created_at)}</Td>
 
-                      <Td>
-                        <div className="flex items-center gap-1">
+                      <Td className="whitespace-nowrap text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          {/* View Profile */}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            icon={<Eye className="w-3.5 h-3.5 text-blue-600" />}
+                            onClick={() => setViewingUser(u)}
+                            title="View User Profile"
+                          />
+
                           {/* Inspect effective permissions */}
                           <Button
                             variant="ghost"
@@ -255,7 +270,7 @@ export default function UsersPage() {
                               variant="ghost"
                               size="sm"
                               icon={<Trash2 className="w-3.5 h-3.5 text-red-500" />}
-                              onClick={() => confirm(`Delete ${u.display_name}?`) && deleteMutation.mutate(u.id)}
+                              onClick={() => setDeletingUser(u)}
                               title="Delete Account"
                             />
                           )}
@@ -464,6 +479,137 @@ export default function UsersPage() {
               </div>
             )}
           </Modal>
+
+          {/* ─── MODAL: USER PROFILE DETAIL ─── */}
+          {viewingUser && (
+            <Modal
+              open={!!viewingUser}
+              onClose={() => setViewingUser(null)}
+              title="User Account Details"
+              size="lg"
+              footer={
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      icon={<Edit2 className="w-3.5 h-3.5" />}
+                      onClick={() => {
+                        const u = viewingUser;
+                        setViewingUser(null);
+                        setShowEdit({ ...u });
+                      }}
+                    >
+                      Edit Account
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      icon={<Key className="w-3.5 h-3.5" />}
+                      onClick={() => {
+                        const u = viewingUser;
+                        setViewingUser(null);
+                        setShowReset(u);
+                      }}
+                    >
+                      Reset Password
+                    </Button>
+                  </div>
+                  <Button onClick={() => setViewingUser(null)}>Close</Button>
+                </div>
+              }
+            >
+              <div className="space-y-5">
+                {/* Profile Header */}
+                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                  <Avatar src={viewingUser.avatar_url} name={viewingUser.display_name} size="lg" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-bold text-slate-900 text-base">{viewingUser.display_name}</h3>
+                      <Badge variant={viewingUser.role === 'super_admin' ? 'warning' : viewingUser.role === 'client' ? 'success' : 'default'} className="capitalize">
+                        {viewingUser.role.replace('_', ' ')}
+                      </Badge>
+                      <StatusBadge status={viewingUser.is_active ? 'active' : 'inactive'} />
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5 text-slate-400" />
+                      {viewingUser.email}
+                    </p>
+                    {viewingUser.phone && (
+                      <p className="text-xs text-slate-500 mt-0.5 flex items-center gap-1.5">
+                        <Phone className="w-3.5 h-3.5 text-slate-400" />
+                        {viewingUser.phone}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Account Details Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs">
+                    <span className="text-slate-400 block font-medium">Verification</span>
+                    <Badge variant={viewingUser.is_verified ? 'success' : 'warning'} className="mt-1">
+                      {viewingUser.is_verified ? 'Verified Email' : 'Pending Verification'}
+                    </Badge>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs">
+                    <span className="text-slate-400 block font-medium">Two-Factor Auth (2FA)</span>
+                    <Badge variant={viewingUser.two_factor_enabled ? 'success' : 'default'} className="mt-1">
+                      {viewingUser.two_factor_enabled ? 'Enabled' : 'Disabled'}
+                    </Badge>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs">
+                    <span className="text-slate-400 block font-medium">Account ID</span>
+                    <code className="text-[11px] font-mono text-slate-700 block truncate mt-1">
+                      {viewingUser.id}
+                    </code>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs">
+                    <span className="text-slate-400 block font-medium">Created On</span>
+                    <span className="font-semibold text-slate-800 block mt-1">
+                      {formatDate(viewingUser.created_at)}
+                    </span>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs">
+                    <span className="text-slate-400 block font-medium">Last Login</span>
+                    <span className="font-semibold text-slate-800 block mt-1">
+                      {viewingUser.last_login_at ? timeAgo(viewingUser.last_login_at) : 'Never'}
+                    </span>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs">
+                    <span className="text-slate-400 block font-medium">Effective Role</span>
+                    <span className="font-semibold text-slate-800 block mt-1 capitalize">
+                      {viewingUser.role.replace('_', ' ')}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+          )}
+
+          {/* ─── CONFIRM DELETE USER ─── */}
+          <ConfirmDialog
+            open={!!deletingUser}
+            onClose={() => setDeletingUser(null)}
+            onConfirm={() => {
+              const id = deletingUser.id;
+              setDeletingUser(null);
+              deleteMutation.mutate(id);
+            }}
+            title="Delete User Account"
+            description={
+              <>
+                Are you sure you want to permanently delete account{' '}
+                <strong>&quot;{deletingUser?.display_name}&quot;</strong> ({deletingUser?.email})? This action cannot be undone.
+              </>
+            }
+            loading={deleteMutation.isPending}
+          />
         </div>
       </DashboardLayout>
     </ProtectedRoute>

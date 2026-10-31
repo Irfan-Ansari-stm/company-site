@@ -12,7 +12,10 @@ async function ensurePermissions() {
     { name: 'Read Finance', slug: 'finance.read', module: 'billing', action: 'read' },
     { name: 'Create Client', slug: 'client.create', module: 'clients', action: 'create' },
     { name: 'Edit Client', slug: 'client.edit', module: 'clients', action: 'edit' },
-    { name: 'Delete Client', slug: 'client.delete', module: 'clients', action: 'delete' }
+    { name: 'Delete Client', slug: 'client.delete', module: 'clients', action: 'delete' },
+    { name: 'Manage Tickets', slug: 'ticket.manage', module: 'support', action: 'manage' },
+    { name: 'Create Ticket', slug: 'ticket.create', module: 'support', action: 'create' },
+    { name: 'Delete Ticket', slug: 'ticket.delete', module: 'support', action: 'delete' }
   ];
 
   for (const p of permsToEnsure) {

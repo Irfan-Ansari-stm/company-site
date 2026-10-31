@@ -16,6 +16,22 @@ const blockClientFromMarketing = (req, res, next) => {
   next();
 };
 
+// ── Marketing Statistics ──────────────────────────────────────
+router.get('/stats', authenticate, blockClientFromMarketing, asyncHandler(async (req, res) => {
+  const [subs, lists, camps, coupons] = await Promise.all([
+    query(`SELECT COUNT(*)::bigint AS count FROM marketing_schema.subscribers`),
+    query(`SELECT COUNT(*)::bigint AS count FROM marketing_schema.mailing_lists`),
+    query(`SELECT COUNT(*)::bigint AS count FROM marketing_schema.campaigns`),
+    query(`SELECT COUNT(*)::bigint AS count FROM billing_schema.coupons WHERE is_active=TRUE AND (valid_until IS NULL OR valid_until > NOW())`)
+  ]);
+  return success(res, {
+    total_subscribers: parseInt(subs.rows[0]?.count || 0),
+    email_lists: parseInt(lists.rows[0]?.count || 0),
+    campaigns: parseInt(camps.rows[0]?.count || 0),
+    active_coupons: parseInt(coupons.rows[0]?.count || 0)
+  });
+}));
+
 // ════════════════════════════════════════════════════════════
 //  NEWSLETTER SUBSCRIBERS
 // ════════════════════════════════════════════════════════════
@@ -116,6 +132,11 @@ router.patch('/subscribers/:id', authenticate, blockClientFromMarketing, require
   return success(res, rows[0]);
 }));
 
+router.delete('/subscribers/:id', authenticate, blockClientFromMarketing, requirePermission('marketing.manage'), asyncHandler(async (req, res) => {
+  await query(`DELETE FROM marketing_schema.subscribers WHERE id=$1`, [req.params.id]);
+  return noContent(res);
+}));
+
 // ════════════════════════════════════════════════════════════
 //  MAILING LISTS
 // ════════════════════════════════════════════════════════════
@@ -152,6 +173,11 @@ router.patch('/lists/:id', authenticate, blockClientFromMarketing, requirePermis
   return success(res, rows[0]);
 }));
 
+router.delete('/lists/:id', authenticate, blockClientFromMarketing, requirePermission('marketing.manage'), asyncHandler(async (req, res) => {
+  await query(`DELETE FROM marketing_schema.mailing_lists WHERE id=$1`, [req.params.id]);
+  return noContent(res);
+}));
+
 // Add subscriber to list
 router.post('/lists/:id/subscribers', authenticate, blockClientFromMarketing, requirePermission('marketing.manage'), asyncHandler(async (req, res) => {
   const { subscriber_id } = req.body;
@@ -172,12 +198,13 @@ router.delete('/lists/:id/subscribers/:subscriberId', authenticate, blockClientF
 //  EMAIL CAMPAIGNS
 // ════════════════════════════════════════════════════════════
 router.get('/campaigns', authenticate, blockClientFromMarketing, requirePermission('marketing.manage'), paginate, asyncHandler(async (req, res) => {
-  const { status, type } = req.query;
+  const { status, type, search } = req.query;
   const conditions = [];
   const params     = [];
   let   idx        = 1;
   if (status) { conditions.push(`status=$${idx}`); params.push(status); idx++; }
   if (type)   { conditions.push(`type=$${idx}`);   params.push(type);   idx++; }
+  if (search) { conditions.push(`(name ILIKE $${idx} OR subject ILIKE $${idx})`); params.push(`%${search}%`); idx++; }
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const [dataRes, countRes] = await Promise.all([
     query(`SELECT c.*, u.display_name AS created_by_name FROM marketing_schema.campaigns c
@@ -243,11 +270,26 @@ router.post('/campaigns/:id/send', authenticate, blockClientFromMarketing, requi
 
 router.delete('/campaigns/:id', authenticate, blockClientFromMarketing, requirePermission('marketing.manage'), asyncHandler(async (req, res) => {
   const { rowCount } = await query(
-    `DELETE FROM marketing_schema.campaigns WHERE id=$1 AND status='draft'`,
+    `DELETE FROM marketing_schema.campaigns WHERE id=$1`,
     [req.params.id]
   );
-  if (!rowCount) throw new AppError('Campaign not found or cannot be deleted (not a draft)', 400);
+  if (!rowCount) throw new AppError('Campaign not found', 404);
   return noContent(res);
+}));
+
+router.post('/campaigns/:id/duplicate', authenticate, blockClientFromMarketing, requirePermission('marketing.manage'), asyncHandler(async (req, res) => {
+  const { rows } = await query(`SELECT * FROM marketing_schema.campaigns WHERE id=$1`, [req.params.id]);
+  if (!rows.length) throw new AppError('Campaign not found', 404);
+  const orig = rows[0];
+  const copyRes = await query(
+    `INSERT INTO marketing_schema.campaigns
+       (name, type, subject, preview_text, from_name, from_email, reply_to,
+        template_id, html_content, text_content, list_ids, status, created_by)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,'draft',$12) RETURNING *`,
+    [`${orig.name} (Copy)`, orig.type, orig.subject, orig.preview_text, orig.from_name, orig.from_email,
+     orig.reply_to, orig.template_id, orig.html_content, orig.text_content, orig.list_ids || [], req.userId]
+  );
+  return created(res, copyRes.rows[0]);
 }));
 
 // Campaign events
@@ -355,6 +397,11 @@ router.patch('/coupons/:id', authenticate, blockClientFromMarketing, requirePerm
   );
   if (!rows.length) throw new AppError('Coupon not found', 404);
   return success(res, rows[0]);
+}));
+
+router.delete('/coupons/:id', authenticate, blockClientFromMarketing, requirePermission('marketing.manage'), asyncHandler(async (req, res) => {
+  await query(`DELETE FROM billing_schema.coupons WHERE id=$1`, [req.params.id]);
+  return noContent(res);
 }));
 
 module.exports = router;

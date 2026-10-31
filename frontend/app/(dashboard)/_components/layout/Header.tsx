@@ -3,7 +3,7 @@
 import { useAuthStore } from '@/store/auth';
 import { notificationsApi } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
-import { Bell, Search } from 'lucide-react';
+import { Bell, Search, Menu } from 'lucide-react';
 import { Avatar } from '@/components/ui';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -12,9 +12,10 @@ import { cn } from '@/lib/utils';
 interface HeaderProps {
   title?: string;
   breadcrumbs?: Array<{ label: string; href?: string }>;
+  onMenuClick?: () => void;
 }
 
-export function Header({ title, breadcrumbs }: HeaderProps) {
+export function Header({ title, breadcrumbs, onMenuClick }: HeaderProps) {
   const { user } = useAuthStore();
   const [showNotifs, setShowNotifs] = useState(false);
 
@@ -32,7 +33,19 @@ export function Header({ title, breadcrumbs }: HeaderProps) {
   });
 
   return (
-    <header className="fixed top-0 left-64 right-0 h-16 bg-white border-b border-slate-200 flex items-center px-6 z-20 gap-4">
+    <header className="fixed top-0 left-0 lg:left-64 right-0 h-16 bg-white border-b border-slate-200 flex items-center px-4 sm:px-6 z-20 gap-3 sm:gap-4 transition-all">
+      {/* Mobile Hamburger Menu Toggle */}
+      {onMenuClick && (
+        <button
+          type="button"
+          onClick={onMenuClick}
+          className="lg:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors -ml-1"
+          aria-label="Open navigation sidebar"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      )}
+
       {/* Breadcrumb / Title */}
       <div className="flex-1 min-w-0">
         {breadcrumbs ? (

@@ -272,7 +272,7 @@ router.post('/upload-multiple', authenticate, uploadLimiter, upload.array('files
 // PATCH /media/:id
 router.patch('/:id', authenticate, asyncHandler(async (req, res) => {
   if (!isUUID(req.params.id)) throw new AppError('Invalid media ID', 400);
-  const { alt_text, caption, tags, folder_id } = req.body;
+  const { alt_text, caption, tags, folder_id, original_name } = req.body;
 
   const tagsParam = tags !== undefined
     ? (Array.isArray(tags) ? tags : (typeof tags === 'string' && tags.trim() ? [tags.trim()] : []))
@@ -280,13 +280,14 @@ router.patch('/:id', authenticate, asyncHandler(async (req, res) => {
 
   const { rows } = await query(
     `UPDATE cms_schema.media
-        SET alt_text  = COALESCE($2, alt_text),
-            caption   = COALESCE($3, caption),
-            tags      = CASE WHEN $4::text[] IS NOT NULL THEN $4::text[] ELSE tags END,
-            folder_id = COALESCE($5, folder_id),
-            updated_at= NOW()
+        SET alt_text      = COALESCE($2, alt_text),
+            caption       = COALESCE($3, caption),
+            tags          = CASE WHEN $4::text[] IS NOT NULL THEN $4::text[] ELSE tags END,
+            folder_id     = COALESCE($5, folder_id),
+            original_name = COALESCE($6, original_name),
+            updated_at    = NOW()
       WHERE id=$1 AND deleted_at IS NULL RETURNING *`,
-    [req.params.id, alt_text, caption, tagsParam, (folder_id && isUUID(folder_id)) ? folder_id : null]
+    [req.params.id, alt_text, caption, tagsParam, (folder_id && isUUID(folder_id)) ? folder_id : null, original_name ? original_name.trim() : null]
   );
   if (!rows.length) throw new AppError('Media not found', 404);
   return success(res, rows[0]);

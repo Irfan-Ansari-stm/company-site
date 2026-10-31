@@ -165,6 +165,7 @@ export const usersApi = {
 
   // Roles
   getRoles: () => api.get('/roles'),
+  getRole: (id: string) => api.get(`/roles/${id}`),
   createRole: (data: any) => api.post('/roles', data),
   updateRole: (id: string, data: any) => api.patch(`/roles/${id}`, data),
   deleteRole: (id: string) => api.delete(`/roles/${id}`),
@@ -402,6 +403,7 @@ export const supportApi = {
   getTicket: (id: string) => api.get(`/support/tickets/${id}`),
   createTicket: (data: any) => api.post('/support/tickets', data),
   updateTicket: (id: string, data: any) => api.patch(`/support/tickets/${id}`, data),
+  deleteTicket: (id: string) => api.delete(`/support/tickets/${id}`),
   getTicketStats: () => api.get('/support/tickets/stats'),
   addReply: (id: string, data: any) =>
     api.post(`/support/tickets/${id}/replies`, data),
@@ -420,6 +422,7 @@ export const supportApi = {
 
 // ─── HR ──────────────────────────────────────────────────────
 export const hrApi = {
+  getStats: () => api.get('/hr/stats'),
   getDepartments: () => api.get('/hr/departments'),
   createDepartment: (data: any) => api.post('/hr/departments', data),
 
@@ -453,6 +456,7 @@ export const blogApi = {
   getCategories: () => api.get('/blog/categories'),
   createCategory: (data: any) => api.post('/blog/categories', data),
   updateCategory: (id: string, data: any) => api.patch(`/blog/categories/${id}`, data),
+  deleteCategory: (id: string) => api.delete(`/blog/categories/${id}`),
 
   getTags: () => api.get('/blog/tags'),
   getTagCloud: () => api.get('/blog/tags/cloud'),
@@ -602,6 +606,8 @@ export const servicesApi = {
   getIndustries: () => api.get('/industries'),
   getIndustry: (slugOrId: string) => api.get(`/industries/${slugOrId}`),
   createIndustry: (data: any) => api.post('/industries', data),
+  updateIndustry: (id: string, data: any) => api.patch(`/industries/${id}`, data),
+  deleteIndustry: (id: string) => api.delete(`/industries/${id}`),
 
   getSolutions: () => api.get('/solutions'),
   getSolution: (slugOrId: string) => api.get(`/solutions/${slugOrId}`),
@@ -628,6 +634,7 @@ export const portfolioApi = {
 
 // ─── MARKETING ───────────────────────────────────────────────
 export const marketingApi = {
+  getStats: () => api.get('/marketing/stats'),
   getSubscribers: (params?: any) => api.get('/marketing/subscribers', { params }),
   getSubscriber: (id: string) => api.get(`/marketing/subscribers/${id}`),
   subscribe: (data: any) => api.post('/marketing/subscribers/subscribe', data),
@@ -635,10 +642,12 @@ export const marketingApi = {
     api.post('/marketing/subscribers/unsubscribe', { email }),
   updateSubscriber: (id: string, data: any) =>
     api.patch(`/marketing/subscribers/${id}`, data),
+  deleteSubscriber: (id: string) => api.delete(`/marketing/subscribers/${id}`),
 
   getLists: () => api.get('/marketing/lists'),
   createList: (data: any) => api.post('/marketing/lists', data),
   updateList: (id: string, data: any) => api.patch(`/marketing/lists/${id}`, data),
+  deleteList: (id: string) => api.delete(`/marketing/lists/${id}`),
   addToList: (id: string, subscriber_id: string) =>
     api.post(`/marketing/lists/${id}/subscribers`, { subscriber_id }),
   removeFromList: (id: string, subscriberId: string) =>
@@ -649,6 +658,8 @@ export const marketingApi = {
   createCampaign: (data: any) => api.post('/marketing/campaigns', data),
   updateCampaign: (id: string, data: any) =>
     api.patch(`/marketing/campaigns/${id}`, data),
+  duplicateCampaign: (id: string) =>
+    api.post(`/marketing/campaigns/${id}/duplicate`),
   sendCampaign: (id: string) => api.post(`/marketing/campaigns/${id}/send`),
   deleteCampaign: (id: string) => api.delete(`/marketing/campaigns/${id}`),
 
@@ -658,6 +669,7 @@ export const marketingApi = {
     api.post('/marketing/coupons/validate', { code, amount }),
   createCoupon: (data: any) => api.post('/marketing/coupons', data),
   updateCoupon: (id: string, data: any) => api.patch(`/marketing/coupons/${id}`, data),
+  deleteCoupon: (id: string) => api.delete(`/marketing/coupons/${id}`),
 };
 
 // ─── MEDIA ───────────────────────────────────────────────────
@@ -753,6 +765,7 @@ export const systemApi = {
     api.put(`/system/settings/${key}`, { value }),
 
   getAuditLogs: (params?: any) => api.get('/system/audit-logs', { params }),
+  getAuditLog: (id: string) => api.get(`/system/audit-logs/${id}`),
 
   // Company Profile & Diagnostics
   getCompanyProfile: () => api.get('/system/company-profile'),
@@ -792,6 +805,7 @@ export const systemApi = {
   createFeatureFlag: (data: any) => api.post('/system/feature-flags', data),
   updateFeatureFlag: (id: string, data: any) =>
     api.patch(`/system/feature-flags/${id}`, data),
+  deleteFeatureFlag: (id: string) => api.delete(`/system/feature-flags/${id}`),
 };
 
 export default api;

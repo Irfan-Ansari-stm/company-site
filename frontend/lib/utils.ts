@@ -82,7 +82,6 @@ export function getStatusColor(status: string) {
     lost: 'bg-red-100 text-red-800',
     // Projects
     planning: 'bg-blue-100 text-blue-800',
-    in_progress: 'bg-yellow-100 text-yellow-800',
     on_hold: 'bg-orange-100 text-orange-800',
     completed: 'bg-green-100 text-green-800',
     cancelled: 'bg-red-100 text-red-800',
@@ -100,19 +99,32 @@ export function getStatusColor(status: string) {
     void: 'bg-gray-100 text-gray-500',
     // Support
     open: 'bg-blue-100 text-blue-800',
+    pending_client: 'bg-yellow-100 text-yellow-800',
+    in_progress: 'bg-amber-100 text-amber-800',
     closed: 'bg-gray-100 text-gray-600',
     resolved: 'bg-green-100 text-green-800',
     // Priority
     critical: 'bg-red-100 text-red-800',
-    high: 'bg-orange-100 text-orange-800',
+    high: 'bg-amber-100 text-amber-800',
     medium: 'bg-yellow-100 text-yellow-800',
     low: 'bg-gray-100 text-gray-700',
     // HR
-    screening: 'bg-blue-100 text-blue-800',
+    applied: 'bg-blue-100 text-blue-800',
+    screening: 'bg-indigo-100 text-indigo-800',
+    shortlisted: 'bg-purple-100 text-purple-800',
     interview: 'bg-purple-100 text-purple-800',
-    offer: 'bg-indigo-100 text-indigo-800',
+    interview_1: 'bg-purple-100 text-purple-800',
+    interview_2: 'bg-purple-100 text-purple-800',
+    technical_test: 'bg-blue-100 text-blue-800',
+    offer: 'bg-emerald-100 text-emerald-800',
     hired: 'bg-green-100 text-green-800',
     rejected: 'bg-red-100 text-red-800',
+    withdrawn: 'bg-gray-100 text-gray-600',
+    full_time: 'bg-slate-100 text-slate-700',
+    part_time: 'bg-slate-100 text-slate-700',
+    contract: 'bg-slate-100 text-slate-700',
+    internship: 'bg-slate-100 text-slate-700',
+    freelance: 'bg-slate-100 text-slate-700',
   };
   return map[status?.toLowerCase()] ?? 'bg-gray-100 text-gray-700';
 }

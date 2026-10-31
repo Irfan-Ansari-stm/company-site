@@ -367,7 +367,7 @@ router.post('/test-email', authenticate, requirePermission('settings.manage'), a
 //  AUDIT LOGS
 // ════════════════════════════════════════════════════════════
 router.get('/audit-logs', authenticate, requirePermission('audit.read'), paginate, asyncHandler(async (req, res) => {
-  const { actor_id, action, resource_type, from_date, to_date } = req.query;
+  const { actor_id, action, resource_type, from_date, to_date, search } = req.query;
   const conditions = [];
   const params     = [];
   let   idx        = 1;
@@ -377,6 +377,11 @@ router.get('/audit-logs', authenticate, requirePermission('audit.read'), paginat
   if (resource_type){ conditions.push(`al.resource_type=$${idx}`);   params.push(resource_type); idx++; }
   if (from_date)    { conditions.push(`al.created_at >= $${idx}`);  params.push(from_date); idx++; }
   if (to_date)      { conditions.push(`al.created_at <= $${idx}`);  params.push(to_date); idx++; }
+  if (search) {
+    conditions.push(`(al.action ILIKE $${idx} OR al.resource_type ILIKE $${idx} OR al.ip_address::text ILIKE $${idx} OR u.email ILIKE $${idx} OR u.display_name ILIKE $${idx})`);
+    params.push(`%${search}%`);
+    idx++;
+  }
 
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const [dataRes, countRes] = await Promise.all([
@@ -389,9 +394,27 @@ router.get('/audit-logs', authenticate, requirePermission('audit.read'), paginat
         LIMIT $${idx} OFFSET $${idx+1}`,
       [...params, req.pagination.limit, req.pagination.offset]
     ),
-    query(`SELECT COUNT(*) FROM system_schema.audit_logs al ${where}`, params),
+    query(
+      `SELECT COUNT(*)
+         FROM system_schema.audit_logs al
+         LEFT JOIN auth_schema.users u ON al.actor_id=u.id
+         ${where}`,
+      params
+    ),
   ]);
   return res.json(paginateResponse(dataRes.rows, countRes.rows[0].count, req.pagination));
+}));
+
+router.get('/audit-logs/:id', authenticate, requirePermission('audit.read'), asyncHandler(async (req, res) => {
+  const { rows } = await query(
+    `SELECT al.*, u.display_name AS actor_name, u.email AS actor_email
+       FROM system_schema.audit_logs al
+       LEFT JOIN auth_schema.users u ON al.actor_id=u.id
+      WHERE al.id=$1`,
+    [req.params.id]
+  );
+  if (!rows.length) throw new AppError('Audit log entry not found', 404);
+  return success(res, rows[0]);
 }));
 
 // ════════════════════════════════════════════════════════════
@@ -496,27 +519,39 @@ router.get('/webhooks/:id/deliveries', authenticate, requirePermission('settings
 //  EMAIL TEMPLATES
 // ════════════════════════════════════════════════════════════
 router.get('/email-templates', authenticate, requirePermission('settings.manage'), asyncHandler(async (req, res) => {
-  return success(res, []);
+  const { rows } = await query(
+    `SELECT id, name, event_type, channel, subject,
+            COALESCE(body_html, body_text) AS html_body,
+            body_text AS text_body,
+            variables, is_active, created_at,
+            event_type AS category
+       FROM system_schema.notification_templates
+      ORDER BY name ASC`
+  );
+  return success(res, rows);
 }));
 
-router.get('/email-templates/:slugOrId', authenticate, requirePermission('settings.manage'), asyncHandler(async (req, res) => {
-  const bySlug = !require('../utils/helpers').isUUID(req.params.slugOrId);
+router.get('/email-templates/:id', authenticate, requirePermission('settings.manage'), asyncHandler(async (req, res) => {
   const { rows } = await query(
-    `SELECT * FROM system_schema.email_templates WHERE ${bySlug ? 'slug' : 'id'}=$1`,
-    [req.params.slugOrId]
+    `SELECT id, name, event_type, channel, subject,
+            COALESCE(body_html, body_text) AS html_body,
+            body_text AS text_body,
+            variables, is_active, created_at
+       FROM system_schema.notification_templates
+      WHERE id=$1`,
+    [req.params.id]
   );
   if (!rows.length) throw new AppError('Template not found', 404);
   return success(res, rows[0]);
 }));
 
 router.post('/email-templates', authenticate, requirePermission('settings.manage'), asyncHandler(async (req, res) => {
-  const { name, slug, subject, html_body, text_body, category, variables } = req.body;
-  if (!name || !slug || !subject || !html_body) throw new AppError('name, slug, subject, html_body required');
+  const { name, event_type, subject, html_body, text_body, variables } = req.body;
+  if (!name || !subject) throw new AppError('name and subject required');
   const { rows } = await query(
-    `INSERT INTO system_schema.email_templates (name, slug, subject, html_body, text_body, category, variables, created_by)
-     VALUES ($1,$2,$3,$4,$5,$6,$7::jsonb,$8) RETURNING *`,
-    [name, slug, subject, html_body, text_body, category || 'general',
-     JSON.stringify(variables || []), req.userId]
+    `INSERT INTO system_schema.notification_templates (name, event_type, channel, subject, body_html, body_text, variables)
+     VALUES ($1,$2,'email',$3,$4,$5,$6) RETURNING *`,
+    [name, event_type || 'custom', subject, html_body, text_body || html_body, variables || []]
   );
   return created(res, rows[0]);
 }));
@@ -524,14 +559,14 @@ router.post('/email-templates', authenticate, requirePermission('settings.manage
 router.patch('/email-templates/:id', authenticate, requirePermission('settings.manage'), asyncHandler(async (req, res) => {
   const { subject, html_body, text_body, is_active } = req.body;
   const { rows } = await query(
-    `UPDATE system_schema.email_templates
+    `UPDATE system_schema.notification_templates
         SET subject   = COALESCE($2, subject),
-            html_body = COALESCE($3, html_body),
-            text_body = COALESCE($4, text_body),
-            is_active = COALESCE($5, is_active),
-            updated_by= $6
-      WHERE id=$1 RETURNING *`,
-    [req.params.id, subject, html_body, text_body, is_active, req.userId]
+            body_html = COALESCE($3, body_html),
+            body_text = COALESCE($4, body_text),
+            is_active = COALESCE($5, is_active)
+      WHERE id=$1
+  RETURNING id, name, event_type, channel, subject, COALESCE(body_html, body_text) AS html_body, body_text AS text_body, variables, is_active`,
+    [req.params.id, subject, html_body, text_body || html_body, is_active]
   );
   if (!rows.length) throw new AppError('Template not found', 404);
   return success(res, rows[0]);
@@ -576,6 +611,15 @@ router.patch('/feature-flags/:id', authenticate, requireRole('super_admin'), asy
   );
   if (!rows.length) throw new AppError('Flag not found', 404);
   return success(res, rows[0]);
+}));
+
+router.delete('/feature-flags/:id', authenticate, requireRole('super_admin'), asyncHandler(async (req, res) => {
+  const { rowCount } = await query(
+    `DELETE FROM system_schema.feature_flags WHERE id=$1 AND COALESCE(is_system, false) = false`,
+    [req.params.id]
+  );
+  if (!rowCount) throw new AppError('Protected system flags cannot be deleted', 400);
+  return success(res, { message: 'Feature flag removed successfully' });
 }));
 
 // ════════════════════════════════════════════════════════════

@@ -18,6 +18,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
   const { user, isAuthenticated, hasHydrated, setHasHydrated, setUser, logout } = useAuthStore();
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // 1. Strict Dashboard Isolation: clean public dark theme classes from root/body
@@ -81,10 +82,17 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Sidebar />
-      <Header title={title} breadcrumbs={breadcrumbs} />
-      <main className="ml-64 pt-16 min-h-screen">
-        <div className="p-6">
+      <Sidebar
+        mobileOpen={mobileMenuOpen}
+        onCloseMobile={() => setMobileMenuOpen(false)}
+      />
+      <Header
+        title={title}
+        breadcrumbs={breadcrumbs}
+        onMenuClick={() => setMobileMenuOpen(true)}
+      />
+      <main className="ml-0 lg:ml-64 pt-16 min-h-screen min-w-0 overflow-x-hidden">
+        <div className="p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto min-w-0">
           {children}
         </div>
       </main>

@@ -235,6 +235,45 @@ rolesRouter.get('/', authenticate, asyncHandler(async (req, res) => {
   return success(res, rows);
 }));
 
+// Get single role with permissions & assigned users
+rolesRouter.get('/:id', authenticate, asyncHandler(async (req, res) => {
+  const { rows } = await query(
+    `SELECT r.id, r.name, r.slug, r.description, r.is_system, r.is_active, r.created_at, r.updated_at,
+            COUNT(DISTINCT ur.user_id) AS user_count,
+            COUNT(DISTINCT rp.permission_id) AS permission_count
+       FROM auth_schema.roles r
+       LEFT JOIN auth_schema.user_roles ur ON r.id = ur.role_id
+       LEFT JOIN auth_schema.role_permissions rp ON r.id = rp.role_id
+      WHERE r.id = $1
+      GROUP BY r.id`,
+    [req.params.id]
+  );
+  if (!rows.length) throw new AppError('Role not found', 404);
+
+  const [permsRes, usersRes] = await Promise.all([
+    query(
+      `SELECT p.* FROM auth_schema.permissions p
+         JOIN auth_schema.role_permissions rp ON p.id=rp.permission_id
+        WHERE rp.role_id=$1 ORDER BY p.module, p.name`,
+      [req.params.id]
+    ),
+    query(
+      `SELECT u.id, u.display_name, u.email, u.avatar_url, ur.granted_at
+         FROM auth_schema.users u
+         JOIN auth_schema.user_roles ur ON u.id=ur.user_id
+        WHERE ur.role_id=$1 AND u.deleted_at IS NULL
+        LIMIT 20`,
+      [req.params.id]
+    ),
+  ]);
+
+  return success(res, {
+    ...rows[0],
+    permissions: permsRes.rows,
+    users: usersRes.rows,
+  });
+}));
+
 // Create custom role
 rolesRouter.post('/', authenticate, requirePermission('role.manage'), asyncHandler(async (req, res) => {
   const { name, slug, description, is_active = true } = req.body;

@@ -37,7 +37,8 @@ router.get('/', optionalAuth, paginate, asyncHandler(async (req, res) => {
     query(
       `SELECT p.id, p.title, p.slug, p.client_name, p.summary, p.budget_range,
               p.duration_weeks, p.tech_stack, p.tags, p.display_order,
-              p.cover_image, p.is_featured, p.end_date, p.region,
+              p.cover_image, p.is_featured, p.is_published, p.end_date, p.region,
+              p.project_url, p.github_url, p.category_id,
               sc.name AS category_name, sc.slug AS category_slug,
               i.name AS industry_name
          FROM portfolio_schema.projects p
@@ -116,7 +117,8 @@ router.post('/', authenticate, requirePermission('portfolio.manage'), asyncHandl
 // PATCH /portfolio/:id
 router.patch('/:id', authenticate, requirePermission('portfolio.manage'), asyncHandler(async (req, res) => {
   const { title, summary, challenge, solution, result, is_published, is_featured,
-          display_order, tech_stack, tags } = req.body;
+          display_order, tech_stack, tags, client_name, client_url, category_id,
+          industry_id, budget_range, duration_weeks, end_date, project_url, github_url, cover_image } = req.body;
   const { rows } = await query(
     `UPDATE portfolio_schema.projects
         SET title         = COALESCE($2, title),
@@ -128,10 +130,22 @@ router.patch('/:id', authenticate, requirePermission('portfolio.manage'), asyncH
             is_featured   = COALESCE($8, is_featured),
             display_order = COALESCE($9, display_order),
             tech_stack    = COALESCE($10, tech_stack),
-            tags          = COALESCE($11, tags)
-      WHERE id=$1 AND deleted_at IS NULL RETURNING id, title, slug, is_published, updated_at`,
+            tags          = COALESCE($11, tags),
+            client_name   = COALESCE($12, client_name),
+            client_url    = COALESCE($13, client_url),
+            category_id   = COALESCE($14, category_id),
+            industry_id   = COALESCE($15, industry_id),
+            budget_range  = COALESCE($16, budget_range),
+            duration_weeks= COALESCE($17, duration_weeks),
+            end_date      = COALESCE($18, end_date),
+            project_url   = COALESCE($19, project_url),
+            github_url    = COALESCE($20, github_url),
+            cover_image   = COALESCE($21, cover_image),
+            updated_at    = NOW()
+      WHERE id=$1 AND deleted_at IS NULL RETURNING id, title, slug, is_published, is_featured, updated_at`,
     [req.params.id, title, summary, challenge, solution, result, is_published, is_featured,
-     display_order, tech_stack, tags]
+     display_order, tech_stack, tags, client_name, client_url, category_id,
+     industry_id, budget_range, duration_weeks, end_date, project_url, github_url, cover_image]
   );
   if (!rows.length) throw new AppError('Project not found', 404);
   return success(res, rows[0]);

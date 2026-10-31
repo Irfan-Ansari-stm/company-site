@@ -12,7 +12,7 @@ import {
   LayoutDashboard, Users, Briefcase, FolderKanban, DollarSign,
   HeadphonesIcon, UserCheck, FileText, Globe, Image, BarChart3,
   Settings, Megaphone, Bot, LogOut, Building2, Shield,
-  PieChart, Clock, FileSpreadsheet, Sliders, History, EyeOff
+  PieChart, Clock, FileSpreadsheet, Sliders, History, EyeOff, X
 } from 'lucide-react';
 
 interface NavItem {
@@ -27,6 +27,11 @@ interface NavItem {
 interface NavGroup {
   label: string;
   items: NavItem[];
+}
+
+interface SidebarProps {
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 const NAV_GROUPS: NavGroup[] = [
@@ -95,7 +100,7 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-export function Sidebar() {
+export function Sidebar({ mobileOpen = false, onCloseMobile }: SidebarProps = {}) {
   const pathname = usePathname();
   const {
     user,
@@ -168,40 +173,71 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-slate-900 flex flex-col z-30 overflow-hidden border-r border-slate-800">
-      {/* Logo & Public Website Link */}
-      <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between">
-        <Link href="/dashboard" className="flex items-center gap-3 group min-w-0">
-          <div className="w-9 h-9 rounded-xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center shadow-lg group-hover:border-cyan-500/40 transition shrink-0">
-            <NextImage
-              src="/images/logo.webp"
-              alt="Sysmaira Software Solutions"
-              width={36}
-              height={36}
-              className="w-full h-full object-contain p-0.5"
-            />
+    <>
+      {/* Mobile Backdrop Overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-30 lg:hidden transition-opacity"
+          onClick={onCloseMobile}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        className={cn(
+          'fixed left-0 top-0 h-full w-64 bg-slate-900 flex flex-col z-40 overflow-hidden border-r border-slate-800 transition-transform duration-300 ease-in-out',
+          mobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full lg:translate-x-0'
+        )}
+      >
+        {/* Logo & Public Website Link */}
+        <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between">
+          <Link
+            href="/dashboard"
+            onClick={onCloseMobile}
+            className="flex items-center gap-2.5 group min-w-0"
+          >
+            <div className="w-8 h-8 rounded-xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center shadow-lg group-hover:border-cyan-500/40 transition shrink-0">
+              <NextImage
+                src="/images/logo.webp"
+                alt="Sysmaira Software Solutions"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain p-0.5"
+              />
+            </div>
+            <div className="min-w-0">
+              <p className="text-white font-bold text-sm leading-tight truncate group-hover:text-cyan-400 transition">Sysmaira</p>
+              <p className="text-slate-400 text-[11px] truncate">
+                {isClientPreview
+                  ? 'Client Preview'
+                  : isSuperAdmin()
+                  ? 'Super Admin Portal'
+                  : user?.role === 'client'
+                  ? 'Client Portal'
+                  : 'Workspace'}
+              </p>
+            </div>
+          </Link>
+          <div className="flex items-center gap-1">
+            <Link
+              href="/"
+              className="text-slate-400 hover:text-cyan-400 p-1.5 rounded-lg hover:bg-slate-800 transition shrink-0"
+              title="View Public Website"
+            >
+              <Globe className="w-4 h-4" />
+            </Link>
+            {onCloseMobile && (
+              <button
+                type="button"
+                onClick={onCloseMobile}
+                className="lg:hidden text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition shrink-0"
+                aria-label="Close sidebar"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
-          <div className="min-w-0">
-            <p className="text-white font-bold text-sm leading-tight truncate group-hover:text-cyan-400 transition">Sysmaira</p>
-            <p className="text-slate-400 text-xs truncate">
-              {isClientPreview
-                ? 'Client Preview'
-                : isSuperAdmin()
-                ? 'Super Admin Portal'
-                : user?.role === 'client'
-                ? 'Client Portal'
-                : 'Workspace'}
-            </p>
-          </div>
-        </Link>
-        <Link
-          href="/"
-          className="text-slate-400 hover:text-cyan-400 p-1.5 rounded-lg hover:bg-slate-800 transition shrink-0"
-          title="View Public Website"
-        >
-          <Globe className="w-4 h-4" />
-        </Link>
-      </div>
+        </div>
 
       {/* Client Preview Mode Warning Banner */}
       {isClientPreview && (
@@ -237,6 +273,7 @@ export function Sidebar() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={onCloseMobile}
                     className={cn(
                       'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all mb-0.5',
                       active
@@ -290,6 +327,7 @@ export function Sidebar() {
         </div>
       )}
     </aside>
+    </>
   );
 }
 
